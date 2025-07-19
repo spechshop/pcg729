@@ -1,0 +1,74 @@
+#!/usr/bin/env sh
+
+# set error-quit, verbose, non-variable-quit
+set -eu
+# see what system used
+__OS__=$(uname -s)
+# see what arch used
+__ARCH__=$(uname -m)
+# format arch name
+case $__ARCH__ in
+arm64 | aarch64) __ARCH__=aarch64 ;;
+x86_64|x64) __ARCH__=x86_64 ;;
+*) ;;
+esac
+
+# format uname
+case $__OS__ in
+Darwin) __OS_FIXED__=macos ;;
+Linux) __OS_FIXED__=linux ;;
+*) echo "Current OS is not supported" && exit 1 ;;
+esac
+
+# set project dir
+__DIR__=$(cd "$(dirname "$0")" && pwd)
+__PROJECT__=$(cd "${__DIR__}"/../ && pwd)
+
+# set download dir
+__PHP_RUNTIME_URL__="https://dl.static-php.dev/static-php-cli/bulk/php-8.4.4-cli-${__OS_FIXED__}-${__ARCH__}.tar.gz"
+__COMPOSER_URL__="https://getcomposer.org/download/latest-stable/composer.phar"
+
+# use china mirror
+# bash bin/setup-runtime --mirror china
+mirror=''
+while [ $# -gt 0 ]; do
+  case "$1" in
+  --mirror)
+    mirror="$2"
+    ;;
+  --*)
+    echo "Illegal option $1"
+    ;;
+  esac
+  shift $(($# > 0 ? 1 : 0))
+done
+
+case "$mirror" in
+china)
+  __PHP_RUNTIME_URL__="https://dl.static-php.dev/static-php-cli/bulk/php-8.4.4-cli-${__OS_FIXED__}-${__ARCH__}.tar.gz"
+  __COMPOSER_URL__="https://mirrors.tencent.com/composer/composer.phar"
+  ;;
+
+esac
+
+if ! command -v curl > /dev/null && command -v apk > /dev/null; then
+  apk add --no-cache curl
+fi
+
+test -d "${__PROJECT__}"/downloads || mkdir "${__PROJECT__}"/downloads
+# download static php binary
+test -f "${__PROJECT__}"/downloads/runtime.tar.gz || { echo "Downloading $__PHP_RUNTIME_URL__ ..." && curl -#fSL -o "${__PROJECT__}"/downloads/runtime.tar.gz "$__PHP_RUNTIME_URL__" ; }
+test -f "${__DIR__}"/php || { tar -xf "${__PROJECT__}"/downloads/runtime.tar.gz -C "${__DIR__}"/ ; }
+chmod +x "${__DIR__}"/php
+# download composer
+test -f "${__DIR__}"/composer || { echo "Downloading Composer from $__COMPOSER_URL__" && curl -#fSL -o "${__DIR__}"/composer "$__COMPOSER_URL__" ; }
+chmod +x "${__DIR__}"/composer
+# sanity check for php and composer
+"${__DIR__}"/php -v >/dev/null || { echo "Failed to run php" && exit 1; }
+"${__DIR__}"/php "${__DIR__}"/composer --version >/dev/null || { echo "Failed to run composer" && exit 1; }
+
+echo "Setup runtime OK!"
+echo "runtime bin path needs to add manually by command below:"
+echo ""
+echo "    export PATH=\"${__DIR__}:\$PATH\""
+echo ""

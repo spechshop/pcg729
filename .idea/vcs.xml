@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/attr" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/bcg729" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/ext-glfw" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/ext-snappy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/ext-snappy/snappy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/ext-snappy/snappy/third_party/benchmark" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/ext-snappy/snappy/third_party/googletest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/freetype" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/freetype/subprojects/dlg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/imap" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libacl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libaom" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libargon2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libbcg729" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libffi-win" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libiconv-win" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libmemcached" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libpng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/librabbitmq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/librabbitmq/travis/run-clang-format" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/libuuid" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/micro" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/pthreads4w" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/qdbm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/rar" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/snappy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/snappy/third_party/benchmark" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/snappy/third_party/googletest" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/spx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/swow" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/downloads/yaml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/libbcg729" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/php-src/ext/bcg729" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/source/php-src/sapi/micro" vcs="Git" />
+  </component>
+</project>
