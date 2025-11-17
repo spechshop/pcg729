@@ -6,6 +6,17 @@
       "path": "LICENSE"
     }
   },
+  "libsoxr": {
+    "path": "libsoxr",
+    "type": "git",
+    "rev": "master",
+    "repo": "chirlu/soxr",
+    "url": "https://github.com/chirlu/soxr.git",
+    "license": {
+      "type": "file",
+      "path": "COPYING"
+    }
+  },
   "libbcg729": {
     "path": "libbcg729",
     "type": "git",
@@ -17,14 +28,14 @@
       "path": "COPYING"
     }
   },
-  "attr": {
+  "opus": {
+    "path": "php-src/ext/opus",
     "type": "git",
     "rev": "master",
-    "url": "https://git.savannah.nongnu.org/git/attr.git",
-    "provide-pre-built": true,
+    "url": "https://github.com/berzersks/opus.git",
     "license": {
       "type": "file",
-      "path": "doc/COPYING"
+      "path": "COPYING"
     }
   },
   "bcg729": {
@@ -35,6 +46,26 @@
     "license": {
       "type": "file",
       "path": "COPYING"
+    }
+  },
+  "psampler": {
+    "path": "php-src/ext/psampler",
+    "type": "git",
+    "rev": "master",
+    "url": "https://github.com/berzersks/psampler.git",
+    "license": {
+      "type": "file",
+      "path": "LICENSE"
+    }
+  },
+  "attr": {
+    "type": "git",
+    "rev": "master",
+    "url": "https://git.savannah.nongnu.org/git/attr.git",
+    "provide-pre-built": true,
+    "license": {
+      "type": "file",
+      "path": "doc/COPYING"
     }
   },
   "swoole": {
@@ -142,6 +173,15 @@
     "license": {
       "type": "file",
       "path": "LICENSE"
+    }
+  },
+  "libopus": {
+    "type": "url",
+    "url": "https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz",
+    "provide-pre-built": false,
+    "license": {
+      "type": "file",
+      "path": "COPYRIGHT"
     }
   },
   "ext-event": {

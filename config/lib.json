@@ -32,6 +32,31 @@
       "decoder.h"
     ]
   },
+  "libsoxr": {
+    "source": "libsoxr",
+    "static-libs-unix": [
+      "libsoxr.a"
+    ],
+    "headers": [
+      "soxr.h",
+      "soxr-config.h"
+    ]
+  },
+  "libopus": {
+    "source": "libopus",
+    "static-libs-unix": [
+      "libopus.a"
+    ],
+    "headers": [
+      "opus.h",
+      "opus_defines.h",
+      "opus_multistream.h",
+      "opus_multistream_defines.h",
+      "opus_types.h",
+      "opus_custom.h",
+      "opus_projection.h"
+    ]
+  },
   "nghttp2": {
     "source": "nghttp2",
     "static-libs-unix": [

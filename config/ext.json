@@ -13,6 +13,32 @@
       "libbcg729"
     ]
   },
+  "psampler": {
+    "support": {
+      "Windows": "no",
+      "BSD": "wip"
+    },
+    "notes": true,
+    "type": "external",
+    "source": "psampler",
+    "arg-type": "custom",
+    "unix-only": true
+  },
+  "opus": {
+    "support": {
+      "Windows": "no",
+      "BSD": "wip"
+    },
+    "notes": true,
+    "type": "external",
+    "source": "opus",
+    "arg-type": "custom",
+    "unix-only": true,
+    "lib-depends": [
+      "libopus",
+      "libsoxr"
+    ]
+  },
   "swoole": {
     "support": {
       "Windows": "no",
