@@ -70,33 +70,7 @@ jobs:
           ./bin/setup-runtime
           bin/php composer install
           bin/php bin/spc doctor --auto-fix
-
-      - name: Download extensões e bibliotecas
-        run: |
-          bin/php bin/spc download --for-extensions "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib"
-          bin/php bin/spc download --for-libs "curl,openssl,zlib,libxml2,sqlite,bzip2,xz,libzip,libjpeg,libpng,libwebp,oniguruma,freetype,gmp,icu,libxslt,libyaml,libevent"
-
-      # -----------------------------------------------------------
-      # 🔥 BAIXAR PHP-SRC 8.5.0 DEPOIS DO SPC DOWNLOAD
-      # -----------------------------------------------------------
-      - name: Baixar e preparar php-src 8.5.0
-        run: |
-          mkdir -p source
-          cd source
-
-          echo "Baixando php-src 8.5.0..."
-          curl -L -o php-src.zip https://github.com/php/php-src/archive/refs/tags/php-8.5.0.zip
-
-          echo "Extraindo..."
-          unzip php-src.zip
-
-          echo "Movendo para source/php-src..."
-          EXTRACTED=$(ls -d php-src-* | head -n 1)
-          mv "$EXTRACTED" php-src
-
-          rm -f php-src.zip
-          ls -lah php-src
-
+  
       - name: Build
         run: bin/php bin/spc build --build-cli "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib" --debug --enable-zts
 
