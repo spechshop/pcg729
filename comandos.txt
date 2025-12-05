@@ -1,10 +1,15 @@
 rm -rf source/php-src
 
-sudo bin/spc build --build-cli "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv" --debug --enable-zts
+sudo bin/spc build --build-cli "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"   --enable-zts
+
+
 sudo bin/spc build --build-cli "opus" --enable-zts
 
 
 
 bin/spc download psampler
+
 rm -rf source/php-src/ext/swoole
+
+
 rm -rf source/php-src/ext/bcg729 && rm -rf buildroot/bin/php && sudo bin/spc build --build-cli "bcg729" --enable-zts
