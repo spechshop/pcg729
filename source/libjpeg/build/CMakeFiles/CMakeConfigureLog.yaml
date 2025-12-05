@@ -1,0 +1,612 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      The system is: Linux - 6.14.0-36-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/local/musl/bin/x86_64-linux-musl-gcc 
+      Build flags: -fPIC
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/3.28.3/CompilerIdC/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c7438/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_c7438.dir/build.make CMakeFiles/cmTC_c7438.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO'
+        Building C object CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC    -v -o CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc
+        Target: x86_64-linux-musl
+        Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 13.2.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/'
+         /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/cc1 -quiet -v -iprefix /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/ -isysroot /usr/local/musl/bin/../x86_64-linux-musl /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_c7438.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fPIC -o /tmp/ccEGgInO.s
+        GNU C17 (GCC) version 13.2.0 (x86_64-linux-musl)
+        	compiled by GNU C version 11.2.1 20220219, GMP version 6.2.1, MPFR version 4.2.0, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/local/include"
+        ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include"
+        ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/include"
+        ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include
+        End of search list.
+        Compiler executable checksum: e297df2ab4165bbbfeef6110a5448586
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/'
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o /tmp/ccEGgInO.s
+        GNU assembler version 2.40 (x86_64-linux-musl) using BFD version (GNU Binutils) 2.40
+        COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/
+        LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_c7438
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c7438.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil -v CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -o cmTC_c7438 
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc
+        COLLECT_LTO_WRAPPER=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/lto-wrapper
+        Target: x86_64-linux-musl
+        Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 13.2.0 (GCC) 
+        COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/
+        LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c7438' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c7438.'
+         /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2 --sysroot=/usr/local/musl/bin/../x86_64-linux-musl --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -o cmTC_c7438 /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0 -L/usr/local/musl/bin/../lib/gcc -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib -L/usr/local/musl/bin/../x86_64-linux-musl/lib -ldl -lpthread -lm -lutil CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c7438' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c7438.'
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include]
+          add: [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include]
+        end of search list found
+        collapse include dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include] ==> [/usr/local/musl/x86_64-linux-musl/include]
+        collapse include dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include]
+        implicit include dirs: [/usr/local/musl/x86_64-linux-musl/include;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(x86_64-linux-musl-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c7438/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_c7438.dir/build.make CMakeFiles/cmTC_c7438.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-alK9dO']
+        ignore line: [Building C object CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC    -v -o CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc]
+        ignore line: [Target: x86_64-linux-musl]
+        ignore line: [Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 13.2.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/']
+        ignore line: [ /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/cc1 -quiet -v -iprefix /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/ -isysroot /usr/local/musl/bin/../x86_64-linux-musl /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_c7438.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fPIC -o /tmp/ccEGgInO.s]
+        ignore line: [GNU C17 (GCC) version 13.2.0 (x86_64-linux-musl)]
+        ignore line: [	compiled by GNU C version 11.2.1 20220219  GMP version 6.2.1  MPFR version 4.2.0  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/local/include"]
+        ignore line: [ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include"]
+        ignore line: [ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/include"]
+        ignore line: [ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include]
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: e297df2ab4165bbbfeef6110a5448586]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/']
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o /tmp/ccEGgInO.s]
+        ignore line: [GNU assembler version 2.40 (x86_64-linux-musl) using BFD version (GNU Binutils) 2.40]
+        ignore line: [COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_c7438]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c7438.dir/link.txt --verbose=1]
+        ignore line: [/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil -v CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -o cmTC_c7438 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-linux-musl]
+        ignore line: [Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 13.2.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c7438' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c7438.']
+        link line: [ /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2 --sysroot=/usr/local/musl/bin/../x86_64-linux-musl --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -o cmTC_c7438 /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0 -L/usr/local/musl/bin/../lib/gcc -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib -L/usr/local/musl/bin/../x86_64-linux-musl/lib -ldl -lpthread -lm -lutil CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o]
+          arg [/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2] ==> ignore
+          arg [--sysroot=/usr/local/musl/bin/../x86_64-linux-musl] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_c7438] ==> ignore
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o]
+          arg [-L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0] ==> dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0]
+          arg [-L/usr/local/musl/bin/../lib/gcc] ==> dir [/usr/local/musl/bin/../lib/gcc]
+          arg [-L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib] ==> dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib]
+          arg [-L/usr/local/musl/bin/../x86_64-linux-musl/lib] ==> dir [/usr/local/musl/bin/../x86_64-linux-musl/lib]
+          arg [-ldl] ==> lib [dl]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lm] ==> lib [m]
+          arg [-lutil] ==> lib [util]
+          arg [CMakeFiles/cmTC_c7438.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/Scrt1.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/crti.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/crtn.o]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc] ==> [/usr/local/musl/lib/gcc]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib] ==> [/usr/local/musl/x86_64-linux-musl/lib]
+        collapse library dir [/usr/local/musl/bin/../x86_64-linux-musl/lib] ==> [/usr/local/musl/x86_64-linux-musl/lib]
+        implicit libs: [dl;pthread;m;util;gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/local/musl/x86_64-linux-musl/lib/Scrt1.o;/usr/local/musl/x86_64-linux-musl/lib/crti.o;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o;/usr/local/musl/x86_64-linux-musl/lib/crtn.o]
+        implicit dirs: [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0;/usr/local/musl/lib/gcc;/usr/local/musl/x86_64-linux-musl/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:250 (check_include_file)"
+      - "CMakeLists.txt:490 (check_type_size)"
+    checks:
+      - "Looking for sys/types.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_40c25/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_40c25.dir/build.make CMakeFiles/cmTC_40c25.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf'
+        Building C object CMakeFiles/cmTC_40c25.dir/CheckIncludeFile.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC  -o CMakeFiles/cmTC_40c25.dir/CheckIncludeFile.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf/CheckIncludeFile.c
+        Linking C executable cmTC_40c25
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_40c25.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_40c25.dir/CheckIncludeFile.c.o -o cmTC_40c25 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-QgJRtf'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:251 (check_include_file)"
+      - "CMakeLists.txt:490 (check_type_size)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_67e80/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_67e80.dir/build.make CMakeFiles/cmTC_67e80.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY'
+        Building C object CMakeFiles/cmTC_67e80.dir/CheckIncludeFile.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC  -o CMakeFiles/cmTC_67e80.dir/CheckIncludeFile.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY/CheckIncludeFile.c
+        Linking C executable cmTC_67e80
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67e80.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_67e80.dir/CheckIncludeFile.c.o -o cmTC_67e80 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-kSV3LY'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:252 (check_include_file)"
+      - "CMakeLists.txt:490 (check_type_size)"
+    checks:
+      - "Looking for stddef.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_668bf/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_668bf.dir/build.make CMakeFiles/cmTC_668bf.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf'
+        Building C object CMakeFiles/cmTC_668bf.dir/CheckIncludeFile.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC  -o CMakeFiles/cmTC_668bf.dir/CheckIncludeFile.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf/CheckIncludeFile.c
+        Linking C executable cmTC_668bf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_668bf.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_668bf.dir/CheckIncludeFile.c.o -o cmTC_668bf 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-3xwtSf'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:490 (check_type_size)"
+    checks:
+      - "Check size of size_t"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_SIZE_T"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a4e6b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a4e6b.dir/build.make CMakeFiles/cmTC_a4e6b.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR'
+        Building C object CMakeFiles/cmTC_a4e6b.dir/SIZE_T.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC  -o CMakeFiles/cmTC_a4e6b.dir/SIZE_T.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR/SIZE_T.c
+        Linking C executable cmTC_a4e6b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a4e6b.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_a4e6b.dir/SIZE_T.c.o -o cmTC_a4e6b 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-4HWKBR'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:491 (check_type_size)"
+    checks:
+      - "Check size of unsigned long"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_UNSIGNED_LONG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fdab6/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fdab6.dir/build.make CMakeFiles/cmTC_fdab6.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk'
+        Building C object CMakeFiles/cmTC_fdab6.dir/UNSIGNED_LONG.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC  -o CMakeFiles/cmTC_fdab6.dir/UNSIGNED_LONG.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk/UNSIGNED_LONG.c
+        Linking C executable cmTC_fdab6
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fdab6.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_fdab6.dir/UNSIGNED_LONG.c.o -o cmTC_fdab6 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-224auk'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:494 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_BUILTIN_CTZL"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_BUILTIN_CTZL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_dc8e1/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_dc8e1.dir/build.make CMakeFiles/cmTC_dc8e1.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO'
+        Building C object CMakeFiles/cmTC_dc8e1.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DHAVE_BUILTIN_CTZL  -fPIC  -o CMakeFiles/cmTC_dc8e1.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO/src.c
+        Linking C executable cmTC_dc8e1
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dc8e1.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_dc8e1.dir/src.c.o -o cmTC_dc8e1 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ilPJpO'
+        
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceRuns.cmake:93 (try_run)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceRuns.cmake:52 (cmake_check_source_runs)"
+      - "CMakeLists.txt:506 (check_c_source_runs)"
+    checks:
+      - "Performing Test RIGHT_SHIFT_IS_UNSIGNED"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "RIGHT_SHIFT_IS_UNSIGNED_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1e0f6/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1e0f6.dir/build.make CMakeFiles/cmTC_1e0f6.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV'
+        Building C object CMakeFiles/cmTC_1e0f6.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DRIGHT_SHIFT_IS_UNSIGNED  -fPIC  -o CMakeFiles/cmTC_1e0f6.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV/src.c
+        Linking C executable cmTC_1e0f6
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1e0f6.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_1e0f6.dir/src.c.o -o cmTC_1e0f6 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-ZAMUgV'
+        
+      exitCode: 0
+    runResult:
+      variable: "RIGHT_SHIFT_IS_UNSIGNED_EXITCODE"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:529 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HIDDEN_WORKS"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HIDDEN_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_494e8/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_494e8.dir/build.make CMakeFiles/cmTC_494e8.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9'
+        Building C object CMakeFiles/cmTC_494e8.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DHIDDEN_WORKS  -fPIC  -o CMakeFiles/cmTC_494e8.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9/src.c
+        Linking C executable cmTC_494e8
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_494e8.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_494e8.dir/src.c.o -o cmTC_494e8 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-HC0jW9'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:553 (check_c_source_compiles)"
+    checks:
+      - "Performing Test INLINE_WORKS"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "INLINE_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f7de8/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f7de8.dir/build.make CMakeFiles/cmTC_f7de8.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT'
+        Building C object CMakeFiles/cmTC_f7de8.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DINLINE_WORKS  -fPIC  -o CMakeFiles/cmTC_f7de8.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT/src.c
+        Linking C executable cmTC_f7de8
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f7de8.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_f7de8.dir/src.c.o -o cmTC_f7de8 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-OCsXRT'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:570 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_THREAD_LOCAL"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_THREAD_LOCAL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7ba0a/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7ba0a.dir/build.make CMakeFiles/cmTC_7ba0a.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q'
+        Building C object CMakeFiles/cmTC_7ba0a.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DHAVE_THREAD_LOCAL  -fPIC  -o CMakeFiles/cmTC_7ba0a.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q/src.c
+        Linking C executable cmTC_7ba0a
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ba0a.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_7ba0a.dir/src.c.o -o cmTC_7ba0a 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-jpEq7Q'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:583 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_VERSION_SCRIPT"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+    buildResult:
+      variable: "HAVE_VERSION_SCRIPT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fac77/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fac77.dir/build.make CMakeFiles/cmTC_fac77.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH'
+        Building C object CMakeFiles/cmTC_fac77.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DHAVE_VERSION_SCRIPT  -fPIC -Wl,--version-script,/home/lotus/PROJETOS/pcg729/source/libjpeg/build/conftest.map -o CMakeFiles/cmTC_fac77.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH/src.c
+        Linking C executable cmTC_fac77
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fac77.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wl,--version-script,/home/lotus/PROJETOS/pcg729/source/libjpeg/build/conftest.map -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_fac77.dir/src.c.o -o cmTC_fac77 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libjpeg/build/CMakeFiles/CMakeScratch/TryCompile-yhOpmH'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLanguage.cmake:139 (message)"
+      - "simd/CMakeLists.txt:46 (check_language)"
+    checks:
+      - "Looking for a ASM_NASM compiler"
+    message: |
+      Looking for a ASM_NASM compiler failed with the following output:
+      -- The ASM_NASM compiler identification is unknown
+      -- Didn't find assembler
+      CMake Error at CMakeLists.txt:2 (project):
+        No CMAKE_ASM_NASM_COMPILER could be found.
+      
+        Tell CMake where to find the compiler by setting either the environment
+        variable "ASM_NASM" or the CMake cache entry CMAKE_ASM_NASM_COMPILER to the
+        full path to the compiler, or to the compiler name if it is in the PATH.
+      
+      
+      -- Configuring incomplete, errors occurred!
+      
+...

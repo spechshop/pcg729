@@ -1,0 +1,60 @@
+tests/test_opus_projection.o: tests/test_opus_projection.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h celt/float_cast.h \
+ celt/arch.h include/opus_types.h include/opus_defines.h \
+ include/opus_types.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ include/opus.h include/opus_defines.h tests/test_opus_common.h \
+ include/opus_projection.h include/opus_multistream.h include/opus.h \
+ celt/mathops.h celt/entcode.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h celt/os_support.h \
+ tests/../src/mapping_matrix.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+/usr/local/musl/x86_64-linux-musl/include/stdio.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+celt/float_cast.h:
+celt/arch.h:
+include/opus_types.h:
+include/opus_defines.h:
+include/opus_types.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h:
+include/opus.h:
+include/opus_defines.h:
+tests/test_opus_common.h:
+include/opus_projection.h:
+include/opus_multistream.h:
+include/opus.h:
+celt/mathops.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+celt/os_support.h:
+tests/../src/mapping_matrix.h:

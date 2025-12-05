@@ -1,0 +1,34 @@
+tests/test_opus_api.o: tests/test_opus_api.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h celt/arch.h \
+ include/opus_types.h include/opus_defines.h include/opus_types.h \
+ include/opus_multistream.h include/opus.h include/opus_defines.h \
+ include/opus.h tests/test_opus_common.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+/usr/local/musl/x86_64-linux-musl/include/stdio.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+celt/arch.h:
+include/opus_types.h:
+include/opus_defines.h:
+include/opus_types.h:
+include/opus_multistream.h:
+include/opus.h:
+include/opus_defines.h:
+include/opus.h:
+tests/test_opus_common.h:

@@ -1,0 +1,32 @@
+CMakeFiles/webpencode.dir/src/enc/near_lossless_enc.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/near_lossless_enc.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /usr/local/musl/x86_64-linux-musl/include/assert.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/lossless_common.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/inttypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/utils/utils.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/build/src/webp/config.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/dsp.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/cpu.h \
+ /usr/local/musl/x86_64-linux-musl/include/pthread.h \
+ /usr/local/musl/x86_64-linux-musl/include/sched.h \
+ /usr/local/musl/x86_64-linux-musl/include/time.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/vp8li_enc.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/backward_references_enc.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/encode.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/./types.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/format_constants.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/histogram_enc.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/utils/bit_writer_utils.h

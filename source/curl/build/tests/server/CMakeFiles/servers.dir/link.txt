@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -I@build_root_path@/include -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/servers.dir/servers.c.o -o servers   -L/home/lotus/PROJETOS/pcg729/source/curl/@build_root_path@/lib 

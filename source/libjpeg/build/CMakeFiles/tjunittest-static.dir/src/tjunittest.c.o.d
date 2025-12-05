@@ -1,0 +1,24 @@
+CMakeFiles/tjunittest-static.dir/src/tjunittest.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/tjunittest.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/errno.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/errno.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/tjutil.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/turbojpeg.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/md5/md5.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/endian.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/select.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfigint.h \
+ /usr/local/musl/x86_64-linux-musl/include/unistd.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/posix.h

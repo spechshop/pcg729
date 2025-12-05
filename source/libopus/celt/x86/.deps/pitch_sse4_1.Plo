@@ -1,0 +1,69 @@
+celt/x86/pitch_sse4_1.lo: celt/x86/pitch_sse4_1.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ silk/macros.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ include/opus_defines.h include/opus_types.h celt/arch.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h celt/arch.h \
+ celt/celt_lpc.h celt/cpu_support.h celt/x86/x86cpu.h \
+ celt/x86/celt_lpc_sse.h celt/stack_alloc.h celt/mathops.h celt/entcode.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h celt/ecintrin.h \
+ celt/os_support.h /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h celt/pitch.h \
+ celt/modes.h celt/celt.h include/opus_custom.h include/opus_defines.h \
+ celt/entenc.h celt/entdec.h celt/mdct.h celt/kiss_fft.h \
+ celt/x86/pitch_sse.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h:
+silk/macros.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+include/opus_defines.h:
+include/opus_types.h:
+celt/arch.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+celt/arch.h:
+celt/celt_lpc.h:
+celt/cpu_support.h:
+celt/x86/x86cpu.h:
+celt/x86/celt_lpc_sse.h:
+celt/stack_alloc.h:
+celt/mathops.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+celt/ecintrin.h:
+celt/os_support.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+celt/pitch.h:
+celt/modes.h:
+celt/celt.h:
+include/opus_custom.h:
+include/opus_defines.h:
+celt/entenc.h:
+celt/entdec.h:
+celt/mdct.h:
+celt/kiss_fft.h:
+celt/x86/pitch_sse.h:

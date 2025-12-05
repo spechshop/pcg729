@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+libdir="/home/lotus/PROJETOS/pcg729/source/nghttp2/lib"
+if [ -d "$libdir/.libs" ]; then
+    libdir="$libdir/.libs"
+fi
+
+export CGO_CFLAGS="-I/home/lotus/PROJETOS/pcg729/source/nghttp2/lib/includes -I/home/lotus/PROJETOS/pcg729/source/nghttp2/lib/includes -fPIC"
+export CGO_CPPFLAGS=""
+export CGO_LDFLAGS="-L$libdir "
+export LD_LIBRARY_PATH="$libdir"
+export DYLD_LIBRARY_PATH="$libdir"
+export GODEBUG=cgocheck=0
+"$@"

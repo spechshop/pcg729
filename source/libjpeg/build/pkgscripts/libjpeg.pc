@@ -1,0 +1,10 @@
+prefix=/home/lotus/PROJETOS/pcg729/buildroot
+exec_prefix=/home/lotus/PROJETOS/pcg729/buildroot
+libdir=/home/lotus/PROJETOS/pcg729/buildroot/lib
+includedir=/home/lotus/PROJETOS/pcg729/buildroot/include
+
+Name: libjpeg
+Description: A SIMD-accelerated JPEG codec that provides the libjpeg API
+Version: 3.1.2
+Libs: -L${libdir} -ljpeg
+Cflags: -I${includedir}

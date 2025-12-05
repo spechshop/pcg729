@@ -1,0 +1,35 @@
+CMakeFiles/webpdsp.dir/src/dsp/cost_sse2.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/cost_sse2.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/dsp.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/build/src/webp/config.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dsp/cpu.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/inttypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/pthread.h \
+ /usr/local/musl/x86_64-linux-musl/include/sched.h \
+ /usr/local/musl/x86_64-linux-musl/include/time.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/cost_enc.h \
+ /usr/local/musl/x86_64-linux-musl/include/assert.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/enc/vp8i_enc.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/dec/common_dec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/utils/bit_writer_utils.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/utils/thread_utils.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/utils/utils.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/encode.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/./types.h

@@ -1,0 +1,59 @@
+src/mapping_matrix.lo: src/mapping_matrix.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ celt/arch.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ include/opus_defines.h include/opus_types.h celt/float_cast.h \
+ celt/arch.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ src/opus_private.h include/opus.h include/opus_defines.h celt/celt.h \
+ include/opus_custom.h celt/entenc.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h celt/entcode.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h celt/entdec.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdarg.h src/mapping_matrix.h \
+ include/opus_projection.h include/opus_multistream.h include/opus.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+celt/arch.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+include/opus_defines.h:
+include/opus_types.h:
+celt/float_cast.h:
+celt/arch.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h:
+src/opus_private.h:
+include/opus.h:
+include/opus_defines.h:
+celt/celt.h:
+include/opus_custom.h:
+celt/entenc.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+celt/entdec.h:
+/usr/local/musl/x86_64-linux-musl/include/stdarg.h:
+src/mapping_matrix.h:
+include/opus_projection.h:
+include/opus_multistream.h:
+include/opus.h:

@@ -1,0 +1,43 @@
+nghttp2_map.lo: nghttp2_map.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h nghttp2_map.h \
+ ../config.h includes/nghttp2/nghttp2.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/inttypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/endian.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/select.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdarg.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ includes/nghttp2/nghttp2ver.h nghttp2_mem.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/assert.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h nghttp2_helper.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+nghttp2_map.h:
+../config.h:
+includes/nghttp2/nghttp2.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/x86_64-linux-musl/include/inttypes.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/sys/types.h:
+/usr/local/musl/x86_64-linux-musl/include/endian.h:
+/usr/local/musl/x86_64-linux-musl/include/sys/select.h:
+/usr/local/musl/x86_64-linux-musl/include/stdarg.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+includes/nghttp2/nghttp2ver.h:
+nghttp2_mem.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+/usr/local/musl/x86_64-linux-musl/include/assert.h:
+/usr/local/musl/x86_64-linux-musl/include/stdio.h:
+nghttp2_helper.h:

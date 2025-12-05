@@ -1,0 +1,75 @@
+celt/celt_encoder.lo: celt/celt_encoder.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ celt/cpu_support.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ include/opus_defines.h include/opus_types.h celt/x86/x86cpu.h \
+ celt/os_support.h /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h celt/mdct.h \
+ celt/kiss_fft.h /usr/local/musl/x86_64-linux-musl/include/math.h \
+ celt/arch.h celt/celt.h include/opus_custom.h include/opus_defines.h \
+ celt/entenc.h /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ celt/entcode.h /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h celt/ecintrin.h \
+ celt/entdec.h celt/pitch.h celt/modes.h celt/x86/pitch_sse.h \
+ celt/bands.h celt/rate.h celt/cwrs.h celt/stack_alloc.h \
+ celt/quant_bands.h celt/mathops.h celt/float_cast.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdarg.h celt/celt_lpc.h \
+ celt/x86/celt_lpc_sse.h celt/vq.h celt/x86/vq_sse.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+celt/cpu_support.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+include/opus_defines.h:
+include/opus_types.h:
+celt/x86/x86cpu.h:
+celt/os_support.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+celt/mdct.h:
+celt/kiss_fft.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+celt/arch.h:
+celt/celt.h:
+include/opus_custom.h:
+include/opus_defines.h:
+celt/entenc.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+celt/ecintrin.h:
+celt/entdec.h:
+celt/pitch.h:
+celt/modes.h:
+celt/x86/pitch_sse.h:
+celt/bands.h:
+celt/rate.h:
+celt/cwrs.h:
+celt/stack_alloc.h:
+celt/quant_bands.h:
+celt/mathops.h:
+celt/float_cast.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/stdarg.h:
+celt/celt_lpc.h:
+celt/x86/celt_lpc_sse.h:
+celt/vq.h:
+celt/x86/vq_sse.h:

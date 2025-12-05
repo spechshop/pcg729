@@ -1,0 +1,236 @@
+celt/x86/pitch_avx.lo: celt/x86/pitch_avx.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/immintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/x86gprintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/ia32intrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/adxintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/bmiintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/bmi2intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cetintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cldemoteintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clflushoptintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clwbintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clzerointrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cmpccxaddintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/enqcmdintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/fxsrintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/lzcntintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/lwpintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/movdirintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mwaitintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mwaitxintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pconfigintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/popcntintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pkuintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/prfchiintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/raointintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/rdseedintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/rtmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/serializeintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/sgxintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tbmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tsxldtrkintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/uintrintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/waitpkgintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/wbnoinvdintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsaveintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsavecintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsaveoptintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsavesintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xtestintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/hresetintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/smmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/wmmintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxvnniintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxifmaintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxvnniint8intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx2intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512erintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512pfintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512cdintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bwintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512dqintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vlbwintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vldqintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512ifmaintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512ifmavlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmiintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmivlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx5124fmapsintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx5124vnniwintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vpopcntdqintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmi2intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmi2vlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vnniintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vnnivlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vpopcntdqvlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bitalgintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vp2intersectintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vp2intersectvlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fp16intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fp16vlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/shaintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/fmaintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/f16cintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/gfniintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/vaesintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/vpclmulqdqintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bf16vlintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bf16intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxneconvertintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxtileintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxint8intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxbf16intrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxcomplexintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/prfchwintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/keylockerintrin.h \
+ /usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxfp16intrin.h \
+ celt/x86/x86cpu.h include/opus_defines.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h celt/pitch.h \
+ celt/modes.h include/opus_types.h celt/celt.h include/opus_custom.h \
+ include/opus_defines.h celt/entenc.h celt/entcode.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h celt/arch.h \
+ celt/entdec.h celt/mdct.h celt/kiss_fft.h celt/cpu_support.h \
+ celt/x86/x86cpu.h celt/x86/pitch_sse.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/immintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/x86gprintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/ia32intrin.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/adxintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/bmiintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/bmi2intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cetintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cldemoteintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clflushoptintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clwbintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/clzerointrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/cmpccxaddintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/enqcmdintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/fxsrintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/lzcntintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/lwpintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/movdirintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mwaitintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mwaitxintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pconfigintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/popcntintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pkuintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/prfchiintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/raointintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/rdseedintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/rtmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/serializeintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/sgxintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tbmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tsxldtrkintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/uintrintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/waitpkgintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/wbnoinvdintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsaveintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsavecintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsaveoptintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xsavesintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xtestintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/hresetintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/xmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/mm_malloc.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/emmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/pmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/tmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/smmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/wmmintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxvnniintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxifmaintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxvnniint8intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx2intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512erintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512pfintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512cdintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bwintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512dqintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vlbwintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vldqintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512ifmaintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512ifmavlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmiintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmivlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx5124fmapsintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx5124vnniwintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vpopcntdqintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmi2intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vbmi2vlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vnniintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vnnivlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vpopcntdqvlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bitalgintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vp2intersectintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512vp2intersectvlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fp16intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512fp16vlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/shaintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/fmaintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/f16cintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/gfniintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/vaesintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/vpclmulqdqintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bf16vlintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avx512bf16intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/avxneconvertintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxtileintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxint8intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxbf16intrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxcomplexintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/prfchwintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/keylockerintrin.h:
+/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include/amxfp16intrin.h:
+celt/x86/x86cpu.h:
+include/opus_defines.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+celt/pitch.h:
+celt/modes.h:
+include/opus_types.h:
+celt/celt.h:
+include/opus_custom.h:
+include/opus_defines.h:
+celt/entenc.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+celt/arch.h:
+celt/entdec.h:
+celt/mdct.h:
+celt/kiss_fft.h:
+celt/cpu_support.h:
+celt/x86/x86cpu.h:
+celt/x86/pitch_sse.h:

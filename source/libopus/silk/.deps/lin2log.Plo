@@ -1,0 +1,46 @@
+silk/lin2log.lo: silk/lin2log.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ silk/SigProc_FIX.h /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h silk/typedef.h \
+ include/opus_types.h /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ include/opus_defines.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/float.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/float.h \
+ silk/resampler_structs.h silk/macros.h celt/arch.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h celt/arch.h \
+ celt/cpu_support.h celt/x86/x86cpu.h silk/x86/SigProc_FIX_sse.h \
+ silk/Inlines.h silk/MacroCount.h silk/MacroDebug.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+silk/SigProc_FIX.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+silk/typedef.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+include/opus_defines.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/float.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/float.h:
+silk/resampler_structs.h:
+silk/macros.h:
+celt/arch.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+celt/arch.h:
+celt/cpu_support.h:
+celt/x86/x86cpu.h:
+silk/x86/SigProc_FIX_sse.h:
+silk/Inlines.h:
+silk/MacroCount.h:
+silk/MacroDebug.h:

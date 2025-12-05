@@ -1,0 +1,1124 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      The system is: Linux - 6.14.0-36-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/local/musl/bin/x86_64-linux-musl-gcc 
+      Build flags: -fPIC
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/3.28.3/CompilerIdC/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c1ba3/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_c1ba3.dir/build.make CMakeFiles/cmTC_c1ba3.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4'
+        Building C object CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC    -v -o CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc
+        Target: x86_64-linux-musl
+        Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 13.2.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/'
+         /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/cc1 -quiet -v -iprefix /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/ -isysroot /usr/local/musl/bin/../x86_64-linux-musl /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_c1ba3.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fPIC -o /tmp/ccGcKeGk.s
+        GNU C17 (GCC) version 13.2.0 (x86_64-linux-musl)
+        	compiled by GNU C version 11.2.1 20220219, GMP version 6.2.1, MPFR version 4.2.0, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/local/include"
+        ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include"
+        ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/include"
+        ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include
+        End of search list.
+        Compiler executable checksum: e297df2ab4165bbbfeef6110a5448586
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/'
+         /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o /tmp/ccGcKeGk.s
+        GNU assembler version 2.40 (x86_64-linux-musl) using BFD version (GNU Binutils) 2.40
+        COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/
+        LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_c1ba3
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1ba3.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil -v CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -o cmTC_c1ba3 
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc
+        COLLECT_LTO_WRAPPER=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/lto-wrapper
+        Target: x86_64-linux-musl
+        Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 13.2.0 (GCC) 
+        COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/
+        LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c1ba3' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c1ba3.'
+         /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2 --sysroot=/usr/local/musl/bin/../x86_64-linux-musl --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -o cmTC_c1ba3 /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0 -L/usr/local/musl/bin/../lib/gcc -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib -L/usr/local/musl/bin/../x86_64-linux-musl/lib -ldl -lpthread -lm -lutil CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o
+        COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c1ba3' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c1ba3.'
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include]
+          add: [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include]
+        end of search list found
+        collapse include dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include] ==> [/usr/local/musl/x86_64-linux-musl/include]
+        collapse include dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include]
+        implicit include dirs: [/usr/local/musl/x86_64-linux-musl/include;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(x86_64-linux-musl-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c1ba3/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_c1ba3.dir/build.make CMakeFiles/cmTC_c1ba3.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-lJemo4']
+        ignore line: [Building C object CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC    -v -o CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc]
+        ignore line: [Target: x86_64-linux-musl]
+        ignore line: [Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 13.2.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/']
+        ignore line: [ /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/cc1 -quiet -v -iprefix /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/ -isysroot /usr/local/musl/bin/../x86_64-linux-musl /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_c1ba3.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fPIC -o /tmp/ccGcKeGk.s]
+        ignore line: [GNU C17 (GCC) version 13.2.0 (x86_64-linux-musl)]
+        ignore line: [	compiled by GNU C version 11.2.1 20220219  GMP version 6.2.1  MPFR version 4.2.0  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/local/include"]
+        ignore line: [ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include"]
+        ignore line: [ignoring nonexistent directory "/usr/local/musl/bin/../x86_64-linux-musl/usr/include"]
+        ignore line: [ignoring duplicate directory "/usr/local/musl/bin/../lib/gcc/../../lib/gcc/x86_64-linux-musl/13.2.0/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/include]
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: e297df2ab4165bbbfeef6110a5448586]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/']
+        ignore line: [ /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o /tmp/ccGcKeGk.s]
+        ignore line: [GNU assembler version 2.40 (x86_64-linux-musl) using BFD version (GNU Binutils) 2.40]
+        ignore line: [COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_c1ba3]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1ba3.dir/link.txt --verbose=1]
+        ignore line: [/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC  -ldl -lpthread -lm -lutil -v CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -o cmTC_c1ba3 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/musl/bin/x86_64-linux-musl-gcc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-linux-musl]
+        ignore line: [Configured with: ../src_gcc/configure --enable-languages=c,c++,fortran CC='gcc -static --static' CXX='g++ -static --static' CFLAGS='-g0 -Os -Wno-error' CXXFLAGS='-g0 -Os -Wno-error' LDFLAGS='-static --static' --enable-static-pie --disable-cet --enable-default-pie --disable-bootstrap --disable-assembly --disable-werror --target=x86_64-linux-musl --prefix= --libdir=/lib --disable-multilib --with-sysroot=/x86_64-linux-musl --enable-tls --disable-libmudflap --disable-libsanitizer --disable-gnu-indirect-function --disable-libmpx --enable-initfini-array --enable-libstdcxx-time=rt --enable-deterministic-archives --enable-libstdcxx-time --enable-libquadmath --enable-libquadmath-support --disable-decimal-float --with-build-sysroot=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_sysroot AR_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ar AS_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/gas/as-new LD_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/ld/ld-new NM_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/nm-new OBJCOPY_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objcopy OBJDUMP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/objdump RANLIB_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/ranlib READELF_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/readelf STRIP_FOR_TARGET=/root/spc-musl/musl-cross-make/build/local/x86_64-linux-musl/obj_binutils/binutils/strip-new --build=x86_64-pc-linux-muslxx --host=x86_64-pc-linux-muslxx]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 13.2.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../libexec/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/:/usr/local/musl/bin/../lib/gcc/:/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/:/usr/local/musl/bin/../x86_64-linux-musl/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-v' '-o' 'cmTC_c1ba3' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c1ba3.']
+        link line: [ /usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2 --sysroot=/usr/local/musl/bin/../x86_64-linux-musl --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -o cmTC_c1ba3 /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0 -L/usr/local/musl/bin/../lib/gcc -L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib -L/usr/local/musl/bin/../x86_64-linux-musl/lib -ldl -lpthread -lm -lutil CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o /usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o]
+          arg [/usr/local/musl/bin/../libexec/gcc/x86_64-linux-musl/13.2.0/collect2] ==> ignore
+          arg [--sysroot=/usr/local/musl/bin/../x86_64-linux-musl] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_c1ba3] ==> ignore
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o]
+          arg [-L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0] ==> dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0]
+          arg [-L/usr/local/musl/bin/../lib/gcc] ==> dir [/usr/local/musl/bin/../lib/gcc]
+          arg [-L/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib] ==> dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib]
+          arg [-L/usr/local/musl/bin/../x86_64-linux-musl/lib] ==> dir [/usr/local/musl/bin/../x86_64-linux-musl/lib]
+          arg [-ldl] ==> lib [dl]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lm] ==> lib [m]
+          arg [-lutil] ==> lib [util]
+          arg [CMakeFiles/cmTC_c1ba3.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o]
+          arg [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o] ==> obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/Scrt1.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/Scrt1.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crti.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/crti.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o]
+        collapse obj [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib/crtn.o] ==> [/usr/local/musl/x86_64-linux-musl/lib/crtn.o]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0] ==> [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc] ==> [/usr/local/musl/lib/gcc]
+        collapse library dir [/usr/local/musl/bin/../lib/gcc/x86_64-linux-musl/13.2.0/../../../../x86_64-linux-musl/lib] ==> [/usr/local/musl/x86_64-linux-musl/lib]
+        collapse library dir [/usr/local/musl/bin/../x86_64-linux-musl/lib] ==> [/usr/local/musl/x86_64-linux-musl/lib]
+        implicit libs: [dl;pthread;m;util;gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/local/musl/x86_64-linux-musl/lib/Scrt1.o;/usr/local/musl/x86_64-linux-musl/lib/crti.o;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtbeginS.o;/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0/crtendS.o;/usr/local/musl/x86_64-linux-musl/lib/crtn.o]
+        implicit dirs: [/usr/local/musl/lib/gcc/x86_64-linux-musl/13.2.0;/usr/local/musl/lib/gcc;/usr/local/musl/x86_64-linux-musl/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.28/Modules/CheckCCompilerFlag.cmake:51 (cmake_check_compiler_flag)"
+      - "cmake/PickyWarnings.cmake:238 (check_c_compiler_flag)"
+      - "CMakeLists.txt:97 (include)"
+    checks:
+      - "Performing Test OPT_Wdouble_promotion"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "OPT_Wdouble_promotion"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b6a1f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b6a1f.dir/build.make CMakeFiles/cmTC_b6a1f.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn'
+        Building C object CMakeFiles/cmTC_b6a1f.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DOPT_Wdouble_promotion  -fPIC -Wall    -Wdouble-promotion -o CMakeFiles/cmTC_b6a1f.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn/src.c
+        Linking C executable cmTC_b6a1f
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b6a1f.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_b6a1f.dir/src.c.o -o cmTC_b6a1f 
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-j90ydn'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.28/Modules/CheckCCompilerFlag.cmake:51 (cmake_check_compiler_flag)"
+      - "cmake/PickyWarnings.cmake:238 (check_c_compiler_flag)"
+      - "CMakeLists.txt:97 (include)"
+    checks:
+      - "Performing Test OPT_Wenum_conversion"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "OPT_Wenum_conversion"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0ff9d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0ff9d.dir/build.make CMakeFiles/cmTC_0ff9d.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt'
+        Building C object CMakeFiles/cmTC_0ff9d.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DOPT_Wenum_conversion  -fPIC -Wall    -Wenum-conversion -o CMakeFiles/cmTC_0ff9d.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt/src.c
+        Linking C executable cmTC_0ff9d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ff9d.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_0ff9d.dir/src.c.o -o cmTC_0ff9d 
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PZhBqt'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.28/Modules/CheckCCompilerFlag.cmake:51 (cmake_check_compiler_flag)"
+      - "cmake/PickyWarnings.cmake:238 (check_c_compiler_flag)"
+      - "CMakeLists.txt:97 (include)"
+    checks:
+      - "Performing Test OPT_Wpragmas"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "OPT_Wpragmas"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_71264/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_71264.dir/build.make CMakeFiles/cmTC_71264.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU'
+        Building C object CMakeFiles/cmTC_71264.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DOPT_Wpragmas  -fPIC -Wall    -Wpragmas -o CMakeFiles/cmTC_71264.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU/src.c
+        Linking C executable cmTC_71264
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_71264.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_71264.dir/src.c.o -o cmTC_71264 
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fmpWU'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.28/Modules/CheckCCompilerFlag.cmake:51 (cmake_check_compiler_flag)"
+      - "cmake/PickyWarnings.cmake:238 (check_c_compiler_flag)"
+      - "CMakeLists.txt:97 (include)"
+    checks:
+      - "Performing Test OPT_Wunused_const_variable"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "OPT_Wunused_const_variable"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_6df8e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_6df8e.dir/build.make CMakeFiles/cmTC_6df8e.dir/build
+        gmake[1]: Entering directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD'
+        Building C object CMakeFiles/cmTC_6df8e.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DOPT_Wunused_const_variable  -fPIC -Wall    -Wunused-const-variable -o CMakeFiles/cmTC_6df8e.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD/src.c
+        Linking C executable cmTC_6df8e
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6df8e.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_6df8e.dir/src.c.o -o cmTC_6df8e 
+        gmake[1]: Leaving directory '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MkqAaD'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "cmake/CheckFunctionExistsMayNeedLibrary.cmake:65 (check_function_exists)"
+      - "CMakeLists.txt:108 (check_function_exists_may_need_library)"
+    checks:
+      - "Looking for socket"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SOCKET"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f2094/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f2094.dir/build.make CMakeFiles/cmTC_f2094.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs'
+        Building C object CMakeFiles/cmTC_f2094.dir/CheckFunctionExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=socket -o CMakeFiles/cmTC_f2094.dir/CheckFunctionExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs/CheckFunctionExists.c
+        Linking C executable cmTC_f2094
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2094.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=socket -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_f2094.dir/CheckFunctionExists.c.o -o cmTC_f2094 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-SCchLs'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "cmake/CheckFunctionExistsMayNeedLibrary.cmake:65 (check_function_exists)"
+      - "CMakeLists.txt:112 (check_function_exists_may_need_library)"
+    checks:
+      - "Looking for inet_addr"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_INET_ADDR"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a9158/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a9158.dir/build.make CMakeFiles/cmTC_a9158.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4'
+        Building C object CMakeFiles/cmTC_a9158.dir/CheckFunctionExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=inet_addr -o CMakeFiles/cmTC_a9158.dir/CheckFunctionExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4/CheckFunctionExists.c
+        Linking C executable cmTC_a9158
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9158.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=inet_addr -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_a9158.dir/CheckFunctionExists.c.o -o cmTC_a9158 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8fqlK4'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:206 (check_include_files)"
+    checks:
+      - "Looking for include file inttypes.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_INTTYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_9f539/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_9f539.dir/build.make CMakeFiles/cmTC_9f539.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ'
+        Building C object CMakeFiles/cmTC_9f539.dir/HAVE_INTTYPES_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_9f539.dir/HAVE_INTTYPES_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ/HAVE_INTTYPES_H.c
+        Linking C executable cmTC_9f539
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9f539.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_9f539.dir/HAVE_INTTYPES_H.c.o -o cmTC_9f539 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-piebuQ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:208 (check_include_files)"
+    checks:
+      - "Looking for include file unistd.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_UNISTD_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_279ed/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_279ed.dir/build.make CMakeFiles/cmTC_279ed.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53'
+        Building C object CMakeFiles/cmTC_279ed.dir/HAVE_UNISTD_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_279ed.dir/HAVE_UNISTD_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53/HAVE_UNISTD_H.c
+        Linking C executable cmTC_279ed
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_279ed.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_279ed.dir/HAVE_UNISTD_H.c.o -o cmTC_279ed 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Qgtm53'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:209 (check_include_files)"
+    checks:
+      - "Looking for include file sys/time.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_TIME_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a06b4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a06b4.dir/build.make CMakeFiles/cmTC_a06b4.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6'
+        Building C object CMakeFiles/cmTC_a06b4.dir/HAVE_SYS_TIME_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_a06b4.dir/HAVE_SYS_TIME_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6/HAVE_SYS_TIME_H.c
+        Linking C executable cmTC_a06b4
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a06b4.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_a06b4.dir/HAVE_SYS_TIME_H.c.o -o cmTC_a06b4 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-Pet1y6'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:212 (check_include_files)"
+    checks:
+      - "Looking for include file sys/select.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_SELECT_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1be4b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1be4b.dir/build.make CMakeFiles/cmTC_1be4b.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79'
+        Building C object CMakeFiles/cmTC_1be4b.dir/HAVE_SYS_SELECT_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_1be4b.dir/HAVE_SYS_SELECT_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79/HAVE_SYS_SELECT_H.c
+        Linking C executable cmTC_1be4b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1be4b.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_1be4b.dir/HAVE_SYS_SELECT_H.c.o -o cmTC_1be4b 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-V3JY79'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:213 (check_include_files)"
+    checks:
+      - "Looking for include file sys/uio.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_UIO_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_50c02/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_50c02.dir/build.make CMakeFiles/cmTC_50c02.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj'
+        Building C object CMakeFiles/cmTC_50c02.dir/HAVE_SYS_UIO_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_50c02.dir/HAVE_SYS_UIO_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj/HAVE_SYS_UIO_H.c
+        Linking C executable cmTC_50c02
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50c02.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_50c02.dir/HAVE_SYS_UIO_H.c.o -o cmTC_50c02 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-i3Catj'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:214 (check_include_files)"
+    checks:
+      - "Looking for include file sys/socket.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_SOCKET_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0c217/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0c217.dir/build.make CMakeFiles/cmTC_0c217.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh'
+        Building C object CMakeFiles/cmTC_0c217.dir/HAVE_SYS_SOCKET_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_0c217.dir/HAVE_SYS_SOCKET_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh/HAVE_SYS_SOCKET_H.c
+        Linking C executable cmTC_0c217
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c217.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_0c217.dir/HAVE_SYS_SOCKET_H.c.o -o cmTC_0c217 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8udJXh'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:215 (check_include_files)"
+    checks:
+      - "Looking for include file sys/ioctl.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_IOCTL_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0eb93/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0eb93.dir/build.make CMakeFiles/cmTC_0eb93.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu'
+        Building C object CMakeFiles/cmTC_0eb93.dir/HAVE_SYS_IOCTL_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_0eb93.dir/HAVE_SYS_IOCTL_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu/HAVE_SYS_IOCTL_H.c
+        Linking C executable cmTC_0eb93
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0eb93.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_0eb93.dir/HAVE_SYS_IOCTL_H.c.o -o cmTC_0eb93 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-QS9Miu'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:216 (check_include_files)"
+    checks:
+      - "Looking for include file sys/un.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SYS_UN_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_13406/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_13406.dir/build.make CMakeFiles/cmTC_13406.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD'
+        Building C object CMakeFiles/cmTC_13406.dir/HAVE_SYS_UN_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_13406.dir/HAVE_SYS_UN_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD/HAVE_SYS_UN_H.c
+        Linking C executable cmTC_13406
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13406.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_13406.dir/HAVE_SYS_UN_H.c.o -o cmTC_13406 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-r5dLWD'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:217 (check_include_files)"
+    checks:
+      - "Looking for include file arpa/inet.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_ARPA_INET_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_95acb/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_95acb.dir/build.make CMakeFiles/cmTC_95acb.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X'
+        Building C object CMakeFiles/cmTC_95acb.dir/HAVE_ARPA_INET_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_95acb.dir/HAVE_ARPA_INET_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X/HAVE_ARPA_INET_H.c
+        Linking C executable cmTC_95acb
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_95acb.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_95acb.dir/HAVE_ARPA_INET_H.c.o -o cmTC_95acb 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-ObMW0X'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "CMakeLists.txt:218 (check_include_files)"
+    checks:
+      - "Looking for include file netinet/in.h"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_NETINET_IN_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_17d6f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_17d6f.dir/build.make CMakeFiles/cmTC_17d6f.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R'
+        Building C object CMakeFiles/cmTC_17d6f.dir/HAVE_NETINET_IN_H.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_17d6f.dir/HAVE_NETINET_IN_H.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R/HAVE_NETINET_IN_H.c
+        Linking C executable cmTC_17d6f
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17d6f.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_17d6f.dir/HAVE_NETINET_IN_H.c.o -o cmTC_17d6f 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YL2V8R'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:230 (check_symbol_exists)"
+    checks:
+      - "Looking for gettimeofday"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_GETTIMEOFDAY"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_93992/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_93992.dir/build.make CMakeFiles/cmTC_93992.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P'
+        Building C object CMakeFiles/cmTC_93992.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_93992.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P/CheckSymbolExists.c:8:11: warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+            8 |   return ((int*)(&gettimeofday))[argc];
+              |           ^
+        Linking C executable cmTC_93992
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93992.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_93992.dir/CheckSymbolExists.c.o -o cmTC_93992 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-pMlg5P'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:234 (check_symbol_exists)"
+    checks:
+      - "Looking for strtoll"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_STRTOLL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_addfb/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_addfb.dir/build.make CMakeFiles/cmTC_addfb.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA'
+        Building C object CMakeFiles/cmTC_addfb.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_addfb.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA/CheckSymbolExists.c:8:11: warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+            8 |   return ((int*)(&strtoll))[argc];
+              |           ^
+        Linking C executable cmTC_addfb
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_addfb.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_addfb.dir/CheckSymbolExists.c.o -o cmTC_addfb 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-5IScnA'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:239 (check_symbol_exists)"
+    checks:
+      - "Looking for snprintf"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SNPRINTF"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bbf6f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bbf6f.dir/build.make CMakeFiles/cmTC_bbf6f.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV'
+        Building C object CMakeFiles/cmTC_bbf6f.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_bbf6f.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV/CheckSymbolExists.c:8:11: warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+            8 |   return ((int*)(&snprintf))[argc];
+              |           ^
+        Linking C executable cmTC_bbf6f
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bbf6f.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_bbf6f.dir/CheckSymbolExists.c.o -o cmTC_bbf6f 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YmuSbV'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:241 (check_symbol_exists)"
+    checks:
+      - "Looking for explicit_bzero"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_EXPLICIT_BZERO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7fe93/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7fe93.dir/build.make CMakeFiles/cmTC_7fe93.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t'
+        Building C object CMakeFiles/cmTC_7fe93.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_7fe93.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t/CheckSymbolExists.c:8:11: warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+            8 |   return ((int*)(&explicit_bzero))[argc];
+              |           ^
+        Linking C executable cmTC_7fe93
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7fe93.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_7fe93.dir/CheckSymbolExists.c.o -o cmTC_7fe93 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-8muF7t'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:242 (check_symbol_exists)"
+    checks:
+      - "Looking for explicit_memset"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_EXPLICIT_MEMSET"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5949d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5949d.dir/build.make CMakeFiles/cmTC_5949d.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg'
+        Building C object CMakeFiles/cmTC_5949d.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_5949d.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg/CheckSymbolExists.c:8:19: error: ‘explicit_memset’ undeclared (first use in this function)
+            8 |   return ((int*)(&explicit_memset))[argc];
+              |                   ^~~~~~~~~~~~~~~
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg/CheckSymbolExists.c:4:14: warning: parameter ‘argc’ set but not used [-Wunused-but-set-parameter]
+            4 | int main(int argc, char** argv)
+              |          ~~~~^~~~
+        gmake[1]: *** [CMakeFiles/cmTC_5949d.dir/build.make:78: CMakeFiles/cmTC_5949d.dir/CheckSymbolExists.c.o] Erro 1
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-YoKTAg'
+        gmake: *** [Makefile:127: cmTC_5949d/fast] Erro 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:243 (check_symbol_exists)"
+    checks:
+      - "Looking for memset_s"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_MEMSET_S"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b8c99/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b8c99.dir/build.make CMakeFiles/cmTC_b8c99.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO'
+        Building C object CMakeFiles/cmTC_b8c99.dir/CheckSymbolExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_b8c99.dir/CheckSymbolExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO/CheckSymbolExists.c
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO/CheckSymbolExists.c: In function ‘main’:
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO/CheckSymbolExists.c:8:19: error: ‘memset_s’ undeclared (first use in this function); did you mean ‘memset’?
+            8 |   return ((int*)(&memset_s))[argc];
+              |                   ^~~~~~~~
+              |                   memset
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+        /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO/CheckSymbolExists.c:4:14: warning: parameter ‘argc’ set but not used [-Wunused-but-set-parameter]
+            4 | int main(int argc, char** argv)
+              |          ~~~~^~~~
+        gmake[1]: *** [CMakeFiles/cmTC_b8c99.dir/build.make:78: CMakeFiles/cmTC_b8c99.dir/CheckSymbolExists.c.o] Erro 1
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-PfzYoO'
+        gmake: *** [Makefile:127: cmTC_b8c99/fast] Erro 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:265 (check_function_exists)"
+    checks:
+      - "Looking for poll"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_POLL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d3331/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d3331.dir/build.make CMakeFiles/cmTC_d3331.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25'
+        Building C object CMakeFiles/cmTC_d3331.dir/CheckFunctionExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=poll -o CMakeFiles/cmTC_d3331.dir/CheckFunctionExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25/CheckFunctionExists.c
+        Linking C executable cmTC_d3331
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3331.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=poll -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_d3331.dir/CheckFunctionExists.c.o -o cmTC_d3331 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-JlyH25'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:270 (check_function_exists)"
+    checks:
+      - "Looking for select"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_SELECT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2fb10/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2fb10.dir/build.make CMakeFiles/cmTC_2fb10.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN'
+        Building C object CMakeFiles/cmTC_2fb10.dir/CheckFunctionExists.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc   -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=select -o CMakeFiles/cmTC_2fb10.dir/CheckFunctionExists.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN/CheckFunctionExists.c
+        Linking C executable cmTC_2fb10
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2fb10.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable -DCHECK_FUNCTION_EXISTS=select -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_2fb10.dir/CheckFunctionExists.c.o -o cmTC_2fb10 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-phlIZN'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "cmake/CheckNonblockingSocketSupport.cmake:30 (check_c_source_compiles)"
+      - "CMakeLists.txt:279 (check_nonblocking_socket_support)"
+    checks:
+      - "Performing Test HAVE_O_NONBLOCK"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "HAVE_O_NONBLOCK"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f1352/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f1352.dir/build.make CMakeFiles/cmTC_f1352.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5'
+        Building C object CMakeFiles/cmTC_f1352.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DHAVE_O_NONBLOCK  -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_f1352.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5/src.c
+        Linking C executable cmTC_f1352
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f1352.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_f1352.dir/src.c.o -o cmTC_f1352 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-MAzLR5'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.28/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/usr/share/cmake-3.28/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/share/cmake-3.28/Modules/FindOpenSSL.cmake:157 (find_package)"
+      - "/usr/share/cmake-3.28/Modules/FindOpenSSL.cmake:546 (_OpenSSL_test_and_find_dependencies)"
+      - "CMakeLists.txt:304 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o"
+      binary: "/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-ldl -lpthread -lm -lutil"
+      CMAKE_MODULE_PATH: "/home/lotus/PROJETOS/pcg729/source/libssh2/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_89403/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_89403.dir/build.make CMakeFiles/cmTC_89403.dir/build
+        gmake[1]: Entrando no diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o'
+        Building C object CMakeFiles/cmTC_89403.dir/src.c.o
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -DCMAKE_HAVE_LIBC_PTHREAD  -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -o CMakeFiles/cmTC_89403.dir/src.c.o -c /home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o/src.c
+        Linking C executable cmTC_89403
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_89403.dir/link.txt --verbose=1
+        /usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -Wall  -W -pedantic -Wbad-function-cast -Wconversion -Winline -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wno-long-long -Wno-multichar -Wpointer-arith -Wshadow -Wsign-compare -Wundef -Wunused -Wwrite-strings -Waddress -Wattributes -Wcast-align -Wdeclaration-after-statement -Wdiv-by-zero -Wempty-body -Wendif-labels -Wfloat-equal -Wformat-security -Wignored-qualifiers -Wmissing-field-initializers -Wmissing-noreturn -Wno-format-nonliteral -Wno-system-headers -Wold-style-definition -Wredundant-decls -Wsign-conversion -Wno-error=sign-conversion -Wstrict-prototypes -Wtype-limits -Wunreachable-code -Wunused-macros -Wunused-parameter -Wvla -Wclobbered -Wmissing-parameter-type -Wold-style-declaration -Wstrict-aliasing=3 -Wtrampolines -Wformat=2 -Warray-bounds=2 -ftree-vrp -Wduplicated-cond -Wnull-dereference -fdelete-null-pointer-checks -Wshift-negative-value -Wshift-overflow=2 -Walloc-zero -Wduplicated-branches -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough -Wrestrict -Warith-conversion -Wdouble-promotion -Wenum-conversion -Wpragmas -Wunused-const-variable  -ldl -lpthread -lm -lutil  CMakeFiles/cmTC_89403.dir/src.c.o -o cmTC_89403 
+        gmake[1]: Saindo do diretório '/home/lotus/PROJETOS/pcg729/source/libssh2/build/CMakeFiles/CMakeScratch/TryCompile-oGyJ6o'
+        
+      exitCode: 0
+...

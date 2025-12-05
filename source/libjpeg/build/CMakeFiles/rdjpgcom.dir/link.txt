@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/rdjpgcom.dir/src/rdjpgcom.c.o -o rdjpgcom 

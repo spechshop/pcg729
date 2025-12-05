@@ -1,0 +1,2 @@
+ar qc libimagedec.a CMakeFiles/imagedec.dir/imageio/image_dec.c.o CMakeFiles/imagedec.dir/imageio/jpegdec.c.o CMakeFiles/imagedec.dir/imageio/metadata.c.o CMakeFiles/imagedec.dir/imageio/pngdec.c.o CMakeFiles/imagedec.dir/imageio/pnmdec.c.o CMakeFiles/imagedec.dir/imageio/tiffdec.c.o CMakeFiles/imagedec.dir/imageio/webpdec.c.o CMakeFiles/imagedec.dir/imageio/wicdec.c.o
+/usr/local/musl/bin/x86_64-linux-musl-ranlib libimagedec.a

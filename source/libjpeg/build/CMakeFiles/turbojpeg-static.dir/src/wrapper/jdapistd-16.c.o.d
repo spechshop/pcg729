@@ -1,0 +1,26 @@
+CMakeFiles/turbojpeg-static.dir/src/wrapper/jdapistd-16.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/jdapistd-16.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jdapistd.c \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jinclude.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfig.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfigint.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/errno.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/errno.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jpeglib.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jmorecfg.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jpegint.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jerror.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jdmaster.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jdmerge.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jsamplecomp.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jdsample.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jmemsys.h

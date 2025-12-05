@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -pthread -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/img2webp.dir/examples/img2webp.c.o -o img2webp  libexampleutil.a libimagedec.a libimageioutil.a libwebp.a libwebpmux.a libwebpdemux.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libpng16.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libz.a -lm libwebp.a libsharpyuv.a 

@@ -1,0 +1,28 @@
+CMakeFiles/djpeg-static.dir/src/wrapper/wrppm-8.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/wrppm-8.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../wrppm.c \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../cmyk.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jinclude.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfig.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfigint.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/errno.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/errno.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jpeglib.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jmorecfg.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jpegint.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jerror.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jsamplecomp.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../cdjpeg.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jinclude.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jpeglib.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../jerror.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/wrapper/../cderror.h

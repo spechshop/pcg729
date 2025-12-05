@@ -1,0 +1,21 @@
+CMakeFiles/imagedec.dir/imageio/image_dec.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/image_dec.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/./image_dec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/inttypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/build/src/webp/config.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././metadata.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././jpegdec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././pngdec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././pnmdec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././tiffdec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././webpdec.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/decode.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/src/webp/./types.h \
+ /home/lotus/PROJETOS/pcg729/source/libwebp/imageio/././wicdec.h

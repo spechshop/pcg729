@@ -1,0 +1,76 @@
+nghttp2_session.lo: nghttp2_session.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ nghttp2_session.h ../config.h includes/nghttp2/nghttp2.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/inttypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/types.h \
+ /usr/local/musl/x86_64-linux-musl/include/endian.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/select.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdarg.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ includes/nghttp2/nghttp2ver.h nghttp2_map.h nghttp2_mem.h \
+ nghttp2_frame.h nghttp2_hd.h nghttp2_hd_huffman.h nghttp2_buf.h \
+ nghttp2_int.h nghttp2_rcbuf.h nghttp2_stream.h nghttp2_outbound_item.h \
+ nghttp2_pq.h nghttp2_callbacks.h nghttp2_ratelim.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/assert.h nghttp2_helper.h \
+ nghttp2_net.h /usr/local/musl/x86_64-linux-musl/include/arpa/inet.h \
+ /usr/local/musl/x86_64-linux-musl/include/netinet/in.h \
+ /usr/local/musl/x86_64-linux-musl/include/sys/socket.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/socket.h \
+ nghttp2_priority_spec.h nghttp2_option.h nghttp2_http.h nghttp2_extpri.h \
+ nghttp2_time.h nghttp2_debug.h nghttp2_submit.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+nghttp2_session.h:
+../config.h:
+includes/nghttp2/nghttp2.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+/usr/local/musl/x86_64-linux-musl/include/inttypes.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/sys/types.h:
+/usr/local/musl/x86_64-linux-musl/include/endian.h:
+/usr/local/musl/x86_64-linux-musl/include/sys/select.h:
+/usr/local/musl/x86_64-linux-musl/include/stdarg.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+includes/nghttp2/nghttp2ver.h:
+nghttp2_map.h:
+nghttp2_mem.h:
+nghttp2_frame.h:
+nghttp2_hd.h:
+nghttp2_hd_huffman.h:
+nghttp2_buf.h:
+nghttp2_int.h:
+nghttp2_rcbuf.h:
+nghttp2_stream.h:
+nghttp2_outbound_item.h:
+nghttp2_pq.h:
+nghttp2_callbacks.h:
+nghttp2_ratelim.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+/usr/local/musl/x86_64-linux-musl/include/stdio.h:
+/usr/local/musl/x86_64-linux-musl/include/assert.h:
+nghttp2_helper.h:
+nghttp2_net.h:
+/usr/local/musl/x86_64-linux-musl/include/arpa/inet.h:
+/usr/local/musl/x86_64-linux-musl/include/netinet/in.h:
+/usr/local/musl/x86_64-linux-musl/include/sys/socket.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/socket.h:
+nghttp2_priority_spec.h:
+nghttp2_option.h:
+nghttp2_http.h:
+nghttp2_extpri.h:
+nghttp2_time.h:
+nghttp2_debug.h:
+nghttp2_submit.h:

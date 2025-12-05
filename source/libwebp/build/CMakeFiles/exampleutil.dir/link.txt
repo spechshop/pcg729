@@ -1,0 +1,2 @@
+ar qc libexampleutil.a CMakeFiles/exampleutil.dir/examples/example_util.c.o
+/usr/local/musl/bin/x86_64-linux-musl-ranlib libexampleutil.a

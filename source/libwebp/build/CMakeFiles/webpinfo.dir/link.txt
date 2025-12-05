@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -pthread -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/webpinfo.dir/examples/webpinfo.c.o -o webpinfo  libexampleutil.a libimageioutil.a libwebp.a libsharpyuv.a 

@@ -1,0 +1,24 @@
+CMakeFiles/jpeg-static.dir/src/jcphuff.c.o: \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jcphuff.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jinclude.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfig.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/build/jconfigint.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdio.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/errno.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/errno.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jpeglib.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jmorecfg.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jpegint.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jerror.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jchuff.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /home/lotus/PROJETOS/pcg729/source/libjpeg/src/jpeg_nbits.h

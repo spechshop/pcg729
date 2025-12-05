@@ -1,0 +1,59 @@
+src/opus_projection_encoder.lo: src/opus_projection_encoder.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ celt/mathops.h celt/arch.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h \
+ include/opus_defines.h include/opus_types.h celt/entcode.h \
+ /usr/local/musl/x86_64-linux-musl/include/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/features.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/limits.h \
+ /usr/local/musl/x86_64-linux-musl/include/stddef.h celt/ecintrin.h \
+ /usr/local/musl/x86_64-linux-musl/include/math.h celt/os_support.h \
+ /usr/local/musl/x86_64-linux-musl/include/string.h \
+ /usr/local/musl/x86_64-linux-musl/include/strings.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdlib.h \
+ /usr/local/musl/x86_64-linux-musl/include/alloca.h celt/os_support.h \
+ src/opus_private.h celt/arch.h include/opus.h include/opus_defines.h \
+ celt/celt.h include/opus_custom.h celt/entenc.h celt/entdec.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdarg.h \
+ include/opus_projection.h include/opus_multistream.h include/opus.h \
+ include/opus_multistream.h celt/stack_alloc.h src/mapping_matrix.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+celt/mathops.h:
+celt/arch.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:
+include/opus_defines.h:
+include/opus_types.h:
+celt/entcode.h:
+/usr/local/musl/x86_64-linux-musl/include/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/features.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/limits.h:
+/usr/local/musl/x86_64-linux-musl/include/stddef.h:
+celt/ecintrin.h:
+/usr/local/musl/x86_64-linux-musl/include/math.h:
+celt/os_support.h:
+/usr/local/musl/x86_64-linux-musl/include/string.h:
+/usr/local/musl/x86_64-linux-musl/include/strings.h:
+/usr/local/musl/x86_64-linux-musl/include/stdlib.h:
+/usr/local/musl/x86_64-linux-musl/include/alloca.h:
+celt/os_support.h:
+src/opus_private.h:
+celt/arch.h:
+include/opus.h:
+include/opus_defines.h:
+celt/celt.h:
+include/opus_custom.h:
+celt/entenc.h:
+celt/entdec.h:
+/usr/local/musl/x86_64-linux-musl/include/stdarg.h:
+include/opus_projection.h:
+include/opus_multistream.h:
+include/opus.h:
+include/opus_multistream.h:
+celt/stack_alloc.h:
+src/mapping_matrix.h:

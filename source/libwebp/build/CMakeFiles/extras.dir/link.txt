@@ -1,0 +1,2 @@
+ar qc libextras.a CMakeFiles/extras.dir/extras/extras.c.o CMakeFiles/extras.dir/extras/quality_estimate.c.o
+/usr/local/musl/bin/x86_64-linux-musl-ranlib libextras.a

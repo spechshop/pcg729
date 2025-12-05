@@ -1,0 +1,13 @@
+src/mlp_data.lo: src/mlp_data.c \
+ /usr/local/musl/x86_64-linux-musl/include/stdc-predef.h config.h \
+ src/mlp.h include/opus_types.h \
+ /usr/local/musl/x86_64-linux-musl/include/stdint.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h \
+ /usr/local/musl/x86_64-linux-musl/include/bits/stdint.h
+/usr/local/musl/x86_64-linux-musl/include/stdc-predef.h:
+config.h:
+src/mlp.h:
+include/opus_types.h:
+/usr/local/musl/x86_64-linux-musl/include/stdint.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/alltypes.h:
+/usr/local/musl/x86_64-linux-musl/include/bits/stdint.h:

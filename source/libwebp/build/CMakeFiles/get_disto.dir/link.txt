@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -pthread -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/get_disto.dir/extras/get_disto.c.o -o get_disto  libimagedec.a libimageioutil.a libwebpdemux.a libwebp.a libsharpyuv.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libpng16.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libz.a -lm 

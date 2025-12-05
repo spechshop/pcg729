@@ -1,0 +1,1 @@
+/usr/local/musl/bin/x86_64-linux-musl-gcc -fPIC -pthread -O3 -DNDEBUG -ldl -lpthread -lm -lutil CMakeFiles/dwebp.dir/examples/dwebp.c.o -o dwebp  libexampleutil.a libimagedec.a libimageenc.a libwebpdemux.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libpng16.a /home/lotus/PROJETOS/pcg729/buildroot/lib/libz.a -lm libimageioutil.a libwebp.a libsharpyuv.a 
