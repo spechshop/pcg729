@@ -19,6 +19,10 @@ jobs:
     - name: Preparar extensões e dependentes
       run: ./bin/setup-runtime && bin/php composer install && bin/php bin/spc doctor --auto-fix
 
+    - name: Instalar re2c
+      run: sudo apt-get update && sudo apt-get install -y re2c
+
+
     - name: Configure CMake
       run: |
         ./bin/setup-runtime \
