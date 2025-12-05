@@ -29,7 +29,7 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run:  bin/php bin/spc build --build-cli --swoole
+      run:  bin/php bin/spc build --build-cli swoole
     - name: Test
       working-directory: ${{github.workspace}}/build
       # Execute tests defined by the CMake configuration.
