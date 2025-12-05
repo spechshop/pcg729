@@ -1,5 +1,5 @@
 # PCG729
-
+[![CMake on a single platform](https://github.com/berzersks/pcg729/actions/workflows/manual.yml/badge.svg)](https://github.com/berzersks/pcg729/actions/workflows/manual.yml)
 ## Descrição
 Este repositório contém o projeto `pcg729`, desenvolvido e mantido por `berzersks`. Ele inclui uma estrutura robusta para desenvolvimento em PHP, com diversas dependências e ferramentas configuradas para facilitar o desenvolvimento e a manutenção do código.
 
