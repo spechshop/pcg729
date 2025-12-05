@@ -3,8 +3,8 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
-        <option value="$PROJECT_DIR$/downloads/ext-glfw/tests" />
         <option value="$PROJECT_DIR$/downloads/ext-glfw/generator/tests" />
+        <option value="$PROJECT_DIR$/downloads/ext-glfw/tests" />
       </list>
     </option>
   </component>

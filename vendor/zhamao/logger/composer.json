@@ -1,0 +1,67 @@
+{
+    "name": "zhamao/logger",
+    "description": "Another Console Logger for CLI Applications",
+    "type": "library",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "ZM\\Logger\\": "src/ZM/Logger"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jerry",
+            "email": "admin@zhamao.me"
+        },
+        {
+            "name": "sunxyw",
+            "email": "dev@sunxyw.xyz"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2 || ^7.3 || ^7.4 || ^8.0 || ^8.1",
+        "psr/log": "^1 || ^2 || ^3",
+        "symfony/polyfill-mbstring": "^1.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "suggest": {
+        "ext-mbstring": "Use C/C++ extension instead of polyfill will be more efficient"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.2",
+        "phpstan/phpstan": "^1.1",
+        "phpunit/phpunit": "^8.5 || ^9.0",
+        "roave/security-advisories": "dev-latest",
+        "brainmaestro/composer-git-hooks": "^2.8"
+    },
+    "extra": {
+        "hooks": {
+            "post-merge": "composer install",
+            "pre-commit": [
+                "echo committing as $(git config user.name)",
+                "composer cs-fix -- --diff"
+            ],
+            "pre-push": [
+                "composer cs-fix -- --dry-run --diff",
+                "composer analyse"
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/cghooks add"
+        ],
+        "analyse": "phpstan analyse --memory-limit 300M",
+        "cs-fix": "php-cs-fixer fix",
+        "test": "phpunit --no-coverage"
+    }
+}
