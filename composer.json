@@ -17,10 +17,10 @@
     "zhamao/logger": "^1.0"
   },
   "require-dev": {
-    "captainhook/captainhook-phar": "^5.23",
-    "captainhook/hook-installer": "^1.0",
-    "friendsofphp/php-cs-fixer": "^3.60",
-    "humbug/box": "^4.5.0 || ^4.6.0",
+    "captainhook/captainhook-phar": "*",
+    "captainhook/hook-installer": "*",
+    "friendsofphp/php-cs-fixer": "*",
+    
     "nunomaduro/collision": "^7.8",
     "phpstan/phpstan": "^1.10",
     "phpunit/phpunit": "^10.3 || ^9.5"
@@ -43,8 +43,7 @@
     "bin/spc"
   ],
   "scripts": {
-    "analyse": "phpstan analyse --memory-limit 300M",
-    "cs-fix": "php-cs-fixer fix",
+
     "test": "vendor/bin/phpunit tests/ --no-coverage",
     "build:phar": "vendor/bin/box compile"
   },
