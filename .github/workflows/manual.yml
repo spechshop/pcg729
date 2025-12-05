@@ -1,42 +1,57 @@
-- name: Baixar e preparar php-src 8.5.0 (Spech mode)
-  run: |
-    mkdir -p source
-    cd source
+name: CMake on a single platform
 
-    echo "[Spech] Baixando php-src 8.5.0..."
-    curl -L -o php-src.zip https://github.com/php/php-src/archive/refs/tags/php-8.5.0.zip
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
-    echo "[Spech] Criando área isolada de extração..."
-    rm -rf tmp_extract
-    mkdir tmp_extract
+env:
+  BUILD_TYPE: Release
 
-    echo "[Spech] Extraindo zip dentro de tmp_extract..."
-    unzip php-src.zip -d tmp_extract >/dev/null
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    echo "[Spech] Localizando diretório real do php-src..."
-    PHP_DIR=$(find tmp_extract -maxdepth 1 -type d ! -name tmp_extract | head -n 1)
+    steps:
+    - uses: actions/checkout@v4
 
-    if [ -z "$PHP_DIR" ]; then
-        echo "[Spech][ERRO] Nenhum diretório encontrado após unzip."
-        exit 1
-    fi
+    - name: Preparar extensões e dependentes
+      run: ./bin/setup-runtime && bin/php composer install && bin/php bin/spc doctor --auto-fix
 
-    echo "[Spech] Diretório detectado: $PHP_DIR"
+    - name: Configure CMake
+      run: |
+        ./bin/setup-runtime \
+        && bin/php composer install \
+        && bin/php bin/spc download --for-extensions "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"
 
-    echo "[Spech] Verificando indicadores de php-src..."
-    if [ ! -f "$PHP_DIR/configure" ] && [ ! -f "$PHP_DIR/README.md" ] && [ ! -d "$PHP_DIR/Zend" ]; then
-        echo "[Spech][ERRO] A pasta extraída não parece ser php-src!"
-        ls -lah "$PHP_DIR"
-        exit 1
-    fi
+    # -----------------------------------------------------------
+    # 🔥 BAIXAR PHP-SRC 8.5.0 DEPOIS DO SPC DOWNLOAD
+    # -----------------------------------------------------------
+    - name: Baixar e preparar php-src 8.5.0
+      run: |
+        mkdir -p source
+        cd source
 
-    echo "[Spech] Movendo php-src para source/php-src..."
-    rm -rf php-src
-    mv "$PHP_DIR" php-src
+        echo "Baixando php-src 8.5.0..."
+        curl -L -o php-src.zip https://github.com/php/php-src/archive/refs/tags/php-8.5.0.zip
 
-    echo "[Spech] Limpando arquivos temporários..."
-    rm -f php-src.zip
-    rm -rf tmp_extract
+        echo "Extraindo..."
+        unzip php-src.zip
 
-    echo "[Spech] php-src preparado:"
-    ls -lah php-src
+        echo "Movendo para source/php-src..."
+        EXTRACTED=$(ls -d php-src-* | head -n 1)
+        mv "$EXTRACTED" php-src
+
+        rm -f php-src.zip
+        ls -lah php-src
+
+    - name: Build
+      run: |
+        bin/php bin/spc build \
+        --build-cli "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv" \
+        --debug --enable-zts
+
+    - name: Test
+      working-directory: ${{ github.workspace }}/build
+      run: buildroot/bin/php -i
