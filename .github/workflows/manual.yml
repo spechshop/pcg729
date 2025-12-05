@@ -1,196 +1,79 @@
-name: Build Self-Hosted PHP Binary (Unix)
+name: Build PHP Custom
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 1 */3 * *"
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  BUILD_TYPE: Release
 
 jobs:
-  build-release-artifacts:
-    name: "Build ${{ matrix.php-version }}-${{ matrix.combination }} on ${{ matrix.runner }}"
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version:
-          - "8.1"
-          - "8.2"
-          - "8.3"
-          - "8.4"
-        runner:
-          - "ubuntu-latest"
-          - "macos-15-intel"
-          - "ubuntu-24.04-arm"
-          - "macos-15"
-          - "ubuntu-22.04"
-          - "ubuntu-22.04-arm"
-        combination:
-          - minimal
-          - bulk
-          - common
-          - gnu-bulk
-        exclude:
-          - { runner: "ubuntu-latest", combination: "gnu-bulk" }
-          - { runner: "ubuntu-24.04-arm", combination: "gnu-bulk" }
-          - { runner: "macos-15-intel", combination: "gnu-bulk" }
-          - { runner: "macos-15", combination: "gnu-bulk" }
-          - { runner: "ubuntu-22.04", combination: "minimal" }
-          - { runner: "ubuntu-22.04", combination: "bulk" }
-          - { runner: "ubuntu-22.04", combination: "common" }
-          - { runner: "ubuntu-22.04-arm", combination: "minimal" }
-          - { runner: "ubuntu-22.04-arm", combination: "bulk" }
-          - { runner: "ubuntu-22.04-arm", combination: "common" }
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: "Process env string"
-        id: process-env
-        shell: bash
+      - uses: actions/checkout@v4
+
+      # -------------------------------
+      # Instalar deps mínimas pro build
+      # -------------------------------
+      - name: Instalar dependências
         run: |
-          case "${{ matrix.combination }}" in
-            minimal) 
-              echo "EXTENSIONS=iconv,pcntl,posix,mbstring,filter,tokenizer,phar" >> "$GITHUB_OUTPUT"
-              ;;
-            common)  
-              echo "EXTENSIONS=bcmath,bz2,calendar,ctype,curl,dom,exif,fileinfo,filter,ftp,gd,gmp,iconv,xml,mbstring,mbregex,mysqlnd,openssl,pcntl,pdo,pdo_mysql,pdo_sqlite,pdo_pgsql,pgsql,phar,posix,redis,session,simplexml,soap,sockets,sqlite3,tokenizer,xmlwriter,xmlreader,zlib,zip" >> "$GITHUB_OUTPUT"
-              echo "SUGGEST=--with-suggested-libs" >> "$GITHUB_OUTPUT"
-              ;;
-            bulk|gnu-bulk)    
-              echo "EXTENSIONS=apcu,bcmath,bz2,calendar,ctype,curl,dba,dom,event,exif,fileinfo,filter,ftp,gd,gmp,iconv,imagick,imap,intl,mbregex,mbstring,mysqli,mysqlnd,opcache,openssl,opentelemetry,pcntl,pdo,pdo_mysql,pgsql,phar,posix,protobuf,readline,redis,session,shmop,simplexml,soap,sockets,sodium,sqlite3,swoole,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,sysvmsg,sysvsem,sysvshm,tokenizer,xml,xmlreader,xmlwriter,xsl,zip,zlib" >> "$GITHUB_OUTPUT"
-              echo "SUGGEST=--with-suggested-libs" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-          
-          case "${{ matrix.runner }}" in
-            ubuntu-latest)
-              echo "OS=linux" >> "$GITHUB_OUTPUT"
-              echo "ARCH=x86_64" >> "$GITHUB_OUTPUT"
-              echo "CMD=bin/spc-alpine-docker" >> "$GITHUB_OUTPUT"
-              ;;
-            ubuntu-24.04-arm)
-              echo "OS=linux" >> "$GITHUB_OUTPUT"
-              echo "ARCH=aarch64" >> "$GITHUB_OUTPUT"
-              echo CMD="bin/spc-alpine-docker" >> "$GITHUB_OUTPUT"
-              ;;
-            ubuntu-22.04)
-              echo "OS=linux" >> "$GITHUB_OUTPUT"
-              echo "ARCH=x86_64" >> "$GITHUB_OUTPUT"
-              echo CMD="bin/spc-gnu-docker" >> "$GITHUB_OUTPUT"
-              ;;
-            ubuntu-22.04-arm)
-              echo "OS=linux" >> "$GITHUB_OUTPUT"
-              echo "ARCH=aarch64" >> "$GITHUB_OUTPUT"
-              echo CMD="bin/spc-gnu-docker" >> "$GITHUB_OUTPUT"
-              ;;
-            windows-2019)
-              echo "OS=windows" >> "$GITHUB_OUTPUT"
-              echo "ARCH=x86_64" >> "$GITHUB_OUTPUT"
-              echo "CMD=bin/spc" >> "$GITHUB_OUTPUT"
-              ;;
-            macos-15-intel)
-              echo "OS=macos" >> "$GITHUB_OUTPUT"
-              echo "ARCH=x86_64" >> "$GITHUB_OUTPUT"
-              echo "CMD=bin/spc" >> "$GITHUB_OUTPUT"
-              ;;
-            macos-15)
-              echo "OS=macos" >> "$GITHUB_OUTPUT"
-              echo "ARCH=aarch64" >> "$GITHUB_OUTPUT"
-              echo "CMD=bin/spc" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-      
-      - name: "Checkout remote"
-        if: github.repository != 'crazywhalecc/static-php-cli'
-        uses: actions/checkout@v4
-        with:
-          repository: crazywhalecc/static-php-cli
-          ref: main
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential autoconf automake cmake make gcc g++ pkg-config \
+            re2c bison flex m4 curl wget git unzip ca-certificates \
+            libxml2-dev libsqlite3-dev libssl-dev zlib1g-dev libbz2-dev \
+            libzip-dev libjpeg-dev libpng-dev libwebp-dev libonig-dev \
+            libreadline-dev libgmp-dev libicu-dev libxslt1-dev libffi-dev \
+            libfreetype6-dev libevent-dev libpcre3-dev libgcc-12-dev libstdc++-12-dev
 
-      - name: "Setup PHP"
-        if: ${{ !startsWith(matrix.runner, 'ubuntu') }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: pecl, composer
-          extensions: curl, openssl, mbstring, filter
-          ini-values: memory_limit=-1
-
-      - name: "Cache composer packages"
-        id: composer-cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php
-      # Cache downloaded source
-      - id: cache-download
-        uses: actions/cache@v4
-        with:
-          path: downloads
-          key: pack-lib-dependencies-${{ matrix.combination }}-${{ matrix.php-version }}-${{ matrix.runner }}
-
-      - name: "Install Dependencies"
-        if: ${{ !startsWith(matrix.runner, 'ubuntu') }}
-        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
-
-      - run: ${{ steps.process-env.outputs.CMD }} doctor --auto-fix
-
-      # If there's no dependencies cache, fetch sources
-      - name: "Download sources"
-        env:
-          GITHUB_TOKEN: ${{ secrets.S_GITHUB_TOKEN }}
-        run: ${{ steps.process-env.outputs.CMD }} download --with-php=${{ matrix.php-version }} --for-extensions=${{ steps.process-env.outputs.EXTENSIONS }} --retry=5 --prefer-pre-built --ignore-cache-sources=php-src
-
-      - name: "Build library: ${{ matrix.library }}"
+      # -------------------------------
+      # Baixar php-src (se não existir)
+      # -------------------------------
+      - name: Baixar e preparar php-src 8.5.0
         run: |
-          if [ "${{ steps.process-env.outputs.OS }}" = "linux" ] && [ "${{ steps.process-env.outputs.CMD }}" = "bin/spc-alpine-docker" ]; then
-            ${{ steps.process-env.outputs.CMD }} install-pkg upx
-            UPX=--with-upx-pack
-          fi
-          
-          ${{ steps.process-env.outputs.CMD }} build --build-cli --build-micro --build-fpm ${{ steps.process-env.outputs.EXTENSIONS }} --debug $UPX ${{ steps.process-env.outputs.SUGGEST }}
-          # Copy out from buildroot, because docker build has different permission
-          mkdir -p tmp_dist/
-          cp buildroot/bin/php tmp_dist/
-          cp buildroot/bin/micro.sfx tmp_dist/
-          cp buildroot/bin/php-fpm tmp_dist/
-          PHPVER=$(cat source/php-src/main/php_version.h | grep "PHP_VERSION " | awk -F\" '{print $2}')
-          
-          if [ ! -d "dist" ]; then
-            mkdir dist/
-          fi
-          sudo chmod -R 777 dist
-          
-          tar -czf dist/php-$PHPVER-cli-${{ steps.process-env.outputs.OS }}-${{ steps.process-env.outputs.ARCH }}.tar.gz -C tmp_dist/ php
-          tar -czf dist/php-$PHPVER-micro-${{ steps.process-env.outputs.OS }}-${{ steps.process-env.outputs.ARCH }}.tar.gz -C tmp_dist/ micro.sfx
-          tar -czf dist/php-$PHPVER-fpm-${{ steps.process-env.outputs.OS }}-${{ steps.process-env.outputs.ARCH }}.tar.gz -C tmp_dist/ php-fpm
-          if [ "${{ matrix.php-version }}" == "8.4" ] && [ "${{ matrix.runner }}" == "ubuntu-latest" ]; then
-            cp -r buildroot/license dist/
-            cp buildroot/build-extensions.json dist/
-            cp buildroot/build-libraries.json dist/
-            echo -e "# Note\n\nCurrent distribution uses extensions:\n\n${{ steps.process-env.outputs.EXTENSIONS }}\n\nUsing compile command:\n\n  bin/spc build --build-cli --build-micro --build-fpm ${{ steps.process-env.outputs.EXTENSIONS }} --debug --with-upx-pack" > dist/README.txt
-          fi
-          if [ "${{ matrix.php-version }}" == "8.4" ] && [ "${{ matrix.runner }}" == "ubuntu-22.04" ]; then
-            cp -r buildroot/license dist/
-            cp buildroot/build-extensions.json dist/
-            cp buildroot/build-libraries.json dist/
-            echo -e "# Note\n\nCurrent distribution uses extensions:\n\n${{ steps.process-env.outputs.EXTENSIONS }}\n\nUsing compile command:\n\n  bin/spc build --build-cli --build-micro --build-fpm ${{ steps.process-env.outputs.EXTENSIONS }} --debug --with-upx-pack" > dist/README.txt
-          fi
-      - name: "Deploy to self-hosted OSS"
-        uses: static-php/upload-s3-action@v1.0.0
-        with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
-          source_dir: "dist/"
-          destination_dir: static-php-cli/${{ matrix.combination }}/
-          endpoint: ${{ secrets.AWS_ENDPOINT }}
+          mkdir -p source
+          cd source
 
-      - name: "Upload Artifact"
-        uses: actions/upload-artifact@v4
-        with:
-          name: php-${{ matrix.php-version }}-${{ matrix.combination }}-${{ steps.process-env.outputs.OS }}-${{ steps.process-env.outputs.ARCH }}
-          path: |
-            tmp_dist/php
-            tmp_dist/php-fpm
-            tmp_dist/micro.sfx
-          if-no-files-found: error
+          echo "Baixando php-src 8.5.0..."
+          curl -L -o php-src.zip https://github.com/php/php-src/archive/refs/tags/php-8.5.0.zip
+
+          echo "Extraindo..."
+          unzip php-src.zip >/dev/null
+
+          echo "Detectando diretório extraído..."
+          EXTRACTED=$(ls -d php-src-* | head -n 1)
+
+          echo "Movendo para source/php-src..."
+          rm -rf php-src
+          mv "$EXTRACTED" php-src
+
+          echo "Estrutura final:"
+          ls -lah php-src
+
+      # -------------------------------
+      # Build PHP (autoconf + configure + make)
+      # -------------------------------
+      - name: Compilar PHP
+        run: |
+          cd source/php-src
+
+          echo "Gerando ./configure..."
+          ./buildconf --force
+
+          echo "Configurando build..."
+          ./configure --enable-cli --enable-zts --with-openssl --with-zlib --enable-mbstring
+
+          echo "Compilando..."
+          make -j$(nproc)
+
+      # -------------------------------
+      # Output final
+      # -------------------------------
+      - name: Exibir binário PHP
+        run: |
+          ls -lh source/php-src/sapi/cli/php
+          file source/php-src/sapi/cli/php
