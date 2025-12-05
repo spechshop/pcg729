@@ -56,7 +56,9 @@ class swoole extends Extension
         // Banco de dados (sem depender de "hook" extra)
 
         //$arg .= ' --enable-swoole-sqlite';
-
+  if ($this->getExtVersion() >= '6.1.0') {
+            $arg .= ' --enable-swoole-stdext';
+        }
         // Sistema
         $arg .= ' --enable-swoole-thread'; // Fix epoll fd warnings
         $arg .= ' --enable-swoole-posix';  // POSIX suporte (ex: gethostname, signals)
@@ -64,7 +66,11 @@ class swoole extends Extension
         // Libuv suporte se disponível
         $arg .= $this->builder->getLib('libuv') ? ' --enable-swoole-uv' : '';
         $arg .= ' --enable-pdo';
+  $arg .= $this->builder->getOption('enable-zts') ? ' --enable-swoole-thread --disable-thread-context' : ' --disable-swoole-thread --enable-thread-context';
 
+        // required features: curl, openssl (but curl hook is buggy for php 8.0)
+        $arg .= $this->builder->getPHPVersionID() >= 80100 ? ' --enable-swoole-curl' : ' --disable-swoole-curl';
+        $arg .= ' --enable-openssl';
 
 
         return $arg;

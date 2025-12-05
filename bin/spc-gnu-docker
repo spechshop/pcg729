@@ -15,7 +15,7 @@ if [ $(id -u) -ne 0 ]; then
         if [ "$SPC_USE_SUDO" != "yes" ]; then
             echo "Docker command requires sudo"
             # shellcheck disable=SC2039
-            echo -n 'To use sudo to run docker, run "export SPC_USE_SUDO=yes" and run command again'
+            echo -n 'To use sudo to run docker run "export SPC_USE_SUDO=yes" and run command again'
             exit 1
         fi
         DOCKER_EXECUTABLE="sudo docker"

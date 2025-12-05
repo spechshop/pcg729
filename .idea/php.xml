@@ -124,9 +124,25 @@
       <path value="$PROJECT_DIR$/downloads/ext-glfw/vendor/nanovg/src" />
       <path value="$PROJECT_DIR$/downloads/ext-glfw/vendor/glad/include" />
       <path value="$PROJECT_DIR$/downloads/ext-glfw/vendor/glad/src" />
+      <path value="$PROJECT_DIR$/downloads/ext-glfw/vendor/opengametools/src" />
+      <path value="$PROJECT_DIR$/downloads/ext-glfw/vendor/opengametools/apps" />
+      <path value="$PROJECT_DIR$/vendor/kelunik/certificate" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
+      <path value="$PROJECT_DIR$/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/marc-mabe/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/daverandom/libdns" />
+      <path value="$PROJECT_DIR$/vendor/revolt/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/amphp/pipeline" />
+      <path value="$PROJECT_DIR$/vendor/amphp/cache" />
+      <path value="$PROJECT_DIR$/vendor/amphp/dns" />
+      <path value="$PROJECT_DIR$/vendor/amphp/socket" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.3">
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpStan">
@@ -140,6 +156,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/downloads/ext-glfw/phpunit.xml" custom_loader_path="$PROJECT_DIR$/downloads/ext-glfw/vendor/autoload.php" use_configuration_file="true" />
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/downloads/ext-glfw/phpunit.xml" custom_loader_path="$PROJECT_DIR$/downloads/ext-glfw/vendor/autoload.php" use_configuration_file="true" />
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
     </phpunit_settings>

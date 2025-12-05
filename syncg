@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# Remove do cache (index) todos os arquivos, respeitando o novo .gitignore
+git rm -r --cached . -f
+
+# Adiciona os arquivos que ainda devem ser rastreados
+git add .
+
+# Commita e envia
+git commit -m "chore: atualiza .gitignore e limpa cache de arquivos ignorados"
+git push
+
+echo "✅ .gitignore atualizado, arquivos ignorados removidos do index, e push feito com sucesso!"

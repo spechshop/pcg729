@@ -202,7 +202,7 @@ class FileSystem
             } else {
                 f_passthru('rm -rf ' . $target);
             }
-            throw new FileSystemException('Cannot extract source ' . $name . ': ' . $e->getMessage(), $e->getCode(), $e);
+            //throw new FileSystemException('Cannot extract source ' . $name . ': ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 

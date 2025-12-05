@@ -2,13 +2,29 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/generator/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/generator/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/generator/tests" isTestSource="true" packagePrefix="\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/tests" isTestSource="true" packagePrefix="GL\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/SPC" isTestSource="false" packagePrefix="SPC\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/SPC" isTestSource="true" packagePrefix="SPC\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/ext-glfw/generator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/examples/php/GPBMetadata" isTestSource="false" packagePrefix="GPBMetadata\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/examples/php/Helloworld" isTestSource="false" packagePrefix="Helloworld\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/examples/php/echo/." isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/examples/php/route_guide/GPBMetadata" isTestSource="false" packagePrefix="GPBMetadata\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/examples/php/route_guide/Routeguide" isTestSource="false" packagePrefix="Routeguide\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/src/php/lib/Grpc" isTestSource="false" packagePrefix="Grpc\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/src/php/tests/generated_code" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/src/php/tests/interop" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/src/php/tests/qps/generated_code" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/bloaty/third_party/protobuf/php/src/GPBMetadata/Google/Protobuf" isTestSource="false" packagePrefix="GPBMetadata\Google\Protobuf\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/bloaty/third_party/protobuf/php/src/Google/Protobuf" isTestSource="false" packagePrefix="Google\Protobuf\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/bloaty/third_party/protobuf/php/tests/generated" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/protobuf/php/src/GPBMetadata/Google/Protobuf" isTestSource="false" packagePrefix="GPBMetadata\Google\Protobuf\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/protobuf/php/src/Google/Protobuf" isTestSource="false" packagePrefix="Google\Protobuf\" />
+      <sourceFolder url="file://$MODULE_DIR$/downloads/grpc/third_party/protobuf/php/tmp" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/swoole/tests/include/lib/src" isTestSource="false" packagePrefix="SwooleTest\" />
-      <sourceFolder url="file://$MODULE_DIR$/downloads/swow/ext/tests/swow_coroutine/autoload" isTestSource="false" packagePrefix="SwowTestYieldInAutoload" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/swow/lib/php-stub-generator/src" isTestSource="true" packagePrefix="Swow\StubUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/swow/lib/php-stub-generator/src" isTestSource="false" packagePrefix="Swow\StubUtils" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/swow/lib/swow-library/lib/psr7-plus/src" isTestSource="false" packagePrefix="Swow\Psr7\" />
@@ -20,8 +36,6 @@
       <sourceFolder url="file://$MODULE_DIR$/downloads/swow/lib/swow-php-cs-fixer-config/src" isTestSource="true" packagePrefix="Swow\PhpCsFixer\" />
       <sourceFolder url="file://$MODULE_DIR$/downloads/swow/lib/swow-utils/src" isTestSource="false" packagePrefix="Swow\Utils\" />
       <sourceFolder url="file://$MODULE_DIR$/source/php-src/ext/swoole/tests/include/lib/src" isTestSource="false" packagePrefix="SwooleTest\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SPC" isTestSource="false" packagePrefix="SPC\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/SPC" isTestSource="true" packagePrefix="SPC\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/downloads/ext-glfw/vendor/glad/include" />
       <excludeFolder url="file://$MODULE_DIR$/downloads/ext-glfw/vendor/glad/src" />
       <excludeFolder url="file://$MODULE_DIR$/downloads/ext-glfw/vendor/glfw/CMake" />
@@ -130,6 +144,22 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zhamao/logger" />
+      <excludeFolder url="file://$MODULE_DIR$/downloads/ext-glfw/vendor/opengametools/apps" />
+      <excludeFolder url="file://$MODULE_DIR$/downloads/ext-glfw/vendor/opengametools/src" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/dns" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/pipeline" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/amphp/socket" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/daverandom/libdns" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kelunik/certificate" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-interfaces" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/marc-mabe/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/revolt/event-loop" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/seld/phar-utils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
