@@ -71,6 +71,9 @@ jobs:
           bin/php composer install
           bin/php bin/spc doctor --auto-fix
           bin/php bin/spc download --with-php=8.5 --for-extensions "curl,openssl,swoole,bcg729"
+          rm -rf downloads/swoole
+          ls downloads -A
+          exit
   
       - name: Build
         run: bin/php bin/spc build --build-cli "swoole" --debug --enable-zts
