@@ -69,17 +69,16 @@ jobs:
         run: |
           ./bin/setup-runtime
           bin/php composer install
-          bin/php bin/spc download --with-php=8.5 --for-extensions "swoole,bcg729"
+          bin/php bin/spc download --with-php=8.5 --for-extensions "opus,bcg729"
           rm -rf downloads/swoole/*
           wget https://github.com/swoole/swoole-src/archive/refs/tags/v6.1.5.zip
           unzip v6.1.5.zip
           cp -r swoole-src-6.1.5/* downloads/swoole          
           ls downloads -A
           bin/php bin/spc doctor --auto-fix
-          exit
   
       - name: Build
-        run: bin/php bin/spc build --build-cli "swoole" --debug --enable-zts
+        run: bin/php bin/spc build --build-cli "opus" --debug --enable-zts
 
       - name: Test
         working-directory: ${{ github.workspace }}/workflowspacesafe
