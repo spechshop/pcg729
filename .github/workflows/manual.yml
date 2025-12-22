@@ -73,11 +73,8 @@ jobs:
           rm -rf downloads/swoole/*
           wget https://github.com/swoole/swoole-src/archive/refs/tags/v6.1.5.zip
           unzip v6.1.5.zip
-          cp -r swoole-src-6.1.5/* downloads/swoole
-          
+          cp -r swoole-src-6.1.5/* downloads/swoole          
           ls downloads -A
-          sleep 30
-          exit
           bin/php bin/spc doctor --auto-fix
           exit
   
