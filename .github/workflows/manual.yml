@@ -1,4 +1,4 @@
-name: Build PHP Custom
+name: CMake on a single platform
 
 on:
   push:
@@ -16,64 +16,64 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # -------------------------------
-      # Instalar deps mínimas pro build
-      # -------------------------------
-      - name: Instalar dependências
+      - name: Instalar dependências do sistema
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential autoconf automake cmake make gcc g++ pkg-config \
-            re2c bison flex m4 curl wget git unzip ca-certificates \
-            libxml2-dev libsqlite3-dev libssl-dev zlib1g-dev libbz2-dev \
-            libzip-dev libjpeg-dev libpng-dev libwebp-dev libonig-dev \
-            libreadline-dev libgmp-dev libicu-dev libxslt1-dev libffi-dev \
-            libfreetype6-dev libevent-dev libpcre3-dev libgcc-12-dev libstdc++-12-dev
+          build-essential \
+          autoconf \
+          automake \
+          cmake \
+          make \
+          gcc \
+          g++ \
+          pkg-config \
+          re2c \
+          bison \
+          flex \
+          m4 \
+          curl \
+          wget \
+          git \
+          unzip \
+          ca-certificates \
+          libtool \
+          libxml2 \
+          libxml2-dev \
+          libsqlite3-dev \
+          libssl-dev \
+          openssl \
+          libcurl4 \
+          libcurl4-openssl-dev \
+          zlib1g \
+          zlib1g-dev \
+          libzip-dev \
+          libjpeg-dev \
+          libpng-dev \
+          libwebp-dev \
+          libonig-dev \
+          libreadline-dev \
+          libgmp-dev \
+          libicu-dev \
+          libxslt1-dev \
+          libffi-dev \
+          libbz2-dev \
+          libfreetype6-dev \
+          libevent-dev \
+          libpcre3-dev \
+          libsqlite3-0 \
+          libgcc-12-dev \
+          libstdc++-12-dev
 
-      # -------------------------------
-      # Baixar php-src (se não existir)
-      # -------------------------------
-      - name: Baixar e preparar php-src 8.5.0
+      - name: Preparar ambiente PHP
         run: |
-          mkdir -p source
-          cd source
+          ./bin/setup-runtime
+          bin/php composer install
+          bin/php bin/spc doctor --auto-fix
+  
+      - name: Build
+        run: bin/php bin/spc build --build-cli "bcg729,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,gmp,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib" --debug --enable-zts
 
-          echo "Baixando php-src 8.5.0..."
-          curl -L -o php-src.zip https://github.com/php/php-src/archive/refs/tags/php-8.5.0.zip
-
-          echo "Extraindo..."
-          unzip php-src.zip >/dev/null
-
-          echo "Detectando diretório extraído..."
-          EXTRACTED=$(ls -d php-src-* | head -n 1)
-
-          echo "Movendo para source/php-src..."
-          rm -rf php-src
-          mv "$EXTRACTED" php-src
-
-          echo "Estrutura final:"
-          ls -lah php-src
-
-      # -------------------------------
-      # Build PHP (autoconf + configure + make)
-      # -------------------------------
-      - name: Compilar PHP
-        run: |
-          cd source/php-src
-
-          echo "Gerando ./configure..."
-          ./buildconf --force
-
-          echo "Configurando build..."
-          ./configure --enable-cli --enable-zts --with-openssl --with-zlib --enable-mbstring
-
-          echo "Compilando..."
-          make -j$(nproc)
-
-      # -------------------------------
-      # Output final
-      # -------------------------------
-      - name: Exibir binário PHP
-        run: |
-          ls -lh source/php-src/sapi/cli/php
-          file source/php-src/sapi/cli/php
+      - name: Test
+        working-directory: ${{ github.workspace }}/build
+        run: buildroot/bin/php -i
