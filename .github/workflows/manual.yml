@@ -73,7 +73,7 @@ jobs:
           bin/php bin/spc download --with-php=8.5 --for-extensions "curl,openssl,swoole,bcg729" --prefer-pre-built
   
       - name: Build
-        run: bin/php bin/spc build --build-cli "bcg729" --debug --enable-zts
+        run: bin/php bin/spc build --build-cli "swoole" --debug --enable-zts
 
       - name: Test
         working-directory: ${{ github.workspace }}/build
