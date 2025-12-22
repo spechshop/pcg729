@@ -71,6 +71,9 @@ jobs:
           bin/php composer install
           bin/php bin/spc download --with-php=8.5 --for-extensions "curl,openssl,swoole,bcg729"
           rm -rf downloads/swoole
+          wget https://github.com/swoole/swoole-src/archive/refs/tags/v6.1.5.zip
+          unzip v6.1.5.zip
+          
           ls downloads -A
           sleep 30
           exit
