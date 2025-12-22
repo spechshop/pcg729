@@ -74,7 +74,7 @@ jobs:
           bin/php bin/spc doctor --auto-fix
   
       - name: Build
-        run: bin/php bin/spc build --build-cli "opus" --debug --enable-zts
+        run: bin/php bin/spc build --build-cli "bcg729" --debug --enable-zts
 
       - name: Test
         working-directory: ${{ github.workspace }}/workflowspacesafe
