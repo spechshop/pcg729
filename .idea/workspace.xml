@@ -24,212 +24,8 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ab660e7-3d80-458f-a6d4-1f9a8282b83a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/x.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pcg729.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pcg729.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/0_original.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1_from_pcma.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2_from_pcmu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3_mixed_3channels.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/44100.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4_pipeline_result.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comandos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/comandos.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/original_8k_mono.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/original_8k_mono.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/pipeline_full_48k_stereo.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/pipeline_full_48k_stereo.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/resample_48k_mono.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/resample_48k_mono.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/spatial_48k_stereo.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/spatial_48k_stereo.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/voice_clarity_48k_mono.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/voice_clarity_48k_mono.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparativo_audio/voice_clarity_8k_mono.wav" beforeDir="false" afterPath="$PROJECT_DIR$/comparativo_audio/voice_clarity_8k_mono.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/env.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/env.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/source.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/source.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_real_audio.php" beforeDir="false" afterPath="$PROJECT_DIR$/demo_real_audio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixed.pcm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixed_3channels.pcm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixed_from_pcma.pcm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixed_from_pcmu.pcm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pipeline_result.pcm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/s.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/AUTHORS" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/AUTHORS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/COPYING.LGPL" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/COPYING.LGPL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/INSTALL" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/INSTALL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/LICENCE" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/LICENCE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/NEWS" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/NEWS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/README" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/TODO" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/TODO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindCFlags.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindCFlags.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindLibAVCodec.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindLibAVCodec.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindLibAVUtil.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindLibAVUtil.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindSIMD32.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindSIMD32.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindSIMD64.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/FindSIMD64.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/SetSystemProcessor.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/cmake/Modules/SetSystemProcessor.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/deinstall.cmake.in" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/deinstall.cmake.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/1-single-block.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/1-single-block.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/1a-lsr.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/1a-lsr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/2-stream.C" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/2-stream.C" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/3-options-input-fn.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/3-options-input-fn.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/4-split-channels.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/4-split-channels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/5-variable-rate.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/5-variable-rate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/README" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/examples/examples-common.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/examples/examples-common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/go.bat" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/go.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/COPYING" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/README" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/calc_snr.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/calc_snr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/callback_hang_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/callback_hang_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/callback_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/callback_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/cmake/Modules/FindFFTW.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/cmake/Modules/FindFFTW.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/cmake/Modules/Findsndfile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/cmake/Modules/Findsndfile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/downsample_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/downsample_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/float_cast.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/float_cast.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/float_short_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/float_short_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/misc_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/misc_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/multi_channel_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/multi_channel_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/multichan_throughput_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/multichan_throughput_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/reset_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/reset_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/simple_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/simple_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/sndfile-resample.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/sndfile-resample.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/snr_bw_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/snr_bw_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/termination_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/termination_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/throughput_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/throughput_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/util.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/util.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/util.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/util.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/lsr-tests/varispeed_test.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/lsr-tests/varispeed_test.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/msvc/README" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/msvc/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/msvc/example1.vcproj" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/msvc/example1.vcproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/msvc/libsoxr.sln" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/msvc/libsoxr.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/msvc/libsoxr.vcproj" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/msvc/libsoxr.vcproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/msvc/soxr-config.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/msvc/soxr-config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/soxr-config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/soxr-config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/aliases.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/aliases.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/avfft32.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/avfft32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/avfft32s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/avfft32s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/ccrw2.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/ccrw2.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr-core.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr-core.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr32.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr32s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr32s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr64.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr64.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/cr64s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/cr64s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/data-io.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/data-io.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/data-io.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/data-io.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/dbesi0.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/dbesi0.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/dev32s.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/dev32s.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/dev64s.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/dev64s.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g32.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g32s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g32s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g64.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g64.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fft4g_cache.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fft4g_cache.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/fifo.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/fifo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/filter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/filter.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/filter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/half-coefs.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/half-coefs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/half-fir.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/half-fir.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/internal.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/internal.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/math-wrap.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/math-wrap.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft-avx.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft-avx.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft-wrap.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft-wrap.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft32.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft32s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft32s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/pffft64s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/pffft64s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/poly-fir.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/poly-fir.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/poly-fir0.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/poly-fir0.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/rdft.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/rdft.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/rdft_t.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/rdft_t.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/rint-clip.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/rint-clip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/rint.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/rint.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/samplerate.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/samplerate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.pc.in" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr-lsr.pc.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/soxr.pc.in" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/soxr.pc.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/std-types.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/std-types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/util-simd.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/util-simd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/util32s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/util32s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/util32s.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/util32s.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/util64s.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/util64s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/util64s.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/util64s.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/vr-coefs.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/vr-coefs.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/vr-coefs.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/vr-coefs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/src/vr32.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/src/vr32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/1-delay-clear.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/1-delay-clear.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/README" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/cmp-test.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/cmp-test.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/throughput-test.bat" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/throughput-test.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/throughput.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/throughput.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/vector-cmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/vector-cmp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/libsoxr/tests/vector-gen.c" beforeDir="false" afterPath="$PROJECT_DIR$/source/libsoxr/tests/vector-gen.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/opus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/opus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/SECURITY.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/SECURITY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/configure.ac" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/configure.ac" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/run-tests.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/run-tests.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/stubs/opus/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/stubs/opus/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/stubs/opusChannel.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/stubs/opusChannel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/cd_quality_stereo.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/cd_quality_stereo.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/narrowband_mono__g_711_style_.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/narrowband_mono__g_711_style_.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_format_l16.raw" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_format_l16.raw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_gain_2x.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_gain_2x.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_normalized.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_normalized.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_reversed.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/test_reversed.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/ultra-wideband_stereo.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/ultra-wideband_stereo.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/wideband_mono__g_722_style_.wav" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/telephony_test_results/wideband_mono__g_722_style_.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/test_all_features_save.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/test_all_features_save.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/test_channel_conversion.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/test_channel_conversion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/opus/test_telephony_simulation.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/opus/test_telephony_simulation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/php-src/ext/yaml/config.w32" beforeDir="false" afterPath="$PROJECT_DIR$/source/php-src/ext/yaml/config.w32" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/extension/curl.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/extension/curl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/linux/library/curl.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/linux/library/curl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/traits/openssl.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/traits/openssl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/unix/library/bcg729.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/unix/library/bcg729.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/unix/library/curl.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/unix/library/curl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/unix/library/libbcg729.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/unix/library/libbcg729.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/unix/library/libopus.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/unix/library/libopus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SPC/builder/unix/library/libsoxr.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPC/builder/unix/library/libsoxr.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/defines.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals/defines.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/0001_imap_macos.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/attr_alpine_gethostname.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/ffi_centos7_fix_O3_strncmp.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/imagick_php84_before_30800.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/libaom_posix_implict.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/musl-1.2.5_CVE-2025-26519_0001.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/musl-1.2.5_CVE-2025-26519_0002.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/musl_static_readline.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/pkg-config_gcc15.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_alpine_build_php80.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_libxml2_12_php80.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_libxml2_12_php81.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_static_opcache_before_80222.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_static_opcache_before_80310.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_swoole_50513.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/spc_fix_xlswriter_win32.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/swoole_fix_date_time.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals/patch/swoole_fix_odbclibs.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+    <list default="true" id="5ab660e7-3d80-458f-a6d4-1f9a8282b83a" name="Changes" comment="Remove unnecessary IDE files and patches">
+      <change beforePath="$PROJECT_DIR$/clean_for_github.sh" beforeDir="false" afterPath="$PROJECT_DIR$/clean_for_github.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -501,8 +297,17 @@
       <workItem from="1767225986026" duration="5808000" />
       <workItem from="1767249472303" duration="1573000" />
       <workItem from="1767416381341" duration="1642000" />
-      <workItem from="1767530610971" duration="1494000" />
+      <workItem from="1767530610971" duration="1646000" />
     </task>
+    <task id="LOCAL-00001" summary="Remove unnecessary IDE files and patches">
+      <option name="closed" value="true" />
+      <created>1767533050654</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1767533050654</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +330,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Remove unnecessary IDE files and patches" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unnecessary IDE files and patches" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

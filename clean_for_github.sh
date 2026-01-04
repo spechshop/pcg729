@@ -81,6 +81,7 @@ remove_item ".output.txt"
 remove_pattern "*.tmp"
 remove_pattern ".*.swp"
 remove_pattern "*~"
+remove_pattern "comparativo_*"
 
 echo ""
 echo "3. Removendo arquivos desnecessários..."
