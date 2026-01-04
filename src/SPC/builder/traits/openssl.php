@@ -12,6 +12,7 @@ trait openssl
 {
     public function getLibVersion(): ?string
     {
+    exit;
         // get openssl version from source directory
         if (file_exists("{$this->source_dir}/VERSION.dat")) {
             // parse as INI

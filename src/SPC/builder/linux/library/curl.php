@@ -12,6 +12,7 @@ class curl extends LinuxLibraryBase
 
     public function getStaticLibFiles(string $style = 'autoconf', bool $recursive = true): string
     {
+    exit;
         $libs = parent::getStaticLibFiles($style, $recursive);
         if ($this->builder->getLib('openssl')) {
             $libs .= ' -ldl -lpthread';

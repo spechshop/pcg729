@@ -36,7 +36,7 @@ trait libbcg729
     protected function build(): void
     {
 
-        $enableIn = false;
+        $enableIn = true;
         if ($enableIn) {
             shell()->cd($this->source_dir)
                 ->setEnv([

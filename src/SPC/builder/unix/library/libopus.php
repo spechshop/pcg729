@@ -61,7 +61,7 @@ trait libopus
         $all_files = $this->listPath($source);
 
         // garantir que diretórios existam
-        $include_dir = $source . '/include/opus';
+        $include_dir = $source . '/include';
         if (!is_dir($include_dir)) {
             if (!mkdir($include_dir, 0755, true)) {
                 throw new FileSystemException("Failed to create directory: $include_dir");

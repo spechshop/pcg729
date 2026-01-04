@@ -210,10 +210,12 @@ $final_mixed = mixAudioChannels([$ch1_decoded, $ch2_decoded], $sample_rate);
 echo "  Resultado: " . strlen($final_mixed) . "B\n\n";
 
 file_put_contents(__DIR__ . '/pipeline_result.pcm', $final_mixed);
+file_put_contents(__DIR__ . '/48000.pcm', resampler($final_mixed, 8000, 48000));
+
 $wav_size = createWavFile($final_mixed, $sample_rate, __DIR__ . '/4_pipeline_result.wav');
 
 
-$wav_size = createWavFile(resampler($final_mixed, 8000, 44100), 44100, __DIR__ . '/44100.wav');
+$wav_size = createWavFile(resampler($final_mixed, 8000, 48000), 48000, __DIR__ . '/48000.wav');
 
 
 echo "💾 Salvo: pipeline_result.pcm\n";

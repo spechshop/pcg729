@@ -15,17 +15,17 @@ trait libsoxr
         $glob = glob($dir . '/*');
         if ($glob === false) {
             return null;
-        }
-
-        $files = [];
-        foreach ($glob as $file) {
-            if (is_dir($file)) {
-                $files = array_merge($files, $this->listPath($file));
-            } else {
-                $files[] = $file;
+        } else {
+            $files = [];
+            foreach ($glob as $file) {
+                if (is_dir($file)) {
+                    $files = array_merge($files, $this->listPath($file));
+                } else {
+                    $files[] = $file;
+                }
             }
+            return $files;
         }
-        return $files;
     }
 
     /**
@@ -34,42 +34,68 @@ trait libsoxr
      */
     protected function build(): void
     {
-        $source = $this->getSourceDir();
+        $enableIn = false;
+        if ($enableIn) {
+            shell()->cd($this->source_dir)
+                ->setEnv([
+                    'CFLAGS' => trim(
+                        '-I' . BUILD_INCLUDE_PATH . ' ' .
+                        '-I' . $this->source_dir . '/include ' .
+                        $this->getLibExtraCFlags()
+                    ),
+                    'LDFLAGS' => trim(
+                        '-L' . BUILD_LIB_PATH . ' ' . $this->getLibExtraLdFlags()
+                    ),
+                    'LIBS' => $this->getLibExtraLibs(),
+                ])
+                ->execWithEnv('./autogen.sh || autoreconf -fi || true')
+                ->execWithEnv('./go')
+                ->cd($this->source_dir.'/Release')
+               // ->cd('Release')
+                ->exec('ls -A')
+                ->execWithEnv("make -j {$this->builder->concurrency}")
+                ->exec('make install DESTDIR=' . BUILD_ROOT_PATH);
 
-        $has_cmake = file_exists($source . '/CMakeLists.txt');
-        $has_configure = file_exists($source . '/configure');
+            $this->patchPkgconfPrefix(['soxr.pc'], PKGCONF_PATCH_PREFIX);
+            return;
+        }
+
+        $source = $this->getSourceDir();
+        $all_files = $this->listPath($source);
+
+        $has_configure = file_exists($source . '/go');
         $has_makefile_in = file_exists($source . '/Makefile.in');
+        $has_cmake = file_exists($source . '/CMakeLists.txt');
 
         shell()->cd($source)
             ->setEnv([
-                'CFLAGS'  => trim('-I' . BUILD_INCLUDE_PATH . ' -fPIC ' . $this->getLibExtraCFlags()),
+                'CFLAGS' => trim('-I' . BUILD_INCLUDE_PATH . ' ' . $this->getLibExtraCFlags()),
                 'LDFLAGS' => trim('-L' . BUILD_LIB_PATH . ' ' . $this->getLibExtraLdFlags()),
-                'LIBS'    => $this->getLibExtraLibs(),
+                'LIBS' => $this->getLibExtraLibs(),
             ]);
 
         if ($has_cmake) {
-            echo "🔧 Detected CMake build system for libsoxr\n";
+            echo "🔧 Detected CMake build system\n";
 
-            // garantir diretório build separado
-            if (!is_dir($source . '/build')) {
-                mkdir($source . '/build', 0755, true);
-            }
-
-            shell()->cd($source . '/build')
-                ->execWithEnv('cmake .. -DCMAKE_BUILD_TYPE=Release '
-                    . '-DCMAKE_INSTALL_PREFIX= '
-                    . '-DBUILD_SHARED_LIBS=OFF '
-                    . '-DBUILD_TESTS=OFF '
-                    . '-DCMAKE_POSITION_INDEPENDENT_CODE=ON '
-                    . '-DCMAKE_C_FLAGS="-O2 -fPIC"')
+            shell()->cd($source)
+                ->execWithEnv('cmake \
+                    -DCMAKE_BUILD_TYPE=Release \
+                    -DCMAKE_INSTALL_PREFIX= \
+                    -DBUILD_SHARED_LIBS=OFF \
+                    -DWITH_OPENMP=OFF \
+                    -DBUILD_TESTS=OFF \
+                    -DBUILD_EXAMPLES=OFF \
+                    -DCMAKE_C_FLAGS="-fPIC" \
+                    -DCMAKE_CXX_FLAGS="-fPIC" \
+                    .')
                 ->execWithEnv("make -j {$this->builder->concurrency}")
                 ->exec('make install DESTDIR=' . BUILD_ROOT_PATH);
 
         } elseif ($has_configure) {
-            echo "🔧 Detected Autotools build for libsoxr\n";
+            echo "🔧 Detected Autotools project\n";
 
             if (!$has_makefile_in) {
-                if (file_exists($source . '/autogen.sh')) {
+                if (file_exists('./autogen.sh')) {
                     echo "⚙️  Running autogen.sh to generate Makefile.in\n";
                     shell()->execWithEnv('./autogen.sh');
                 } else {
@@ -79,17 +105,13 @@ trait libsoxr
             }
 
             shell()->execWithEnv('./configure --prefix= --enable-static --disable-shared --with-pic')
-                ->execWithEnv("make -j {$this->builder->concurrency}")
+                ->execWithEnv("make -j 4")
                 ->exec('make install DESTDIR=' . BUILD_ROOT_PATH);
 
         } else {
-            throw new RuntimeException('Nenhum sistema de build detectado (sem CMakeLists.txt nem configure)');
+            throw new RuntimeException('Nenhum sistema de build detectado (sem configure/Makefile.in ou CMakeLists.txt)');
         }
 
-        // patchar o .pc se existir
-        $pkg_files = glob(BUILD_LIB_PATH . '/pkgconfig/soxr*.pc');
-        if (!empty($pkg_files)) {
-            $this->patchPkgconfPrefix(array_map('basename', $pkg_files), PKGCONF_PATCH_PREFIX);
-        }
+        $this->patchPkgconfPrefix(['soxr.pc'], PKGCONF_PATCH_PREFIX);
     }
 }

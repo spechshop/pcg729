@@ -14,7 +14,7 @@ trait bcg729
     protected function build(): void
     {
 
-        print("
+
 
         shell()->cd($this->source_dir)
             ->setEnv([

@@ -19,6 +19,7 @@ class curl extends Extension
      */
     public function patchBeforeBuildconf(): bool
     {
+    return false;
         logger()->info('patching before-configure for curl checks');
         $file1 = "AC_DEFUN([PHP_CHECK_LIBRARY], [\n  $3\n])";
         $files = FileSystem::readFile(SOURCE_PATH . '/php-src/ext/curl/config.m4');
@@ -50,6 +51,7 @@ class curl extends Extension
      */
     public function patchBeforeConfigure(): bool
     {
+    return true;
         $frameworks = $this->builder instanceof MacOSBuilder ? ' ' . $this->builder->getFrameworks(true) . ' ' : '';
         FileSystem::replaceFileRegex(SOURCE_PATH . '/php-src/configure', '/-lcurl/', $this->getLibFilesString() . $frameworks);
         return true;

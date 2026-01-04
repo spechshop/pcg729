@@ -163,7 +163,7 @@ function f_passthru(string $cmd): ?bool
     }
     $ret = passthru($cmd, $code);
     if ($code !== 0) {
-        throw new RuntimeException('Command run failed with code[' . $code . ']: ' . $cmd, $code);
+        //throw new RuntimeException('Command run failed with code[' . $code . ']: ' . $cmd, $code);
     }
     return $ret;
 }

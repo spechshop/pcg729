@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'crazywhalecc/static-php-cli',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'fc327b9e6fa5f43bfc8e4f944e1a2dc462ada936',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '4272637de9a5f48453baf27c2c26520b4ef67137',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -164,9 +164,9 @@
             'dev_requirement' => true,
         ),
         'crazywhalecc/static-php-cli' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'fc327b9e6fa5f43bfc8e4f944e1a2dc462ada936',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '4272637de9a5f48453baf27c2c26520b4ef67137',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
