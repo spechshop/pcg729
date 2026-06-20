@@ -15,12 +15,12 @@ trait attr
     {
         shell()->cd($this->source_dir)
             ->setEnv([
-                'CFLAGS' => trim('-I' . BUILD_INCLUDE_PATH . ' ' . $this->getLibExtraCFlags()),
+                'CFLAGS' => trim('-I' . BUILD_INCLUDE_PATH . ' -fPIC ' . $this->getLibExtraCFlags()),
                 'LDFLAGS' => trim('-L' . BUILD_LIB_PATH . ' ' . $this->getLibExtraLdFlags()),
                 'LIBS' => $this->getLibExtraLibs(),
             ])
             ->execWithEnv('libtoolize --force --copy')
-            ->execWithEnv('./autogen.sh')
+            ->execWithEnv('./autogen.sh || autoreconf -fi')
             ->execWithEnv('./configure --prefix= --enable-static --disable-shared --with-pic --disable-nls')
             ->execWithEnv("make -j {$this->builder->concurrency}")
             ->exec('make install DESTDIR=' . BUILD_ROOT_PATH);

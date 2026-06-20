@@ -241,13 +241,13 @@ function generateClassStubs(array $allowFilters)
 generateFunctionStubs('bcg729');
 generateFunctionStubs('opus');
 generateFunctionStubs('psampler');
-
+generateFunctionStubs('swoole');
 generateExtensionConstants('bcg729');
 generateExtensionConstants('opusChannel');
 generateExtensionConstants('psampler');
-
+generateExtensionConstants('swoole');
 // 🔧 Filtrar classes permitidas
-generateClassStubs(['bcg729', 'LPCM', 'bcg729Channel', 'Resampler', 'opusChannel', 'psampler']);
+generateClassStubs(['bcg729', 'LPCM', 'bcg729Channel', 'Resampler', 'opusChannel','swoole','Co', 'psampler']);
 
 function listStubFolders($dir = __DIR__ . '/stubs')
 {

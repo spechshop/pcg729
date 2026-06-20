@@ -137,7 +137,7 @@
       <path value="$PROJECT_DIR$/vendor/zhamao/logger" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.5">
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpStan">
@@ -152,7 +152,6 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/downloads/ext-glfw/phpunit.xml" custom_loader_path="$PROJECT_DIR$/downloads/ext-glfw/vendor/autoload.php" use_configuration_file="true" />
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

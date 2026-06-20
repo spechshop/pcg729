@@ -689,8 +689,9 @@
     "source": "postgresql",
     "static-libs-unix": [
       "libpq.a",
-      "libpgport.a",
-      "libpgcommon.a"
+      "libpq_encoding_compat.a",
+      "libpgcommon.a",
+      "libpgport.a"
     ],
     "lib-depends": [
       "libiconv",

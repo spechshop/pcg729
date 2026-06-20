@@ -106,7 +106,83 @@ trait postgresql
             ->exec($envs . ' make -C src/include install')
             ->exec($envs . ' make -C src/common install')
             ->exec($envs . ' make -C src/port install')
+            ->exec($envs . ' make -C src/interfaces/libpq all-static-lib')
+            ->exec($envs . ' make -C src/interfaces/libpq install-lib-static')
             ->exec($envs . ' make -C src/interfaces/libpq install');
+
+            // libpq headers are not always installed correctly by the partial libpq install.
+            if (!is_dir(BUILD_INCLUDE_PATH . '/libpq')) {
+                mkdir(BUILD_INCLUDE_PATH . '/libpq', 0777, true);
+            }
+            if (!is_dir(BUILD_INCLUDE_PATH . '/postgresql')) {
+                mkdir(BUILD_INCLUDE_PATH . '/postgresql', 0777, true);
+            }
+
+            copy($this->source_dir . '/src/interfaces/libpq/libpq-fe.h', BUILD_INCLUDE_PATH . '/libpq-fe.h');
+            copy($this->source_dir . '/src/include/postgres_ext.h', BUILD_INCLUDE_PATH . '/postgres_ext.h');
+
+            if (file_exists($this->source_dir . '/src/interfaces/libpq/libpq-events.h')) {
+                copy($this->source_dir . '/src/interfaces/libpq/libpq-events.h', BUILD_INCLUDE_PATH . '/libpq-events.h');
+            }
+
+            copy($this->source_dir . '/src/include/libpq/libpq-fs.h', BUILD_INCLUDE_PATH . '/libpq/libpq-fs.h');
+            copy($this->source_dir . '/src/include/libpq/libpq-fs.h', BUILD_INCLUDE_PATH . '/postgresql/libpq-fs.h');
+
+            // PostgreSQL 16+ static libpq may reference public encoding symbols, while
+            // libpgcommon.a provides the private frontend variants. Provide a tiny compat archive.
+            $compat_c = <<<'C'
+            extern int pg_char_to_encoding_private(const char *name);
+            extern const char *pg_encoding_to_char_private(int encoding);
+
+            int pg_char_to_encoding(const char *name)
+            {
+                return pg_char_to_encoding_private(name);
+            }
+
+            const char *pg_encoding_to_char(int encoding)
+            {
+                return pg_encoding_to_char_private(encoding);
+            }
+            C;
+
+            FileSystem::writeFile($this->source_dir . '/build/libpq_encoding_compat.c', $compat_c);
+
+            $cc = getenv('CC') ?: 'x86_64-linux-musl-gcc';
+            $ar = getenv('AR') ?: 'ar';
+            $ranlib = getenv('RANLIB') ?: 'ranlib';
+
+            shell()->cd($this->source_dir . '/build')
+                ->exec(
+                    $cc .
+                    ' -I' . BUILD_INCLUDE_PATH .
+                    ' -I' . BUILD_INCLUDE_PATH . '/postgresql' .
+                    ' -c libpq_encoding_compat.c -o libpq_encoding_compat.o'
+                )
+                ->exec($ar . ' rcs ' . BUILD_LIB_PATH . '/libpq_encoding_compat.a libpq_encoding_compat.o')
+                ->exec($ranlib . ' ' . BUILD_LIB_PATH . '/libpq_encoding_compat.a');
+
+            // Some PostgreSQL partial installs do not generate libpq.pc. PHP configure
+            // prefers pkg-config for libpq detection, so generate a static-safe one.
+            if (!is_dir(BUILD_LIB_PATH . '/pkgconfig')) {
+                mkdir(BUILD_LIB_PATH . '/pkgconfig', 0777, true);
+            }
+
+            $libpq_pc = <<<PC
+            prefix={$builddir}
+            exec_prefix=\${prefix}
+            libdir=\${prefix}/lib
+            includedir=\${prefix}/include
+
+            Name: libpq
+            Description: PostgreSQL libpq static client library
+            Version: {$version}
+            Cflags: -I\${includedir}
+            Libs: -L\${libdir} -lpq -lpq_encoding_compat -lpgcommon -lpgport
+            Libs.private: -lssl -lcrypto -lxml2 -lz -liconv -lcharset -lreadline -lncurses -lm -ldl -lpthread
+
+            PC;
+
+            FileSystem::writeFile(BUILD_LIB_PATH . '/pkgconfig/libpq.pc', $libpq_pc);
 
         // remove dynamic libs
         shell()->cd($this->source_dir . '/build')

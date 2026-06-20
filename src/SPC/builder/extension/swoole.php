@@ -44,6 +44,12 @@ class swoole extends Extension
         // Recursos obrigatórios
         $arg .= ' --enable-openssl';      // HTTPS, WebSocket TLS
         $arg .= ' --enable-sockets';       // TCP, UDP, UnixSocket
+         // Sistema
+        $arg .= ' --enable-swoole-thread'; // Fix epoll fd warnings
+        $arg .= ' --enable-swoole-posix';  // POSIX suporte (ex: gethostname, signals)
+        $arg .= ' --enable-swoole-coro-time';
+        $arg .= ' --enable-swoole-pgsql';
+
 
         // Recursos de rede e otimizações
         $arg .= ' --enable-cares';         // DNS Resolver (c-ares)
@@ -55,13 +61,11 @@ class swoole extends Extension
 
         // Banco de dados (sem depender de "hook" extra)
 
-        //$arg .= ' --enable-swoole-sqlite';
+
   if ($this->getExtVersion() >= '6.1.0') {
             $arg .= ' --enable-swoole-stdext';
         }
-        // Sistema
-        $arg .= ' --enable-swoole-thread'; // Fix epoll fd warnings
-        $arg .= ' --enable-swoole-posix';  // POSIX suporte (ex: gethostname, signals)
+
 
         // Libuv suporte se disponível
         $arg .= $this->builder->getLib('libuv') ? ' --enable-swoole-uv' : '';

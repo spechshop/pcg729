@@ -52,7 +52,7 @@
   "bcg729": {
     "path": "php-src/ext/bcg729",
     "type": "git",
-    "rev": "main",
+    "rev": "mix",
     "url": "https://github.com/berzersks/bcg729.git",
     "license": {
       "type": "file",

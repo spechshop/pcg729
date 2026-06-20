@@ -380,7 +380,7 @@ class Downloader
                     }
                     break;
                 default:
-                    throw new DownloaderException('unknown source type: ' . $pkg['type']);
+                    break;
             }
         } catch (RuntimeException $e) {
             // Because sometimes files downloaded through the command line are not automatically deleted after a failure.
@@ -486,7 +486,7 @@ class Downloader
                     }
                     break;
                 default:
-                    throw new DownloaderException('unknown source type: ' . $source['type']);
+                   break;
             }
         } catch (RuntimeException $e) {
             // Because sometimes files downloaded through the command line are not automatically deleted after a failure.
