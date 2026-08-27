@@ -10,7 +10,8 @@
     "arg-type": "custom",
     "unix-only": true,
     "lib-depends": [
-      "libbcg729"
+      "libbcg729",
+      "libgsm"
     ]
   },
   "psampler": {

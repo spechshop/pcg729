@@ -1,5 +1,36 @@
-buildroot
-BLADE
-.git
-source
-downloads
+# Build artifacts
+/buildroot/
+/source/
+/stubs/
+/downloads/
+/dist/
+/pkgroot/
+/frankenphp-dist/
+/BLADE/
+
+# Composer dependencies
+/vendor/
+
+# IDE / editor
+/.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files / logs
+*.log
+*.tmp
+*.cache
+
+# Generated audio test artifacts
+/*.wav
+/*.pcm
+/*.pcma
+/*.pcmu
+/*.l16
+/*.gsm

@@ -1,7 +1,0 @@
-### Composer 相关文件 ###
-composer.phar
-/vendor/
-composer.lock
-
-### cghooks.lock ###
-cghooks.lock

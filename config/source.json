@@ -14,7 +14,7 @@
     "provide-pre-built": false,
     "license": {
       "type": "file",
-      "path": "COPYRIGHT"
+      "path": "COPYING"
     }
   },
   "libsoxr": {
@@ -25,7 +25,7 @@
     "url": "https://github.com/chirlu/soxr.git",
     "license": {
       "type": "file",
-      "path": "COPYING"
+      "path": "LICENSE"
     }
   },
   "libbcg729": {
@@ -36,7 +36,18 @@
     "url": "https://github.com/BelledonneCommunications/bcg729.git",
     "license": {
       "type": "file",
-      "path": "COPYING"
+      "path": "LICENSE.txt"
+    }
+  },
+  "libgsm": {
+    "path": "libgsm",
+    "type": "git",
+    "rev": "master",
+    "repo": "timothytylee/libgsm",
+    "url": "https://github.com/timothytylee/libgsm.git",
+    "license": {
+      "type": "file",
+      "path": "COPYRIGHT"
     }
   },
   "opus": {
@@ -56,7 +67,7 @@
     "url": "https://github.com/berzersks/bcg729.git",
     "license": {
       "type": "file",
-      "path": "COPYING"
+      "path": "LICENSE"
     }
   },
   "psampler": {

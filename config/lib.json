@@ -32,6 +32,15 @@
       "decoder.h"
     ]
   },
+  "libgsm": {
+    "source": "libgsm",
+    "static-libs-unix": [
+      "libgsm.a"
+    ],
+    "headers": [
+      "gsm.h"
+    ]
+  },
   "libsoxr": {
     "source": "libsoxr",
     "static-libs-unix": [

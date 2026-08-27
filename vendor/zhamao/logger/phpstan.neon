@@ -1,8 +1,0 @@
-parameters:
-  reportUnmatchedIgnoredErrors: false
-  level: 5
-  paths:
-    - ./src/
-  ignoreErrors:
-    - '#Used constant OS_TYPE_(LINUX|WINDOWS) not found#'
-    - '#Unsafe usage of new static#'

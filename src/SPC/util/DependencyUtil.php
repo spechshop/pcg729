@@ -166,7 +166,7 @@ class DependencyUtil
         foreach ($deps as $ext_name) {
             if (!isset($dep_list[$ext_name])) {
                 $ext_name = str_starts_with($ext_name, 'ext@') ? ('Extension [' . substr($ext_name, 4) . ']') : ('Library [' . $ext_name . ']');
-                throw new WrongUsageException("{$ext_name} not exist !");
+                throw new WrongUsageException("ext {$ext_name} not exist !");
             }
             if (!isset($visited[$ext_name])) {
                 self::visitPlatDeps($ext_name, $dep_list, $visited, $sorted);
@@ -211,7 +211,7 @@ class DependencyUtil
         $visited[$lib_name] = true;
         // 遍历该依赖的所有依赖（此处的 getLib 如果检测到当前库不存在的话，会抛出异常）
         if (!isset($dep_list[$lib_name])) {
-            throw new WrongUsageException("{$lib_name} not exist !");
+            throw new WrongUsageException("lib {$lib_name} not exist !");
         }
         foreach ($dep_list[$lib_name]['depends'] as $dep) {
             self::visitPlatDeps($dep, $dep_list, $visited, $sorted);
