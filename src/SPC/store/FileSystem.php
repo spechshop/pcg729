@@ -202,7 +202,7 @@ class FileSystem
             } else {
                 f_passthru('rm -rf ' . $target);
             }
-            //throw new FileSystemException('Cannot extract source ' . $name . ': ' . $e->getMessage(), $e->getCode(), $e);
+            throw new FileSystemException('Cannot extract source ' . $name . ': ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -462,23 +462,6 @@ class FileSystem
     }
 
     /**
-     * @throws FileSystemException
-     */
-    public static function replaceFileLineContainsString(string $file, string $find, string $line): false|int
-    {
-        $lines = file($file);
-        if ($lines === false) {
-            throw new FileSystemException('Cannot read file: ' . $file);
-        }
-        foreach ($lines as $key => $value) {
-            if (str_contains($value, $find)) {
-                $lines[$key] = $line . PHP_EOL;
-            }
-        }
-        return file_put_contents($file, implode('', $lines));
-    }
-
-    /**
      * @throws RuntimeException
      * @throws FileSystemException
      */
@@ -528,37 +511,6 @@ class FileSystem
      */
     private static function replaceFile(string $filename, int $replace_type = REPLACE_FILE_STR, mixed $callback_or_search = null, mixed $to_replace = null): false|int
     {
-         $backupFile = $filename . '.in';
-
-        // 1. Se o arquivo principal NÃO existe, tenta copiar do arquivo .in
-        if (!file_exists($filename)) {
-            if (file_exists($backupFile)) {
-                if (copy($backupFile, $filename)) {
-                    echo "Sucesso: Arquivo [$filename] criado a partir do backup [$backupFile].\n";
-                } else {
-                    fwrite(STDERR, "Erro: Falha ao copiar o arquivo [$backupFile] para [$filename].\n");
-                    exit(1);
-                }
-            } else {
-                fwrite(STDERR, "Erro: Nem o arquivo [$filename] nem o backup [$backupFile] foram encontrados.\n");
-                exit(1);
-            }
-        }
-
-        // 2. Checa e aplica a permissão 777
-        $permissoesAtuais = substr(sprintf('%o', fileperms($filename)), -4);
-
-        if ($permissoesAtuais !== '0777') {
-            if (chmod($filename, 0777)) {
-                echo "Sucesso: Permissão do arquivo [$filename] alterada de $permissoesAtuais para 0777.\n";
-            } else {
-                fwrite(STDERR, "Erro: O arquivo [$filename] existe, mas o CHMOD 777 falhou. Tente rodar com privilégios de administrador.\n");
-                exit(1);
-            }
-        } else {
-            echo "O arquivo [$filename] já possui a permissão 0777.\n";
-        }
-
         logger()->debug('Replacing file with type[' . $replace_type . ']: ' . $filename);
         $file = self::readFile($filename);
         switch ($replace_type) {

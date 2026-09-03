@@ -22,6 +22,9 @@ class libxml2 extends LinuxLibraryBase
         $enable_icu = $this->builder->getLib('icu') ? 'ON' : 'OFF';
         $enable_xz = $this->builder->getLib('xz') ? 'ON' : 'OFF';
 
+
+
+
         FileSystem::resetDir($this->source_dir . '/build');
         shell()->cd($this->source_dir . '/build')
             ->exec(
