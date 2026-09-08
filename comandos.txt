@@ -1,4 +1,5 @@
 rm -rf source/php-src
+bin/spc build --build-cli "bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,bcg729,psampler,opus,iconv,intl,libxml,mbstring,mysqli,mysqlnd,openssl,pcntl,pdo,pdo_mysql,pgsql,pdo,json,phar,posix,readline,redis,session,soap,sockets,sodium,sqlite3,swoole,tokenizer,uv,yaml,zip,zlib" --debug -r --enable-zts && buildroot/bin/php -v && buildroot/bin/php -m
 
 sudo
 rm -rf source/php-src/ext/bcg729 && rm -rf source/php-src/ext/swoole && rm -rf buildroot/bin/php && bin/spc build --build-cli "bcg729,swoole-hook-pgsql,redis,psampler,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,Phar,posix,readline,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv" --no-strip --enable-zts --debug
@@ -6,6 +7,7 @@ rm -rf source/php-src/ext/bcg729 && rm -rf source/php-src/ext/swoole && rm -rf b
 bin/php bin/spc build --build-cli "psampler" --enable-zts --with-suggested-libs --no-strip
 
 rm -rf buildroot
+rm -rf source
 rm -rf source/php-src/ext/opus
 rm -rf source/libopus
 rm -rf source/libsoxr

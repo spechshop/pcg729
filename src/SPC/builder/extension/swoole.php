@@ -48,7 +48,8 @@ class swoole extends Extension
         $arg .= ' --enable-swoole-thread'; // Fix epoll fd warnings
         $arg .= ' --enable-swoole-posix';  // POSIX suporte (ex: gethostname, signals)
         $arg .= ' --enable-swoole-coro-time';
-        $arg .= ' --enable-swoole-pgsql';
+
+        $arg .= $this->builder->getLib('pgsql') ? ' --enable-swoole-pgsql' : ' --enable-swoole-pgsql';
 
 
         // Recursos de rede e otimizações
