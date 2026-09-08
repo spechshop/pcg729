@@ -360,8 +360,10 @@ class DownloadCommand extends BaseCommand
      */
     private function findPreBuilt(array $assets, string $filename): ?string
     {
+
         logger()->debug("Finding pre-built asset {$filename}");
         foreach ($assets as $asset) {
+
             if ($asset['name'] === $filename) {
                 return $asset['browser_download_url'];
             }

@@ -169,6 +169,7 @@ class LinuxBuilder extends UnixBuilderBase
         }
 
         $embed_type = getenv('SPC_CMD_VAR_PHP_EMBED_TYPE') ?: 'static';
+        print("Embed type: {$embed_type}\n");
         shell()->cd(SOURCE_PATH . '/php-src')
             ->exec(
                 getenv('SPC_CMD_PREFIX_PHP_CONFIGURE') . ' ' .
@@ -223,7 +224,13 @@ class LinuxBuilder extends UnixBuilderBase
      */
     protected function buildCli(): void
     {
+
         $vars = SystemUtil::makeEnvVarString($this->getMakeExtraVars());
+        print("Building cli sapi\n");
+        $varSPC_CMD_PREFIX_PHP_MAKE = getenv('SPC_CMD_PREFIX_PHP_MAKE') ?: '';
+        print "Full command: {$varSPC_CMD_PREFIX_PHP_MAKE}{$vars} cli\n";
+
+
         shell()->cd(SOURCE_PATH . '/php-src')
             ->exec('sed -i "s|//lib|/lib|g" Makefile')
             ->exec("\$SPC_CMD_PREFIX_PHP_MAKE {$vars} cli");

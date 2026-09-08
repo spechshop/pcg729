@@ -58,7 +58,7 @@ bin/spc download swoole &&
 bin/spc download psampler &&
 sudo bin/spc build --build-cli "bcg729" --enable-zts --debug
 
-
+bin/spc build --build-cli "bcg729" --debug
 bin/spc download psampler
 
 sudo rm -rf source/*

@@ -1,0 +1,281 @@
+#!/usr/bin/env bash
+
+set -u
+
+PHP85="${PHP85:-php85}"
+PCG_PHP="${PCG_PHP:-/home/lotus/CLionProjects/pcg729/buildroot/bin/php}"
+BENCH="${BENCH:-/home/lotus/projetos/typephp/examples/lotus-lab/mono_to_stereo_php.php}"
+RUNS="${RUNS:-5}"
+
+OUT="/tmp/php-runtime-compare"
+
+rm -rf "$OUT"
+mkdir -p "$OUT"
+
+echo "========================================"
+echo " PHP runtime comparison"
+echo "========================================"
+echo
+echo "PHP85:   $PHP85"
+echo "PCG PHP: $PCG_PHP"
+echo "Bench:   $BENCH"
+echo "Runs:    $RUNS"
+echo "Output:  $OUT"
+echo
+
+if ! command -v "$PHP85" >/dev/null 2>&1; then
+    echo "ERRO: $PHP85 não encontrado."
+    exit 1
+fi
+
+if [ ! -x "$PCG_PHP" ]; then
+    echo "ERRO: $PCG_PHP não existe ou não é executável."
+    exit 1
+fi
+
+if [ ! -f "$BENCH" ]; then
+    echo "ERRO: benchmark não encontrado: $BENCH"
+    exit 1
+fi
+
+PHP85_BIN="$(command -v "$PHP85")"
+
+echo "=== Binários ==="
+echo "php85: $PHP85_BIN"
+echo "pcg:   $PCG_PHP"
+echo
+
+"$PHP85" -v > "$OUT/php85-version.txt" 2>&1
+"$PCG_PHP" -v > "$OUT/pcg-version.txt" 2>&1
+
+file "$PHP85_BIN" > "$OUT/php85-file.txt" 2>&1
+file "$PCG_PHP" > "$OUT/pcg-file.txt" 2>&1
+
+ldd "$PHP85_BIN" > "$OUT/php85-ldd.txt" 2>&1 || true
+ldd "$PCG_PHP" > "$OUT/pcg-ldd.txt" 2>&1 || true
+
+echo "=== Thread Safety ==="
+
+"$PHP85" -i 2>/dev/null | grep -i '^Thread Safety' || true
+"$PCG_PHP" -i 2>/dev/null | grep -i '^Thread Safety' || true
+echo
+
+echo "=== INI ==="
+
+"$PHP85" --ini > "$OUT/php85-ini.txt" 2>&1
+"$PCG_PHP" --ini > "$OUT/pcg-ini.txt" 2>&1
+
+cat "$OUT/php85-ini.txt"
+echo
+cat "$OUT/pcg-ini.txt"
+echo
+
+echo "=== Coletando php -i ==="
+
+"$PHP85" -i > "$OUT/php85-info.txt" 2>&1
+"$PCG_PHP" -i > "$OUT/pcg-info.txt" 2>&1
+
+KEY_REGEX='PHP Version|Configure Command|Compiler|Architecture|Thread Safety|Zend Memory|Zend Signal|Zend Max|opcache.enable_cli|opcache.jit|opcache.jit_buffer_size|JIT|pcre.jit|memory_limit|Loaded Configuration|Scan this dir'
+
+grep -Ei "$KEY_REGEX" "$OUT/php85-info.txt" \
+    > "$OUT/php85-key.txt" || true
+
+grep -Ei "$KEY_REGEX" "$OUT/pcg-info.txt" \
+    > "$OUT/pcg-key.txt" || true
+
+diff -u \
+    "$OUT/pcg-key.txt" \
+    "$OUT/php85-key.txt" \
+    > "$OUT/key.diff" || true
+
+echo "=== Módulos ==="
+
+"$PHP85" -m | sort > "$OUT/php85-modules.txt"
+"$PCG_PHP" -m | sort > "$OUT/pcg-modules.txt"
+
+diff -u \
+    "$OUT/pcg-modules.txt" \
+    "$OUT/php85-modules.txt" \
+    > "$OUT/modules.diff" || true
+
+echo "=== Configure options ==="
+
+find_php_config()
+{
+    local php_bin="$1"
+    local candidate
+
+    candidate="$(dirname "$php_bin")/php-config"
+
+    if [ -x "$candidate" ]; then
+        echo "$candidate"
+        return
+    fi
+
+    for candidate in php-config85 php85-config php-config; do
+        if command -v "$candidate" >/dev/null 2>&1; then
+            command -v "$candidate"
+            return
+        fi
+    done
+
+    return 1
+}
+
+PHP85_CONFIG=""
+PCG_CONFIG=""
+
+PHP85_CONFIG="$(find_php_config "$PHP85_BIN" || true)"
+
+if [ -x "$(dirname "$PCG_PHP")/php-config" ]; then
+    PCG_CONFIG="$(dirname "$PCG_PHP")/php-config"
+fi
+
+if [ -n "$PHP85_CONFIG" ]; then
+    "$PHP85_CONFIG" --configure-options \
+        > "$OUT/php85-configure-options.txt" 2>&1 || true
+else
+    echo "php-config não encontrado" \
+        > "$OUT/php85-configure-options.txt"
+fi
+
+if [ -n "$PCG_CONFIG" ]; then
+    "$PCG_CONFIG" --configure-options \
+        > "$OUT/pcg-configure-options.txt" 2>&1 || true
+else
+    echo "php-config não encontrado" \
+        > "$OUT/pcg-configure-options.txt"
+fi
+
+diff -u \
+    "$OUT/pcg-configure-options.txt" \
+    "$OUT/php85-configure-options.txt" \
+    > "$OUT/configure.diff" || true
+
+extract_calls()
+{
+    grep '^calls/s:' | awk '{print $2}'
+}
+
+run_bench()
+{
+    local name="$1"
+    local php_bin="$2"
+    local ini_mode="$3"
+    local result_file="$OUT/${name}-${ini_mode}.txt"
+
+    : > "$result_file"
+
+    echo
+    echo "=== Benchmark: $name / $ini_mode ==="
+
+    for ((i = 1; i <= RUNS; i++)); do
+        if [ "$ini_mode" = "no-ini" ]; then
+            result="$("$php_bin" -n "$BENCH")"
+        else
+            result="$("$php_bin" "$BENCH")"
+        fi
+
+        calls="$(printf '%s\n' "$result" | extract_calls)"
+
+        printf "run %02d: %s calls/s\n" "$i" "$calls"
+        printf "%s\n" "$calls" >> "$result_file"
+    done
+}
+
+run_bench "php85" "$PHP85_BIN" "normal"
+run_bench "pcg" "$PCG_PHP" "normal"
+
+run_bench "php85" "$PHP85_BIN" "no-ini"
+run_bench "pcg" "$PCG_PHP" "no-ini"
+
+stats()
+{
+    local file="$1"
+
+    awk '
+    {
+        values[NR]=$1
+        sum += $1
+        sumsq += $1*$1
+
+        if (NR == 1 || $1 < min) min=$1
+        if (NR == 1 || $1 > max) max=$1
+    }
+    END {
+        if (NR == 0) exit
+
+        mean=sum/NR
+        variance=(sumsq/NR)-(mean*mean)
+
+        if (variance < 0)
+            variance=0
+
+        stddev=sqrt(variance)
+
+        printf "mean=%0.2f min=%0.2f max=%0.2f stddev=%0.2f cv=%0.2f%%",
+            mean,
+            min,
+            max,
+            stddev,
+            mean > 0 ? (stddev/mean)*100 : 0
+    }
+    ' "$file"
+}
+
+echo
+echo "========================================"
+echo " RESULTADOS"
+echo "========================================"
+
+for mode in normal no-ini; do
+    echo
+    echo "--- $mode ---"
+
+    echo -n "php85: "
+    stats "$OUT/php85-${mode}.txt"
+    echo
+
+    echo -n "pcg:   "
+    stats "$OUT/pcg-${mode}.txt"
+    echo
+
+    PHP85_MEAN="$(
+        awk '{s+=$1} END {if (NR) print s/NR}' \
+            "$OUT/php85-${mode}.txt"
+    )"
+
+    PCG_MEAN="$(
+        awk '{s+=$1} END {if (NR) print s/NR}' \
+            "$OUT/pcg-${mode}.txt"
+    )"
+
+    awk \
+        -v a="$PHP85_MEAN" \
+        -v b="$PCG_MEAN" \
+        'BEGIN {
+            if (a > 0 && b > 0) {
+                printf "php85 vs pcg: %+0.2f%%\n", ((a/b)-1)*100
+            }
+        }'
+done
+
+echo
+echo "========================================"
+echo " DIFF PRINCIPAL"
+echo "========================================"
+echo
+cat "$OUT/key.diff"
+
+echo
+echo "Arquivos gerados em:"
+echo "$OUT"
+echo
+echo "Principais:"
+echo "  $OUT/key.diff"
+echo "  $OUT/configure.diff"
+echo "  $OUT/modules.diff"
+echo "  $OUT/php85-ldd.txt"
+echo "  $OUT/pcg-ldd.txt"
+echo "  $OUT/php85-info.txt"
+echo "  $OUT/pcg-info.txt"

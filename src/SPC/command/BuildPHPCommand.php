@@ -108,6 +108,14 @@ class BuildPHPCommand extends BuildCommand
             $include_suggest_ext = $this->getOption('with-suggested-exts');
             $include_suggest_lib = $this->getOption('with-suggested-libs');
             [$extensions, $libraries, $not_included] = DependencyUtil::getExtsAndLibs($extensions, $libraries, $include_suggest_ext, $include_suggest_lib);
+            logger()->warning(
+                'RESOLVED LIBRARIES: ' . implode(', ', $libraries)
+            );
+
+            logger()->warning(
+                'PKG-CONFIG RESOLVED: ' .
+                (in_array('pkg-config', $libraries, true) ? 'YES' : 'NO')
+            );
             $display_libs = array_filter($libraries, fn ($lib) => in_array(Config::getLib($lib, 'type', 'lib'), ['lib', 'package']));
 
             // print info

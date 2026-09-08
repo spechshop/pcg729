@@ -467,6 +467,7 @@ class FileSystem
      */
     private static function extractArchive(string $filename, string $target): void
     {
+
         // Git source, just move
         if (is_dir(self::convertPath($filename))) {
             self::copyDir(self::convertPath($filename), $target);

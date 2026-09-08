@@ -46,7 +46,9 @@ abstract class LibraryBase
         $lock = json_decode(FileSystem::readFile(DOWNLOAD_PATH . '/.lock.json'), true) ?? [];
         $source = Config::getLib(static::NAME, 'source');
         // if source is locked as pre-built, we just tryInstall it
+
         $pre_built_name = Downloader::getPreBuiltLockName($source);
+
         if (isset($lock[$pre_built_name]) && ($lock[$pre_built_name]['lock_as'] ?? SPC_DOWNLOAD_SOURCE) === SPC_DOWNLOAD_PRE_BUILT) {
             return $this->tryInstall($lock[$pre_built_name]['filename'], $force);
         }
@@ -168,13 +170,15 @@ abstract class LibraryBase
         if ($force_install) {
             logger()->info('Installing required library [' . static::NAME . '] from pre-built binaries');
 
+
             // Extract files
             try {
                 FileSystem::extractPackage($install_file, DOWNLOAD_PATH . '/' . $install_file, BUILD_ROOT_PATH);
+
                 $this->install();
                 return LIB_STATUS_OK;
             } catch (FileSystemException|RuntimeException $e) {
-                logger()->error('Failed to extract pre-built library [' . static::NAME . ']: ' . $e->getMessage());
+                logger()->error('Failed to extract pre-built library [' .  DOWNLOAD_PATH . '/' . $install_file.']: ' . $e->getMessage());
                 return LIB_STATUS_INSTALL_FAILED;
             }
         }
