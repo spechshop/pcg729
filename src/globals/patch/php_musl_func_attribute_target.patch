@@ -1,0 +1,15 @@
+diff --git a/configure.ac b/configure.ac
+--- a/configure.ac
++++ b/configure.ac
+@@ -523,6 +523,10 @@
+ dnl At least some versions of FreeBSD seem to have buggy ifunc support, see
+ dnl bug #77284. Conservatively don't use ifuncs on FreeBSD prior to version 12.
+-AS_CASE([$host_alias], [*-*-*android*|*-*-*uclibc*|*-*-*musl*|*openbsd*], [true], [
++AS_CASE([$host_alias],
++  [*-*-*musl*], [
++    AX_GCC_FUNC_ATTRIBUTE([target])
++  ],
++  [*-*-*android*|*-*-*uclibc*|*openbsd*], [true], [
+   if test "$(uname -s 2>/dev/null)" != "FreeBSD" || test "$(uname -U 2>/dev/null)" -ge 1200000; then
+     AX_GCC_FUNC_ATTRIBUTE([ifunc])
+     AX_GCC_FUNC_ATTRIBUTE([target])

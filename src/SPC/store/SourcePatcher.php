@@ -53,6 +53,11 @@ class SourcePatcher
                 logger()->info('Library [' . $lib->getName() . '] patched before buildconf');
             }
         }
+
+        if ($builder instanceof LinuxBuilder && getenv('SPC_LIBC') === 'musl') {
+            self::patchPhpMuslFuncAttributeTarget();
+        }
+
         // patch windows php 8.1 bug
         if (PHP_OS_FAMILY === 'Windows' && $builder->getPHPVersionID() >= 80100 && $builder->getPHPVersionID() < 80200) {
             logger()->info('Patching PHP 8.1 windows Fiber bug');
@@ -162,6 +167,34 @@ class SourcePatcher
         }
 
         return true;
+    }
+
+    /**
+     * Allow configure to detect the target function attribute for musl builds.
+     *
+     * @throws FileSystemException
+     * @throws RuntimeException
+     */
+    private static function patchPhpMuslFuncAttributeTarget(): void
+    {
+        $configure_ac = SOURCE_PATH . '/php-src/configure.ac';
+        $original_case = 'AS_CASE([$host_alias], [*-*-*android*|*-*-*uclibc*|*-*-*musl*|*openbsd*], [true], [';
+        $patched_case_pattern = '/\[\*-\*-\*musl\*\],\s*\[\s*AX_GCC_FUNC_ATTRIBUTE\(\[target\]\)\s*\],/';
+        $content = FileSystem::readFile($configure_ac);
+
+        if (preg_match($patched_case_pattern, $content) === 1) {
+            return;
+        }
+        if (!str_contains($content, $original_case)) {
+            throw new RuntimeException('Cannot safely patch PHP configure.ac for musl target attribute detection');
+        }
+
+        logger()->info('Patching PHP configure.ac to detect the target function attribute for musl');
+        self::patchFile('php_musl_func_attribute_target.patch', SOURCE_PATH . '/php-src');
+
+        if (preg_match($patched_case_pattern, FileSystem::readFile($configure_ac)) !== 1) {
+            throw new RuntimeException('PHP configure.ac musl target attribute patch was not applied');
+        }
     }
 
     /**
