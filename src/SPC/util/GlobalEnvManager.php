@@ -41,15 +41,11 @@ class GlobalEnvManager
             self::putenv('PKG_CONFIG=' . BUILD_BIN_PATH . '/pkg-config');
             self::putenv('PKG_CONFIG_PATH=' . BUILD_ROOT_PATH . '/lib/pkgconfig');
             if ($builder instanceof BuilderBase) {
-            //self::putenv(
-            //    'SPC_PHP_DEFAULT_OPTIMIZE_CFLAGS=' .
-            //    (
-            //        $builder->getOption('no-strip')
-            //            ? '-g -O0'
-            //            : '-g -Os -fstack-protector-strong  -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
-            //    )
-            //);
-                self::putenv('SPC_PHP_DEFAULT_OPTIMIZE_CFLAGS=' . ($builder->getOption('no-strip') ? '-g -O0' : '-g -fstack-protector-strong  -Os -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'));
+                self::putenv(
+                    'SPC_PHP_DEFAULT_OPTIMIZE_CFLAGS=' .
+                    '-fstack-protector-strong -Os -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
+                );
+                //self::putenv('SPC_PHP_DEFAULT_OPTIMIZE_CFLAGS=' . ($builder->getOption('no-strip') ? '-g -O0' : '-g -fstack-protector-strong  -Os -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'));
                 //self::putenv('SPC_PHP_DEFAULT_OPTIMIZE_CFLAGS=' . ($builder->getOption('no-strip') ? '-g -O0' : '-g -fstack-protector-strong  -Os -fno-strict-aliasing -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'));
 
             }
