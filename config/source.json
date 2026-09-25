@@ -914,9 +914,9 @@
     }
   },
   "mimalloc": {
-    "type": "ghtagtar",
-    "repo": "microsoft/mimalloc",
-    "match": "v2\\.\\d\\.[^3].*",
+    "type": "url",
+    "url": "https://codeload.github.com/microsoft/mimalloc/tar.gz/refs/tags/v2.5.2",
+    "filename": "mimalloc-2.5.2.tar.gz",
     "provide-pre-built": false,
     "license": {
       "type": "file",
@@ -1116,7 +1116,7 @@
     "type": "git",
     "url": "https://github.com/static-php/php-rar.git",
     "path": "php-src/ext/rar",
-    "rev": "issue-php82",
+    "rev": "master",
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -1169,8 +1169,9 @@
     }
   },
   "spx": {
-    "type": "pie",
-    "repo": "noisebynorthwest/php-spx",
+    "type": "url",
+    "url": "https://codeload.github.com/noisebynorthwest/php-spx/tar.gz/refs/tags/v0.4.22",
+    "filename": "php-spx-0.4.22.tar.gz",
     "path": "php-src/ext/spx",
     "license": {
       "type": "file",
@@ -1245,8 +1246,9 @@
     }
   },
   "xdebug": {
-    "type": "pie",
-    "repo": "xdebug/xdebug",
+    "type": "url",
+    "url": "https://codeload.github.com/xdebug/xdebug/tar.gz/refs/tags/3.5.3",
+    "filename": "xdebug-3.5.3.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"

@@ -29,7 +29,7 @@ Para compilar um PHP com a extensão `bcg729` e suporte a ZTS:
 git clone https://github.com/spechshop/pcg729
 cd pcg729
 bin/php bin/composer install
-bin/php bin/spc download -A --debug
+bin/php bin/spc download -A --shallow-clone --debug
 bin/php bin/spc build --build-cli "bcg729" --enable-zts --debug
 buildroot/bin/php -v
 ```
