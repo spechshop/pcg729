@@ -123,9 +123,9 @@
     }
   },
   "brotli": {
-    "type": "ghtagtar",
-    "repo": "google/brotli",
-    "match": "v1\\.\\d.*",
+    "type": "url",
+    "url": "https://codeload.github.com/google/brotli/tar.gz/refs/tags/v1.2.0",
+    "filename": "brotli-v1.2.0.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -147,10 +147,9 @@
     }
   },
   "curl": {
-    "type": "ghrel",
-    "repo": "curl/curl",
-    "match": "curl.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/curl/curl/releases/download/curl-8_22_0/curl-8.22.0.tar.xz",
+    "filename": "curl-8.22.0.tar.xz",
     "license": {
       "type": "file",
       "path": "COPYING"
@@ -215,8 +214,9 @@
     }
   },
   "ext-gmssl": {
-    "type": "ghtar",
-    "repo": "gmssl/GmSSL-PHP",
+    "type": "url",
+    "url": "https://codeload.github.com/gmssl/GmSSL-PHP/tar.gz/refs/tags/v1.1.1",
+    "filename": "ext-gmssl-v1.1.1.tar.gz",
     "path": "php-src/ext/gmssl",
     "license": {
       "type": "file",
@@ -246,8 +246,9 @@
     }
   },
   "ext-lz4": {
-    "type": "ghtagtar",
-    "repo": "kjdev/php-ext-lz4",
+    "type": "url",
+    "url": "https://codeload.github.com/kjdev/php-ext-lz4/tar.gz/refs/tags/0.7.1",
+    "filename": "ext-lz4-0.7.1.tar.gz",
     "path": "php-src/ext/lz4",
     "license": {
       "type": "file",
@@ -384,18 +385,18 @@
     }
   },
   "frankenphp": {
-    "type": "ghtar",
-    "repo": "php/frankenphp",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/php/frankenphp/tar.gz/refs/tags/v1.12.7",
+    "filename": "frankenphp-v1.12.7.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
     }
   },
   "freetype": {
-    "type": "ghtagtar",
-    "repo": "freetype/freetype",
-    "match": "VER-2-\\d+-\\d+",
+    "type": "url",
+    "url": "https://codeload.github.com/freetype/freetype/tar.gz/refs/tags/VER-2-14-3",
+    "filename": "freetype-VER-2-14-3.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE.TXT"
@@ -425,8 +426,9 @@
     }
   },
   "gmssl": {
-    "type": "ghtar",
-    "repo": "guanzhi/GmSSL",
+    "type": "url",
+    "url": "https://codeload.github.com/guanzhi/GmSSL/tar.gz/refs/tags/v3.2.0",
+    "filename": "gmssl-v3.2.0.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -444,10 +446,9 @@
     }
   },
   "icu": {
-    "type": "ghrel",
-    "repo": "unicode-org/icu",
-    "match": "icu4c.+-src\\.tgz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-src.tgz",
+    "filename": "icu4c-77_1-src.tgz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -473,8 +474,9 @@
     }
   },
   "imagemagick": {
-    "type": "ghtar",
-    "repo": "ImageMagick/ImageMagick",
+    "type": "url",
+    "url": "https://codeload.github.com/ImageMagick/ImageMagick/tar.gz/refs/tags/7.1.2-31",
+    "filename": "imagemagick-7.1.2-31.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -513,10 +515,9 @@
     }
   },
   "krb5": {
-    "type": "ghtagtar",
-    "repo": "krb5/krb5",
-    "match": "krb5.+-final",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/krb5/krb5/tar.gz/refs/tags/krb5-1.22.2-final",
+    "filename": "krb5-krb5-1.22.2-final.tar.gz",
     "license": {
       "type": "file",
       "path": "NOTICE"
@@ -532,9 +533,9 @@
     }
   },
   "lerc": {
-    "type": "ghtar",
-    "repo": "Esri/lerc",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/Esri/lerc/tar.gz/refs/tags/v4.2.0",
+    "filename": "lerc-v4.2.0.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -575,8 +576,9 @@
     }
   },
   "libavif": {
-    "type": "ghtar",
-    "repo": "AOMediaCodec/libavif",
+    "type": "url",
+    "url": "https://codeload.github.com/AOMediaCodec/libavif/tar.gz/refs/tags/v1.4.2",
+    "filename": "libavif-v1.4.2.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -584,10 +586,9 @@
     }
   },
   "libcares": {
-    "type": "ghrel",
-    "repo": "c-ares/c-ares",
-    "match": "c-ares-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/c-ares/c-ares/releases/download/v1.34.8/c-ares-1.34.8.tar.gz",
+    "filename": "c-ares-1.34.8.tar.gz",
     "provide-pre-built": true,
     "alt": {
       "type": "filelist",
@@ -600,10 +601,9 @@
     }
   },
   "libde265": {
-    "type": "ghrel",
-    "repo": "strukturag/libde265",
-    "match": "libde265-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/strukturag/libde265/releases/download/v1.1.3/libde265-1.1.3.tar.gz",
+    "filename": "libde265-1.1.3.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -621,10 +621,9 @@
     }
   },
   "libevent": {
-    "type": "ghrel",
-    "repo": "libevent/libevent",
-    "match": "libevent.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/libevent/libevent/releases/download/release-2.2.2-alpha/libevent-2.2.2-alpha.tar.gz",
+    "filename": "libevent-2.2.2-alpha.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -632,10 +631,9 @@
     }
   },
   "libffi": {
-    "type": "ghrel",
-    "repo": "libffi/libffi",
-    "match": "libffi.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/libffi/libffi/releases/download/v3.8.0/libffi-3.8.0.tar.gz",
+    "filename": "libffi-3.8.0.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -651,10 +649,9 @@
     }
   },
   "libheif": {
-    "type": "ghrel",
-    "repo": "strukturag/libheif",
-    "match": "libheif-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/strukturag/libheif/releases/download/v1.23.5/libheif-1.23.5.tar.gz",
+    "filename": "libheif-1.23.5.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -690,8 +687,9 @@
     }
   },
   "libjpeg": {
-    "type": "ghtar",
-    "repo": "libjpeg-turbo/libjpeg-turbo",
+    "type": "url",
+    "url": "https://codeload.github.com/libjpeg-turbo/libjpeg-turbo/tar.gz/refs/tags/3.2.0",
+    "filename": "libjpeg-3.2.0.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE.md"
@@ -713,10 +711,9 @@
     }
   },
   "liblz4": {
-    "type": "ghrel",
-    "repo": "lz4/lz4",
-    "match": "lz4-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz",
+    "filename": "lz4-1.10.0.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -724,19 +721,18 @@
     }
   },
   "libmaxminddb": {
-    "type": "ghrel",
-    "repo": "maxmind/libmaxminddb",
-    "match": "libmaxminddb-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/maxmind/libmaxminddb/releases/download/1.14.1/libmaxminddb-1.14.1.tar.gz",
+    "filename": "libmaxminddb-1.14.1.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
     }
   },
   "libmemcached": {
-    "type": "ghtagtar",
-    "repo": "awesomized/libmemcached",
-    "match": "1.\\d.\\d",
+    "type": "url",
+    "url": "https://codeload.github.com/awesomized/libmemcached/tar.gz/refs/tags/1.1.4",
+    "filename": "libmemcached-1.1.4.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -762,18 +758,18 @@
     }
   },
   "librdkafka": {
-    "type": "ghtar",
-    "repo": "confluentinc/librdkafka",
+    "type": "url",
+    "url": "https://codeload.github.com/confluentinc/librdkafka/tar.gz/refs/tags/v2.15.1",
+    "filename": "librdkafka-v2.15.1.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
     }
   },
   "libsodium": {
-    "type": "ghrel",
-    "repo": "jedisct1/libsodium",
-    "match": "libsodium-\\d+(\\.\\d+)*\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/jedisct1/libsodium/releases/download/1.0.22-RELEASE/libsodium-1.0.22.tar.gz",
+    "filename": "libsodium-1.0.22.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -781,10 +777,9 @@
     }
   },
   "libssh2": {
-    "type": "ghrel",
-    "repo": "libssh2/libssh2",
-    "match": "libssh2.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/libssh2/libssh2/releases/download/libssh2-1.11.1/libssh2-1.11.1.tar.gz",
+    "filename": "libssh2-1.11.1.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -811,9 +806,9 @@
     }
   },
   "liburing": {
-    "type": "ghtar",
-    "repo": "axboe/liburing",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/axboe/liburing/tar.gz/refs/tags/liburing-2.15",
+    "filename": "liburing-liburing-2.15.tar.gz",
     "license": {
       "type": "file",
       "path": "COPYING"
@@ -830,8 +825,9 @@
     }
   },
   "libuv": {
-    "type": "ghtar",
-    "repo": "libuv/libuv",
+    "type": "url",
+    "url": "https://codeload.github.com/libuv/libuv/tar.gz/refs/tags/v1.53.0",
+    "filename": "libuv-v1.53.0.tar.gz",
     "license": [
       {
         "type": "file",
@@ -844,9 +840,9 @@
     ]
   },
   "libwebp": {
-    "type": "ghtagtar",
-    "repo": "webmproject/libwebp",
-    "match": "v1\\.\\d+\\.\\d+$",
+    "type": "url",
+    "url": "https://codeload.github.com/webmproject/libwebp/tar.gz/refs/tags/v1.6.0",
+    "filename": "libwebp-v1.6.0.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -854,9 +850,9 @@
     }
   },
   "libxml2": {
-    "type": "ghtagtar",
-    "repo": "GNOME/libxml2",
-    "match": "v2\\.\\d+\\.\\d+$",
+    "type": "url",
+    "url": "https://codeload.github.com/GNOME/libxml2/tar.gz/refs/tags/v2.15.4",
+    "filename": "libxml2-v2.15.4.tar.gz",
     "provide-pre-built": false,
     "license": {
       "type": "file",
@@ -873,10 +869,9 @@
     }
   },
   "libyaml": {
-    "type": "ghrel",
-    "repo": "yaml/libyaml",
-    "match": "yaml-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz",
+    "filename": "yaml-0.2.5.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -884,10 +879,9 @@
     }
   },
   "libzip": {
-    "type": "ghrel",
-    "repo": "nih-at/libzip",
-    "match": "libzip.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/nih-at/libzip/releases/download/v1.11.4/libzip-1.11.4.tar.xz",
+    "filename": "libzip-1.11.4.tar.xz",
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -924,11 +918,10 @@
     }
   },
   "mongodb": {
-    "type": "ghrel",
-    "repo": "mongodb/mongo-php-driver",
+    "type": "url",
+    "url": "https://github.com/mongodb/mongo-php-driver/releases/download/2.5.3/mongodb-2.5.3.tgz",
+    "filename": "mongodb-2.5.3.tgz",
     "path": "php-src/ext/mongodb",
-    "match": "mongodb.+\\.tgz",
-    "prefer-stable": true,
     "license": {
       "type": "file",
       "path": "LICENSE"
@@ -955,48 +948,45 @@
     }
   },
   "net-snmp": {
-    "type": "ghtagtar",
-    "repo": "net-snmp/net-snmp",
+    "type": "url",
+    "url": "https://codeload.github.com/net-snmp/net-snmp/tar.gz/refs/tags/v5.10.pre2",
+    "filename": "net-snmp-v5.10.pre2.tar.gz",
     "license": {
       "type": "file",
       "path": "COPYING"
     }
   },
   "nghttp2": {
-    "type": "ghrel",
-    "repo": "nghttp2/nghttp2",
-    "match": "nghttp2.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/nghttp2/nghttp2/releases/download/v1.70.0/nghttp2-1.70.0.tar.xz",
+    "filename": "nghttp2-1.70.0.tar.xz",
     "license": {
       "type": "file",
       "path": "COPYING"
     }
   },
   "nghttp3": {
-    "type": "ghrel",
-    "repo": "ngtcp2/nghttp3",
-    "match": "nghttp3.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/ngtcp2/nghttp3/releases/download/v1.18.0/nghttp3-1.18.0.tar.xz",
+    "filename": "nghttp3-1.18.0.tar.xz",
     "license": {
       "type": "file",
       "path": "COPYING"
     }
   },
   "ngtcp2": {
-    "type": "ghrel",
-    "repo": "ngtcp2/ngtcp2",
-    "match": "ngtcp2.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/ngtcp2/ngtcp2/releases/download/v1.25.0/ngtcp2-1.25.0.tar.xz",
+    "filename": "ngtcp2-1.25.0.tar.xz",
     "license": {
       "type": "file",
       "path": "COPYING"
     }
   },
   "onig": {
-    "type": "ghrel",
-    "repo": "kkos/oniguruma",
-    "match": "onig-.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/kkos/oniguruma/releases/download/v6.9.10/onig-6.9.10.tar.gz",
+    "filename": "onig-6.9.10.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -1004,10 +994,9 @@
     }
   },
   "openssl": {
-    "type": "ghrel",
-    "repo": "openssl/openssl",
-    "match": "openssl.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/openssl/openssl/releases/download/openssl-4.0.2/openssl-4.0.2.tar.gz",
+    "filename": "openssl-4.0.2.tar.gz",
     "alt": {
       "type": "filelist",
       "url": "https://www.openssl.org/source/",
@@ -1068,9 +1057,9 @@
     }
   },
   "postgresql": {
-    "type": "ghtagtar",
-    "repo": "postgres/postgres",
-    "match": "REL_18_\\d+",
+    "type": "url",
+    "url": "https://codeload.github.com/postgres/postgres/tar.gz/refs/tags/REL_18_6",
+    "filename": "postgresql-REL_18_6.tar.gz",
     "license": {
       "type": "file",
       "path": "COPYRIGHT"
@@ -1123,10 +1112,9 @@
     }
   },
   "re2c": {
-    "type": "ghrel",
-    "repo": "skvadrik/re2c",
-    "match": "re2c.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/skvadrik/re2c/releases/download/4.6/re2c-4.6.tar.xz",
+    "filename": "re2c-4.6.tar.xz",
     "alt": {
       "type": "url",
       "url": "https://dl.static-php.dev/static-php-cli/deps/re2c/re2c-4.3.tar.xz"
@@ -1198,30 +1186,29 @@
     }
   },
   "swoole": {
+    "type": "url",
+    "url": "https://codeload.github.com/swoole/swoole-src/tar.gz/refs/tags/v6.2.3",
+    "filename": "swoole-v6.2.3.tar.gz",
     "path": "php-src/ext/swoole",
-    "type": "ghtar",
-    "repo": "swoole/swoole-src",
-    "match": "v6\\.+",
-    "prefer-stable": true,
     "license": {
       "type": "file",
       "path": "LICENSE"
     }
   },
   "swow": {
+    "type": "url",
+    "url": "https://codeload.github.com/swow/swow/tar.gz/refs/tags/v1.6.2",
+    "filename": "swow-v1.6.2.tar.gz",
     "path": "php-src/ext/swow-src",
-    "type": "ghtar",
-    "repo": "swow/swow",
-    "prefer-stable": true,
     "license": {
       "type": "file",
       "path": "LICENSE"
     }
   },
   "tidy": {
-    "type": "ghtar",
-    "repo": "htacg/tidy-html5",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/htacg/tidy-html5/tar.gz/refs/tags/5.8.0",
+    "filename": "tidy-5.8.0.tar.gz",
     "license": {
       "type": "file",
       "path": "README/LICENSE.md"
@@ -1237,9 +1224,9 @@
     }
   },
   "watcher": {
-    "type": "ghtar",
-    "repo": "e-dant/watcher",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://codeload.github.com/e-dant/watcher/tar.gz/refs/tags/0.14.5",
+    "filename": "watcher-0.14.5.tar.gz",
     "license": {
       "type": "file",
       "path": "license"
@@ -1275,10 +1262,9 @@
     }
   },
   "xz": {
-    "type": "ghrel",
-    "repo": "tukaani-project/xz",
-    "match": "xz.+\\.tar\\.xz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4.tar.xz",
+    "filename": "xz-5.8.4.tar.xz",
     "provide-pre-built": true,
     "license": {
       "type": "file",
@@ -1306,10 +1292,9 @@
     }
   },
   "zlib": {
-    "type": "ghrel",
-    "repo": "madler/zlib",
-    "match": "zlib.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/madler/zlib/releases/download/v1.3.2/zlib-1.3.2.tar.gz",
+    "filename": "zlib-1.3.2.tar.gz",
     "provide-pre-built": true,
     "license": {
       "type": "text",
@@ -1317,10 +1302,9 @@
     }
   },
   "zstd": {
-    "type": "ghrel",
-    "repo": "facebook/zstd",
-    "match": "zstd.+\\.tar\\.gz",
-    "prefer-stable": true,
+    "type": "url",
+    "url": "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz",
+    "filename": "zstd-1.5.7.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"

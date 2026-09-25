@@ -34,6 +34,8 @@ bin/php bin/spc build --build-cli "bcg729" --enable-zts --debug
 buildroot/bin/php -v
 ```
 
+O `-A` baixa todas as fontes. As fontes do GitHub usam URLs públicas de versões fixas em `config/source.json`, sem depender da API de releases e tags.
+
 ## Contribuição
 Contribuições são bem-vindas! Siga as etapas abaixo para contribuir:
 
