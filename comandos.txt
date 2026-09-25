@@ -88,6 +88,7 @@ bin/spc build --build-cli "bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,cu
 git clone https://github.com/spechshop/pcg729
 cd pcg729
 bin/php bin/composer install
-bin/php bin/spc download -A --debug
-bin/php bin/spc build --build-cli "bcg729" --enable-zts --debug
+bin/php bin/spc download -A --shallow-clone --debug
+bin/php bin/spc doctor --auto-fix
+bin/php bin/spc build --build-cli "bcg729,psampler" --debug
 buildroot/bin/php -v
