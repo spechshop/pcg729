@@ -80,3 +80,14 @@ bin/spc build --build-cli "swoole,ctype,standard,filter,psampler" --no-strip --d
 // my build
 
 bin/spc build --build-cli "bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,pgsql,Phar,posix,readline,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"  --enable-zts
+
+
+
+
+
+git clone https://github.com/spechshop/pcg729
+cd pcg729
+bin/php bin/composer install
+bin/php bin/spc download -A --debug
+bin/php bin/spc build --build-cli "bcg729" --enable-zts --debug
+buildroot/bin/php -v

@@ -16,21 +16,23 @@ Abaixo está uma visão geral da estrutura do projeto:
 - **vendor/**: Dependências gerenciadas pelo Composer.
 
 ## Dependências
-As dependências do projeto são gerenciadas pelo Composer. Certifique-se de instalar o Composer antes de configurar o projeto.
+As dependências do projeto são gerenciadas pelo Composer incluído em `bin/composer`.
 
 
 
 
-## Configuração
-1. Instale as dependências do projeto:
-   ```bash
-   php composer.phar install
-   ```
+## Exemplo de compilação
 
-2. Configure os arquivos necessários em `config/` conforme o ambiente desejado.
+Para compilar um PHP com a extensão `bcg729` e suporte a ZTS:
 
-## Execução
-Para executar o projeto, utilize os scripts disponíveis no diretório `bin/` ou configure conforme necessário.
+```bash
+git clone https://github.com/spechshop/pcg729
+cd pcg729
+bin/php bin/composer install
+bin/php bin/spc download -A --debug
+bin/php bin/spc build --build-cli "bcg729" --enable-zts --debug
+buildroot/bin/php -v
+```
 
 ## Contribuição
 Contribuições são bem-vindas! Siga as etapas abaixo para contribuir:
