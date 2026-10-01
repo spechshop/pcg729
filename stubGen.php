@@ -248,7 +248,7 @@ generateExtensionConstants('opusChannel');
 generateExtensionConstants('psampler');
 generateExtensionConstants('gsm');
 // 🔧 Filtrar classes permitidas
-generateClassStubs(['bcg729', 'LPCM', 'bcg729Channel', 'Resampler', 'opusChannel','gsm','psampler']);
+generateClassStubs(['bcg729', 'byteBuffer', 'LPCM', 'bcg729Channel', 'Resampler', 'opusChannel','gsm','psampler']);
 
 function listStubFolders($dir = __DIR__ . '/stubs')
 {
