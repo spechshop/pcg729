@@ -1187,8 +1187,8 @@
   },
   "swoole": {
     "type": "url",
-    "url": "https://codeload.github.com/swoole/swoole-src/tar.gz/refs/tags/v6.2.3",
-    "filename": "swoole-v6.2.3.tar.gz",
+    "url": "https://codeload.github.com/swoole/swoole-src/tar.gz/refs/tags/v6.3.0-rc1",
+    "filename": "swoole-v6.3.0-rc1.tar.gz",
     "path": "php-src/ext/swoole",
     "license": {
       "type": "file",
