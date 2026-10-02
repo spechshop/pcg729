@@ -49,11 +49,13 @@ x|  sudo bin/spc build --build-cli "bcmath,bz2,calendar,ctype,curl,dba,dio,dom,d
 rm -rf source/* &&
 rm -rf buildroot/bin/php &&
 bin/spc del-download bcg729 &&
+bin/spc del-download opus &&
 bin/spc del-download libbcg729 &&
 bin/spc del-download libgsm &&
 bin/spc del-download psampler &&
 bin/spc del-download swoole &&
 bin/spc download bcg729 &&
+bin/spc download opus &&
 bin/spc download libbcg729 &&
 bin/spc download libgsm &&
 bin/spc download swoole &&
@@ -73,13 +75,13 @@ rm -rf source/php-src/ext/bcg729 && rm -rf source/php-src/ext/psampler && rm -rf
 
 
 
-bin/spc build --build-cli "swoole,ctype,standard,filter,psampler" --no-strip --debug
+bin/spc build --build-cli --build-micro "swoole,opus,bcg729,ctype,standard,filter,psampler" --enable-zts --debug
 
 
 
 // my build
 
-bin/spc build --build-cli "bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,pgsql,Phar,posix,readline,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"  --enable-zts
+bin/spc build --build-micro --build-cli "bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pdo_mysql,pgsql,Phar,posix,readline,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"  --enable-zts --no-strip --debug
 
 
 
@@ -90,5 +92,5 @@ cd pcg729
 bin/php bin/composer install
 bin/php bin/spc download -A --shallow-clone --debug
 bin/php bin/spc doctor --auto-fix
-bin/php bin/spc build --build-cli "bcg729,psampler" --debug
+bin/php bin/spc build --build-micro "standard" --debug --enable-zts
 buildroot/bin/php -v

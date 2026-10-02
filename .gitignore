@@ -1,7 +1,6 @@
 # Build artifacts
 /buildroot/
 /source/
-/stubs/
 /downloads/
 /dist/
 /pkgroot/

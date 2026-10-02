@@ -279,6 +279,9 @@ class SourcePatcher
         if ($builder instanceof UnixBuilderBase) {
             FileSystem::replaceFileStr(SOURCE_PATH . '/php-src/Makefile', 'install-micro', '');
         }
+        if ($builder->getOption('build-micro', false) || $builder->getOption('build-all', false)) {
+            self::patchMicroOpcacheStat();
+        }
 
         // no asan
         // if (strpos(file_get_contents(SOURCE_PATH . '/php-src/Makefile'), 'CFLAGS_CLEAN = -g') === false) {
@@ -296,6 +299,44 @@ class SourcePatcher
                 logger()->info('Library [' . $lib->getName() . '] patched before make');
             }
         }
+    }
+
+    /**
+     * Opcache asks the SAPI for the primary script's stat information. Micro's
+     * primary ZEND_HANDLE_STREAM contains a FILE*, not a php_stream, so the
+     * Opcache fallback would interpret that FILE* as a php_stream and crash.
+     */
+    public static function patchMicroOpcacheStat(): void
+    {
+        $path = SOURCE_PATH . '/php-src/sapi/micro/php_micro.c';
+        if (!file_exists($path)) {
+            return;
+        }
+
+        $source = FileSystem::readFile($path);
+        if (str_contains($source, 'sapi_micro_get_stat')) {
+            return;
+        }
+
+        $newline = str_contains($source, "\r\n") ? "\r\n" : "\n";
+        $anchor = '/* {{{ sapi_module_struct micro_sapi_module';
+        $field = '    NULL, /* get uid */';
+        if (!str_contains($source, $anchor) || !str_contains($source, $field)) {
+            throw new RuntimeException('Cannot patch micro Opcache stat callback: unexpected micro source');
+        }
+
+        $callback = implode($newline, [
+            'static zend_stat_t *sapi_micro_get_stat(void) {',
+            '    if (VCWD_STAT(micro_get_filename(), &SG(global_stat)) != 0) {',
+            '        return NULL;',
+            '    }',
+            '    return &SG(global_stat);',
+            '}',
+            '',
+        ]);
+        $source = str_replace($anchor, $callback . $anchor, $source);
+        $source = str_replace($field, '    sapi_micro_get_stat, /* get stat */', $source);
+        FileSystem::writeFile($path, $source);
     }
 
     /**

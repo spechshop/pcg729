@@ -56,7 +56,7 @@
     "url": "https://github.com/berzersks/opus.git",
     "license": {
       "type": "file",
-      "path": "COPYING"
+      "path": "LICENSE"
     }
   },
   "bcg729": {
