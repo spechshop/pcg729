@@ -24,7 +24,7 @@
     "url": "https://github.com/chirlu/soxr.git",
     "license": {
       "type": "file",
-      "path": "LICENSE"
+      "path": "LICENCE"
     }
   },
   "libbcg729": {
