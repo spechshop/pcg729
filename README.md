@@ -31,7 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/spechshop/pcg729/refs/heads/fix-fil
 
 O instalador detecta o binário retornado por `command -v php`, identifica se o ambiente atual usa ZTS ou NTS e mostra um menu navegável com as setas ↑/↓ e Enter.
 
-Somente os builds realmente disponíveis na última release pública estável são exibidos. Antes de substituir o PHP atual, o instalador baixa o `SHA256SUMS` da release e valida a integridade do binário.
+Todos os arquivos instaláveis disponíveis na última release pública estável são exibidos no menu, preservando variantes antigas e builds com extensões adicionais. Arquivos de checksum e assinatura são ignorados. Quando o GitHub publica o digest SHA-256 do asset, o instalador valida a integridade antes de substituir o PHP atual.
 
 ## Exemplo de compilação
 
