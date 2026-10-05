@@ -3,9 +3,7 @@
 set -Eeuo pipefail
 
 REPO="spechshop/pcg729"
-ARCH="$(uname -m)"
 API_URL="https://api.github.com/repos/$REPO/releases/latest"
-DOWNLOAD_BASE="https://github.com/$REPO/releases/latest/download"
 
 die() {
     printf '\nErro: %s\n' "$1" >&2
@@ -13,17 +11,8 @@ die() {
 }
 
 command -v curl >/dev/null 2>&1 || die "curl não está instalado."
-command -v sha256sum >/dev/null 2>&1 || die "sha256sum não está instalado."
 command -v php >/dev/null 2>&1 || die "nenhum PHP foi encontrado no PATH."
-
-case "$ARCH" in
-    x86_64|amd64)
-        ASSET_ARCH="x86_64"
-        ;;
-    *)
-        die "arquitetura não suportada: $ARCH"
-        ;;
-esac
+command -v sha256sum >/dev/null 2>&1 || die "sha256sum não está instalado."
 
 PHP_COMMAND="$(command -v php)"
 PHP_BIN="$(readlink -f "$PHP_COMMAND" 2>/dev/null || printf '%s' "$PHP_COMMAND")"
@@ -35,35 +24,55 @@ CURRENT_MODE="$("$PHP_BIN" -r 'echo PHP_ZTS ? "ZTS" : "NTS";' 2>/dev/null || tru
 
 RELEASE_JSON="$(curl -fsSL --retry 3 "$API_URL")" || die "não foi possível consultar a última release pública."
 
-builds=()
-labels=()
+RELEASE_TAG="$(printf '%s' "$RELEASE_JSON" | "$PHP_BIN" -r '
+    $data = json_decode(stream_get_contents(STDIN), true);
+    if (!is_array($data)) {
+        exit(1);
+    }
+    echo $data["tag_name"] ?? "";
+' 2>/dev/null || true)"
 
-asset_available() {
-    printf '%s' "$RELEASE_JSON" | grep -Eq "\"name\"[[:space:]]*:[[:space:]]*\"pcg729-linux-${ASSET_ARCH}-$1\""
-}
+assets=()
+urls=()
+digests=()
 
-if asset_available "zts"; then
-    builds+=("zts")
-    labels+=("ZTS")
-fi
+while IFS=$'\t' read -r name url digest; do
+    [ -n "$name" ] || continue
+    assets+=("$name")
+    urls+=("$url")
+    digests+=("$digest")
+done < <(
+    printf '%s' "$RELEASE_JSON" | "$PHP_BIN" -r '
+        $data = json_decode(stream_get_contents(STDIN), true);
 
-if asset_available "nts"; then
-    builds+=("nts")
-    labels+=("NTS")
-fi
+        if (!is_array($data) || !isset($data["assets"]) || !is_array($data["assets"])) {
+            exit(1);
+        }
 
-[ "${#builds[@]}" -gt 0 ] || die "a última release pública não possui builds compatíveis para Linux $ASSET_ARCH."
+        foreach ($data["assets"] as $asset) {
+            $name = (string) ($asset["name"] ?? "");
+            $url = (string) ($asset["browser_download_url"] ?? "");
+            $digest = (string) ($asset["digest"] ?? "");
 
-labels+=("Cancelar")
-builds+=("cancel")
+            if ($name === "" || $url === "") {
+                continue;
+            }
 
+            if (preg_match("/^(SHA(1|256|512)SUMS?|checksums?(\\.txt)?|.*\\.(sha1|sha256|sha512|sig|asc))$/i", $name)) {
+                continue;
+            }
+
+            echo str_replace(["\\t", "\\r", "\\n"], " ", $name), "\t",
+                 str_replace(["\\t", "\\r", "\\n"], "", $url), "\t",
+                 str_replace(["\\t", "\\r", "\\n"], "", $digest), "\n";
+        }
+    '
+)
+
+[ "${#assets[@]}" -gt 0 ] || die "a última release pública não possui arquivos instaláveis."
+
+labels=("${assets[@]}" "Cancelar")
 selected=0
-for i in "${!labels[@]}"; do
-    if [ "${labels[$i]}" = "$CURRENT_MODE" ]; then
-        selected="$i"
-        break
-    fi
-done
 
 if [ ! -r /dev/tty ]; then
     die "este instalador é interativo e precisa de um terminal."
@@ -78,20 +87,19 @@ draw_menu() {
     printf 'PHP atual\n' >&4
     printf '  Binário: %s\n' "$PHP_BIN" >&4
     printf '  Versão:  %s\n' "$CURRENT_VERSION" >&4
-    printf '  Build:    %s\n\n' "$CURRENT_MODE" >&4
-    printf 'Selecione a versão para instalar usando ↑/↓ e Enter:\n\n' >&4
+    printf '  Build:    %s\n' "$CURRENT_MODE" >&4
+
+    if [ -n "$RELEASE_TAG" ]; then
+        printf '  Release:  %s\n' "$RELEASE_TAG" >&4
+    fi
+
+    printf '\nSelecione o arquivo para instalar usando ↑/↓ e Enter:\n\n' >&4
 
     for i in "${!labels[@]}"; do
-        label="${labels[$i]}"
-
-        if [ "$label" = "$CURRENT_MODE" ]; then
-            label="$label (atual)"
-        fi
-
         if [ "$i" -eq "$selected" ]; then
-            printf '  \033[1;36m> %s\033[0m\n' "$label" >&4
+            printf '  \033[1;36m> %s\033[0m\n' "${labels[$i]}" >&4
         else
-            printf '    %s\n' "$label" >&4
+            printf '    %s\n' "${labels[$i]}" >&4
         fi
     done
 }
@@ -123,51 +131,56 @@ while true; do
     fi
 done
 
-BUILD="${builds[$selected]}"
-
-if [ "$BUILD" = "cancel" ]; then
+if [ "$selected" -eq "${#assets[@]}" ]; then
     printf '\033[2J\033[HCancelado.\n' >&4
     exit 0
 fi
 
-ASSET="pcg729-linux-${ASSET_ARCH}-$BUILD"
+ASSET="${assets[$selected]}"
+ASSET_URL="${urls[$selected]}"
+ASSET_DIGEST="${digests[$selected]}"
+
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 printf '\033[2J\033[H' >&4
 printf 'Baixando %s...\n' "$ASSET" >&4
 
-curl -fL --retry 3 "$DOWNLOAD_BASE/$ASSET" -o "$TMP_DIR/$ASSET"
-curl -fL --retry 3 "$DOWNLOAD_BASE/SHA256SUMS" -o "$TMP_DIR/SHA256SUMS"
+curl -fL --retry 3 "$ASSET_URL" -o "$TMP_DIR/php-new"
 
-CHECKSUM_LINE="$(grep -E "[[:space:]]${ASSET}$" "$TMP_DIR/SHA256SUMS" | head -n 1 || true)"
-[ -n "$CHECKSUM_LINE" ] || die "o checksum de $ASSET não foi encontrado em SHA256SUMS."
+if [[ "$ASSET_DIGEST" == sha256:* ]]; then
+    EXPECTED_SHA256="${ASSET_DIGEST#sha256:}"
+    ACTUAL_SHA256="$(sha256sum "$TMP_DIR/php-new" | awk '{print $1}')"
 
-(
-    cd "$TMP_DIR"
-    printf '%s\n' "$CHECKSUM_LINE" | sha256sum -c -
-) || die "a validação SHA-256 falhou."
+    if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+        die "a validação SHA-256 falhou para $ASSET."
+    fi
 
-chmod +x "$TMP_DIR/$ASSET"
+    printf 'SHA-256 validado com sucesso.\n' >&4
+else
+    printf 'Aviso: o GitHub não informou SHA-256 para este asset; seguindo sem validação de digest.\n' >&4
+fi
+
+chmod +x "$TMP_DIR/php-new"
 
 printf '\nBinário baixado:\n' >&4
-"$TMP_DIR/$ASSET" -v >&4
+"$TMP_DIR/php-new" -v >&4 || die "o arquivo selecionado não parece ser um executável PHP válido."
 
 install_binary() {
     if [ -w "$PHP_BIN" ] || { [ ! -e "$PHP_BIN" ] && [ -w "$(dirname "$PHP_BIN")" ]; }; then
-        install -m 0755 "$TMP_DIR/$ASSET" "$PHP_BIN"
+        install -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
         return
     fi
 
     if command -v sudo >/dev/null 2>&1; then
-        sudo install -m 0755 "$TMP_DIR/$ASSET" "$PHP_BIN"
+        sudo install -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
         return
     fi
 
     die "sem permissão para atualizar $PHP_BIN e sudo não está disponível."
 }
 
-printf '\nAtualizando %s...\n' "$PHP_BIN" >&4
+printf '\nAtualizando %s com %s...\n' "$PHP_BIN" "$ASSET" >&4
 install_binary
 
 printf '\nPHP atualizado com sucesso:\n' >&4
