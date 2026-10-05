@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+REPO="spechshop/pcg729"
+ARCH="$(uname -m)"
+API_URL="https://api.github.com/repos/$REPO/releases/latest"
+DOWNLOAD_BASE="https://github.com/$REPO/releases/latest/download"
+
+die() {
+    printf '\nErro: %s\n' "$1" >&2
+    exit 1
+}
+
+command -v curl >/dev/null 2>&1 || die "curl não está instalado."
+command -v sha256sum >/dev/null 2>&1 || die "sha256sum não está instalado."
+command -v php >/dev/null 2>&1 || die "nenhum PHP foi encontrado no PATH."
+
+case "$ARCH" in
+    x86_64|amd64)
+        ASSET_ARCH="x86_64"
+        ;;
+    *)
+        die "arquitetura não suportada: $ARCH"
+        ;;
+esac
+
+PHP_COMMAND="$(command -v php)"
+PHP_BIN="$(readlink -f "$PHP_COMMAND" 2>/dev/null || printf '%s' "$PHP_COMMAND")"
+CURRENT_VERSION="$("$PHP_BIN" -r 'echo PHP_VERSION;' 2>/dev/null || true)"
+CURRENT_MODE="$("$PHP_BIN" -r 'echo PHP_ZTS ? "ZTS" : "NTS";' 2>/dev/null || true)"
+
+[ -n "$CURRENT_VERSION" ] || die "não foi possível identificar a versão do PHP atual."
+[ -n "$CURRENT_MODE" ] || die "não foi possível identificar se o PHP atual é ZTS ou NTS."
+
+RELEASE_JSON="$(curl -fsSL --retry 3 "$API_URL")" || die "não foi possível consultar a última release pública."
+
+builds=()
+labels=()
+
+asset_available() {
+    printf '%s' "$RELEASE_JSON" | grep -Eq "\"name\"[[:space:]]*:[[:space:]]*\"pcg729-linux-${ASSET_ARCH}-$1\""
+}
+
+if asset_available "zts"; then
+    builds+=("zts")
+    labels+=("ZTS")
+fi
+
+if asset_available "nts"; then
+    builds+=("nts")
+    labels+=("NTS")
+fi
+
+[ "${#builds[@]}" -gt 0 ] || die "a última release pública não possui builds compatíveis para Linux $ASSET_ARCH."
+
+labels+=("Cancelar")
+builds+=("cancel")
+
+selected=0
+for i in "${!labels[@]}"; do
+    if [ "${labels[$i]}" = "$CURRENT_MODE" ]; then
+        selected="$i"
+        break
+    fi
+done
+
+if [ ! -r /dev/tty ]; then
+    die "este instalador é interativo e precisa de um terminal."
+fi
+
+exec 3</dev/tty
+exec 4>/dev/tty
+
+draw_menu() {
+    printf '\033[2J\033[H' >&4
+    printf 'PCG729 - Atualizador do PHP\n\n' >&4
+    printf 'PHP atual\n' >&4
+    printf '  Binário: %s\n' "$PHP_BIN" >&4
+    printf '  Versão:  %s\n' "$CURRENT_VERSION" >&4
+    printf '  Build:    %s\n\n' "$CURRENT_MODE" >&4
+    printf 'Selecione a versão para instalar usando ↑/↓ e Enter:\n\n' >&4
+
+    for i in "${!labels[@]}"; do
+        label="${labels[$i]}"
+
+        if [ "$label" = "$CURRENT_MODE" ]; then
+            label="$label (atual)"
+        fi
+
+        if [ "$i" -eq "$selected" ]; then
+            printf '  \033[1;36m> %s\033[0m\n' "$label" >&4
+        else
+            printf '    %s\n' "$label" >&4
+        fi
+    done
+}
+
+while true; do
+    draw_menu
+
+    IFS= read -rsn1 key <&3 || true
+
+    if [ "$key" = $'\x1b' ]; then
+        IFS= read -rsn2 -t 0.15 rest <&3 || true
+
+        case "$rest" in
+            '[A')
+                selected=$((selected - 1))
+                if [ "$selected" -lt 0 ]; then
+                    selected=$(("${#labels[@]}" - 1))
+                fi
+                ;;
+            '[B')
+                selected=$((selected + 1))
+                if [ "$selected" -ge "${#labels[@]}" ]; then
+                    selected=0
+                fi
+                ;;
+        esac
+    elif [ -z "$key" ]; then
+        break
+    fi
+done
+
+BUILD="${builds[$selected]}"
+
+if [ "$BUILD" = "cancel" ]; then
+    printf '\033[2J\033[HCancelado.\n' >&4
+    exit 0
+fi
+
+ASSET="pcg729-linux-${ASSET_ARCH}-$BUILD"
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+printf '\033[2J\033[H' >&4
+printf 'Baixando %s...\n' "$ASSET" >&4
+
+curl -fL --retry 3 "$DOWNLOAD_BASE/$ASSET" -o "$TMP_DIR/$ASSET"
+curl -fL --retry 3 "$DOWNLOAD_BASE/SHA256SUMS" -o "$TMP_DIR/SHA256SUMS"
+
+CHECKSUM_LINE="$(grep -E "[[:space:]]${ASSET}$" "$TMP_DIR/SHA256SUMS" | head -n 1 || true)"
+[ -n "$CHECKSUM_LINE" ] || die "o checksum de $ASSET não foi encontrado em SHA256SUMS."
+
+(
+    cd "$TMP_DIR"
+    printf '%s\n' "$CHECKSUM_LINE" | sha256sum -c -
+) || die "a validação SHA-256 falhou."
+
+chmod +x "$TMP_DIR/$ASSET"
+
+printf '\nBinário baixado:\n' >&4
+"$TMP_DIR/$ASSET" -v >&4
+
+install_binary() {
+    if [ -w "$PHP_BIN" ] || { [ ! -e "$PHP_BIN" ] && [ -w "$(dirname "$PHP_BIN")" ]; }; then
+        install -m 0755 "$TMP_DIR/$ASSET" "$PHP_BIN"
+        return
+    fi
+
+    if command -v sudo >/dev/null 2>&1; then
+        sudo install -m 0755 "$TMP_DIR/$ASSET" "$PHP_BIN"
+        return
+    fi
+
+    die "sem permissão para atualizar $PHP_BIN e sudo não está disponível."
+}
+
+printf '\nAtualizando %s...\n' "$PHP_BIN" >&4
+install_binary
+
+printf '\nPHP atualizado com sucesso:\n' >&4
+"$PHP_BIN" -v >&4
