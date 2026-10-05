@@ -21,6 +21,18 @@ As dependências do projeto são gerenciadas pelo Composer incluído em `bin/com
 
 
 
+## Atualizar o PHP do ambiente
+
+Para baixar a versão pública estável mais recente e atualizar o PHP atual de forma interativa:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/spechshop/pcg729/refs/heads/fix-files/bin/update-php | bash
+```
+
+O instalador detecta o binário retornado por `command -v php`, identifica se o ambiente atual usa ZTS ou NTS e mostra um menu navegável com as setas ↑/↓ e Enter.
+
+Somente os builds realmente disponíveis na última release pública estável são exibidos. Antes de substituir o PHP atual, o instalador baixa o `SHA256SUMS` da release e valida a integridade do binário.
+
 ## Exemplo de compilação
 
 Para compilar um PHP com a extensão `bcg729` e suporte a ZTS:
