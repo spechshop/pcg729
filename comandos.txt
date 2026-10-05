@@ -78,10 +78,9 @@ rm -rf source/php-src/ext/bcg729 && rm -rf source/php-src/ext/psampler && rm -rf
 bin/spc build --build-cli "pgsql" --enable-zts --debug --with-clean
 
 
-
 // my build
 
-bin/spc build --build-cli "bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pgsql,Phar,posix,readline,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"  --enable-zts --no-strip --debug
+bin/spc build --build-cli "xmlwriter,xhprof,bcg729,psampler,redis,opus,swoole,bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,hash,iconv,intl,json,mbstring,mysqli,mysqlnd,openssl,pcntl,pcre,PDO,pgsql,Phar,posix,readline,swoole-hook-mysql,swoole-hook-pgsql,swoole-hook-sqlite,Reflection,session,soap,sockets,sodium,SPL,sqlite3,uv,standard,tokenizer,yaml,zip,zlib,uv"  --enable-zts --no-strip --debug
 
 
 
