@@ -15,6 +15,8 @@ class swoole extends Extension
 {
     public function patchBeforeBuildconf(): bool
     {
+        // Apply/upgrade Buffer ABI sources and header installation before PHP
+        // generates configure and the extension's build rules.
         return SwooleBufferPatcher::apply(SOURCE_PATH . '/php-src/ext/swoole');
     }
 

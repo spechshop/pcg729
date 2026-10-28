@@ -1,49 +1,32 @@
 --- a/config.m4
 +++ b/config.m4
-@@ -1319,10 +1319,10 @@
-     fi
-     AC_MSG_RESULT([$swoole_source_dir])
- 
+@@ -1322 +1322 @@
 -    ext_src_files=$(cd $swoole_source_dir && find ext-src/ -name *.cc)
 +    ext_src_files=$(cd $swoole_source_dir && find ext-src/ -name '*.cc' ! -name 'swoole_buffer.cc')
-     lib_src_files=$(cd $swoole_source_dir && find src/ -name *.cc)
- 
+@@ -1325 +1325 @@
 -    swoole_source_file="${ext_src_files} ${lib_src_files}"
 +    swoole_source_file="ext-src/swoole_buffer.cc ${ext_src_files} ${lib_src_files}"
- 
-     swoole_source_file="$swoole_source_file \
-         thirdparty/php/sockets/multicast.cc \
+@@ -1560 +1560 @@
+-    PHP_INSTALL_HEADERS([ext/swoole], [ext-src/*.h config.h php_swoole.h php_swoole_api.h \
++    PHP_INSTALL_HEADERS([ext/swoole], [swoole_buffer_c_api.h ext-src/*.h config.h php_swoole.h php_swoole_api.h \
 --- a/config.w32
 +++ b/config.w32
-@@ -32,6 +32,7 @@
- 	// Add ext-src files
- 	swoole_source_files += "ext-src\\php_swoole.cc ";
- 	swoole_source_files += "ext-src\\php_swoole_cxx.cc ";
+@@ -34,0 +35 @@
 +	swoole_source_files += "ext-src\\swoole_buffer.cc ";
- 	swoole_source_files += "ext-src\\swoole_async_coro.cc ";
- 	swoole_source_files += "ext-src\\swoole_channel_coro.cc ";
- 	swoole_source_files += "ext-src\\swoole_client.cc ";
+@@ -421 +422 @@
+-	PHP_INSTALL_HEADERS("ext/swoole", "php_swoole.h");
++	PHP_INSTALL_HEADERS("ext/swoole", "php_swoole.h swoole_buffer_c_api.h");
 --- a/ext-src/php_swoole.cc
 +++ b/ext-src/php_swoole.cc
-@@ -14,6 +14,7 @@
-   +----------------------------------------------------------------------+
- */
- #include "php_swoole_cxx.h"
+@@ -16,0 +17 @@
 +#include "php_swoole_buffer.h"
- #include "php_swoole_library.h"
- #ifndef _WIN32
- #include "php_swoole_process.h"
-@@ -1026,6 +1027,7 @@
-     php_swoole_channel_coro_minit(module_number);
-     php_swoole_runtime_minit(module_number);
-     // client
+@@ -1028,0 +1030 @@
 +    php_swoole_buffer_minit(module_number);
-     php_swoole_socket_coro_minit(module_number);
- #ifndef _WIN32
-     php_swoole_client_minit(module_number);
+@@ -1103,0 +1106 @@
++    php_swoole_buffer_mshutdown();
 --- /dev/null
 +++ b/ext-src/php_swoole_buffer.h
-@@ -0,0 +1,34 @@
+@@ -0,0 +1,38 @@
 +/*
 + +----------------------------------------------------------------------+
 + | Swoole                                                               |
@@ -72,11 +55,15 @@
 +    size_t capacity;
 +    size_t length;
 +    bool receiving;
++    uintptr_t read_token;
++    const void *read_thread;
 +    zend_object std;
 +};
 +
 +extern zend_class_entry *swoole_buffer_ce;
 +void php_swoole_buffer_minit(int module_number);
++void php_swoole_buffer_mshutdown();
++bool php_swoole_buffer_read_active();
 +SwooleBufferObject *php_swoole_buffer_get(zval *zbuffer);
 --- /dev/null
 +++ b/ext-src/stubs/php_swoole_buffer.stub.php
@@ -113,39 +100,23 @@
 +ZEND_END_ARG_INFO()
 --- a/ext-src/stubs/php_swoole_socket_coro.stub.php
 +++ b/ext-src/stubs/php_swoole_socket_coro.stub.php
-@@ -22,6 +22,7 @@
-         public function recvLine(int $length = 65536, float $timeout = 0): string|false {}
-         public function recvWithBuffer(int $length = 65536, float $timeout = 0): string|false {}
-         public function recvfrom(mixed &$peername, float $timeout = 0): string|false {}
+@@ -24,0 +25 @@
 +        public function recvfromInto(\Swoole\Buffer $buffer, mixed &$peername, float $timeout = 0): int|false {}
-         public function sendto(string $addr, int $port, string $data): int|false {}
-         public function getOption(int $level, int $opt_name): mixed {}
-         public function setOption(int $level, int $opt_name, mixed $opt_value): bool {}
 --- a/ext-src/stubs/php_swoole_socket_coro_arginfo.h
 +++ b/ext-src/stubs/php_swoole_socket_coro_arginfo.h
-@@ -1,5 +1,5 @@
- /* This is a generated file, edit the .stub.php file instead.
+@@ -2 +2 @@
 - * Stub hash: 7d2b3ea5b4d1613340006de2fa67d2a0bf314f09 */
 + * Stub hash: b3055a43f07b9bbf3e23554ac32e27d6c4b7727c */
- 
- ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Swoole_Coroutine_Socket___construct, 0, 0, 2)
- 	ZEND_ARG_TYPE_INFO(0, domain, IS_LONG, 0)
-@@ -87,6 +87,12 @@
- 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, timeout, IS_DOUBLE, 0, "0")
- ZEND_END_ARG_INFO()
- 
+@@ -89,0 +90,6 @@
 +ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_class_Swoole_Coroutine_Socket_recvfromInto, 0, 2, MAY_BE_LONG|MAY_BE_FALSE)
 +    ZEND_ARG_OBJ_INFO(0, buffer, Swoole\\Buffer, 0)
 +    ZEND_ARG_TYPE_INFO(1, peername, IS_MIXED, 0)
 +    ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, timeout, IS_DOUBLE, 0, "0")
 +ZEND_END_ARG_INFO()
 +
- ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_class_Swoole_Coroutine_Socket_sendto, 0, 3, MAY_BE_LONG|MAY_BE_FALSE)
- 	ZEND_ARG_TYPE_INFO(0, addr, IS_STRING, 0)
- 	ZEND_ARG_TYPE_INFO(0, port, IS_LONG, 0)
 --- /dev/null
 +++ b/ext-src/swoole_buffer.cc
-@@ -0,0 +1,161 @@
+@@ -0,0 +1,340 @@
 +/*
 + +----------------------------------------------------------------------+
 + | Swoole                                                               |
@@ -164,7 +135,13 @@
 + +----------------------------------------------------------------------+
 + */
 +
++#define SWOOLE_BUFFER_C_API_BUILD
++#include "swoole_buffer_c_api.h"
 +#include "php_swoole_buffer.h"
++
++BEGIN_EXTERN_C()
++#include "Zend/zend_fibers.h"
++END_EXTERN_C()
 +
 +#include <cstdlib>
 +#include <limits>
@@ -175,6 +152,15 @@
 +
 +zend_class_entry *swoole_buffer_ce;
 +static zend_object_handlers swoole_buffer_handlers;
++static const swoole_buffer_read_api_v1 *buffer_read_api;
++// No request object or address is stored in process-global API state.
++static thread_local char buffer_thread_identity;
++static thread_local uintptr_t buffer_next_token;
++static thread_local size_t buffer_active_reads;
++
++bool php_swoole_buffer_read_active() {
++    return buffer_active_reads != 0;
++}
 +
 +static SwooleBufferObject *buffer_fetch_object(zend_object *object) {
 +    return reinterpret_cast<SwooleBufferObject *>(reinterpret_cast<char *>(object) -
@@ -182,7 +168,12 @@
 +}
 +
 +SwooleBufferObject *php_swoole_buffer_get(zval *zbuffer) {
-+    auto *buffer = buffer_fetch_object(Z_OBJ_P(zbuffer));
++    zend_object *source = Z_OBJ_P(zbuffer);
++    if (UNEXPECTED(source->ce != swoole_buffer_ce || source->handlers != &swoole_buffer_handlers)) {
++        zend_throw_error(nullptr, "Invalid Swoole\\Buffer object");
++        return nullptr;
++    }
++    auto *buffer = buffer_fetch_object(source);
 +    if (UNEXPECTED(buffer->data == nullptr)) {
 +        zend_throw_error(nullptr, "Swoole\\Buffer must be constructed before use");
 +        return nullptr;
@@ -196,6 +187,8 @@
 +    buffer->capacity = 0;
 +    buffer->length = 0;
 +    buffer->receiving = false;
++    buffer->read_token = 0;
++    buffer->read_thread = nullptr;
 +    zend_object_std_init(&buffer->std, ce);
 +    object_properties_init(&buffer->std, ce);
 +    buffer->std.handlers = &swoole_buffer_handlers;
@@ -219,6 +212,10 @@
 +    ZEND_PARSE_PARAMETERS_END();
 +
 +    auto *buffer = buffer_fetch_object(Z_OBJ_P(ZEND_THIS));
++    if (UNEXPECTED(buffer->read_token != 0)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has an active native read");
++        RETURN_THROWS();
++    }
 +    if (UNEXPECTED(buffer->data != nullptr)) {
 +        zend_throw_error(nullptr, "Swoole\\Buffer is already constructed");
 +        RETURN_THROWS();
@@ -266,6 +263,10 @@
 +    if (UNEXPECTED(buffer == nullptr)) {
 +        RETURN_THROWS();
 +    }
++    if (UNEXPECTED(buffer->read_token != 0)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has an active native read");
++        RETURN_THROWS();
++    }
 +    if (UNEXPECTED(buffer->receiving)) {
 +        zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive");
 +        RETURN_THROWS();
@@ -297,6 +298,148 @@
 +    PHP_FE_END
 +};
 +
++static zend_result buffer_read_acquire(zend_object *source, swoole_buffer_read_view_v1 *view) {
++    if (view != nullptr) {
++        *view = {};
++    }
++    if (UNEXPECTED(EG(exception))) {
++        return FAILURE;
++    }
++    // Validate the public Zend identity BEFORE touching our private layout.
++    if (UNEXPECTED(view == nullptr || source == nullptr || buffer_read_api == nullptr ||
++                   source->ce != swoole_buffer_ce || source->handlers != &swoole_buffer_handlers)) {
++        zend_throw_error(nullptr, "Invalid Swoole\\Buffer native read source or view");
++        return FAILURE;
++    }
++    auto *buffer = buffer_fetch_object(source);
++    if (UNEXPECTED(buffer->data == nullptr || buffer->capacity == 0 ||
++                   buffer->capacity > static_cast<size_t>(ZEND_LONG_MAX) || buffer->length > buffer->capacity)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer must have valid constructed storage before native read");
++        return FAILURE;
++    }
++    if (UNEXPECTED(buffer->receiving || buffer->read_token != 0)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive or active native read");
++        return FAILURE;
++    }
++    if (UNEXPECTED(buffer_next_token == UINTPTR_MAX)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer native read token space exhausted");
++        return FAILURE;
++    }
++
++    // No fallible operations after acquiring these resources. A caller pin must
++    // outlive this additional producer reference, including on Zend bailout.
++    GC_ADDREF(source);
++    buffer->read_thread = &buffer_thread_identity;
++    buffer->read_token = ++buffer_next_token;
++    ++buffer_active_reads;
++    zend_fiber_switch_block();
++    view->source = source;
++    view->data = buffer->length == 0 ? nullptr : reinterpret_cast<const unsigned char *>(buffer->data);
++    view->length = buffer->length;
++    view->capacity = buffer->capacity;
++    view->token = reinterpret_cast<void *>(buffer->read_token);
++    return SUCCESS;
++}
++
++static void buffer_read_release(zend_object *source, void *token) {
++    if (source == nullptr || source->ce != swoole_buffer_ce || source->handlers != &swoole_buffer_handlers) {
++        return;
++    }
++    auto *buffer = buffer_fetch_object(source);
++    if (buffer->read_token == 0 || buffer->read_thread != &buffer_thread_identity ||
++        token != reinterpret_cast<void *>(buffer->read_token)) {
++        return;
++    }
++    buffer->read_token = 0;
++    buffer->read_thread = nullptr;
++    --buffer_active_reads;
++    zend_fiber_switch_unblock();
++    // The mandatory caller pin prevents destruction/PHP reentry here.
++    ZEND_ASSERT(GC_REFCOUNT(source) >= 2);
++    GC_DELREF(source);
++}
++
++extern "C" SWOOLE_BUFFER_C_API uint32_t swoole_buffer_read_api_version(void) {
++    return SWOOLE_BUFFER_READ_API_VERSION;
++}
++
++extern "C" SWOOLE_BUFFER_C_API const swoole_buffer_read_api_v1 *swoole_buffer_get_read_api(
++    uint32_t api_version, size_t expected_struct_size) {
++    if (api_version != SWOOLE_BUFFER_READ_API_VERSION || expected_struct_size != sizeof(swoole_buffer_read_api_v1)) {
++        return nullptr;
++    }
++    return buffer_read_api;
++}
++
++extern "C" SWOOLE_BUFFER_C_API zend_result swoole_buffer_with_read_view_v1(
++    zval *source, size_t offset, size_t length, swoole_buffer_read_handler_v1 handler, void *context) {
++    if (UNEXPECTED(EG(exception))) {
++        return FAILURE;
++    }
++    if (source != nullptr) {
++        ZVAL_DEREF(source);
++    }
++    if (source == nullptr || Z_TYPE_P(source) != IS_OBJECT || handler == nullptr) {
++        zend_value_error("Native buffer read requires an object and a handler");
++        return FAILURE;
++    }
++    zend_object *object = Z_OBJ_P(source);
++    swoole_buffer_read_view_v1 view = {};
++    zend_result result;
++    GC_ADDREF(object);
++    // acquire may throw (and exception allocation may bail out), but never
++    // bails out after activating the borrow. Do not read view in this catch.
++    zend_try {
++        result = buffer_read_acquire(object, &view);
++    } zend_catch {
++        OBJ_RELEASE(object);
++        zend_bailout();
++    } zend_end_try();
++    if (result != SUCCESS) {
++        OBJ_RELEASE(object);
++        return FAILURE;
++    }
++    if (offset > view.length || (length != SIZE_MAX && length > view.length - offset)) {
++        buffer_read_release(object, view.token);
++        OBJ_RELEASE(object);
++        zend_value_error("Native buffer read slice exceeds valid bytes");
++        return FAILURE;
++    }
++    size_t slice_length = length == SIZE_MAX ? view.length - offset : length;
++    // Never do arithmetic on a NULL pointer, even for an empty buffer/slice.
++    view.data = slice_length == 0 ? nullptr : view.data + offset;
++    view.length = slice_length;
++
++    // object/view/token are established before setjmp and unchanged afterwards.
++    // result is used only on the normal return path. C++ exceptions are not ABI
++    // compliant; contain them as Errors while still releasing our resources.
++    zend_try {
++        try {
++            result = handler(&view, context);
++        } catch (...) {
++            zend_throw_error(nullptr, "Native buffer reader threw a C++ exception");
++            result = FAILURE;
++        }
++    } zend_catch {
++        buffer_read_release(object, view.token);
++        OBJ_RELEASE(object);
++        zend_bailout();
++    } zend_end_try();
++    buffer_read_release(object, view.token);
++    OBJ_RELEASE(object);
++    if (result != SUCCESS || EG(exception)) {
++        if (!EG(exception)) {
++            zend_throw_error(nullptr, "Native buffer reader failed without an exception");
++        }
++        return FAILURE;
++    }
++    return SUCCESS;
++}
++
++void php_swoole_buffer_mshutdown() {
++    buffer_read_api = nullptr;
++}
++
 +void php_swoole_buffer_minit(int module_number) {
 +    SW_INIT_CLASS_ENTRY_STD(swoole_buffer, "Swoole\\Buffer", swoole_buffer_methods);
 +    swoole_buffer_ce->ce_flags |= ZEND_ACC_FINAL;
@@ -306,37 +449,23 @@
 +    SW_SET_CLASS_NOT_SERIALIZABLE(swoole_buffer);
 +    SW_SET_CLASS_CLONEABLE(swoole_buffer, sw_zend_class_clone_deny);
 +    SW_SET_CLASS_CUSTOM_OBJECT(swoole_buffer, buffer_create_object, buffer_free_object, SwooleBufferObject, std);
++    // Written only at module startup, immutable until all dependents shut down.
++    static swoole_buffer_read_api_v1 api;
++    api = {
++        SWOOLE_BUFFER_READ_API_VERSION, sizeof(swoole_buffer_read_api_v1),
++        swoole_buffer_ce, buffer_read_acquire, buffer_read_release
++    };
++    buffer_read_api = &api;
 +}
 --- a/ext-src/swoole_socket_coro.cc
 +++ b/ext-src/swoole_socket_coro.cc
-@@ -17,6 +17,7 @@
-  */
- 
- #include "php_swoole_cxx.h"
+@@ -19,0 +20 @@
 +#include "php_swoole_buffer.h"
- #include "php_swoole_thread.h"
- 
- #include "swoole_string.h"
-@@ -75,6 +76,7 @@
- static PHP_METHOD(swoole_socket_coro, recvLine);
- static PHP_METHOD(swoole_socket_coro, recvWithBuffer);
- static PHP_METHOD(swoole_socket_coro, recvfrom);
+@@ -77,0 +79 @@
 +static PHP_METHOD(swoole_socket_coro, recvfromInto);
- static PHP_METHOD(swoole_socket_coro, sendto);
- static PHP_METHOD(swoole_socket_coro, getOption);
- static PHP_METHOD(swoole_socket_coro, setOption);
-@@ -113,6 +115,7 @@
-     PHP_ME(swoole_socket_coro, sendFile,       arginfo_class_Swoole_Coroutine_Socket_sendFile,       ZEND_ACC_PUBLIC)
-     PHP_ME(swoole_socket_coro, sendAll,        arginfo_class_Swoole_Coroutine_Socket_sendAll,        ZEND_ACC_PUBLIC)
-     PHP_ME(swoole_socket_coro, recvfrom,       arginfo_class_Swoole_Coroutine_Socket_recvfrom,       ZEND_ACC_PUBLIC)
+@@ -115,0 +118 @@
 +    PHP_ME(swoole_socket_coro, recvfromInto,   arginfo_class_Swoole_Coroutine_Socket_recvfromInto,   ZEND_ACC_PUBLIC)
-     PHP_ME(swoole_socket_coro, sendto,         arginfo_class_Swoole_Coroutine_Socket_sendto,         ZEND_ACC_PUBLIC)
-     PHP_ME(swoole_socket_coro, getOption,      arginfo_class_Swoole_Coroutine_Socket_getOption,      ZEND_ACC_PUBLIC)
-     PHP_ME(swoole_socket_coro, setProtocol,    arginfo_class_Swoole_Coroutine_Socket_setProtocol,    ZEND_ACC_PUBLIC)
-@@ -1820,6 +1823,79 @@
-     }
- }
- 
+@@ -1822,0 +1826,77 @@
 +static PHP_METHOD(swoole_socket_coro, recvfromInto) {
 +    zval *zbuffer, *peername;
 +    double timeout = 0;
@@ -351,6 +480,10 @@
 +    swoole_get_socket_coro(sock, ZEND_THIS);
 +    auto *buffer = php_swoole_buffer_get(zbuffer);
 +    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    if (UNEXPECTED(buffer->read_token != 0)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has an active native read");
 +        RETURN_THROWS();
 +    }
 +    if (UNEXPECTED(buffer->receiving)) {
@@ -410,6 +543,129 @@
 +    RETURN_LONG(static_cast<zend_long>(bytes));
 +}
 +
- static PHP_METHOD(swoole_socket_coro, sendto) {
-     char *data;
-     size_t l_data;
+--- a/ext-src/swoole_coroutine.cc
++++ b/ext-src/swoole_coroutine.cc
+@@ -20,0 +21 @@
++#include "php_swoole_buffer.h"
+@@ -293 +294 @@
+-    if (task && task->co && PHPCoroutine::is_schedulable(task)) {
++    if (task && task->co && !php_swoole_buffer_read_active() && PHPCoroutine::is_schedulable(task)) {
+@@ -645,0 +647,5 @@
++    if (UNEXPECTED(php_swoole_buffer_read_active())) {
++        // A synchronous native borrow cannot cross coroutine contexts. Bailout
++        // reaches the reader's zend_catch before any Zend context is switched.
++        zend_error_noreturn(E_ERROR, "Cannot switch Swoole coroutine during a native buffer read");
++    }
+@@ -660,0 +667,5 @@
++    if (UNEXPECTED(php_swoole_buffer_read_active())) {
++        // A synchronous native borrow cannot cross coroutine contexts. Bailout
++        // reaches the reader's zend_catch before any Zend context is switched.
++        zend_error_noreturn(E_ERROR, "Cannot switch Swoole coroutine during a native buffer read");
++    }
+@@ -826,0 +838,5 @@
++    if (UNEXPECTED(php_swoole_buffer_read_active())) {
++        // A synchronous native borrow cannot cross coroutine contexts. Bailout
++        // reaches the reader's zend_catch before any Zend context is switched.
++        zend_error_noreturn(E_ERROR, "Cannot switch Swoole coroutine during a native buffer read");
++    }
+--- /dev/null
++++ b/swoole_buffer_c_api.h
+@@ -0,0 +1,98 @@
++/* Public Swoole Buffer read ABI. Shares the PHP/Zend ABI of the host process. */
++#ifndef SWOOLE_BUFFER_READ_C_API_V1_H
++#define SWOOLE_BUFFER_READ_C_API_V1_H
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++#include "php.h"
++#include <stddef.h>
++#include <stdint.h>
++#ifdef __cplusplus
++}
++#endif
++
++#define SWOOLE_BUFFER_READ_API_VERSION 1
++#ifdef PHP_WIN32
++# if defined(SWOOLE_BUFFER_C_API_STATIC)
++#  define SWOOLE_BUFFER_C_API
++# elif defined(SWOOLE_BUFFER_C_API_BUILD)
++#  define SWOOLE_BUFFER_C_API __declspec(dllexport)
++# else
++#  define SWOOLE_BUFFER_C_API __declspec(dllimport)
++# endif
++#elif defined(__GNUC__) && __GNUC__ >= 4
++# define SWOOLE_BUFFER_C_API __attribute__((visibility("default")))
++#else
++# define SWOOLE_BUFFER_C_API
++#endif
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++typedef struct {
++    zend_object *source;
++    const unsigned char *data;
++    size_t length;
++    size_t capacity;
++    void *token;
++} swoole_buffer_read_view_v1;
++
++typedef struct {
++    uint32_t api_version;
++    size_t struct_size;
++    zend_class_entry *buffer_ce;
++    zend_result (*acquire)(zend_object *source, swoole_buffer_read_view_v1 *view);
++    void (*release)(zend_object *source, void *token);
++} swoole_buffer_read_api_v1;
++
++/* Exact v1 proposal layout. NULL for unsupported version/size or outside the
++ * producer's module lifetime. Table immutable from MINIT through dependent
++ * MSHUTDOWN. Cache once at consumer MINIT, with a required swoole dependency.
++ *
++ * Low-level protocol for trusted native adapters (e.g. a provider registry):
++ * caller MUST pin source before acquire until AFTER release, even on bailout.
++ * acquire checks exact class/handlers before private access, construction,
++ * length <= capacity <= ZEND_LONG_MAX, and absence of receive/another borrow.
++ * SUCCESS fills every field, takes an additional producer reference and blocks
++ * mutations and Fiber switches. FAILURE throws, without acquiring any guard.
++ * release consumes exactly one matching source/token, on the acquiring thread;
++ * no allocation, PHP calls, exceptions or suspension. The caller's pin ensures
++ * dropping the producer reference cannot destroy the object in release.
++ *
++ * All fields/pointers are borrowed until release only; never retain, modify,
++ * free, share across threads, or use after release. No transfer of ownership.
++ * Read operations are request-time only, on live objects owned by the caller.
++ * No coroutine/Fiber suspension or async work is permitted in this interval.
++ * Swoole coroutine switching during a borrow is a fatal contract violation
++ * (bailout before switching); callers MUST release in their zend_catch path.
++ * Invalid/stale release tokens are ignored; they grant no access to bytes.
++ * Tokens are opaque, never dereference them. NULL data is valid for length 0.
++ * The private overflow byte is not part of the view. Request objects and guards
++ * are thread-affine, including ZTS; this is not a cross-thread locking API.
++ */
++SWOOLE_BUFFER_C_API const swoole_buffer_read_api_v1 *swoole_buffer_get_read_api(
++    uint32_t api_version, size_t expected_struct_size);
++SWOOLE_BUFFER_C_API uint32_t swoole_buffer_read_api_version(void);
++
++typedef zend_result (*swoole_buffer_read_handler_v1)(
++    const swoole_buffer_read_view_v1 *view, void *context);
++
++/* Preferred synchronous reader. Pins/acquires, validates offset and length by
++ * subtraction, invokes handler once, releases, then unpins, including exception
++ * and Zend bailout paths. length == SIZE_MAX means the remaining valid bytes.
++ * An empty slice at the end is valid. capacity remains the source capacity;
++ * length/data describe only the requested slice. No payload copy or string.
++ * The callback may reenter PHP synchronously, but cannot release the token,
++ * yield, retain pointers or throw C++ exceptions across the C boundary.
++ * FAILURE always has a pending exception. context remains caller-owned.
++ */
++SWOOLE_BUFFER_C_API zend_result swoole_buffer_with_read_view_v1(
++    zval *source, size_t offset, size_t length,
++    swoole_buffer_read_handler_v1 handler, void *context);
++
++#ifdef __cplusplus
++}
++#endif
++#endif
