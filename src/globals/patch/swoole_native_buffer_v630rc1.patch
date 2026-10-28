@@ -1,0 +1,415 @@
+--- a/config.m4
++++ b/config.m4
+@@ -1319,10 +1319,10 @@
+     fi
+     AC_MSG_RESULT([$swoole_source_dir])
+ 
+-    ext_src_files=$(cd $swoole_source_dir && find ext-src/ -name *.cc)
++    ext_src_files=$(cd $swoole_source_dir && find ext-src/ -name '*.cc' ! -name 'swoole_buffer.cc')
+     lib_src_files=$(cd $swoole_source_dir && find src/ -name *.cc)
+ 
+-    swoole_source_file="${ext_src_files} ${lib_src_files}"
++    swoole_source_file="ext-src/swoole_buffer.cc ${ext_src_files} ${lib_src_files}"
+ 
+     swoole_source_file="$swoole_source_file \
+         thirdparty/php/sockets/multicast.cc \
+--- a/config.w32
++++ b/config.w32
+@@ -32,6 +32,7 @@
+ 	// Add ext-src files
+ 	swoole_source_files += "ext-src\\php_swoole.cc ";
+ 	swoole_source_files += "ext-src\\php_swoole_cxx.cc ";
++	swoole_source_files += "ext-src\\swoole_buffer.cc ";
+ 	swoole_source_files += "ext-src\\swoole_async_coro.cc ";
+ 	swoole_source_files += "ext-src\\swoole_channel_coro.cc ";
+ 	swoole_source_files += "ext-src\\swoole_client.cc ";
+--- a/ext-src/php_swoole.cc
++++ b/ext-src/php_swoole.cc
+@@ -14,6 +14,7 @@
+   +----------------------------------------------------------------------+
+ */
+ #include "php_swoole_cxx.h"
++#include "php_swoole_buffer.h"
+ #include "php_swoole_library.h"
+ #ifndef _WIN32
+ #include "php_swoole_process.h"
+@@ -1026,6 +1027,7 @@
+     php_swoole_channel_coro_minit(module_number);
+     php_swoole_runtime_minit(module_number);
+     // client
++    php_swoole_buffer_minit(module_number);
+     php_swoole_socket_coro_minit(module_number);
+ #ifndef _WIN32
+     php_swoole_client_minit(module_number);
+--- /dev/null
++++ b/ext-src/php_swoole_buffer.h
+@@ -0,0 +1,34 @@
++/*
++ +----------------------------------------------------------------------+
++ | Swoole                                                               |
++ +----------------------------------------------------------------------+
++ | Copyright (c) 2012-2018 The Swoole Group                             |
++ +----------------------------------------------------------------------+
++ | This source file is subject to version 2.0 of the Apache license,    |
++ | that is bundled with this package in the file LICENSE, and is        |
++ | available through the world-wide-web at the following url:           |
++ | http://www.apache.org/licenses/LICENSE-2.0.html                      |
++ | If you did not receive a copy of the Apache2.0 license and are unable|
++ | to obtain it through the world-wide-web, please send a note to       |
++ | license@swoole.com so we can mail you a copy immediately.            |
++ +----------------------------------------------------------------------+
++ | Author: Tianfeng Han  <rango@swoole.com>                             |
++ +----------------------------------------------------------------------+
++ */
++
++#pragma once
++
++#include "php_swoole_private.h"
++
++// Internal PHP object storage. No pointer is exposed to userland.
++struct SwooleBufferObject {
++    char *data;
++    size_t capacity;
++    size_t length;
++    bool receiving;
++    zend_object std;
++};
++
++extern zend_class_entry *swoole_buffer_ce;
++void php_swoole_buffer_minit(int module_number);
++SwooleBufferObject *php_swoole_buffer_get(zval *zbuffer);
+--- /dev/null
++++ b/ext-src/stubs/php_swoole_buffer.stub.php
+@@ -0,0 +1,10 @@
++<?php
++namespace Swoole {
++    final class Buffer {
++        public function __construct(int $capacity) {}
++        public function getCapacity(): int {}
++        public function getLength(): int {}
++        public function clear(): void {}
++        public function toString(): string {}
++    }
++}
+--- /dev/null
++++ b/ext-src/stubs/php_swoole_buffer_arginfo.h
+@@ -0,0 +1,17 @@
++/* This is a generated file, edit the .stub.php file instead.
++ * Stub hash: 2107aa796f72a29a4c73bed156ee7602279d1b45 */
++
++ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Swoole_Buffer___construct, 0, 0, 1)
++    ZEND_ARG_TYPE_INFO(0, capacity, IS_LONG, 0)
++ZEND_END_ARG_INFO()
++
++ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Swoole_Buffer_getCapacity, 0, 0, IS_LONG, 0)
++ZEND_END_ARG_INFO()
++
++#define arginfo_class_Swoole_Buffer_getLength arginfo_class_Swoole_Buffer_getCapacity
++
++ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Swoole_Buffer_clear, 0, 0, IS_VOID, 0)
++ZEND_END_ARG_INFO()
++
++ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_Swoole_Buffer_toString, 0, 0, IS_STRING, 0)
++ZEND_END_ARG_INFO()
+--- a/ext-src/stubs/php_swoole_socket_coro.stub.php
++++ b/ext-src/stubs/php_swoole_socket_coro.stub.php
+@@ -22,6 +22,7 @@
+         public function recvLine(int $length = 65536, float $timeout = 0): string|false {}
+         public function recvWithBuffer(int $length = 65536, float $timeout = 0): string|false {}
+         public function recvfrom(mixed &$peername, float $timeout = 0): string|false {}
++        public function recvfromInto(\Swoole\Buffer $buffer, mixed &$peername, float $timeout = 0): int|false {}
+         public function sendto(string $addr, int $port, string $data): int|false {}
+         public function getOption(int $level, int $opt_name): mixed {}
+         public function setOption(int $level, int $opt_name, mixed $opt_value): bool {}
+--- a/ext-src/stubs/php_swoole_socket_coro_arginfo.h
++++ b/ext-src/stubs/php_swoole_socket_coro_arginfo.h
+@@ -1,5 +1,5 @@
+ /* This is a generated file, edit the .stub.php file instead.
+- * Stub hash: 7d2b3ea5b4d1613340006de2fa67d2a0bf314f09 */
++ * Stub hash: b3055a43f07b9bbf3e23554ac32e27d6c4b7727c */
+ 
+ ZEND_BEGIN_ARG_INFO_EX(arginfo_class_Swoole_Coroutine_Socket___construct, 0, 0, 2)
+ 	ZEND_ARG_TYPE_INFO(0, domain, IS_LONG, 0)
+@@ -87,6 +87,12 @@
+ 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, timeout, IS_DOUBLE, 0, "0")
+ ZEND_END_ARG_INFO()
+ 
++ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_class_Swoole_Coroutine_Socket_recvfromInto, 0, 2, MAY_BE_LONG|MAY_BE_FALSE)
++    ZEND_ARG_OBJ_INFO(0, buffer, Swoole\\Buffer, 0)
++    ZEND_ARG_TYPE_INFO(1, peername, IS_MIXED, 0)
++    ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, timeout, IS_DOUBLE, 0, "0")
++ZEND_END_ARG_INFO()
++
+ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_MASK_EX(arginfo_class_Swoole_Coroutine_Socket_sendto, 0, 3, MAY_BE_LONG|MAY_BE_FALSE)
+ 	ZEND_ARG_TYPE_INFO(0, addr, IS_STRING, 0)
+ 	ZEND_ARG_TYPE_INFO(0, port, IS_LONG, 0)
+--- /dev/null
++++ b/ext-src/swoole_buffer.cc
+@@ -0,0 +1,161 @@
++/*
++ +----------------------------------------------------------------------+
++ | Swoole                                                               |
++ +----------------------------------------------------------------------+
++ | Copyright (c) 2012-2018 The Swoole Group                             |
++ +----------------------------------------------------------------------+
++ | This source file is subject to version 2.0 of the Apache license,    |
++ | that is bundled with this package in the file LICENSE, and is        |
++ | available through the world-wide-web at the following url:           |
++ | http://www.apache.org/licenses/LICENSE-2.0.html                      |
++ | If you did not receive a copy of the Apache2.0 license and are unable|
++ | to obtain it through the world-wide-web, please send a note to       |
++ | license@swoole.com so we can mail you a copy immediately.            |
++ +----------------------------------------------------------------------+
++ | Author: Tianfeng Han  <rango@swoole.com>                             |
++ +----------------------------------------------------------------------+
++ */
++
++#include "php_swoole_buffer.h"
++
++#include <cstdlib>
++#include <limits>
++
++BEGIN_EXTERN_C()
++#include "stubs/php_swoole_buffer_arginfo.h"
++END_EXTERN_C()
++
++zend_class_entry *swoole_buffer_ce;
++static zend_object_handlers swoole_buffer_handlers;
++
++static SwooleBufferObject *buffer_fetch_object(zend_object *object) {
++    return reinterpret_cast<SwooleBufferObject *>(reinterpret_cast<char *>(object) -
++                                                  XtOffsetOf(SwooleBufferObject, std));
++}
++
++SwooleBufferObject *php_swoole_buffer_get(zval *zbuffer) {
++    auto *buffer = buffer_fetch_object(Z_OBJ_P(zbuffer));
++    if (UNEXPECTED(buffer->data == nullptr)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer must be constructed before use");
++        return nullptr;
++    }
++    return buffer;
++}
++
++static zend_object *buffer_create_object(zend_class_entry *ce) {
++    auto *buffer = static_cast<SwooleBufferObject *>(zend_object_alloc(sizeof(SwooleBufferObject), ce));
++    buffer->data = nullptr;
++    buffer->capacity = 0;
++    buffer->length = 0;
++    buffer->receiving = false;
++    zend_object_std_init(&buffer->std, ce);
++    object_properties_init(&buffer->std, ce);
++    buffer->std.handlers = &swoole_buffer_handlers;
++    return &buffer->std;
++}
++
++static void buffer_free_object(zend_object *object) {
++    auto *buffer = buffer_fetch_object(object);
++    std::free(buffer->data);
++    buffer->data = nullptr;
++    buffer->capacity = 0;
++    buffer->length = 0;
++    zend_object_std_dtor(object);
++}
++
++SW_EXTERN_C_BEGIN
++static PHP_METHOD(swoole_buffer, __construct) {
++    zend_long capacity;
++    ZEND_PARSE_PARAMETERS_START(1, 1)
++    Z_PARAM_LONG(capacity)
++    ZEND_PARSE_PARAMETERS_END();
++
++    auto *buffer = buffer_fetch_object(Z_OBJ_P(ZEND_THIS));
++    if (UNEXPECTED(buffer->data != nullptr)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer is already constructed");
++        RETURN_THROWS();
++    }
++    // Reserve one private byte for datagram overflow detection; neither the
++    // allocation nor the recvfrom result may overflow size_t/ssize_t/PHP int.
++    if (capacity <= 0 ||
++        static_cast<zend_ulong>(capacity) >= std::numeric_limits<size_t>::max() ||
++        static_cast<zend_ulong>(capacity) >= static_cast<zend_ulong>(std::numeric_limits<ssize_t>::max()) ||
++        static_cast<zend_ulong>(capacity) > ZSTR_MAX_LEN) {
++        zend_argument_value_error(1, "must be a positive capacity with room for one overflow byte");
++        RETURN_THROWS();
++    }
++
++    auto *data = static_cast<char *>(std::malloc(static_cast<size_t>(capacity) + 1));
++    if (UNEXPECTED(data == nullptr)) {
++        zend_throw_exception(swoole_exception_ce, "Swoole\\Buffer allocation failed", ENOMEM);
++        RETURN_THROWS();
++    }
++    buffer->data = data;
++    buffer->capacity = static_cast<size_t>(capacity);
++}
++
++static PHP_METHOD(swoole_buffer, getCapacity) {
++    ZEND_PARSE_PARAMETERS_NONE();
++    auto *buffer = php_swoole_buffer_get(ZEND_THIS);
++    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    RETURN_LONG(static_cast<zend_long>(buffer->capacity));
++}
++
++static PHP_METHOD(swoole_buffer, getLength) {
++    ZEND_PARSE_PARAMETERS_NONE();
++    auto *buffer = php_swoole_buffer_get(ZEND_THIS);
++    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    RETURN_LONG(static_cast<zend_long>(buffer->length));
++}
++
++static PHP_METHOD(swoole_buffer, clear) {
++    ZEND_PARSE_PARAMETERS_NONE();
++    auto *buffer = php_swoole_buffer_get(ZEND_THIS);
++    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    if (UNEXPECTED(buffer->receiving)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive");
++        RETURN_THROWS();
++    }
++    buffer->length = 0;
++    RETURN_NULL();
++}
++
++static PHP_METHOD(swoole_buffer, toString) {
++    ZEND_PARSE_PARAMETERS_NONE();
++    auto *buffer = php_swoole_buffer_get(ZEND_THIS);
++    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    if (UNEXPECTED(buffer->receiving)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive");
++        RETURN_THROWS();
++    }
++    RETURN_STRINGL(buffer->data, buffer->length);
++}
++SW_EXTERN_C_END
++
++static const zend_function_entry swoole_buffer_methods[] = {
++    PHP_ME(swoole_buffer, __construct, arginfo_class_Swoole_Buffer___construct, ZEND_ACC_PUBLIC)
++    PHP_ME(swoole_buffer, getCapacity, arginfo_class_Swoole_Buffer_getCapacity, ZEND_ACC_PUBLIC)
++    PHP_ME(swoole_buffer, getLength, arginfo_class_Swoole_Buffer_getLength, ZEND_ACC_PUBLIC)
++    PHP_ME(swoole_buffer, clear, arginfo_class_Swoole_Buffer_clear, ZEND_ACC_PUBLIC)
++    PHP_ME(swoole_buffer, toString, arginfo_class_Swoole_Buffer_toString, ZEND_ACC_PUBLIC)
++    PHP_FE_END
++};
++
++void php_swoole_buffer_minit(int module_number) {
++    SW_INIT_CLASS_ENTRY_STD(swoole_buffer, "Swoole\\Buffer", swoole_buffer_methods);
++    swoole_buffer_ce->ce_flags |= ZEND_ACC_FINAL;
++#ifdef ZEND_ACC_NO_DYNAMIC_PROPERTIES
++    swoole_buffer_ce->ce_flags |= ZEND_ACC_NO_DYNAMIC_PROPERTIES;
++#endif
++    SW_SET_CLASS_NOT_SERIALIZABLE(swoole_buffer);
++    SW_SET_CLASS_CLONEABLE(swoole_buffer, sw_zend_class_clone_deny);
++    SW_SET_CLASS_CUSTOM_OBJECT(swoole_buffer, buffer_create_object, buffer_free_object, SwooleBufferObject, std);
++}
+--- a/ext-src/swoole_socket_coro.cc
++++ b/ext-src/swoole_socket_coro.cc
+@@ -17,6 +17,7 @@
+  */
+ 
+ #include "php_swoole_cxx.h"
++#include "php_swoole_buffer.h"
+ #include "php_swoole_thread.h"
+ 
+ #include "swoole_string.h"
+@@ -75,6 +76,7 @@
+ static PHP_METHOD(swoole_socket_coro, recvLine);
+ static PHP_METHOD(swoole_socket_coro, recvWithBuffer);
+ static PHP_METHOD(swoole_socket_coro, recvfrom);
++static PHP_METHOD(swoole_socket_coro, recvfromInto);
+ static PHP_METHOD(swoole_socket_coro, sendto);
+ static PHP_METHOD(swoole_socket_coro, getOption);
+ static PHP_METHOD(swoole_socket_coro, setOption);
+@@ -113,6 +115,7 @@
+     PHP_ME(swoole_socket_coro, sendFile,       arginfo_class_Swoole_Coroutine_Socket_sendFile,       ZEND_ACC_PUBLIC)
+     PHP_ME(swoole_socket_coro, sendAll,        arginfo_class_Swoole_Coroutine_Socket_sendAll,        ZEND_ACC_PUBLIC)
+     PHP_ME(swoole_socket_coro, recvfrom,       arginfo_class_Swoole_Coroutine_Socket_recvfrom,       ZEND_ACC_PUBLIC)
++    PHP_ME(swoole_socket_coro, recvfromInto,   arginfo_class_Swoole_Coroutine_Socket_recvfromInto,   ZEND_ACC_PUBLIC)
+     PHP_ME(swoole_socket_coro, sendto,         arginfo_class_Swoole_Coroutine_Socket_sendto,         ZEND_ACC_PUBLIC)
+     PHP_ME(swoole_socket_coro, getOption,      arginfo_class_Swoole_Coroutine_Socket_getOption,      ZEND_ACC_PUBLIC)
+     PHP_ME(swoole_socket_coro, setProtocol,    arginfo_class_Swoole_Coroutine_Socket_setProtocol,    ZEND_ACC_PUBLIC)
+@@ -1820,6 +1823,79 @@
+     }
+ }
+ 
++static PHP_METHOD(swoole_socket_coro, recvfromInto) {
++    zval *zbuffer, *peername;
++    double timeout = 0;
++
++    ZEND_PARSE_PARAMETERS_START(2, 3)
++    Z_PARAM_OBJECT_OF_CLASS(zbuffer, swoole_buffer_ce)
++    Z_PARAM_ZVAL(peername)
++    Z_PARAM_OPTIONAL
++    Z_PARAM_DOUBLE(timeout)
++    ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
++
++    swoole_get_socket_coro(sock, ZEND_THIS);
++    auto *buffer = php_swoole_buffer_get(zbuffer);
++    if (UNEXPECTED(buffer == nullptr)) {
++        RETURN_THROWS();
++    }
++    if (UNEXPECTED(buffer->receiving)) {
++        zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive");
++        RETURN_THROWS();
++    }
++    if (UNEXPECTED(!sock->socket->get_socket()->is_dgram())) {
++        sock->socket->set_err(EPROTONOSUPPORT);
++        socket_coro_sync_properties(ZEND_THIS, sock);
++        RETURN_FALSE;
++    }
++
++    // Own both objects independently of PHP variables/references throughout the
++    // yield and peer assignment. The guard also releases the buffer on errors.
++    struct ReceiveGuard {
++        SwooleBufferObject *buffer;
++        zend_object *socket_object;
++        ReceiveGuard(SwooleBufferObject *buffer, zend_object *socket_object)
++            : buffer(buffer), socket_object(socket_object) {
++            GC_ADDREF(&buffer->std);
++            GC_ADDREF(socket_object);
++            buffer->receiving = true;
++            buffer->length = 0;
++        }
++        ~ReceiveGuard() {
++            buffer->receiving = false;
++            OBJ_RELEASE(socket_object);
++            OBJ_RELEASE(&buffer->std);
++        }
++    } guard(buffer, Z_OBJ_P(ZEND_THIS));
++
++    SocketImpl::TimeoutSetter ts(sock->socket, timeout, SW_TIMEOUT_READ);
++    // A private extra byte distinguishes an exact fit from every oversized
++    // datagram on recvfrom implementations that return only the copied length.
++    // Use Swoole's existing receive, reactor, cancellation and concurrency checks.
++    ssize_t bytes = sock->socket->recvfrom(buffer->data, buffer->capacity + 1);
++    if (bytes >= 0 && static_cast<size_t>(bytes) > buffer->capacity) {
++        sock->socket->set_err(EMSGSIZE);
++        bytes = -1;
++    }
++    socket_coro_sync_properties(ZEND_THIS, sock);
++    if (bytes < 0) {
++        RETURN_FALSE;
++    }
++
++    // Only peer metadata uses PHP strings; the payload stays in native storage.
++    // Zero-byte UDP datagrams are successful receives and still have a sender.
++    zval peer;
++    array_init(&peer);
++    add_assoc_string(&peer, "address", (char *) sock->socket->get_addr());
++    add_assoc_long(&peer, "port", sock->socket->get_port());
++    ZEND_TRY_ASSIGN_VALUE(peername, &peer);
++    if (UNEXPECTED(EG(exception))) {
++        RETURN_THROWS();
++    }
++    buffer->length = static_cast<size_t>(bytes);
++    RETURN_LONG(static_cast<zend_long>(bytes));
++}
++
+ static PHP_METHOD(swoole_socket_coro, sendto) {
+     char *data;
+     size_t l_data;

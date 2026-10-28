@@ -288,7 +288,7 @@ function generateExtensionStubs(string $name, string $root): void
 }
 
 $arguments = array_slice($argv, 1);
-$extensions = $arguments === [] ? ['bcg729', 'opus', 'psampler'] : explode(',', implode(',', $arguments));
+$extensions = $arguments === [] ? ['bcg729', 'swoole', 'opus', 'psampler'] : explode(',', implode(',', $arguments));
 $extensions = array_values(array_unique(array_filter(array_map('trim', $extensions), 'strlen')));
 $failed = false;
 foreach ($extensions as $extension) {

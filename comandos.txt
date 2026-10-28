@@ -60,9 +60,9 @@ bin/spc download libbcg729 &&
 bin/spc download libgsm &&
 bin/spc download swoole &&
 bin/spc download psampler &&
-bin/spc build --build-cli "bcg729" --enable-zts --debug
+bin/spc build --build-cli "swoole" --enable-zts --debug
 
-bin/spc build --build-cli "bcg729" --debug
+bin/spc build --build-cli "swoole" --debug
 bin/spc download psampler
 
 sudo rm -rf source/*

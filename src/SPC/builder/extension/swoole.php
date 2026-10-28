@@ -7,11 +7,17 @@ namespace SPC\builder\extension;
 use SPC\builder\Extension;
 use SPC\builder\macos\MacOSBuilder;
 use SPC\store\FileSystem;
+use SPC\store\SwooleBufferPatcher;
 use SPC\util\CustomExt;
 
 #[CustomExt('swoole')]
 class swoole extends Extension
 {
+    public function patchBeforeBuildconf(): bool
+    {
+        return SwooleBufferPatcher::apply(SOURCE_PATH . '/php-src/ext/swoole');
+    }
+
     public function patchBeforeMake(): bool
     {
         if (!$this->builder instanceof MacOSBuilder) {
