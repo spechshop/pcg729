@@ -1,0 +1,13 @@
+10 s 48000->8000: 80000 samples OK
+10 s 44100->8000: 80000 samples OK
+10 s 8000->48000: 480000 samples OK
+10 s 8000->44100: 441000 samples OK
+10 s 48000->44100: 441000 samples OK
+10 s 44100->48000: 480000 samples OK
+60 s 48000->8000: 480000 samples OK
+60 s 44100->8000: 480000 samples OK
+60 s 8000->48000: 2880000 samples OK
+60 s 8000->44100: 2646000 samples OK
+60 s 48000->44100: 2646000 samples OK
+60 s 44100->48000: 2880000 samples OK
+stress 160000 interleaved frames, reset, flush, destroy: OK; memory 4194304 -> 6291456; RSS 30688 -> 32988 KiB; last rounds 32988,32988,32988,32988,32988 KiB

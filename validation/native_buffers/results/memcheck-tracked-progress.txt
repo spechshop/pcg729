@@ -1,0 +1,9 @@
+swoole-bailout exit 255 errors 0 allocs 82486
+swoole-coroutine_create exit 255 errors 0 allocs 82467
+swoole-coroutine_suspend exit 97 errors 2 allocs 82996
+fatal_control exit 255 errors 0 allocs 82274
+binary_bailout exit 255 errors 0 allocs 82488
+peer_bailout exit 97 errors 2 allocs 83054
+pcm_bailout exit 255 errors 0 allocs 82473
+alloc-recvfrom exit 0 errors 0 allocs 218929
+alloc-recvfromInto exit 0 errors 0 allocs 204332

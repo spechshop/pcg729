@@ -14,7 +14,7 @@ Swoole\Coroutine\run(function () {
     ensure(swoole_buffer_test_read($buffer) === [
         'length' => 0, 'capacity' => 2048, 'checksum' => 0, 'fiber_blocked' => true,
     ]);
-    foreach ([0, 160, 1024, 2048, 160] as $size) {
+    foreach ([0, 160, 172, 1024, 2048, 160] as $size) {
         $packet = substr(str_repeat("\0\xffabc\0\x80", 300), 0, $size);
         receive_packet($receiver, $sender, $port, $buffer, $packet);
         $view = swoole_buffer_test_read($buffer);
@@ -47,6 +47,7 @@ Swoole\Coroutine\run(function () {
 --EXPECT--
 read 0 OK
 read 160 OK
+read 172 OK
 read 1024 OK
 read 2048 OK
 read 160 OK

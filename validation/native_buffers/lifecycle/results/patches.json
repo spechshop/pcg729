@@ -1,0 +1,174 @@
+[
+  {
+    "case": "upstream-v1-partial",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_buffer.cc\n"
+  },
+  {
+    "case": "upstream-v1",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file config.m4\npatching file config.w32\npatching file ext-src/php_swoole.cc\npatching file ext-src/php_swoole_buffer.h\npatching file ext-src/swoole_buffer.cc\npatching file ext-src/swoole_socket_coro.cc\npatching file ext-src/swoole_coroutine.cc\npatching file swoole_buffer_c_api.h\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream-v1",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream-v2-partial",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_buffer.cc\n"
+  },
+  {
+    "case": "upstream-v2",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file ext-src/swoole_socket_coro.cc\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream-v2",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream-mixed-valid-hashes",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch is partially applied; restore the Swoole source before building\n"
+  },
+  {
+    "case": "upstream",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file config.m4\npatching file config.w32\npatching file ext-src/php_swoole.cc\npatching file ext-src/php_swoole_buffer.h\npatching file ext-src/stubs/php_swoole_buffer.stub.php\npatching file ext-src/stubs/php_swoole_buffer_arginfo.h\npatching file ext-src/stubs/php_swoole_socket_coro.stub.php\npatching file ext-src/stubs/php_swoole_socket_coro_arginfo.h\npatching file ext-src/swoole_buffer.cc\npatching file ext-src/swoole_socket_coro.cc\npatching file ext-src/swoole_coroutine.cc\npatching file swoole_buffer_c_api.h\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "upstream-tampered-swoole_socket_coro",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_socket_coro.cc\n"
+  },
+  {
+    "case": "upstream-tampered-socket",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible src/coroutine/socket.cc\n"
+  },
+  {
+    "case": "spc-hook-v1-partial",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_buffer.cc\n"
+  },
+  {
+    "case": "spc-hook-v1",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file config.m4\nHunk #1 succeeded at 1561 (offset 1 line).\npatching file config.w32\npatching file ext-src/php_swoole.cc\npatching file ext-src/php_swoole_buffer.h\npatching file ext-src/swoole_buffer.cc\npatching file ext-src/swoole_socket_coro.cc\npatching file ext-src/swoole_coroutine.cc\npatching file swoole_buffer_c_api.h\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook-v1",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook-v2-partial",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_buffer.cc\n"
+  },
+  {
+    "case": "spc-hook-v2",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file ext-src/swoole_socket_coro.cc\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook-v2",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook-mixed-valid-hashes",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch is partially applied; restore the Swoole source before building\n"
+  },
+  {
+    "case": "spc-hook",
+    "expected": "APPLIED",
+    "exit": 0,
+    "stdout": "patching file config.m4\nHunk #3 succeeded at 1561 (offset 1 line).\npatching file config.w32\npatching file ext-src/php_swoole.cc\npatching file ext-src/php_swoole_buffer.h\npatching file ext-src/stubs/php_swoole_buffer.stub.php\npatching file ext-src/stubs/php_swoole_buffer_arginfo.h\npatching file ext-src/stubs/php_swoole_socket_coro.stub.php\npatching file ext-src/stubs/php_swoole_socket_coro_arginfo.h\npatching file ext-src/swoole_buffer.cc\npatching file ext-src/swoole_socket_coro.cc\npatching file ext-src/swoole_coroutine.cc\npatching file swoole_buffer_c_api.h\nAPPLIED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook",
+    "expected": "UNCHANGED",
+    "exit": 0,
+    "stdout": "UNCHANGED\n",
+    "stderr": ""
+  },
+  {
+    "case": "spc-hook-tampered-swoole_socket_coro",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible ext-src/swoole_socket_coro.cc\n"
+  },
+  {
+    "case": "spc-hook-tampered-socket",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "SPC\\exception\\RuntimeException: Swoole Buffer patch requires swoole/swoole-src v6.3.0-rc1 (6.3.0RC1): incompatible src/coroutine/socket.cc\n"
+  },
+  {
+    "case": "integrity-swoole_native_buffer_v630rc1.patch",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "Swoole Buffer patch is missing or differs from its compatibility manifest\n"
+  },
+  {
+    "case": "integrity-swoole_native_buffer_v630rc1_read_api_v1_upgrade.patch",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "Swoole Buffer upgrade patch differs from its compatibility manifest\n"
+  },
+  {
+    "case": "integrity-swoole_native_buffer_v630rc1_lifecycle_upgrade.patch",
+    "expected": "REJECT",
+    "exit": 1,
+    "stdout": "Swoole Buffer upgrade patch differs from its compatibility manifest\n"
+  }
+]

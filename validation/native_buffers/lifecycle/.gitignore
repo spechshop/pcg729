@@ -1,0 +1,9 @@
+# Disposable source copies, build intermediates and executables
+/baseline/
+/modules/
+/php-before
+/php-after
+/php-contract
+/php-optimized
+
+# results/ contains versioned evidence referenced by REPORT.md

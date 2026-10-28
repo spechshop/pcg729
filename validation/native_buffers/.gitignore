@@ -1,0 +1,17 @@
+# Disposable executables and build intermediates
+/modules/
+/php-fixtures
+/php-contract
+/php-no-swoole
+/udp_sender
+
+# PHPT runner outputs; keep test sources and utility scripts visible
+/*.diff
+/*.out
+/*.exp
+/pcm_handler_bailout.sh
+/udp_peer_bailout.sh
+/pcm_handler_bailout.php
+/udp_peer_bailout.php
+
+# results/ contains versioned evidence referenced by REPORT.md

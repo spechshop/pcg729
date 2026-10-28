@@ -1,0 +1,41 @@
+
+Fatal error: recvfromInto peer bailout in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc on line 22
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(22): trigger_error('recvfromInto pe...', 256)
+#1 [internal function]: RecvIntoPeer->__destruct()
+#2 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(60): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), NULL, 0.125)
+#3 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(74): {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc:56}()
+#4 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/zts_bailout.php(12): require('/home/lotus/CLi...')
+#5 {main}
+recvfromInto guard, pins and timeout OK; fatal frame refs match PHP control
+
+Fatal error: recvfromInto peer bailout in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc on line 22
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(22): trigger_error('recvfromInto pe...', 256)
+#1 [internal function]: RecvIntoPeer->__destruct()
+#2 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(60): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), Array, 0.125)
+#3 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(74): {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc:56}()
+#4 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/zts_bailout.php(12): require('/home/lotus/CLi...')
+#5 {main}
+recvfromInto guard, pins and timeout OK; fatal frame refs match PHP control
+
+Fatal error: recvfromInto peer bailout in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc on line 22
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(22): trigger_error('recvfromInto pe...', 256)
+#1 [internal function]: RecvIntoPeer->__destruct()
+#2 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(60): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), NULL, 0.125)
+#3 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(74): {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc:56}()
+#4 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/zts_bailout.php(12): require('/home/lotus/CLi...')
+#5 {main}
+recvfromInto guard, pins and timeout OK; fatal frame refs match PHP control
+
+Fatal error: recvfromInto peer bailout in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc on line 22
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(22): trigger_error('recvfromInto pe...', 256)
+#1 [internal function]: RecvIntoPeer->__destruct()
+#2 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(60): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), Array, 0.125)
+#3 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(74): {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc:56}()
+#4 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/zts_bailout.php(12): require('/home/lotus/CLi...')
+#5 {main}
+recvfromInto guard, pins and timeout OK; fatal frame refs match PHP control
+ZTS 4 fatal requests: guards released, ABI usable, fatal status 255 preserved

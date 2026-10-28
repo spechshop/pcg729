@@ -1,0 +1,165 @@
+==2041024== Memcheck, a memory error detector
+==2041024== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2041024== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2041024== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures -n -d log_errors=0 -d display_errors=1 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/validation/native_buffers/binary_bailout.inc
+==2041024== Parent PID: 2040360
+==2041024==
+==2041024== Warning: invalid file descriptor -1 in syscall close()
+==2041024==
+==2041024== HEAP SUMMARY:
+==2041024==     in use at exit: 104,644 bytes in 2,187 blocks
+==2041024==   total heap usage: 82,480 allocs, 80,293 frees, 18,549,862 bytes allocated
+==2041024==
+==2041024== 8 bytes in 1 blocks are definitely lost in loss record 7 of 656
+==2041024==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x1189E8B: __zend_malloc (zend_alloc.c:3543)
+==2041024==    by 0x1251B6D: init_op_array (zend_opcode.c:55)
+==2041024==    by 0x11B29A4: zend_compile_func_decl_ex (zend_compile.c:8459)
+==2041024==    by 0x11B7874: zend_compile_expr_inner (zend_compile.c:11929)
+==2041024==    by 0x11B7874: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11BC309: zend_compile_args (zend_compile.c:3866)
+==2041024==    by 0x11BC309: zend_compile_call_common (zend_compile.c:3975)
+==2041024==    by 0x11BB874: zend_compile_call (zend_compile.c:5235)
+==2041024==    by 0x11BB874: zend_compile_var_inner (zend_compile.c:11982)
+==2041024==    by 0x11BB874: zend_compile_var (zend_compile.c:12013)
+==2041024==    by 0x11B5A7D: zend_compile_expr_inner (zend_compile.c:11832)
+==2041024==    by 0x11B5A7D: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11B27AA: zend_compile_stmt (zend_compile.c:11793)
+==2041024==    by 0x11BD04E: zend_compile_top_stmt (zend_compile.c:11677)
+==2041024==    by 0x11BCFBD: zend_compile_top_stmt (zend_compile.c:11663)
+==2041024==    by 0x12391CE: zend_compile (zend_language_scanner.c:623)
+==2041024==
+==2041024== 16 bytes in 1 blocks are definitely lost in loss record 27 of 656
+==2041024==    at 0x54EBB80: realloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x118A036: __zend_realloc (zend_alloc.c:3562)
+==2041024==    by 0x1252F26: pass_two (zend_opcode.c:1103)
+==2041024==    by 0x11B423E: zend_compile_func_decl_ex (zend_compile.c:8620)
+==2041024==    by 0x11B7874: zend_compile_expr_inner (zend_compile.c:11929)
+==2041024==    by 0x11B7874: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11BC309: zend_compile_args (zend_compile.c:3866)
+==2041024==    by 0x11BC309: zend_compile_call_common (zend_compile.c:3975)
+==2041024==    by 0x11BB874: zend_compile_call (zend_compile.c:5235)
+==2041024==    by 0x11BB874: zend_compile_var_inner (zend_compile.c:11982)
+==2041024==    by 0x11BB874: zend_compile_var (zend_compile.c:12013)
+==2041024==    by 0x11B5A7D: zend_compile_expr_inner (zend_compile.c:11832)
+==2041024==    by 0x11B5A7D: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11B27AA: zend_compile_stmt (zend_compile.c:11793)
+==2041024==    by 0x11BD04E: zend_compile_top_stmt (zend_compile.c:11677)
+==2041024==    by 0x11BCFBD: zend_compile_top_stmt (zend_compile.c:11663)
+==2041024==    by 0x12391CE: zend_compile (zend_language_scanner.c:623)
+==2041024==
+==2041024== 88 bytes in 1 blocks are definitely lost in loss record 576 of 656
+==2041024==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x1189E8B: __zend_malloc (zend_alloc.c:3543)
+==2041024==    by 0x12684C7: zend_object_alloc (zend_objects_API.h:94)
+==2041024==    by 0x12684C7: test_create (psampler_binary_test.c:35)
+==2041024==    by 0x1192C9B: _object_and_properties_init (zend_API.c:1862)
+==2041024==    by 0x1192C9B: object_init_ex (zend_API.c:1876)
+==2041024==    by 0x11E1073: ZEND_NEW_SPEC_CONST_UNUSED_HANDLER (zend_vm_execute.h:11297)
+==2041024==    by 0x120EFAE: execute_ex (zend_vm_execute.h:117635)
+==2041024==    by 0x120A1A4: zend_execute (zend_vm_execute.h:121974)
+==2041024==    by 0x1266E9A: zend_execute_script (zend.c:1981)
+==2041024==    by 0x1139567: php_execute_script_ex (main.c:2642)
+==2041024==    by 0x126A546: do_cli (php_cli.c:951)
+==2041024==    by 0x913123: main (php_cli.c:1374)
+==2041024==
+==2041024== 120 bytes in 1 blocks are definitely lost in loss record 587 of 656
+==2041024==    at 0x54EBB80: realloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x118A036: __zend_realloc (zend_alloc.c:3562)
+==2041024==    by 0x12657EE: zend_string_realloc (zend_string.h:243)
+==2041024==    by 0x12657EE: smart_str_trim_to_size_ex (zend_smart_str.h:95)
+==2041024==    by 0x12657EE: smart_str_extract_ex (zend_smart_str.h:109)
+==2041024==    by 0x12657EE: smart_str_extract (zend_smart_str.h:120)
+==2041024==    by 0x12657EE: zend_vstrpprintf (zend.c:350)
+==2041024==    by 0x12659AF: zend_strpprintf_unchecked (zend.c:372)
+==2041024==    by 0x11B2E5E: zend_begin_func_decl (zend_compile.c:8375)
+==2041024==    by 0x11B2E5E: zend_compile_func_decl_ex (zend_compile.c:8485)
+==2041024==    by 0x11B7874: zend_compile_expr_inner (zend_compile.c:11929)
+==2041024==    by 0x11B7874: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11BC309: zend_compile_args (zend_compile.c:3866)
+==2041024==    by 0x11BC309: zend_compile_call_common (zend_compile.c:3975)
+==2041024==    by 0x11BB874: zend_compile_call (zend_compile.c:5235)
+==2041024==    by 0x11BB874: zend_compile_var_inner (zend_compile.c:11982)
+==2041024==    by 0x11BB874: zend_compile_var (zend_compile.c:12013)
+==2041024==    by 0x11B5A7D: zend_compile_expr_inner (zend_compile.c:11832)
+==2041024==    by 0x11B5A7D: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11B27AA: zend_compile_stmt (zend_compile.c:11793)
+==2041024==    by 0x11BD04E: zend_compile_top_stmt (zend_compile.c:11677)
+==2041024==    by 0x11BCFBD: zend_compile_top_stmt (zend_compile.c:11663)
+==2041024==
+==2041024== 376 (56 direct, 320 indirect) bytes in 1 blocks are definitely lost in loss record 618 of 656
+==2041024==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x1189E8B: __zend_malloc (zend_alloc.c:3543)
+==2041024==    by 0x121D8D4: _zend_new_array_0 (zend_hash.c:283)
+==2041024==    by 0x11B3191: zend_compile_closure_binding (zend_compile.c:8049)
+==2041024==    by 0x11B3191: zend_compile_func_decl_ex (zend_compile.c:8490)
+==2041024==    by 0x11B7874: zend_compile_expr_inner (zend_compile.c:11929)
+==2041024==    by 0x11B7874: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11BC309: zend_compile_args (zend_compile.c:3866)
+==2041024==    by 0x11BC309: zend_compile_call_common (zend_compile.c:3975)
+==2041024==    by 0x11BB874: zend_compile_call (zend_compile.c:5235)
+==2041024==    by 0x11BB874: zend_compile_var_inner (zend_compile.c:11982)
+==2041024==    by 0x11BB874: zend_compile_var (zend_compile.c:12013)
+==2041024==    by 0x11B5A7D: zend_compile_expr_inner (zend_compile.c:11832)
+==2041024==    by 0x11B5A7D: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11B27AA: zend_compile_stmt (zend_compile.c:11793)
+==2041024==    by 0x11BD04E: zend_compile_top_stmt (zend_compile.c:11677)
+==2041024==    by 0x11BCFBD: zend_compile_top_stmt (zend_compile.c:11663)
+==2041024==    by 0x12391CE: zend_compile (zend_language_scanner.c:623)
+==2041024==
+==2041024== 736 (384 direct, 352 indirect) bytes in 1 blocks are definitely lost in loss record 628 of 656
+==2041024==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x1189E8B: __zend_malloc (zend_alloc.c:3543)
+==2041024==    by 0x11A6B82: zend_closure_new (zend_closures.c:564)
+==2041024==    by 0x1192C9B: _object_and_properties_init (zend_API.c:1862)
+==2041024==    by 0x1192C9B: object_init_ex (zend_API.c:1876)
+==2041024==    by 0x11A6C68: zend_create_closure_ex (zend_closures.c:758)
+==2041024==    by 0x11D997F: ZEND_DECLARE_LAMBDA_FUNCTION_SPEC_CONST_HANDLER (zend_vm_execute.h:5921)
+==2041024==    by 0x120DFDC: execute_ex (zend_vm_execute.h:117045)
+==2041024==    by 0x120A1A4: zend_execute (zend_vm_execute.h:121974)
+==2041024==    by 0x1266E9A: zend_execute_script (zend.c:1981)
+==2041024==    by 0x1139567: php_execute_script_ex (main.c:2642)
+==2041024==    by 0x126A546: do_cli (php_cli.c:951)
+==2041024==    by 0x913123: main (php_cli.c:1374)
+==2041024==
+==2041024== 1,336 (1,120 direct, 216 indirect) bytes in 1 blocks are definitely lost in loss record 645 of 656
+==2041024==    at 0x54EBB80: realloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x118A036: __zend_realloc (zend_alloc.c:3562)
+==2041024==    by 0x1252F5D: pass_two (zend_opcode.c:1117)
+==2041024==    by 0x11B423E: zend_compile_func_decl_ex (zend_compile.c:8620)
+==2041024==    by 0x11B7874: zend_compile_expr_inner (zend_compile.c:11929)
+==2041024==    by 0x11B7874: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11BC309: zend_compile_args (zend_compile.c:3866)
+==2041024==    by 0x11BC309: zend_compile_call_common (zend_compile.c:3975)
+==2041024==    by 0x11BB874: zend_compile_call (zend_compile.c:5235)
+==2041024==    by 0x11BB874: zend_compile_var_inner (zend_compile.c:11982)
+==2041024==    by 0x11BB874: zend_compile_var (zend_compile.c:12013)
+==2041024==    by 0x11B5A7D: zend_compile_expr_inner (zend_compile.c:11832)
+==2041024==    by 0x11B5A7D: zend_compile_expr (zend_compile.c:11951)
+==2041024==    by 0x11B27AA: zend_compile_stmt (zend_compile.c:11793)
+==2041024==    by 0x11BD04E: zend_compile_top_stmt (zend_compile.c:11677)
+==2041024==    by 0x11BCFBD: zend_compile_top_stmt (zend_compile.c:11663)
+==2041024==    by 0x12391CE: zend_compile (zend_language_scanner.c:623)
+==2041024==
+==2041024== 1,692 (256 direct, 1,436 indirect) bytes in 1 blocks are definitely lost in loss record 646 of 656
+==2041024==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041024==    by 0x1189E8B: __zend_malloc (zend_alloc.c:3543)
+==2041024==    by 0x1239141: zend_compile (zend_language_scanner.c:610)
+==2041024==    by 0x123AB04: compile_file (zend_language_scanner.c:663)
+==2041024==    by 0xC764FD: phar_compile_file (phar.c:3305)
+==2041024==    by 0x1266E4E: zend_execute_script (zend.c:1974)
+==2041024==    by 0x1139567: php_execute_script_ex (main.c:2642)
+==2041024==    by 0x126A546: do_cli (php_cli.c:951)
+==2041024==    by 0x913123: main (php_cli.c:1374)
+==2041024==
+==2041024== LEAK SUMMARY:
+==2041024==    definitely lost: 2,048 bytes in 8 blocks
+==2041024==    indirectly lost: 2,324 bytes in 13 blocks
+==2041024==      possibly lost: 0 bytes in 0 blocks
+==2041024==    still reachable: 100,272 bytes in 2,166 blocks
+==2041024==         suppressed: 0 bytes in 0 blocks
+==2041024== Reachable blocks (those to which a pointer was found) are not shown.
+==2041024== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2041024==
+==2041024== For lists of detected and suppressed errors, rerun with: -s
+==2041024== ERROR SUMMARY: 21 errors from 21 contexts (suppressed: 0 from 0)

@@ -1,0 +1,95 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.10
+ZEND_VERSION: 4.5.10
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  :
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/36 [tests/native_swoole_buffer/bailout.phpt]
+PASS Native reader releases borrow and references on Zend bailout (isolated process) [tests/native_swoole_buffer/bailout.phpt]
+TEST 2/36 [tests/native_swoole_buffer/coroutine_create.phpt]
+PASS Borrow callback cannot enter a new Swoole coroutine from the main context [tests/native_swoole_buffer/coroutine_create.phpt]
+TEST 3/36 [tests/native_swoole_buffer/coroutine_suspend.phpt]
+PASS Borrow callback cannot suspend Swoole coroutine; bailout releases native read [tests/native_swoole_buffer/coroutine_suspend.phpt]
+TEST 4/36 [tests/native_swoole_buffer/errors.phpt]
+PASS Buffer native reader validates objects, initialization, ranges and error cleanup [tests/native_swoole_buffer/errors.phpt]
+TEST 5/36 [tests/native_swoole_buffer/guards.phpt]
+PASS Native Buffer borrow rejects clear, constructor, recursive reads and receive before mutation [tests/native_swoole_buffer/guards.phpt]
+TEST 6/36 [tests/native_swoole_buffer/lifetime.phpt]
+PASS Native Buffer pins survive removal of the last PHP owner and release after exceptions [tests/native_swoole_buffer/lifetime.phpt]
+TEST 7/36 [tests/native_swoole_buffer/pending_receive.phpt]
+PASS Native reads reject pending UDP receive and allow timeout/cancellation cleanup [tests/native_swoole_buffer/pending_receive.phpt]
+TEST 8/36 [tests/native_swoole_buffer/psampler_contract.phpt]
+SKIP Optional psampler adapter uses the exact public v1 producer contract [tests/native_swoole_buffer/psampler_contract.phpt] reason: rebuild fixture with --enable-swoole-buffer-test-psampler; do not load psampler_swoole
+TEST 9/36 [tests/native_swoole_buffer/read.phpt]
+PASS Public Buffer C ABI: empty, binary UDP, exact capacity, slices and reuse [tests/native_swoole_buffer/read.phpt]
+TEST 10/36 [/home/lotus/projetos/psampler/tests/binary_provider_guards.phpt]
+PASS Native read blocks ByteBuffer mutations and recursion and releases guards after PHP exceptions [/home/lotus/projetos/psampler/tests/binary_provider_guards.phpt]
+TEST 11/36 [/home/lotus/projetos/psampler/tests/binary_provider_read.phpt]
+PASS Isolated native provider reads borrowed bytes without payload strings and pins source lifetime [/home/lotus/projetos/psampler/tests/binary_provider_read.phpt]
+TEST 12/36 [/home/lotus/projetos/psampler/tests/binary_provider_swoole_guards_future.phpt]
+SKIP FUTURE INTEGRATION: Swoole producer must exclude pending receive and borrowed read mutations [/home/lotus/projetos/psampler/tests/binary_provider_swoole_guards_future.phpt] reason: Required extension missing: psampler_swoole
+TEST 13/36 [/home/lotus/projetos/psampler/tests/binary_provider_validation.phpt]
+PASS Malformed native views fail before touching destination and every acquired view is released [/home/lotus/projetos/psampler/tests/binary_provider_validation.phpt]
+TEST 14/36 [/home/lotus/projetos/psampler/tests/byte_buffer.phpt]
+PASS ByteBuffer supports binary data, wraparound, growth, and bounds checks [/home/lotus/projetos/psampler/tests/byte_buffer.phpt]
+TEST 15/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native.phpt]
+PASS ByteBuffer native append handles empty, binary packets, slices and source reuse [/home/lotus/projetos/psampler/tests/byte_buffer_native.phpt]
+TEST 16/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_errors.phpt]
+PASS Native append rejects unsupported objects and invalid ranges without changing destination [/home/lotus/projetos/psampler/tests/byte_buffer_native_errors.phpt]
+TEST 17/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_lifecycle.phpt]
+PASS Native append retains no source reference or borrowed bytes after return [/home/lotus/projetos/psampler/tests/byte_buffer_native_lifecycle.phpt]
+TEST 18/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_no_swoole.phpt]
+SKIP Native byte infrastructure loads and operates without Swoole [/home/lotus/projetos/psampler/tests/byte_buffer_native_no_swoole.phpt] reason: run in a PHP process without Swoole
+TEST 19/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_ring.phpt]
+PASS Native append preserves two-span source order and destination wraparound and growth [/home/lotus/projetos/psampler/tests/byte_buffer_native_ring.phpt]
+TEST 20/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_swoole_future.phpt]
+SKIP FUTURE INTEGRATION: recvfromInto native append requires public Swoole C API and bridge [/home/lotus/projetos/psampler/tests/byte_buffer_native_swoole_future.phpt] reason: Required extension missing: psampler_swoole
+TEST 21/36 [/home/lotus/projetos/psampler/tests/byte_buffer_native_swoole_unavailable.phpt]
+PASS Swoole Buffer without a registered public C provider is rejected without conversion [/home/lotus/projetos/psampler/tests/byte_buffer_native_swoole_unavailable.phpt]
+TEST 22/36 [/home/lotus/projetos/psampler/tests/byte_buffer_stress.phpt]
+PASS ByteBuffer preserves FIFO order through repeated wraparound and growth [/home/lotus/projetos/psampler/tests/byte_buffer_stress.phpt]
+TEST 23/36 [/home/lotus/projetos/psampler/tests/legacy_api.phpt]
+PASS Legacy Resampler LPCM and stereo helpers remain available [/home/lotus/projetos/psampler/tests/legacy_api.phpt]
+TEST 24/36 [/home/lotus/projetos/psampler/tests/module_info.phpt]
+PASS psampler module info lists every registered class, method and function [/home/lotus/projetos/psampler/tests/module_info.phpt]
+TEST 25/36 [/home/lotus/projetos/psampler/tests/pcm_analyzer.phpt]
+PASS PCMAnalyzer validates PCM16 and isolates consecutive analyses [/home/lotus/projetos/psampler/tests/pcm_analyzer.phpt]
+TEST 26/36 [/home/lotus/projetos/psampler/tests/pcm_buffer.phpt]
+PASS PcmBuffer owns contiguous binary PCM with metadata, growth, clear and destruction [/home/lotus/projetos/psampler/tests/pcm_buffer.phpt]
+TEST 27/36 [/home/lotus/projetos/psampler/tests/pcm_buffer_errors.phpt]
+PASS PcmBuffer rejects invalid rates, channels, incomplete frames and incorrect parameter types [/home/lotus/projetos/psampler/tests/pcm_buffer_errors.phpt]
+TEST 28/36 [/home/lotus/projetos/psampler/tests/pcm_buffer_invoke.phpt]
+PASS PcmBuffer dispatch rejects unavailable operations and validates invoke argument parsing [/home/lotus/projetos/psampler/tests/pcm_buffer_invoke.phpt]
+TEST 29/36 [/home/lotus/projetos/psampler/tests/pcm_buffer_resample.phpt]
+PASS PcmBuffer resampling reuses the legacy DSP for mono and independent stereo channels [/home/lotus/projetos/psampler/tests/pcm_buffer_resample.phpt]
+TEST 30/36 [/home/lotus/projetos/psampler/tests/pcm_buffer_reset.phpt]
+PASS PcmBuffer reset restores metadata, retains storage, validates atomically and returns void [/home/lotus/projetos/psampler/tests/pcm_buffer_reset.phpt]
+TEST 31/36 [/home/lotus/projetos/psampler/tests/pcm_buffer_transforms.phpt]
+PASS PcmBuffer channel transforms mutate and return the same object using shared PCM16LE kernels [/home/lotus/projetos/psampler/tests/pcm_buffer_transforms.phpt]
+TEST 32/36 [/home/lotus/projetos/psampler/tests/pcm_stream_lifecycle.phpt]
+PASS PCM stream clear/reset/flush and invalid inputs remain safe and atomic [/home/lotus/projetos/psampler/tests/pcm_stream_lifecycle.phpt]
+TEST 33/36 [/home/lotus/projetos/psampler/tests/resampler_filter_cache.phpt]
+PASS Resampler shares bounded FIR banks safely across more live rate pairs than the cache limit [/home/lotus/projetos/psampler/tests/resampler_filter_cache.phpt]
+TEST 34/36 [/home/lotus/projetos/psampler/tests/resampler_stream.phpt]
+PASS Legacy Resampler consumes long input and preserves FIR state across chunks [/home/lotus/projetos/psampler/tests/resampler_stream.phpt]
+TEST 35/36 [/home/lotus/projetos/psampler/tests/ring_evidence.phpt]
+PASS PCMAnalyzer returns ring evidence and resets it between calls [/home/lotus/projetos/psampler/tests/ring_evidence.phpt]
+TEST 36/36 [/home/lotus/projetos/psampler/tests/stereo_to_mono.phpt]
+PASS stereoToMono averages signed PCM16LE without overflow and truncates toward zero [/home/lotus/projetos/psampler/tests/stereo_to_mono.phpt]
+=====================================================================
+Number of tests :    36                32
+Tests skipped   :     4 ( 11.1%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     0 (  0.0%) (  0.0%)
+Tests passed    :    32 ( 88.9%) (100.0%)
+---------------------------------------------------------------------
+Time taken      : 0.948 seconds
+=====================================================================

@@ -1,6 +1,6 @@
 {
     "upstream": "swoole/swoole-src v6.3.0-rc1 (6.3.0RC1)",
-    "revision": 2,
+    "revision": 3,
     "read_api_version": 1,
     "files": {
         "config.m4": {
@@ -82,7 +82,7 @@
                 "011d16796d6d98cc27a74250f669b310b049f4607d9f6f9aa178f7a92fab6577"
             ],
             "after": [
-                "9f7210156936fc46ecadf67556fb7037f6c108a383cc342c1ec386a86c701365"
+                "73687f4de06c560633570a3bf0aa5da4b5d3ec46f61eab5365e068d8d7f780af"
             ]
         },
         "ext-src/swoole_coroutine.cc": {
@@ -111,11 +111,11 @@
         "src/coroutine/base.cc": "a3c5fe1ca38b4be960d41f2af457e0345e84de800fc5a269a6960a42ec43594e",
         "ext-src/php_swoole_coroutine.h": "3d705af60d75b4c9418cb713e081ee3b28fc716a3a1e685b792002c04b9d01b4"
     },
-    "patch_sha256": "ccbe3a29c0d59da0ef92b9f29792e8f2af9f24194044c2bdfa35ed9ce8db22cf",
+    "patch_sha256": "4c6988aacd6e7bda42fe348e18585740b51409fb98f99aced465532e73a214bc",
     "upgrade": {
         "from": "pcg729 v1.1.3 complete native Buffer patch",
         "patch": "swoole_native_buffer_v630rc1_read_api_v1_upgrade.patch",
-        "patch_sha256": "1e0985570291f4b49b040e484b1017386a1384d3c5ecc9c025879bb31fbf18ad",
+        "patch_sha256": "7c0ac71ec6350dc2901c7cc2da6d0c29f46865bdf1ff8a46400af10976b2ebce",
         "files": {
             "config.m4": [
                 "f25ef70c47979140abc9ee2c85fc44efc34fcd36989618e3e36c3a420a4034b2",
@@ -153,6 +153,50 @@
             ],
             "swoole_buffer_c_api.h": [
                 null
+            ]
+        }
+    },
+    "lifecycle_upgrade": {
+        "from": "complete native Buffer read API v1 patch (revision 2)",
+        "patch": "swoole_native_buffer_v630rc1_lifecycle_upgrade.patch",
+        "patch_sha256": "d3d99f032bc7a1a5a2c8aba9942b579c1ed8d7e886ab65d3b63dca16dd387885",
+        "files": {
+            "config.m4": [
+                "c235084bbc9c9547af9fa227f5674ed2827dd09e25275563cf164692598e2514",
+                "93b18ccbb0385873b57b1eedbe221d9127ac3beac00d4fe40cec300f52e378ed"
+            ],
+            "config.w32": [
+                "954c1a0f8d773eb61a43308be38d2b49421bb4a3b88333ca608a0973bf3c559e"
+            ],
+            "ext-src/php_swoole.cc": [
+                "93231c41cba0dee1132355cacc2978041ec2ee86604b23e26415ae1eb4677e8e"
+            ],
+            "ext-src/php_swoole_buffer.h": [
+                "2bd60369f7f7f91fd791533c6151cd1a75b282d820dfb3c60b732ad0bd4e1a42"
+            ],
+            "ext-src/stubs/php_swoole_buffer.stub.php": [
+                "8fad35f54598dec2c8f0ca18c3d9c3139f3097ee3dbe89c11b4ced7eb5fdf786"
+            ],
+            "ext-src/stubs/php_swoole_buffer_arginfo.h": [
+                "9f5668c930094f6be0cd25e268d2e03d8c0f6a6405e64578d20fbe4753cdaa67"
+            ],
+            "ext-src/stubs/php_swoole_socket_coro.stub.php": [
+                "196886610bdc7caab8dcf01aa98dd0638700d55a86ad05da5fe983970f783148"
+            ],
+            "ext-src/stubs/php_swoole_socket_coro_arginfo.h": [
+                "a52361020bf690a036ae16bca8bd2da087c60196d681ac5a264eaec586a3d37c"
+            ],
+            "ext-src/swoole_buffer.cc": [
+                "4aed4f1da5c6d1d427f85bfad34008576fee9f39a2026a82229dea47738d45fd"
+            ],
+            "ext-src/swoole_socket_coro.cc": [
+                "9f7210156936fc46ecadf67556fb7037f6c108a383cc342c1ec386a86c701365"
+            ],
+            "ext-src/swoole_coroutine.cc": [
+                "e032dc2f9ba44adb2d76ee35e08d52633fc0e0888d2d592fdc33caa2ceaafd88"
+            ],
+            "swoole_buffer_c_api.h": [
+                "7b2f89c8b728bf08a26e724ac9b966144c2e4993b165202c3f1c7e0710f167f3"
             ]
         }
     }

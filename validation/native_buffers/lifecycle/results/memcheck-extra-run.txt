@@ -1,0 +1,10 @@
+frame_control before exit 255 errors 0 lost 0
+zts before exit 97 errors 11 lost 8320
+zts_control before exit 97 errors 11 lost 8320
+zts_fatal_control before exit 97 errors 13 lost 8592
+frame_control after exit 255 errors 0 lost 0
+zts after exit 97 errors 11 lost 8320
+zts_control after exit 97 errors 11 lost 8320
+zts_fatal_control after exit 97 errors 13 lost 8592
+zts_bailout after exit 97 errors 13 lost 8592
+functional before exit 0 errors 0 lost 0

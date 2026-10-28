@@ -1,0 +1,14 @@
+libtool: link: warning: library `/usr/local/musl/x86_64-linux-musl/lib/libstdc++.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsodium.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcharset.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsqlite3.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcares.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libnghttp2.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libiconv.la' was moved.
+libtool: link: warning: library `/usr/local/musl/x86_64-linux-musl/lib/libstdc++.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsodium.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcharset.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsqlite3.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcares.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libnghttp2.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libiconv.la' was moved.

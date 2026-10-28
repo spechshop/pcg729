@@ -1,0 +1,23 @@
+==2394981== Memcheck, a memory error detector
+==2394981== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2394981== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2394981== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-before -n -d display_errors=1 -d log_errors=0 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/frame_control.php
+==2394981== Parent PID: 2394980
+==2394981==
+==2394981== Warning: invalid file descriptor -1 in syscall close()
+==2394981==
+==2394981== HEAP SUMMARY:
+==2394981==     in use at exit: 100,272 bytes in 2,166 blocks
+==2394981==   total heap usage: 82,535 allocs, 80,369 frees, 19,880,887 bytes allocated
+==2394981==
+==2394981== LEAK SUMMARY:
+==2394981==    definitely lost: 0 bytes in 0 blocks
+==2394981==    indirectly lost: 0 bytes in 0 blocks
+==2394981==      possibly lost: 0 bytes in 0 blocks
+==2394981==    still reachable: 100,272 bytes in 2,166 blocks
+==2394981==         suppressed: 0 bytes in 0 blocks
+==2394981== Reachable blocks (those to which a pointer was found) are not shown.
+==2394981== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2394981==
+==2394981== For lists of detected and suppressed errors, rerun with: -s
+==2394981== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,1 @@
+swoole_api=40 swoole_view=40 binary_provider=40 binary_view=56 ZTS=1

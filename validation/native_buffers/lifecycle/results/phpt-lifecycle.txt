@@ -1,0 +1,42 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.10
+ZEND_VERSION: 4.5.10
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  :
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/1 [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt]
+TEST 1/1 [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt]
+========DIFF========
+001- UDP, errors, pins, aliasing and suspended lifetime OK
+001+ Fatal error: Uncaught RuntimeException: check failed in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/common.inc:4
+002+ Stack trace:
+003+ #0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/common.inc(17): ensure(false)
+004+ #1 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_lifecycle.php(66): rejects(Object(Closure))
+005+ #2 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_lifecycle.php:3}()
+006+ #3 {main}
+007+   thrown in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/common.inc on line 4
+========DONE========
+FAIL recvfromInto balances pins on UDP, timeout, cancellation, error, overflow and peer aliasing [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt]
+=====================================================================
+Number of tests :     1                 1
+Tests skipped   :     0 (  0.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     1 (100.0%) (100.0%)
+Tests passed    :     0 (  0.0%) (  0.0%)
+---------------------------------------------------------------------
+Time taken      : 0.100 seconds
+=====================================================================
+
+=====================================================================
+FAILED TEST SUMMARY
+---------------------------------------------------------------------
+recvfromInto balances pins on UDP, timeout, cancellation, error, overflow and peer aliasing [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt]
+=====================================================================

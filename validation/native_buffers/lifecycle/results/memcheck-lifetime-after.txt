@@ -1,0 +1,27 @@
+==2390300== Memcheck, a memory error detector
+==2390300== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2390300== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2390300== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after -n -d display_errors=1 -d log_errors=0 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/.memcheck-nuu7e4tq.php
+==2390300== Parent PID: 2389976
+==2390300==
+==2390300== Warning: client switching stacks?  SP change: 0x1ffeffb5d8 --> 0x82c9fb8
+==2390300==          to suppress, use: --max-stackframe=137285015072 or greater
+==2390300== Warning: client switching stacks?  SP change: 0x82c9ee8 --> 0x1ffeffb5d8
+==2390300==          to suppress, use: --max-stackframe=137285015280 or greater
+==2390300== Warning: invalid file descriptor -1 in syscall close()
+==2390300==
+==2390300== HEAP SUMMARY:
+==2390300==     in use at exit: 100,272 bytes in 2,166 blocks
+==2390300==   total heap usage: 86,706 allocs, 84,540 frees, 20,486,484 bytes allocated
+==2390300==
+==2390300== LEAK SUMMARY:
+==2390300==    definitely lost: 0 bytes in 0 blocks
+==2390300==    indirectly lost: 0 bytes in 0 blocks
+==2390300==      possibly lost: 0 bytes in 0 blocks
+==2390300==    still reachable: 100,272 bytes in 2,166 blocks
+==2390300==         suppressed: 0 bytes in 0 blocks
+==2390300== Reachable blocks (those to which a pointer was found) are not shown.
+==2390300== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2390300==
+==2390300== For lists of detected and suppressed errors, rerun with: -s
+==2390300== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

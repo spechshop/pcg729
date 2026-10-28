@@ -1,0 +1,44 @@
+[
+  {
+    "file": "psampler_binary.h",
+    "identical": true,
+    "psampler_sha256": "5be3943debc49f8c8023938b06f20811861d58431b55ac19b0c994957df1f394",
+    "build_source_sha256": "5be3943debc49f8c8023938b06f20811861d58431b55ac19b0c994957df1f394"
+  },
+  {
+    "file": "psampler_native.h",
+    "identical": true,
+    "psampler_sha256": "4fbfb9153ea26e0e45a102b99d021616536abc26e14d58e1b2e325313f32a0a4",
+    "build_source_sha256": "4fbfb9153ea26e0e45a102b99d021616536abc26e14d58e1b2e325313f32a0a4"
+  },
+  {
+    "file": "binary_buffer.c",
+    "identical": true,
+    "psampler_sha256": "232375bac37378e81a682b782b08de78b84ebebb719d32cbb7844f77c6d28f08",
+    "build_source_sha256": "232375bac37378e81a682b782b08de78b84ebebb719d32cbb7844f77c6d28f08"
+  },
+  {
+    "file": "byte_buffer.c",
+    "identical": true,
+    "psampler_sha256": "5d48eeb7c50806fd6c06a7f70828e566c7a60c39c097edab0025fa080f73558f",
+    "build_source_sha256": "5d48eeb7c50806fd6c06a7f70828e566c7a60c39c097edab0025fa080f73558f"
+  },
+  {
+    "file": "pcm_buffer.c",
+    "identical": true,
+    "psampler_sha256": "3f4aa5a61cc7eab6cc08eaa1943f1606cbf0d079cb800d66f4cca4d4e18a76fb",
+    "build_source_sha256": "3f4aa5a61cc7eab6cc08eaa1943f1606cbf0d079cb800d66f4cca4d4e18a76fb"
+  },
+  {
+    "file": "pcm_core.c",
+    "identical": true,
+    "psampler_sha256": "d558cd1dc342e5705476262c82e054f76817f006910422583e034e8d79c87d80",
+    "build_source_sha256": "d558cd1dc342e5705476262c82e054f76817f006910422583e034e8d79c87d80"
+  },
+  {
+    "file": "pcm_analyzer.c",
+    "identical": true,
+    "psampler_sha256": "2535afe1b189a73b6598994b19c6a9337f35b84a0dc9a7130548de11985029b8",
+    "build_source_sha256": "2535afe1b189a73b6598994b19c6a9337f35b84a0dc9a7130548de11985029b8"
+  }
+]

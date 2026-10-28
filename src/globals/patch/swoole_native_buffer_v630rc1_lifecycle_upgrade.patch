@@ -1,0 +1,91 @@
+--- a/ext-src/swoole_socket_coro.cc
++++ b/ext-src/swoole_socket_coro.cc
+@@ -1867,0 +1868,7 @@
++        void release() {
++            buffer->receiving = false;
++            // Buffer is final and has no PHP destructor or dynamic properties.
++            // Release it before the socket, whose subclass destructor may bail out.
++            OBJ_RELEASE(&buffer->std);
++            OBJ_RELEASE(socket_object);
++        }
+@@ -1869,3 +1876 @@
+-            buffer->receiving = false;
+-            OBJ_RELEASE(socket_object);
+-            OBJ_RELEASE(&buffer->std);
++            release();
+@@ -1876,20 +1881,52 @@
+-    // A private extra byte distinguishes an exact fit from every oversized
+-    // datagram on recvfrom implementations that return only the copied length.
+-    // Use Swoole's existing receive, reactor, cancellation and concurrency checks.
+-    ssize_t bytes = sock->socket->recvfrom(buffer->data, buffer->capacity + 1);
+-    if (bytes >= 0 && static_cast<size_t>(bytes) > buffer->capacity) {
+-        sock->socket->set_err(EMSGSIZE);
+-        bytes = -1;
+-    }
+-    socket_coro_sync_properties(ZEND_THIS, sock);
+-    if (bytes < 0) {
+-        RETURN_FALSE;
+-    }
+-
+-    // Only peer metadata uses PHP strings; the payload stays in native storage.
+-    // Zero-byte UDP datagrams are successful receives and still have a sender.
+-    zval peer;
+-    array_init(&peer);
+-    add_assoc_string(&peer, "address", (char *) sock->socket->get_addr());
+-    add_assoc_long(&peer, "port", sock->socket->get_port());
+-    ZEND_TRY_ASSIGN_VALUE(peername, &peer);
++    zend_array *volatile owned_peer = nullptr;
++    RETVAL_FALSE;
++    // Zend bailout skips C++ destructors. Keep guard/ts unchanged after setjmp
++    // and restore both explicitly in the catch, before propagating the bailout.
++    zend_try {
++        // A private extra byte detects datagrams larger than the fixed capacity.
++        // Keep Swoole's receive, reactor, cancellation and concurrency checks.
++        ssize_t bytes = sock->socket->recvfrom(buffer->data, buffer->capacity + 1);
++        if (bytes >= 0 && static_cast<size_t>(bytes) > buffer->capacity) {
++            sock->socket->set_err(EMSGSIZE);
++            bytes = -1;
++        }
++        socket_coro_sync_properties(ZEND_THIS, sock);
++        if (bytes >= 0) {
++            // Only metadata uses PHP strings, including for empty datagrams.
++            // owned_peer is volatile because ownership changes after setjmp.
++            owned_peer = zend_new_array(0);
++            zval peer;
++            ZVAL_ARR(&peer, owned_peer);
++            add_assoc_string(&peer, "address", (char *) sock->socket->get_addr());
++            add_assoc_long(&peer, "port", sock->socket->get_port());
++            if (Z_ISREF_P(peername) && ZEND_REF_HAS_TYPE_SOURCES(Z_REF_P(peername))) {
++                // Typed assignment publishes the new value BEFORE invoking
++                // the old destructor. Retain ownership on validation failure.
++                if (zend_verify_ref_assignable_zval(Z_REF_P(peername), &peer, ZEND_ARG_USES_STRICT_TYPES())) {
++                    owned_peer = nullptr;
++                    zend_safe_assign_to_variable_noref(Z_REFVAL_P(peername), &peer);
++                }
++            } else {
++                // Untyped ZEND_TRY_ASSIGN_VALUE destroys the old value BEFORE
++                // transfer. On bailout the metadata is still ours to destroy.
++                ZEND_TRY_ASSIGN_VALUE(peername, &peer);
++                owned_peer = nullptr;
++            }
++            if (!EG(exception)) {
++                buffer->length = static_cast<size_t>(bytes);
++                RETVAL_LONG(static_cast<zend_long>(bytes));
++            }
++        }
++    } zend_catch {
++        if (owned_peer != nullptr) {
++            // Unpublished metadata contains only an address and a port, so its
++            // destruction cannot invoke PHP. Published values belong to Zend.
++            zend_array_destroy(owned_peer);
++        }
++        ts.~TimeoutSetter();
++        guard.release();
++        zend_bailout();
++    } zend_end_try();
++    if (owned_peer != nullptr) {
++        zend_array_destroy(owned_peer);
++    }
+@@ -1899,2 +1935,0 @@
+-    buffer->length = static_cast<size_t>(bytes);
+-    RETURN_LONG(static_cast<zend_long>(bytes));

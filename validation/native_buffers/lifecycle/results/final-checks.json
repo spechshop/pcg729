@@ -1,0 +1,29 @@
+{
+  "phpt_contract": {
+    "passed": 14,
+    "failed": 0
+  },
+  "phpt_optimized": {
+    "passed": 14,
+    "failed": 0
+  },
+  "patch_checks": 25,
+  "memcheck": {
+    "processes": 31,
+    "zero_error": 17,
+    "access_errors": 0
+  },
+  "diff_check": "PASS",
+  "original_php_hash": "UNCHANGED",
+  "native_source_files_changed": [
+    "ext-src/swoole_socket_coro.cc"
+  ],
+  "abi_version": 1,
+  "patch_revision": 3,
+  "known_pending": [
+    "fatal coroutine teardown leak",
+    "ZTS extension globals and fatal trace conversion leaks",
+    "PCM handler bailout in psampler (outside scope)"
+  ],
+  "fatal_shutdown_weak_reference": "remains alive through normal PHP frame/trace references; exactly one final free observed in GDB"
+}

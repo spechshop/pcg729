@@ -1,0 +1,14 @@
+{
+    "version": "8.5.10",
+    "zts": true,
+    "swoole": "6.3.0RC1",
+    "psampler": "0.6.1",
+    "jit": "disable",
+    "opcache_cli": "0",
+    "memory_limit": "128M",
+    "xhprof_constants": {
+        "XHPROF_FLAGS_NO_BUILTINS": 1,
+        "XHPROF_FLAGS_CPU": 2,
+        "XHPROF_FLAGS_MEMORY": 4
+    }
+}

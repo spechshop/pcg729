@@ -1,0 +1,30 @@
+==2392581== Memcheck, a memory error detector
+==2392581== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2392581== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2392581== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after -n -d display_errors=1 -d log_errors=0 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/validation/native_buffers/functional.inc
+==2392581== Parent PID: 2389976
+==2392581==
+==2392581== Warning: client switching stacks?  SP change: 0x1ffeffb548 --> 0x7f338f8
+==2392581==          to suppress, use: --max-stackframe=137288776784 or greater
+==2392581== Warning: client switching stacks?  SP change: 0x7f331f8 --> 0x96c8ff8
+==2392581==          to suppress, use: --max-stackframe=24731136 or greater
+==2392581== Warning: client switching stacks?  SP change: 0x96c8538 --> 0x7f331f8
+==2392581==          to suppress, use: --max-stackframe=24728384 or greater
+==2392581==          further instances of this message will not be shown.
+==2392581== Warning: invalid file descriptor -1 in syscall close()
+==2392581==
+==2392581== HEAP SUMMARY:
+==2392581==     in use at exit: 100,272 bytes in 2,166 blocks
+==2392581==   total heap usage: 273,442 allocs, 271,276 frees, 40,132,233 bytes allocated
+==2392581==
+==2392581== LEAK SUMMARY:
+==2392581==    definitely lost: 0 bytes in 0 blocks
+==2392581==    indirectly lost: 0 bytes in 0 blocks
+==2392581==      possibly lost: 0 bytes in 0 blocks
+==2392581==    still reachable: 100,272 bytes in 2,166 blocks
+==2392581==         suppressed: 0 bytes in 0 blocks
+==2392581== Reachable blocks (those to which a pointer was found) are not shown.
+==2392581== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2392581==
+==2392581== For lists of detected and suppressed errors, rerun with: -s
+==2392581== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,25 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-no-swoole
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.10
+ZEND_VERSION: 4.5.10
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  :
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/1 [/home/lotus/projetos/psampler/tests/byte_buffer_native_no_swoole.phpt]
+PASS Native byte infrastructure loads and operates without Swoole [/home/lotus/projetos/psampler/tests/byte_buffer_native_no_swoole.phpt]
+=====================================================================
+Number of tests :     1                 1
+Tests skipped   :     0 (  0.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     0 (  0.0%) (  0.0%)
+Tests passed    :     1 (100.0%) (100.0%)
+---------------------------------------------------------------------
+Time taken      : 0.064 seconds
+=====================================================================

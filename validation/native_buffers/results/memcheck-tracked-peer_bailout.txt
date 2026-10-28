@@ -1,0 +1,40 @@
+==2041558== Memcheck, a memory error detector
+==2041558== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2041558== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2041558== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures -n -d log_errors=0 -d display_errors=1 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/validation/native_buffers/peer_bailout.php
+==2041558== Parent PID: 2041381
+==2041558==
+==2041558== Warning: client switching stacks?  SP change: 0x1ffeffb568 --> 0x7f1ea98
+==2041558==          to suppress, use: --max-stackframe=137288862416 or greater
+==2041558== Warning: client switching stacks?  SP change: 0x7f1e678 --> 0x1ffeffb568
+==2041558==          to suppress, use: --max-stackframe=137288863472 or greater
+==2041558== Warning: invalid file descriptor -1 in syscall close()
+==2041558==
+==2041558== HEAP SUMMARY:
+==2041558==     in use at exit: 2,197,592 bytes in 2,168 blocks
+==2041558==   total heap usage: 83,054 allocs, 80,886 frees, 22,024,217 bytes allocated
+==2041558==
+==2041558== 2,097,320 (168 direct, 2,097,152 indirect) bytes in 1 blocks are definitely lost in loss record 637 of 637
+==2041558==    at 0x54E4FA3: operator new(unsigned long) (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2041558==    by 0xE6B40C: swoole::Coroutine::create(std::function<void (void*)> const&, void*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures)
+==2041558==    by 0xE61E00: swoole::PHPCoroutine::create(_zend_fcall_info_cache*, unsigned int, _zval_struct*, _zval_struct*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures)
+==2041558==    by 0xDDEA20: zim_swoole_coroutine_scheduler_start (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures)
+==2041558==    by 0x8F7FB3: ZEND_DO_FCALL_SPEC_OBSERVER_HANDLER (zend_vm_execute.h:2286)
+==2041558==    by 0x120CAA2: execute_ex (zend_vm_execute.h:116541)
+==2041558==    by 0x120A1A4: zend_execute (zend_vm_execute.h:121974)
+==2041558==    by 0x1266E9A: zend_execute_script (zend.c:1981)
+==2041558==    by 0x1139567: php_execute_script_ex (main.c:2642)
+==2041558==    by 0x126A546: do_cli (php_cli.c:951)
+==2041558==    by 0x913123: main (php_cli.c:1374)
+==2041558==
+==2041558== LEAK SUMMARY:
+==2041558==    definitely lost: 168 bytes in 1 blocks
+==2041558==    indirectly lost: 2,097,152 bytes in 1 blocks
+==2041558==      possibly lost: 0 bytes in 0 blocks
+==2041558==    still reachable: 100,272 bytes in 2,166 blocks
+==2041558==         suppressed: 0 bytes in 0 blocks
+==2041558== Reachable blocks (those to which a pointer was found) are not shown.
+==2041558== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2041558==
+==2041558== For lists of detected and suppressed errors, rerun with: -s
+==2041558== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

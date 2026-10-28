@@ -1,0 +1,7 @@
+# Normalize text files and use LF on checkout.
+* text=auto eol=lf
+
+# Keep bundled executables byte-for-byte intact.
+/bin/php binary
+/bin/composer binary
+/composer binary

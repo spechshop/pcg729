@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-28T04:58:20Z",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "cpus": 16,
+  "receiver_cpu": 2,
+  "sender_cpu": 4,
+  "php_sha256": "17319dac0290c0ed7f01b54bc9164f2520733da397426b45000e6d046b59f71d",
+  "fixed_packets": 1000000,
+  "repetitions": 5,
+  "batch": 32,
+  "stress_packets": 10000000,
+  "cadence_packets": 250,
+  "cadence_pps": 50,
+  "byte_operations": 2000000,
+  "seed": 729
+}

@@ -1,0 +1,1 @@
+{"calls":100000,"initial_rss_kb":29832,"peak_rss_kb":31732,"final_rss_kb":31732,"delta_rss_kb":1900,"fuzz_cases":1024}

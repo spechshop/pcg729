@@ -1,0 +1,101 @@
+In file included from /home/lotus/CLionProjects/pcg729/validation/native_buffers/modules/internal_functions_cli.c:72:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:154:37: warning: ‘tracer_observer’ declared ‘static’ but never defined [-Wunused-function]
+  154 | static zend_observer_fcall_handlers tracer_observer(zend_execute_data *execute_data);
+      |                                     ^~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:155:13: warning: ‘tracer_observer_begin’ declared ‘static’ but never defined [-Wunused-function]
+  155 | static void tracer_observer_begin(zend_execute_data *ex);
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:156:13: warning: ‘tracer_observer_end’ declared ‘static’ but never defined [-Wunused-function]
+  156 | static void tracer_observer_end(zend_execute_data *ex, zval *return_value);
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:172:13: warning: ‘hp_register_constants’ declared ‘static’ but never defined [-Wunused-function]
+  172 | static void hp_register_constants(INIT_FUNC_ARGS);
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:174:13: warning: ‘hp_begin’ declared ‘static’ but never defined [-Wunused-function]
+  174 | static void hp_begin(zend_long level, zend_long xhprof_flags);
+      |             ^~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:175:13: warning: ‘hp_stop’ declared ‘static’ but never defined [-Wunused-function]
+  175 | static void hp_stop();
+      |             ^~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:176:13: warning: ‘hp_end’ declared ‘static’ but never defined [-Wunused-function]
+  176 | static void hp_end();
+      |             ^~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:178:26: warning: ‘cycle_timer’ declared ‘static’ but never defined [-Wunused-function]
+  178 | static inline zend_ulong cycle_timer();
+      |                          ^~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:180:13: warning: ‘hp_free_the_free_list’ declared ‘static’ but never defined [-Wunused-function]
+  180 | static void hp_free_the_free_list();
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:181:13: warning: ‘hp_fast_free_hprof_entry’ declared ‘static’ but never defined [-Wunused-function]
+  181 | static void hp_fast_free_hprof_entry(hp_entry_t *p);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:183:13: warning: ‘incr_us_interval’ declared ‘static’ but never defined [-Wunused-function]
+  183 | static void incr_us_interval(struct timeval *start, zend_ulong incr);
+      |             ^~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:185:13: warning: ‘hp_get_ignored_functions_from_arg’ declared ‘static’ but never defined [-Wunused-function]
+  185 | static void hp_get_ignored_functions_from_arg(zval *args);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:187:20: warning: ‘hp_array_del’ declared ‘static’ but never defined [-Wunused-function]
+  187 | static inline void hp_array_del(zend_string **names);
+      |                    ^~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:151:26: warning: ‘_zend_compile_string’ defined but not used [-Wunused-variable]
+  151 | static zend_op_array * (*_zend_compile_string) (zend_string *source_string, const char *filename, zend_compile_position position);
+      |                          ^~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:138:26: warning: ‘_zend_compile_file’ defined but not used [-Wunused-variable]
+  138 | static zend_op_array * (*_zend_compile_file) (zend_file_handle *file_handle, int type);
+      |                          ^~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:134:15: warning: ‘_zend_execute_internal’ defined but not used [-Wunused-variable]
+  134 | static void (*_zend_execute_internal) (zend_execute_data *data, zval *return_value);
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+php-fixtures ready
+php-contract ready
+In file included from /home/lotus/CLionProjects/pcg729/validation/native_buffers/modules/internal_no_swoole.c:72:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:154:37: warning: ‘tracer_observer’ declared ‘static’ but never defined [-Wunused-function]
+  154 | static zend_observer_fcall_handlers tracer_observer(zend_execute_data *execute_data);
+      |                                     ^~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:155:13: warning: ‘tracer_observer_begin’ declared ‘static’ but never defined [-Wunused-function]
+  155 | static void tracer_observer_begin(zend_execute_data *ex);
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:156:13: warning: ‘tracer_observer_end’ declared ‘static’ but never defined [-Wunused-function]
+  156 | static void tracer_observer_end(zend_execute_data *ex, zval *return_value);
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:172:13: warning: ‘hp_register_constants’ declared ‘static’ but never defined [-Wunused-function]
+  172 | static void hp_register_constants(INIT_FUNC_ARGS);
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:174:13: warning: ‘hp_begin’ declared ‘static’ but never defined [-Wunused-function]
+  174 | static void hp_begin(zend_long level, zend_long xhprof_flags);
+      |             ^~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:175:13: warning: ‘hp_stop’ declared ‘static’ but never defined [-Wunused-function]
+  175 | static void hp_stop();
+      |             ^~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:176:13: warning: ‘hp_end’ declared ‘static’ but never defined [-Wunused-function]
+  176 | static void hp_end();
+      |             ^~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:178:26: warning: ‘cycle_timer’ declared ‘static’ but never defined [-Wunused-function]
+  178 | static inline zend_ulong cycle_timer();
+      |                          ^~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:180:13: warning: ‘hp_free_the_free_list’ declared ‘static’ but never defined [-Wunused-function]
+  180 | static void hp_free_the_free_list();
+      |             ^~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:181:13: warning: ‘hp_fast_free_hprof_entry’ declared ‘static’ but never defined [-Wunused-function]
+  181 | static void hp_fast_free_hprof_entry(hp_entry_t *p);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:183:13: warning: ‘incr_us_interval’ declared ‘static’ but never defined [-Wunused-function]
+  183 | static void incr_us_interval(struct timeval *start, zend_ulong incr);
+      |             ^~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:185:13: warning: ‘hp_get_ignored_functions_from_arg’ declared ‘static’ but never defined [-Wunused-function]
+  185 | static void hp_get_ignored_functions_from_arg(zval *args);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:187:20: warning: ‘hp_array_del’ declared ‘static’ but never defined [-Wunused-function]
+  187 | static inline void hp_array_del(zend_string **names);
+      |                    ^~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:151:26: warning: ‘_zend_compile_string’ defined but not used [-Wunused-variable]
+  151 | static zend_op_array * (*_zend_compile_string) (zend_string *source_string, const char *filename, zend_compile_position position);
+      |                          ^~~~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:138:26: warning: ‘_zend_compile_file’ defined but not used [-Wunused-variable]
+  138 | static zend_op_array * (*_zend_compile_file) (zend_file_handle *file_handle, int type);
+      |                          ^~~~~~~~~~~~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/xhprof/php_xhprof.h:134:15: warning: ‘_zend_execute_internal’ defined but not used [-Wunused-variable]
+  134 | static void (*_zend_execute_internal) (zend_execute_data *data, zval *return_value);
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+original sha256 17319dac0290c0ed7f01b54bc9164f2520733da397426b45000e6d046b59f71d

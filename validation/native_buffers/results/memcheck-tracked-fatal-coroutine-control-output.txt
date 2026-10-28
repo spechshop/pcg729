@@ -1,0 +1,7 @@
+
+Fatal error: isolated coroutine fatal without borrow in /home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_coroutine_control.php on line 3
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_coroutine_control.php(3): trigger_error('isolated corout...', 256)
+#1 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_coroutine_control.php:3}()
+#2 {main}
+coroutine control shutdown

@@ -1,0 +1,20 @@
+Modo: concorrencia
+Porta UDP: 6734
+Capacidade: 2048
+
+[CO1] Iniciando primeira leitura...
+[CO2] Socket ocupado pela corrotina: 2
+[CO2] Tentando segunda leitura simultânea...
+[CO2] Esperado: proteção de concorrência do Swoole
+
+Fatal error: Uncaught Swoole\Error: Socket#5 has already been bound to another coroutine#2, reading of the same socket in coroutine#3 at the same time is not allowed in /home/lotus/CLionProjects/pcg729/testb2.php:171
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/testb2.php(171): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), NULL, 0.2)
+#1 [internal function]: {closure:{closure:/home/lotus/CLionProjects/pcg729/testb2.php:17}:151}()
+#2 {main}
+  thrown in /home/lotus/CLionProjects/pcg729/testb2.php on line 171
+
+ [Coroutine-2] Stack trace:
+ -------------------------------------------------------------------
+#0 /home/lotus/CLionProjects/pcg729/testb2.php(141): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), NULL, 2.0)
+#1 [internal function]: {closure:{closure:/home/lotus/CLionProjects/pcg729/testb2.php:17}:136}()

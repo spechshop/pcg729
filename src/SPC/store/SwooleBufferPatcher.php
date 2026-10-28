@@ -26,10 +26,11 @@ final class SwooleBufferPatcher
         if (self::fileHash($patch) !== $manifest['patch_sha256']) {
             throw new RuntimeException('Swoole Buffer patch is missing or differs from its compatibility manifest');
         }
-        $upgrade = $manifest['upgrade'];
-        $upgradePatch = $patchDir . $upgrade['patch'];
-        if (self::fileHash($upgradePatch) !== $upgrade['patch_sha256']) {
-            throw new RuntimeException('Swoole Buffer upgrade patch differs from its compatibility manifest');
+        $upgrades = [$manifest['upgrade'], $manifest['lifecycle_upgrade']];
+        foreach ($upgrades as $upgrade) {
+            if (self::fileHash($patchDir . $upgrade['patch']) !== $upgrade['patch_sha256']) {
+                throw new RuntimeException('Swoole Buffer upgrade patch differs from its compatibility manifest');
+            }
         }
 
         // Also pin the unmodified C++ receive implementation and class helpers.
@@ -42,29 +43,34 @@ final class SwooleBufferPatcher
 
         $allBefore = true;
         $allAfter = true;
-        $allPrevious = true;
+        $allPrevious = array_fill(0, count($upgrades), true);
         foreach ($manifest['files'] as $file => $hashes) {
             $hash = self::fileHash($sourceDir . '/' . $file);
             $before = in_array($hash, $hashes['before'], true);
             $after = in_array($hash, $hashes['after'], true);
-            $previous = in_array($hash, $upgrade['files'][$file], true);
+            $previous = false;
+            foreach ($upgrades as $index => $upgrade) {
+                $matches = in_array($hash, $upgrade['files'][$file], true);
+                $previous = $previous || $matches;
+                $allPrevious[$index] = $allPrevious[$index] && $matches;
+            }
             if (!$before && !$after && !$previous) {
                 throw new RuntimeException("Swoole Buffer patch requires {$manifest['upstream']}: incompatible {$file}");
             }
             $allBefore = $allBefore && $before;
             $allAfter = $allAfter && $after;
-            $allPrevious = $allPrevious && $previous;
         }
         if ($allAfter) {
             return false;
         }
-        if (!$allBefore && !$allPrevious) {
+        $previousIndex = array_search(true, $allPrevious, true);
+        if (!$allBefore && $previousIndex === false) {
             throw new RuntimeException('Swoole Buffer patch is partially applied; restore the Swoole source before building');
         }
 
-        // A complete v1.1.3 tree can be upgraded without accepting mixed hunks.
+        // Complete v1.1.3 and read ABI v1 trees can be upgraded without mixed hunks.
         // Pristine, previous and current states are checked as whole trees.
-        $selectedPatch = $allBefore ? self::PATCH_NAME . '.patch' : $upgrade['patch'];
+        $selectedPatch = $allBefore ? self::PATCH_NAME . '.patch' : $upgrades[$previousIndex]['patch'];
         if (!SourcePatcher::patchFile($selectedPatch, $sourceDir)) {
             throw new RuntimeException('Swoole Buffer patch could not be applied');
         }

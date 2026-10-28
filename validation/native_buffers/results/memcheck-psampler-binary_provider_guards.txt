@@ -1,0 +1,23 @@
+==2040757== Memcheck, a memory error detector
+==2040757== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2040757== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2040757== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures -n -d log_errors=0 -d display_errors=1 -d error_reporting=24575 /home/lotus/projetos/psampler/tests/.memcheck-pj6fbapu.php
+==2040757== Parent PID: 2040360
+==2040757==
+==2040757== Warning: invalid file descriptor -1 in syscall close()
+==2040757==
+==2040757== HEAP SUMMARY:
+==2040757==     in use at exit: 100,272 bytes in 2,166 blocks
+==2040757==   total heap usage: 82,928 allocs, 80,762 frees, 18,615,436 bytes allocated
+==2040757==
+==2040757== LEAK SUMMARY:
+==2040757==    definitely lost: 0 bytes in 0 blocks
+==2040757==    indirectly lost: 0 bytes in 0 blocks
+==2040757==      possibly lost: 0 bytes in 0 blocks
+==2040757==    still reachable: 100,272 bytes in 2,166 blocks
+==2040757==         suppressed: 0 bytes in 0 blocks
+==2040757== Reachable blocks (those to which a pointer was found) are not shown.
+==2040757== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2040757==
+==2040757== For lists of detected and suppressed errors, rerun with: -s
+==2040757== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

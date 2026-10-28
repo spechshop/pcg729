@@ -1,0 +1,15 @@
+Modo: cancel
+Porta UDP: 41176
+Capacidade: 2048
+
+[RX] Aguardando datagrama...
+[CTRL] Corrotina aguardando leitura: 2
+[RX] Resultado: false
+[RX] Erro: 125
+[RX] Duração: 0.101s
+[RX] Buffer length: 0
+
+[RX] Tentando reutilizar o buffer...
+[CTRL] cancel(): true
+[CTRL] Datagrama enviado após cancelamento: 13
+[OK] Buffer reutilizado após cancelamento

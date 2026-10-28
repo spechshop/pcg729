@@ -1,0 +1,235 @@
+==2395311== Memcheck, a memory error detector
+==2395311== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==2395311== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==2395311== Command: /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after -n -d display_errors=1 -d log_errors=0 -d error_reporting=24575 /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/zts_fatal_control.php
+==2395311== Parent PID: 2394980
+==2395311==
+==2395311== Warning: invalid file descriptor -1 in syscall close()
+==2395311== Warning: invalid file descriptor -1 in syscall close()
+==2395311== Warning: invalid file descriptor -1 in syscall close()
+==2395311== Warning: invalid file descriptor -1 in syscall close()
+==2395311== Warning: invalid file descriptor -1 in syscall close()
+==2395311==
+==2395311== HEAP SUMMARY:
+==2395311==     in use at exit: 109,200 bytes in 2,230 blocks
+==2395311==   total heap usage: 229,623 allocs, 227,393 frees, 71,165,132 bytes allocated
+==2395311==
+==2395311== 128 bytes in 4 blocks are definitely lost in loss record 590 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x1246F01: Balloc (zend_strtod.c:587)
+==2395311==    by 0x12474ED: rv_alloc (zend_strtod.c:3622)
+==2395311==    by 0x1248F59: zend_dtoa (zend_strtod.c:3954)
+==2395311==    by 0x1249AC6: zend_gcvt (zend_strtod.c:4519)
+==2395311==    by 0x12443BB: smart_str_append_double (zend_smart_str.c:120)
+==2395311==    by 0x1244A11: smart_str_append_zval (zend_smart_str.c:236)
+==2395311==    by 0x11ABD60: _build_trace_args (zend_exceptions.c:549)
+==2395311==    by 0x11ABD60: _build_trace_string (zend_exceptions.c:621)
+==2395311==    by 0x11ABD60: zend_trace_to_string (zend_exceptions.c:647)
+==2395311==    by 0x8E313A: php_error_cb (main.c:1391)
+==2395311==    by 0x8F9983: zend_error_zstr_at (zend.c:1543)
+==2395311==    by 0x118CAD9: zif_trigger_error (zend_builtin_functions.c:1300)
+==2395311==    by 0x8F78F3: ZEND_DO_FCALL_SPEC_OBSERVER_HANDLER (zend_vm_execute.h:2286)
+==2395311==
+==2395311== 144 bytes in 4 blocks are definitely lost in loss record 593 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x1246F01: Balloc (zend_strtod.c:587)
+==2395311==    by 0x1246FD8: d2b (zend_strtod.c:1325)
+==2395311==    by 0x1248D26: zend_dtoa (zend_strtod.c:3827)
+==2395311==    by 0x1249AC6: zend_gcvt (zend_strtod.c:4519)
+==2395311==    by 0x12443BB: smart_str_append_double (zend_smart_str.c:120)
+==2395311==    by 0x1244A11: smart_str_append_zval (zend_smart_str.c:236)
+==2395311==    by 0x11ABD60: _build_trace_args (zend_exceptions.c:549)
+==2395311==    by 0x11ABD60: _build_trace_string (zend_exceptions.c:621)
+==2395311==    by 0x11ABD60: zend_trace_to_string (zend_exceptions.c:647)
+==2395311==    by 0x8E313A: php_error_cb (main.c:1391)
+==2395311==    by 0x8F9983: zend_error_zstr_at (zend.c:1543)
+==2395311==    by 0x118CAD9: zif_trigger_error (zend_builtin_functions.c:1300)
+==2395311==    by 0x8F78F3: ZEND_DO_FCALL_SPEC_OBSERVER_HANDLER (zend_vm_execute.h:2286)
+==2395311==
+==2395311== 160 bytes in 4 blocks are definitely lost in loss record 594 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BDE2: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BDE2: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BDE2: zm_globals_ctor_pgsql (pgsql.c:516)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 192 bytes in 4 blocks are definitely lost in loss record 596 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BD02: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BD02: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BD02: zm_globals_ctor_pgsql (pgsql.c:513)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 256 bytes in 4 blocks are definitely lost in loss record 604 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BD87: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BD87: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BD87: zm_globals_ctor_pgsql (pgsql.c:515)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 288 bytes in 4 blocks are definitely lost in loss record 608 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BD4F: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BD4F: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BD4F: zm_globals_ctor_pgsql (pgsql.c:514)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 288 bytes in 4 blocks are definitely lost in loss record 609 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BECE: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BECE: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BECE: zm_globals_ctor_pgsql (pgsql.c:520)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 288 bytes in 4 blocks are definitely lost in loss record 610 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BF7A: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BF7A: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BF7A: zm_globals_ctor_pgsql (pgsql.c:551)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 352 bytes in 4 blocks are definitely lost in loss record 613 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BF07: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BF07: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BF07: zm_globals_ctor_pgsql (pgsql.c:521)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 544 bytes in 4 blocks are definitely lost in loss record 619 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BE1A: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BE1A: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BE1A: zm_globals_ctor_pgsql (pgsql.c:517)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 864 bytes in 4 blocks are definitely lost in loss record 629 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BE92: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BE92: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BE92: zm_globals_ctor_pgsql (pgsql.c:519)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 2,272 bytes in 4 blocks are definitely lost in loss record 643 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BF3F: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BF3F: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BF3F: zm_globals_ctor_pgsql (pgsql.c:522)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== 2,816 bytes in 4 blocks are definitely lost in loss record 647 of 651
+==2395311==    at 0x54E4828: malloc (in /tmp/pcg729-valgrind/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2395311==    by 0x117335B: __zend_malloc (zend_alloc.c:3543)
+==2395311==    by 0xC4BE56: zend_string_alloc (zend_string.h:167)
+==2395311==    by 0xC4BE56: zend_string_init (zend_string.h:189)
+==2395311==    by 0xC4BE56: zm_globals_ctor_pgsql (pgsql.c:518)
+==2395311==    by 0x111D14E: allocate_new_resource (TSRM.c:406)
+==2395311==    by 0x111D55E: ts_resource_ex (TSRM.c:461)
+==2395311==    by 0xEB535A: php_swoole_thread_start(std::shared_ptr<swoole::Thread>, _zend_string*, ZendArray*) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB2E17: zim_swoole_thread___construct::{lambda()#1}::operator()() const (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DFF: void std::__invoke_impl<void, zim_swoole_thread___construct::{lambda()#1}>(std::__invoke_other, zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9DB4: std::__invoke_result<zim_swoole_thread___construct::{lambda()#1}>::type std::__invoke<zim_swoole_thread___construct::{lambda()#1}>(zim_swoole_thread___construct::{lambda()#1}&&) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D61: void std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::_M_invoke<0ul>(std::_Index_tuple<0ul>) (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D35: std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> >::operator()() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==    by 0xEB9D19: std::thread::_State_impl<std::thread::_Invoker<std::tuple<zim_swoole_thread___construct::{lambda()#1}> > >::_M_run() (in /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after)
+==2395311==
+==2395311== LEAK SUMMARY:
+==2395311==    definitely lost: 8,592 bytes in 52 blocks
+==2395311==    indirectly lost: 0 bytes in 0 blocks
+==2395311==      possibly lost: 0 bytes in 0 blocks
+==2395311==    still reachable: 100,608 bytes in 2,178 blocks
+==2395311==         suppressed: 0 bytes in 0 blocks
+==2395311== Reachable blocks (those to which a pointer was found) are not shown.
+==2395311== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2395311==
+==2395311== For lists of detected and suppressed errors, rerun with: -s
+==2395311== ERROR SUMMARY: 13 errors from 13 contexts (suppressed: 0 from 0)

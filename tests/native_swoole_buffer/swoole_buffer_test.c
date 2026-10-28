@@ -128,6 +128,20 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_protocol, 0, 1, _IS_BOOL, 0)
     ZEND_ARG_TYPE_INFO(0, source, IS_OBJECT, 0)
 ZEND_END_ARG_INFO()
 
+/* Observe pin balance without depending on the private Buffer/Socket layout. */
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_refcount, 0, 1, IS_LONG, 0)
+    ZEND_ARG_TYPE_INFO(1, source, IS_OBJECT, 0)
+ZEND_END_ARG_INFO()
+
+PHP_FUNCTION(swoole_buffer_test_refcount)
+{
+    zval *source;
+    ZEND_PARSE_PARAMETERS_START(1, 1)
+        Z_PARAM_OBJECT_EX(source, 0, 1)
+    ZEND_PARSE_PARAMETERS_END();
+    RETURN_LONG(GC_REFCOUNT(Z_OBJ_P(source)));
+}
+
 PHP_FUNCTION(swoole_buffer_test_protocol)
 {
     zval *source;
@@ -242,6 +256,7 @@ static void producer_release(zend_object *source, const psampler_binary_view *vi
 static const zend_function_entry functions[] = {
     PHP_FE(swoole_buffer_test_read, arginfo_read)
     PHP_FE(swoole_buffer_test_protocol, arginfo_protocol)
+    PHP_FE(swoole_buffer_test_refcount, arginfo_refcount)
     PHP_FE(swoole_buffer_test_contract, arginfo_contract)
     PHP_FE(swoole_buffer_test_uninitialized, arginfo_uninitialized)
     PHP_FE_END

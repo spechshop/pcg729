@@ -1,0 +1,7 @@
+
+Fatal error: isolated fatal without native borrow in /home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_control.php on line 4
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_control.php(4): trigger_error('isolated fatal ...', 256)
+#1 /home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_control.php(4): {closure:/home/lotus/CLionProjects/pcg729/validation/native_buffers/fatal_control.php:4}()
+#2 {main}
+control shutdown OK

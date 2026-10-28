@@ -1,0 +1,85 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/validation/native_buffers/php-fixtures
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.10
+ZEND_VERSION: 4.5.10
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  :
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/8 [validation/native_buffers/binary_bailout.phpt]
+========DIFF========
+001- %AFatal error: binary isolated bailout in %s on line %d
+002- %Abinary bailout guard/release PASS
+001+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in /home/lotus/CLionProjects/pcg729/validation/native_buffers/binary_bailout.php on line 1
+002+
+003+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+========DONE========
+FAIL Native binary consumer releases acquisition after callback bailout [validation/native_buffers/binary_bailout.phpt]
+TEST 2/8 [validation/native_buffers/coroutine_concurrency.phpt]
+PASS Concurrent reads on one socket reject with the native Swoole fatal and exit without SIGSEGV [validation/native_buffers/coroutine_concurrency.phpt]
+TEST 3/8 [validation/native_buffers/functional.phpt]
+========DIFF========
+001- {"sizes":[0,1,12,160,1024,2048],"oversized":[2049,4096,65507],"reuse":10000,"scheduler_ticks":%d,"cancel_code":125,"status":"PASS"}
+001+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in /home/lotus/CLionProjects/pcg729/validation/native_buffers/functional.php on line 1
+002+
+003+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+========DONE========
+FAIL UDP required datagram sizes, 10000 reuse, peer identity, overflow, conflicting buffer, timeout and cancellation [validation/native_buffers/functional.phpt]
+TEST 4/8 [validation/native_buffers/pcm_api.phpt]
+========DIFF========
+001- PCM native v1 registration, invoke, integrity, guards, exceptions and 10000 cycles PASS
+001+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes) in /home/lotus/CLionProjects/pcg729/validation/native_buffers/pcm_api.php on line 1
+========DONE========
+FAIL Native PCM v1 registers, inspects bytes, rejects mutations and releases exceptions over 10000 reuse cycles [validation/native_buffers/pcm_api.phpt]
+TEST 5/8 [validation/native_buffers/pcm_handler_bailout.phpt]
+========DIFF========
+     %AFatal error: isolated PCM handler bailout in %s on line %d
+002- %APCM bailout cleanup PASS
+002+ PCM GUARD LEAK: PcmBuffer cannot be modified or invoked recursively during invoke()
+========DONE========
+FAIL PcmBuffer invoke must release mutation guard after handler bailout [validation/native_buffers/pcm_handler_bailout.phpt]
+TEST 6/8 [validation/native_buffers/suspension.phpt]
+========DIFF========
+001- Fiber suspend, nested guards, automatic preemption deferral and scheduler recovery PASS
+001+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in /home/lotus/CLionProjects/pcg729/validation/native_buffers/suspension.php on line 1
+002+
+003+ Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+========DONE========
+FAIL Nested borrows block Fiber suspension and defer automatic coroutine preemption [validation/native_buffers/suspension.phpt]
+TEST 7/8 [validation/native_buffers/udp_peer_bailout.phpt]
+========DIFF========
+     %AFatal error: isolated peer destructor bailout in %s on line %d
+002- %Apeer bailout guard released
+003- destroyed=yes
+002+ GUARD LEAK: Swoole\Buffer has a pending receive
+003+ destroyed=no
+========DONE========
+FAIL recvfromInto must release pending receive and references after peer destructor bailout [validation/native_buffers/udp_peer_bailout.phpt]
+TEST 8/8 [validation/native_buffers/udp_peer_exception.phpt]
+PASS recvfromInto releases pending receive after recoverable peer destructor exception [validation/native_buffers/udp_peer_exception.phpt]
+=====================================================================
+Number of tests :     8                 8
+Tests skipped   :     0 (  0.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     6 ( 75.0%) ( 75.0%)
+Tests passed    :     2 ( 25.0%) ( 25.0%)
+---------------------------------------------------------------------
+Time taken      : 3.183 seconds
+=====================================================================
+
+=====================================================================
+FAILED TEST SUMMARY
+---------------------------------------------------------------------
+Native binary consumer releases acquisition after callback bailout [validation/native_buffers/binary_bailout.phpt]
+UDP required datagram sizes, 10000 reuse, peer identity, overflow, conflicting buffer, timeout and cancellation [validation/native_buffers/functional.phpt]
+Native PCM v1 registers, inspects bytes, rejects mutations and releases exceptions over 10000 reuse cycles [validation/native_buffers/pcm_api.phpt]
+PcmBuffer invoke must release mutation guard after handler bailout [validation/native_buffers/pcm_handler_bailout.phpt]
+Nested borrows block Fiber suspension and defer automatic coroutine preemption [validation/native_buffers/suspension.phpt]
+recvfromInto must release pending receive and references after peer destructor bailout [validation/native_buffers/udp_peer_bailout.phpt]
+=====================================================================

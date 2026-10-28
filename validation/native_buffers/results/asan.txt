@@ -1,0 +1,10 @@
+pcm_stream_asan exit=0
+/usr/bin/ld: /tmp/ccOQqsl0.o: in function `main':
+/home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:9:(.text+0x65): undefined reference to `pcm_analyzer_init'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:14:(.text+0x18e): undefined reference to `pcm_analyzer_run'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:23:(.text+0x492): undefined reference to `pcm_analyzer_init'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:24:(.text+0x4a9): undefined reference to `pcm_analyzer_run'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:29:(.text+0x565): undefined reference to `pcm_analyzer_run'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:33:(.text+0x589): undefined reference to `pcm_analyzer_run'
+/usr/bin/ld: /home/lotus/projetos/psampler/tests/pcm_analyzer_asan.c:31:(.text+0x5e7): undefined reference to `pcm_analyzer_run'
+collect2: error: ld returned 1 exit status

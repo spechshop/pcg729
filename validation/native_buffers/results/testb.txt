@@ -1,0 +1,11 @@
+Porta UDP: 3417
+Capacidade: 2048
+Scheduler ativo: 1
+Scheduler ativo: 2
+Pacote 1: OK | bytes=13 | length=13 | capacity=2048
+Scheduler ativo: 3
+Scheduler ativo: 4
+Pacote 2: OK | bytes=160 | length=160 | capacity=2048
+Scheduler ativo: 5
+Pacote 3: OK | bytes=1024 | length=1024 | capacity=2048
+Timeout: result=false | erro=110 | duracao=0.200s

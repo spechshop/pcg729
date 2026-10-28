@@ -1,0 +1,52 @@
+To enable execution of this file add
+	add-auto-load-safe-path /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after
+line to your configuration file "/home/lotus/.config/gdb/gdbinit".
+To completely disable this security protection add
+	set auto-load safe-path /
+line to your configuration file "/home/lotus/.config/gdb/gdbinit".
+For more information about this security protection see the
+"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+	info "(gdb)Auto-loading safe path"
+Breakpoint 1 at 0x1158b8d: file /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc, line 1872.
+Breakpoint 2 at 0x1158c07: file /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc, line 1873.
+Breakpoint 3 at 0xcc3275
+Breakpoint 4 at 0x7f2897: file /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend.c, line 1259.
+Breakpoint 5 at 0x1159d7f: file /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc, line 1928.
+
+Fatal error: recvfromInto peer bailout in /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc on line 22
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(22): trigger_error('recvfromInto pe...', 256)
+#1 [internal function]: RecvIntoPeer->__destruct()
+#2 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(60): Swoole\Coroutine\Socket->recvfromInto(Object(Swoole\Buffer), Array, 0.125)
+#3 /home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc(74): {closure:/home/lotus/CLionProjects/pcg729/tests/native_swoole_buffer/recvfrom_into_peer.inc:56}()
+#4 Command line code(1): require('/home/lotus/CLi...')
+#5 {main}
+BAILOUT PROPAGATION
+#0  _zend_bailout (filename=filename@entry=0x55555817265a "/home/lotus/CLionProjects/pcg729/source/php-src/main/main.c", lineno=lineno@entry=1541) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend.c:1259
+#1  0x0000555555bdb846 in php_error_cb (orig_type=256, error_filename=<optimized out>, error_lineno=22, message=<optimized out>) at /home/lotus/CLionProjects/pcg729/source/php-src/main/main.c:1541
+#2  0x0000555555bf1984 in zend_error_zstr_at (orig_type=256, error_filename=0x7ffff7bc54d0, error_lineno=error_lineno@entry=22, message=message@entry=0x7ffff7bee690) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend.c:1543
+NATIVE RELEASE receiving=0 buffer_refs=4 socket_refs=3
+#0  ReceiveGuard::release (this=0x7fffffffb790) at /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:1872
+#1  0x0000555556559d7f in zim_swoole_socket_coro_recvfromInto (execute_data=0x7ffff7a126e0, return_value=0x7fffffffba18) at /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:1927
+#2  0x0000555555bef8f4 in ZEND_DO_FCALL_SPEC_OBSERVER_HANDLER () at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_vm_execute.h:2286
+#3  0x00005555564edf73 in execute_ex (ex=<optimized out>) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_vm_execute.h:116541
+FLAG RESET receiving=0
+AFTER RELEASE receiving=0 buffer_refs=3 socket_refs=2
+BAILOUT PROPAGATION
+#0  _zend_bailout (filename=0x555558198758 "/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc", lineno=1928) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend.c:1259
+#1  0x0000555556559d93 in zim_swoole_socket_coro_recvfromInto (execute_data=0x7ffff7a126e0, return_value=0x7fffffffba18) at /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:1928
+#2  0x0000555555bef8f4 in ZEND_DO_FCALL_SPEC_OBSERVER_HANDLER () at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_vm_execute.h:2286
+BAILOUT PROPAGATION
+#0  _zend_bailout (filename=filename@entry=0x55555817ed39 "/home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_execute_API.c", lineno=lineno@entry=1367) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend.c:1259
+#1  0x00005555564a6852 in zend_eval_stringl (str=str@entry=0x5555564a6972 <zend_eval_stringl_ex+12> "\211\303@\204\355t7dH\213\004%", str_len=<optimized out>, retval_ptr=0x0, string_name=0x555558199665 "Command line code") at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_execute_API.c:1367
+#2  0x00005555564a6972 in zend_eval_stringl_ex (str=str@entry=0x5555564a6972 <zend_eval_stringl_ex+12> "\211\303@\204\355t7dH\213\004%", str_len=<optimized out>, retval_ptr=<optimized out>, string_name=<optimized out>, handle_exceptions=true) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_execute_API.c:1405
+recvfromInto guard, pins and timeout OK; fatal frame refs match PHP control
+BUFFER FREE EVENT 1
+#0  0x00005555560c3275 in buffer_free_object(_zend_object*) ()
+#1  0x000055555653116a in zend_objects_store_free_object_storage (objects=<optimized out>, fast_shutdown=fast_shutdown@entry=255) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_objects_API.c:107
+#2  0x00005555564a5701 in zend_shutdown_executor_values (fast_shutdown=255, fast_shutdown@entry=true) at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_execute_API.c:430
+#3  0x00005555564a57bd in shutdown_executor () at /home/lotus/CLionProjects/pcg729/source/php-src/Zend/zend_execute_API.c:453
+[Inferior 1 (process 2395498) exited with code 0377]
+FINAL RELEASES=1 BUFFER_FREES=1
+warning: File "/home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-after" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load".
+warning: File "/usr/local/musl/x86_64-linux-musl/lib/libstdc++.so.6.0.32-gdb.py" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load".

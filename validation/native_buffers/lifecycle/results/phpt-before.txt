@@ -1,0 +1,34 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/validation/native_buffers/lifecycle/php-before
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.10
+ZEND_VERSION: 4.5.10
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  :
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/2 [tests/native_swoole_buffer/recvfrom_into_bailout.phpt]
+FAIL recvfromInto releases guard, both Zend pins and unpublished peer on bailout [tests/native_swoole_buffer/recvfrom_into_bailout.phpt]
+TEST 2/2 [tests/native_swoole_buffer/recvfrom_into_typed_bailout.phpt]
+FAIL recvfromInto releases pins without destroying the published typed peer twice [tests/native_swoole_buffer/recvfrom_into_typed_bailout.phpt]
+=====================================================================
+Number of tests :     2                 2
+Tests skipped   :     0 (  0.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     2 (100.0%) (100.0%)
+Tests passed    :     0 (  0.0%) (  0.0%)
+---------------------------------------------------------------------
+Time taken      : 0.101 seconds
+=====================================================================
+
+=====================================================================
+FAILED TEST SUMMARY
+---------------------------------------------------------------------
+recvfromInto releases guard, both Zend pins and unpublished peer on bailout [tests/native_swoole_buffer/recvfrom_into_bailout.phpt]
+recvfromInto releases pins without destroying the published typed peer twice [tests/native_swoole_buffer/recvfrom_into_typed_bailout.phpt]
+=====================================================================

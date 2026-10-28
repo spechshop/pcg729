@@ -1,0 +1,36 @@
+In file included from /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_cxx.h:19,
+                 from /home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:19:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_private.h: In function ‘int sw_zend_register_function_alias(zend_array*, const char*, size_t, zend_array*, const char*, size_t, const zend_internal_arg_info*)’:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_private.h:746:19: warning: missing initializer for member ‘_zend_function_entry::frameless_function_infos’ [-Wmissing-field-initializers]
+  746 |         PHP_FE_END};
+      |                   ^
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_private.h:746:19: warning: missing initializer for member ‘_zend_function_entry::doc_comment’ [-Wmissing-field-initializers]
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_private.h: In function ‘zval* sw_zend_read_property_ex(zend_class_entry*, zval*, zend_string*, int)’:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_private.h:820:109: warning: unused parameter ‘silent’ [-Wunused-parameter]
+  820 | static sw_inline zval *sw_zend_read_property_ex(zend_class_entry *ce, zval *zobject, zend_string *name, int silent) {
+      |                                                                                                         ~~~~^~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_cxx.h: In member function ‘void zend::ArrayIterator::operator++(int)’:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/php_swoole_cxx.h:354:25: warning: unused parameter ‘i’ [-Wunused-parameter]
+  354 |     void operator++(int i) {
+      |                     ~~~~^
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc: In lambda function:
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:961:32: warning: unused parameter ‘protocol’ [-Wunused-parameter]
+  961 |             [](const Protocol *protocol, swoole::network::Socket *conn, PacketLength *pl) {
+      |                ~~~~~~~~~~~~~~~~^~~~~~~~
+/home/lotus/CLionProjects/pcg729/source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc:961:67: warning: unused parameter ‘conn’ [-Wunused-parameter]
+  961 |             [](const Protocol *protocol, swoole::network::Socket *conn, PacketLength *pl) {
+      |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+libtool: link: warning: library `/usr/local/musl/x86_64-linux-musl/lib/libstdc++.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsodium.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcharset.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsqlite3.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcares.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libnghttp2.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libiconv.la' was moved.
+libtool: link: warning: library `/usr/local/musl/x86_64-linux-musl/lib/libstdc++.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsodium.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcharset.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libsqlite3.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libcares.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libnghttp2.la' was moved.
+libtool: link: warning: library `/home/lotus/CLionProjects/pcg729/buildroot/lib/libiconv.la' was moved.

@@ -1,0 +1,94 @@
+172 0 paired run done
+172 1 paired run done
+172 2 paired run done
+172 3 paired run done
+172 4 paired run done
+172 5 paired run done
+172 6 paired run done
+2048 0 paired run done
+2048 1 paired run done
+2048 2 paired run done
+2048 3 paired run done
+2048 4 paired run done
+2048 5 paired run done
+2048 6 paired run done
+{
+  "172": {
+    "before": {
+      "pps": {
+        "median": 559805.3489625016,
+        "min": 544241.2525976568,
+        "max": 566586.3978051032
+      },
+      "us_packet": {
+        "median": 1.7863352,
+        "min": 1.76495589,
+        "max": 1.8374204366666664
+      },
+      "cpu_s_million": {
+        "median": 1.74018,
+        "min": 1.70616,
+        "max": 1.79192
+      }
+    },
+    "after": {
+      "pps": {
+        "median": 550861.0918281676,
+        "min": 547855.765399045,
+        "max": 564143.4687471787
+      },
+      "us_packet": {
+        "median": 1.8153396833333335,
+        "min": 1.7725987366666665,
+        "max": 1.82529794
+      },
+      "cpu_s_million": {
+        "median": 1.76728,
+        "min": 1.7235533333333333,
+        "max": 1.7814333333333334
+      }
+    },
+    "cpu_change_percent": 1.5573101633164388
+  },
+  "2048": {
+    "before": {
+      "pps": {
+        "median": 504287.0043383206,
+        "min": 498877.6135046595,
+        "max": 522281.73847019795
+      },
+      "us_packet": {
+        "median": 1.98299776,
+        "min": 1.9146754066666667,
+        "max": 2.004499646666667
+      },
+      "cpu_s_million": {
+        "median": 1.9060466666666667,
+        "min": 1.8620866666666667,
+        "max": 1.9403266666666668
+      }
+    },
+    "after": {
+      "pps": {
+        "median": 508360.63972740044,
+        "min": 496730.0599585138,
+        "max": 514610.80245746276
+      },
+      "us_packet": {
+        "median": 1.967107446666667,
+        "min": 1.9432161066666669,
+        "max": 2.0131658633333336
+      },
+      "cpu_s_million": {
+        "median": 1.9082466666666662,
+        "min": 1.88114,
+        "max": 1.94825
+      }
+    },
+    "cpu_change_percent": 0.11542214776130155
+  },
+  "sha256": {
+    "before": "0f7868355080c19a8bb7ac927d1017421c22995d0d730c09816d34ece530f7c4",
+    "after": "8116448aa3f3d42c7c0b48494233a2e903f0c5f4543de92e4c43f8c2cb108bdd"
+  }
+}
