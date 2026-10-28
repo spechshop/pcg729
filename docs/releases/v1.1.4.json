@@ -1,0 +1,227 @@
+{
+  "release": "v1.1.4",
+  "validated_at_utc": "2026-10-28T22:18:57Z",
+  "artifact": {
+    "name": "pcg729-linux-x86_64-zts",
+    "source": "buildroot/bin/php",
+    "size_bytes": 137769360,
+    "sha256": "09d08e11460a10721544a8a3e90a0d856ec7614ae877183527da3c88f81b10df",
+    "mode": "0o775",
+    "original_mtime_ns": 1793219646690105017,
+    "format": "ELF64 x86_64 Linux, statically linked, debug_info, not stripped",
+    "identical_to_sapi_cli_php": true,
+    "rebuilt": false,
+    "modified_original": false
+  },
+  "runtime": {
+    "php": "8.5.10",
+    "zts": true,
+    "os": "Linux",
+    "architecture": "x86_64",
+    "extensions": {
+      "Core": "8.5.10",
+      "date": "8.5.10",
+      "lexbor": "8.5.10",
+      "openssl": "8.5.10",
+      "pcre": "8.5.10",
+      "sqlite3": "8.5.10",
+      "zlib": "8.5.10",
+      "bcg729": "1.0.3",
+      "bcmath": "8.5.10",
+      "bz2": "8.5.10",
+      "ctype": "8.5.10",
+      "curl": "8.5.10",
+      "uri": "8.5.10",
+      "json": "8.5.10",
+      "mbstring": "8.5.10",
+      "SPL": "8.5.10",
+      "fileinfo": "8.5.10",
+      "filter": "8.5.10",
+      "gd": "8.5.10",
+      "hash": "8.5.10",
+      "iconv": "8.5.10",
+      "intl": "8.5.10",
+      "session": "8.5.10",
+      "standard": "8.5.10",
+      "libxml": "8.5.10",
+      "mysqlnd": "mysqlnd 8.5.10",
+      "mysqli": "8.5.10",
+      "Zend OPcache": "8.5.10",
+      "opus": "1.1.1",
+      "pcntl": "8.5.10",
+      "PDO": "8.5.10",
+      "pdo_mysql": "8.5.10",
+      "pgsql": "8.5.10",
+      "Phar": "8.5.10",
+      "posix": "8.5.10",
+      "sockets": "8.5.10",
+      "random": "8.5.10",
+      "readline": "8.5.10",
+      "redis": "6.3.0",
+      "Reflection": "8.5.10",
+      "exif": "8.5.10",
+      "soap": "8.5.10",
+      "swoole": "6.3.0RC1",
+      "sodium": "8.5.10",
+      "psampler": "0.6.1",
+      "tokenizer": "8.5.10",
+      "dom": "20031129",
+      "uv": "0.3.0",
+      "xhprof": "2.3.10",
+      "xmlwriter": "8.5.10",
+      "yaml": "2.3.0",
+      "zip": "1.22.8"
+    }
+  },
+  "configure_command": " './configure'  '--prefix=' '--with-valgrind=no' '--enable-shared=no' '--enable-static=yes' '--disable-all' '--disable-cgi' '--disable-phpdbg' '--with-pic' '--enable-cli' '--disable-fpm' '--disable-embed' '--disable-micro' '--with-config-file-path=/usr/local/etc/php' '--with-config-file-scan-dir=/usr/local/etc/php/conf.d' '--enable-zts' '--disable-zend-signals' '--enable-zend-max-execution-timers' '--enable-xmlwriter' '--enable-ctype' '--enable-xhprof' '--enable-bcg729' '--enable-psampler' '--with-extra-cflags=-I/home/lotus/CLionProjects/pcg729/buildroot/include' '--with-extra-ldflags=-L/home/lotus/CLionProjects/pcg729/buildroot/lib' '--enable-session' '--enable-redis' '--enable-redis-session' '--disable-redis-igbinary' '--enable-opus' '--with-extra-cflags=-I/home/lotus/CLionProjects/pcg729/buildroot/include -DHAVE_LIBSOXR=1' '--with-extra-ldflags=-L/home/lotus/CLionProjects/pcg729/buildroot/lib -lsoxr -lopus' '--with-zlib' '--with-openssl=/home/lotus/CLionProjects/pcg729/buildroot' '--with-curl' '--with-pgsql' 'PGSQL_CFLAGS=-I/home/lotus/CLionProjects/pcg729/buildroot/include' 'PGSQL_LIBS=-L/home/lotus/CLionProjects/pcg729/buildroot/lib -lpq -lpgport -lpgcommon' '--enable-mysqlnd' '--with-pdo-mysql' '--with-mysqli' '--with-sqlite3=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-swoole-sqlite' '--enable-swoole' '--enable-openssl' '--enable-swoole-posix' '--enable-swoole-coro-time' '--enable-cares' '--enable-pdo' '--disable-thread-context' '--enable-swoole-thread' '--enable-swoole-pgsql' '--enable-swoole-curl' '--with-brotli-dir=/home/lotus/CLionProjects/pcg729/buildroot' '--with-nghttp2-dir=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-swoole-uv' '--enable-swoole-stdext' '--enable-bcmath' '--with-bz2=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-dom' '--enable-exif' '--enable-fileinfo' '--enable-filter' '--enable-gd' '--with-iconv=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-intl' '--enable-mbstring' '--disable-mbregex' '--enable-pcntl' '--enable-phar' '--enable-posix' '--with-readline=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-soap' '--with-libxml=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-sockets' '--with-sodium' '--with-uv=/home/lotus/CLionProjects/pcg729/buildroot' '--enable-tokenizer' '--with-yaml=/home/lotus/CLionProjects/pcg729/buildroot' '--with-zip=/home/lotus/CLionProjects/pcg729/buildroot' 'PKG_CONFIG=/home/lotus/CLionProjects/pcg729/buildroot/bin/pkg-config' 'PKG_CONFIG_PATH=/home/lotus/CLionProjects/pcg729/buildroot/lib/pkgconfig' 'EXTENSION_DIR='",
+  "pcg729_source_base": "bf176e41c8febeb47e7350f0975ae30f041d45ac",
+  "swoole": {
+    "upstream": "swoole/swoole-src v6.3.0-rc1 (6.3.0RC1)",
+    "patch_revision": 3,
+    "read_abi_version": 1,
+    "manifest_sha256": "90d1faf5c82def9c2994a1777e433e1e1ed155e0af90074d9d77823926d7b823",
+    "patches_sha256": {
+      "swoole_native_buffer_v630rc1.patch": "4c6988aacd6e7bda42fe348e18585740b51409fb98f99aced465532e73a214bc",
+      "swoole_native_buffer_v630rc1_read_api_v1_upgrade.patch": "7c0ac71ec6350dc2901c7cc2da6d0c29f46865bdf1ff8a46400af10976b2ebce",
+      "swoole_native_buffer_v630rc1_lifecycle_upgrade.patch": "d3d99f032bc7a1a5a2c8aba9942b579c1ed8d7e886ab65d3b63dca16dd387885"
+    },
+    "build_files_sha256": {
+      "config.m4": "93b18ccbb0385873b57b1eedbe221d9127ac3beac00d4fe40cec300f52e378ed",
+      "config.w32": "954c1a0f8d773eb61a43308be38d2b49421bb4a3b88333ca608a0973bf3c559e",
+      "ext-src/php_swoole.cc": "93231c41cba0dee1132355cacc2978041ec2ee86604b23e26415ae1eb4677e8e",
+      "ext-src/php_swoole_buffer.h": "2bd60369f7f7f91fd791533c6151cd1a75b282d820dfb3c60b732ad0bd4e1a42",
+      "ext-src/stubs/php_swoole_buffer.stub.php": "8fad35f54598dec2c8f0ca18c3d9c3139f3097ee3dbe89c11b4ced7eb5fdf786",
+      "ext-src/stubs/php_swoole_buffer_arginfo.h": "9f5668c930094f6be0cd25e268d2e03d8c0f6a6405e64578d20fbe4753cdaa67",
+      "ext-src/stubs/php_swoole_socket_coro.stub.php": "196886610bdc7caab8dcf01aa98dd0638700d55a86ad05da5fe983970f783148",
+      "ext-src/stubs/php_swoole_socket_coro_arginfo.h": "a52361020bf690a036ae16bca8bd2da087c60196d681ac5a264eaec586a3d37c",
+      "ext-src/swoole_buffer.cc": "4aed4f1da5c6d1d427f85bfad34008576fee9f39a2026a82229dea47738d45fd",
+      "ext-src/swoole_socket_coro.cc": "73687f4de06c560633570a3bf0aa5da4b5d3ec46f61eab5365e068d8d7f780af",
+      "ext-src/swoole_coroutine.cc": "e032dc2f9ba44adb2d76ee35e08d52633fc0e0888d2d592fdc33caa2ceaafd88",
+      "swoole_buffer_c_api.h": "7b2f89c8b728bf08a26e724ac9b966144c2e4993b165202c3f1c7e0710f167f3",
+      "include/swoole_version.h": "330a890cae13319c428917eb6fe57b080a370db9c7c703780908fbcc22913987",
+      "include/swoole_coroutine_socket.h": "999056ee5889dccc59323238376feedcf66427f7f27f2292980aa3a95bb4e7c3",
+      "src/coroutine/socket.cc": "85b1d809c72451858caad161bf4904e7806d4aedf11b9171340f6f114718edac",
+      "ext-src/php_swoole_private.h": "c39ee022639c99718c9024c3002343c769dec401a62652e434ef487075e9bad9",
+      "include/swoole_coroutine.h": "0d9af2316a4d0e890fc988b6d802be81beec357561d72649c33aeb152d4f0984",
+      "src/coroutine/base.cc": "a3c5fe1ca38b4be960d41f2af457e0345e84de800fc5a269a6960a42ec43594e",
+      "ext-src/php_swoole_coroutine.h": "3d705af60d75b4c9418cb713e081ee3b28fc716a3a1e685b792002c04b9d01b4"
+    }
+  },
+  "psampler": {
+    "repository": "https://github.com/berzersks/psampler",
+    "build_source_commit": "1401ffefe9e11b771b5272bd1882027f2c5a264e",
+    "build_checkout_clean": true,
+    "public_commit_verified": true,
+    "archive_url": "https://codeload.github.com/berzersks/psampler/tar.gz/1401ffefe9e11b771b5272bd1882027f2c5a264e",
+    "archive_sha256": "631d8806f8c6f117f6d016d22c38d84b27f9174d34d20b5bc5fee64dfc29568b",
+    "archive_matches_build_tracked_c_headers_and_config": true,
+    "build_files_sha256": {
+      "bench/category-core.c": "8102f9936820924d6a9ccf738cc4371160339e7b31099c2b43dcdc6a0db43026",
+      "bench/unified-core.c": "77839354e072b467a827d5913503e55ae8b082f6f9c37c01ce14d6bdc2964653",
+      "binary_buffer.c": "7eea4ed758c06eb5abb46ae592196e21055f7fbde02b6f1bc3448160aa6972ca",
+      "binary_buffer.h": "cee848a08c4bca52c9d7f464204ac554920d96b0f49e5a0aaab87702c8724b1a",
+      "byte_buffer.c": "5d48eeb7c50806fd6c06a7f70828e566c7a60c39c097edab0025fa080f73558f",
+      "byte_buffer.h": "2de71bb7461b1ec6a3ec0d9f54d904f43b4538549a146dd567438101144a4ac1",
+      "config.m4": "f0676a3274a32e31d2bcea2f0a12468653405393d977db542bb957ae65bca84c",
+      "docs/swoole-buffer-c-api-v1.h": "1d0d5c073990ce91c045b1b566ec4be4da5899a93907870b7ecaca011cc1631d",
+      "pcm_analyzer.c": "2535afe1b189a73b6598994b19c6a9337f35b84a0dc9a7130548de11985029b8",
+      "pcm_analyzer.h": "cd1c2a6add0b12ec6540190499ace407b74e3d4d9cba588c8022db88707d441e",
+      "pcm_benchmark.c": "8542172c24fb6a89256af6ec1b2017daaf914a01185a23ba57a01ab7c9ac93ae",
+      "pcm_buffer.c": "d34679300e974161605751006972c53d6f7751f0080abcbb4cba33aae0482e7d",
+      "pcm_buffer.h": "b4c5cbe3645381bc162067e8d3c883038b31e3b91a5f97e12e6b342c1b908b97",
+      "pcm_core.c": "d558cd1dc342e5705476262c82e054f76817f006910422583e034e8d79c87d80",
+      "pcm_core.h": "44bad942a416780afd003df2fb7b2ec6af002651800d085e487fe6a597aca845",
+      "pcm_standalone.c": "a0059d5b40eb69a1cb23e574a327ce7f9629efedc1f2851cd3dd8eac46037661",
+      "php_psampler.h": "cd7e79ad0a1c7a9f600090fcf17132227b6b9e628cd740c1d68a73c45015f3ae",
+      "psampler.c": "2f4f09219956d1893a817bda641606c715f4a8dba9fdbd021d34f8452032459d",
+      "psampler_binary.h": "5be3943debc49f8c8023938b06f20811861d58431b55ac19b0c994957df1f394",
+      "psampler_native.h": "4fbfb9153ea26e0e45a102b99d021616536abc26e14d58e1b2e325313f32a0a4",
+      "psampler_platform.h": "909cefc4b39a33244e92d69051c2c9484008ec9873cc33680a33d104c80e7f75",
+      "psampler_resample.h": "79f7ce689954bc7366f1b2775142819dd433060911b8f1de6cee9df8ff407f24",
+      "swoole_bridge.c": "77d44a15e3d37901fba87dceccb6c35edcd8f850e68f45164c8abc23b3be22cb",
+      "swoole_bridge.h": "8146baeb9bb09b3a9267453c0a3e56769e551d33814481494818ba62d7931bc3",
+      "swoole_buffer_c_api.h": "7b2f89c8b728bf08a26e724ac9b966144c2e4993b165202c3f1c7e0710f167f3",
+      "tests/native_binary_provider/psampler_binary_test.c": "2319b472644c93785828cc2fabd7d1b200d7fa13e24aec260c30c55832a00b84",
+      "tests/pcm_analyzer_asan.c": "1f4ae1dd5e22f4b32ce77ef8cbe4381b8ee871f14de30168f9cbf5b3d4140136",
+      "tests/pcm_cache_threads.c": "447c6ddc9ea3794b0dbfe734e1c99bc23f41e94ab80786d1cceac363b22b2435",
+      "tests/pcm_stream_asan.c": "aeb0d90fcb7d9cb59bb15d42e36979d0156217fe78d725e18111eb63604652ca"
+    },
+    "binary_api_version": 1,
+    "swoole_bridge": "enabled (Swoole read ABI v1)"
+  },
+  "validation": {
+    "requested_checks": {
+      "supports_native_swoole_buffer": true,
+      "append_buffer_method": true,
+      "recvfrom_into_method": true
+    },
+    "phpt": {
+      "total": 54,
+      "passed": 23,
+      "failed": 0,
+      "skipped": 31,
+      "skip_reason": "Test-only native fixtures or alternative PHP/Swoole builds are absent from production binary.",
+      "original_test_revision": "1401ffefe9e11b771b5272bd1882027f2c5a264e",
+      "corrected_test_revision": "00bf876e92032ca33fa23c7e59f0b36b950e61d5",
+      "corrected_test_files_sha256": {
+        "byte_buffer_native_swoole_ring.phpt": "4f89aa0c7550577f6c28d84e20fccd3af32f759c354276a57092a137ea26b977",
+        "byte_buffer_native_swoole_oom.phpt": "8db5437072f2615001eb748d31494a6bb571ecb4813c2f3064d8b3523aaaf4e6"
+      },
+      "initial_invalid_test_failures": [
+        "byte_buffer_native_swoole_ring.phpt: exception trace retained the source",
+        "byte_buffer_native_swoole_oom.phpt: attempted to reconstruct an already constructed Swoole Buffer"
+      ]
+    },
+    "smoke": [
+      {
+        "case": "udp-functional",
+        "exit": 0,
+        "expected_exit": 0,
+        "marker": "\"status\":\"PASS\"",
+        "passed": true
+      },
+      {
+        "case": "udp-manual",
+        "exit": 0,
+        "expected_exit": 0,
+        "marker": "Pacote 3: OK",
+        "passed": true
+      },
+      {
+        "case": "udp-cancel",
+        "exit": 0,
+        "expected_exit": 0,
+        "marker": "Buffer reutilizado após cancelamento",
+        "passed": true
+      },
+      {
+        "case": "udp-concurrency",
+        "exit": 255,
+        "expected_exit": 255,
+        "marker": "already been bound",
+        "passed": true
+      },
+      {
+        "case": "udp-peer-bailout",
+        "exit": 255,
+        "expected_exit": 255,
+        "marker": "peer bailout guard released",
+        "passed": true
+      }
+    ],
+    "prior_instrumented_memcheck": {
+      "report": "validation/native_buffers/lifecycle/REPORT.md",
+      "processes": 31,
+      "zero_error_processes": 17,
+      "invalid_accesses": 0,
+      "known_leaks": "fatal coroutine teardown and ZTS globals/trace; historical PCM limitations remain recorded",
+      "same_as_release_binary": false,
+      "new_valgrind_run": false
+    }
+  },
+  "reproducibility": {
+    "independent_rebuild_performed": false,
+    "bit_reproducibility_proven": false,
+    "limitation": "Source provenance and Swoole/psampler hashes verified. Full dependency/toolchain pinning and independent rebuild comparison not performed."
+  }
+}

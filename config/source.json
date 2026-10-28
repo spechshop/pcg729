@@ -71,9 +71,9 @@
   },
   "psampler": {
     "path": "php-src/ext/psampler",
-    "type": "git",
-    "rev": "master",
-    "url": "https://github.com/berzersks/psampler.git",
+    "type": "url",
+    "url": "https://codeload.github.com/berzersks/psampler/tar.gz/1401ffefe9e11b771b5272bd1882027f2c5a264e",
+    "filename": "psampler-1401ffefe9e11b771b5272bd1882027f2c5a264e.tar.gz",
     "license": {
       "type": "file",
       "path": "LICENSE"
