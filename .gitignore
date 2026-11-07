@@ -10,6 +10,21 @@
 /CMakeUserPresets.json
 /compile_commands.json
 
+# Isolated psampler 0.7.0 build and generated validation outputs.
+# Keep preparation/build scripts and validation test sources versionable.
+# Nested Git copies do not inherit this file; configure-ignores.py writes
+# their local info/exclude rules without changing dependency source files.
+/validation/psampler-0.7.0/php-src/
+/validation/psampler-0.7.0/bin/
+/validation/psampler-0.7.0/pcm-analyzer-asan
+/validation/psampler-0.7.0/cache-threads-asan
+/validation/psampler-0.7.0/*.sha256
+/validation/psampler-0.7.0/source-sha256.json
+/validation/psampler-0.7.0/original-modules.json
+/validation/psampler-0.7.0/verification.json
+/validation/psampler-0.7.0/psampler-info.txt
+/validation/psampler-0.7.0/module-info.patch
+
 # Native compilation artifacts
 *.o
 *.lo
