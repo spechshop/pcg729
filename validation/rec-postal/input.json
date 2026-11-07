@@ -1,0 +1,8 @@
+{
+  "channels": 1,
+  "rate": 8000,
+  "sample_width": 2,
+  "frames": 390080,
+  "duration": 48.76,
+  "original_sha256": "26ea7e45e718acbc87966a53eab31211af2d084c751cb39da0722e1b6f9ecfc3"
+}

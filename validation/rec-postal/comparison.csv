@@ -1,0 +1,35 @@
+instante_ms,evento,resultado,observacao,motivo,detected_at_ms
+160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,160
+1240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,1240
+5160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,5160
+6240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,6240
+10160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,10160
+11240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,11240
+15160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,15160
+16240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,16240
+20160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,20160
+21240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,21240
+25160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,25160
+26240,signal.changed,silence,"silencio correto, atraso de 130 ms",classification_changed,26240
+30160,signal.changed,narrowband_tone,"tom correto, atraso de 50 ms",classification_changed,30160
+30460,signal.changed,silence,"silencio correto, atraso de 125 ms",classification_changed,30460
+31200,signal.changed,voice_like,fala correta; latencia aproximada de 66 ms (55 ms com limiar -42 dBFS),classification_changed,31200
+31200,speech.started,voice_like,fala correta; latencia aproximada de 66 ms (55 ms com limiar -42 dBFS),voice_like,31200
+33020,speech.ended,voice_like,fim da fala correto; aproximadamente 94 ms apos envelope -50 dBFS,classification_changed,33020
+33020,signal.changed,silence,fim da fala correto; aproximadamente 94 ms apos envelope -50 dBFS,classification_changed,33020
+33400,signal.changed,voice_like,incorreto: bip de aproximadamente 1400 Hz classificado como fala,classification_changed,33400
+33400,speech.started,voice_like,incorreto: bip de aproximadamente 1400 Hz classificado como fala,voice_like,33400
+33600,speech.ended,voice_like,"fim do falso episodio de fala, 118 ms apos o bip",classification_changed,33600
+33600,signal.changed,silence,"fim do falso episodio de fala, 118 ms apos o bip",classification_changed,33600
+37260,signal.changed,narrowband_tone,bip corretamente classificado como tom; aproximadamente 61 ms de atraso,classification_changed,37260
+37540,signal.changed,silence,silencio correto; aproximadamente 118 ms de atraso,classification_changed,37540
+44520,signal.changed,voice_like,fala correta; aproximadamente 102 ms apos envelope -50 dBFS,classification_changed,44520
+44520,speech.started,voice_like,fala correta; aproximadamente 102 ms apos envelope -50 dBFS,voice_like,44520
+44720,speech.ended,voice_like,segmentacao por queda de atividade; nao representa fim semantico da locucao,classification_changed,44720
+44720,signal.changed,silence,segmentacao por queda de atividade; nao representa fim semantico da locucao,classification_changed,44720
+44800,signal.changed,voice_like,retomada de atividade na mesma locucao,classification_changed,44800
+44800,speech.started,voice_like,retomada de atividade na mesma locucao,voice_like,44800
+46700,speech.ended,voice_like,segmentacao por queda de atividade; nao representa fim semantico da locucao,classification_changed,46700
+46700,signal.changed,silence,segmentacao por queda de atividade; nao representa fim semantico da locucao,classification_changed,46700
+46920,signal.changed,voice_like,retomada de atividade na mesma locucao,classification_changed,46920
+46920,speech.started,voice_like,retomada de atividade na mesma locucao,voice_like,46920

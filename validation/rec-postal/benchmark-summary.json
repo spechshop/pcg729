@@ -1,0 +1,16 @@
+{
+  "stream_ms": {
+    "median_ms": 7.5878985,
+    "p95_nearest_rank_ms": 8.650316,
+    "minimum_ms": 7.463095,
+    "maximum_ms": 9.188693,
+    "repetitions": 30
+  },
+  "pcm_full_coverage_ms": {
+    "median_ms": 3.068848,
+    "p95_nearest_rank_ms": 3.75297,
+    "minimum_ms": 3.017531,
+    "maximum_ms": 4.115832,
+    "repetitions": 30
+  }
+}

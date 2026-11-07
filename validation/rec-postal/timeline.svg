@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="290" viewBox="0 0 1440 290">
+<rect width="1440" height="290" fill="white"/>
+<g font-family="sans-serif" font-size="14" fill="#222">
+<text x="25" y="28">rec_postal.wav — referencia acustica independente e estado online</text>
+<path d="M110.0,45 V240" stroke="#eee"/><text x="102.0" y="260">0s</text>
+<path d="M241.25512715340443,45 V240" stroke="#eee"/><text x="233.25512715340443" y="260">5s</text>
+<path d="M372.51025430680886,45 V240" stroke="#eee"/><text x="364.51025430680886" y="260">10s</text>
+<path d="M503.76538146021335,45 V240" stroke="#eee"/><text x="495.76538146021335" y="260">15s</text>
+<path d="M635.0205086136177,45 V240" stroke="#eee"/><text x="627.0205086136177" y="260">20s</text>
+<path d="M766.2756357670221,45 V240" stroke="#eee"/><text x="758.2756357670221" y="260">25s</text>
+<path d="M897.5307629204267,45 V240" stroke="#eee"/><text x="889.5307629204267" y="260">30s</text>
+<path d="M1028.785890073831,45 V240" stroke="#eee"/><text x="1020.7858900738311" y="260">35s</text>
+<path d="M1160.0410172272354,45 V240" stroke="#eee"/><text x="1152.0410172272354" y="260">40s</text>
+<path d="M1291.2961443806398,45 V240" stroke="#eee"/><text x="1283.2961443806398" y="260">45s</text>
+<text x="10" y="90">Referencia</text>
+<text x="10" y="175">Online</text>
+<rect x="112.8876127973749" y="65" width="26.251025430680883" height="40" fill="#d99500"/>
+<rect x="244.14273995077932" y="65" width="26.251025430680926" height="40" fill="#d99500"/>
+<rect x="375.3978671041838" y="65" width="26.251025430680897" height="40" fill="#d99500"/>
+<rect x="506.65299425758815" y="65" width="26.251025430680897" height="40" fill="#d99500"/>
+<rect x="637.9081214109926" y="65" width="26.251025430680784" height="40" fill="#d99500"/>
+<rect x="769.163248564397" y="65" width="26.25102543068101" height="40" fill="#d99500"/>
+<rect x="900.4183757178015" y="65" width="5.906480721903222" height="40" fill="#d99500"/>
+<rect x="927.2994257588186" y="65" width="47.041837571780206" height="40" fill="#1675ba"/>
+<rect x="985.025430680886" y="65" width="3.911402789171575" height="40" fill="#d99500"/>
+<rect x="1086.5118949958983" y="65" width="5.853978671041887" height="40" fill="#d99500"/>
+<rect x="1276.0180475799837" y="65" width="113.98195242001634" height="40" fill="#1675ba"/>
+<rect x="114.20016406890895" y="150" width="28.351107465135357" height="40" fill="#d99500"/>
+<rect x="142.5512715340443" y="150" width="102.90401968826905" height="40" fill="#ddd"/>
+<rect x="245.45529122231335" y="150" width="28.351107465135385" height="40" fill="#d99500"/>
+<rect x="273.80639868744873" y="150" width="102.9040196882691" height="40" fill="#ddd"/>
+<rect x="376.71041837571784" y="150" width="28.35110746513533" height="40" fill="#d99500"/>
+<rect x="405.06152584085316" y="150" width="102.9040196882691" height="40" fill="#ddd"/>
+<rect x="507.96554552912227" y="150" width="28.351107465135385" height="40" fill="#d99500"/>
+<rect x="536.3166529942577" y="150" width="102.90401968826905" height="40" fill="#ddd"/>
+<rect x="639.2206726825267" y="150" width="28.35110746513533" height="40" fill="#d99500"/>
+<rect x="667.571780147662" y="150" width="102.90401968826905" height="40" fill="#ddd"/>
+<rect x="770.4757998359311" y="150" width="28.351107465135442" height="40" fill="#d99500"/>
+<rect x="798.8269073010665" y="150" width="102.90401968826905" height="40" fill="#ddd"/>
+<rect x="901.7309269893356" y="150" width="7.875307629204258" height="40" fill="#d99500"/>
+<rect x="909.6062346185398" y="150" width="19.425758818703912" height="40" fill="#ddd"/>
+<rect x="929.0319934372437" y="150" width="47.77686628383913" height="40" fill="#1675ba"/>
+<rect x="976.8088597210829" y="150" width="9.975389663658802" height="40" fill="#ddd"/>
+<rect x="986.7842493847417" y="150" width="5.250205086136134" height="40" fill="#1675ba"/>
+<rect x="992.0344544708778" y="150" width="96.07875307629206" height="40" fill="#ddd"/>
+<rect x="1088.1132075471698" y="150" width="7.350287120590792" height="40" fill="#d99500"/>
+<rect x="1095.4634946677606" y="150" width="183.23215750615236" height="40" fill="#ddd"/>
+<rect x="1278.695652173913" y="150" width="5.250205086136248" height="40" fill="#1675ba"/>
+<rect x="1283.9458572600493" y="150" width="2.1000820344545446" height="40" fill="#ddd"/>
+<rect x="1286.0459392945038" y="150" width="49.876948318293444" height="40" fill="#1675ba"/>
+<rect x="1335.9228876127972" y="150" width="5.775225594749827" height="40" fill="#ddd"/>
+<rect x="1341.698113207547" y="150" width="48.30188679245293" height="40" fill="#1675ba"/>
+<text x="110" y="220">Amarelo: tom/bip. Azul: fala. Cinza: silencio online. Referencia de fala inclui pausas internas.</text>
+<text x="110" y="282">Nenhum ring.started, ring.ended, ring.cadence_detected ou ring.interrupted emitido.</text>
+</g></svg>
