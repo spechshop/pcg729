@@ -21,9 +21,9 @@ As dependências do projeto são gerenciadas pelo Composer incluído em `bin/com
 
 
 
-## Atualizar o PHP do ambiente
+## Instalar ou atualizar o PHP do ambiente
 
-Para baixar a versão pública estável mais recente e atualizar o PHP atual de forma interativa:
+Para baixar a versão pública estável mais recente e instalar ou atualizar o PHP de forma interativa:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/spechshop/pcg729/refs/heads/fix-files/bin/update-php | bash
@@ -31,7 +31,9 @@ curl -fsSL https://raw.githubusercontent.com/spechshop/pcg729/refs/heads/fix-fil
 
 O instalador detecta o binário retornado por `command -v php`, identifica se o ambiente atual usa ZTS ou NTS e mostra um menu navegável com as setas ↑/↓ e Enter.
 
-Todos os arquivos instaláveis disponíveis na última release pública estável são exibidos no menu, preservando variantes antigas e builds com extensões adicionais. Arquivos de checksum e assinatura são ignorados. Quando o GitHub publica o digest SHA-256 do asset, o instalador valida a integridade antes de substituir o PHP atual.
+Se não houver PHP no `PATH`, o mesmo comando instala em `/usr/local/bin/php`. Nesse caso, é necessário ter Python 3 para consultar os dados da release. O script requer Bash, `curl`, `sha256sum` e `install` (GNU coreutils); usa `sudo` quando precisa de permissão para gravar no destino. Certifique-se de que `/usr/local/bin` esteja no `PATH` após a instalação.
+
+Todos os arquivos instaláveis disponíveis na última release pública estável são exibidos no menu, preservando variantes antigas e builds com extensões adicionais. Arquivos de checksum e assinatura são ignorados. Quando o GitHub publica o digest SHA-256 do asset, o instalador valida a integridade antes de instalar o binário.
 
 ## Exemplo de compilação
 

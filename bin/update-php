@@ -11,63 +11,85 @@ die() {
 }
 
 command -v curl >/dev/null 2>&1 || die "curl não está instalado."
-command -v php >/dev/null 2>&1 || die "nenhum PHP foi encontrado no PATH."
 command -v sha256sum >/dev/null 2>&1 || die "sha256sum não está instalado."
 
-PHP_COMMAND="$(command -v php)"
-PHP_BIN="$(readlink -f "$PHP_COMMAND" 2>/dev/null || printf '%s' "$PHP_COMMAND")"
-CURRENT_VERSION="$("$PHP_BIN" -r 'echo PHP_VERSION;' 2>/dev/null || true)"
-CURRENT_MODE="$("$PHP_BIN" -r 'echo PHP_ZTS ? "ZTS" : "NTS";' 2>/dev/null || true)"
+PHP_COMMAND="$(command -v php || true)"
+PHP_BIN="/usr/local/bin/php"
+CURRENT_VERSION=""
+CURRENT_MODE=""
 
-[ -n "$CURRENT_VERSION" ] || die "não foi possível identificar a versão do PHP atual."
-[ -n "$CURRENT_MODE" ] || die "não foi possível identificar se o PHP atual é ZTS ou NTS."
+if [ -n "$PHP_COMMAND" ]; then
+    PHP_BIN="$(readlink -f "$PHP_COMMAND" 2>/dev/null || printf '%s' "$PHP_COMMAND")"
+    CURRENT_VERSION="$("$PHP_BIN" -r 'echo PHP_VERSION;' 2>/dev/null || true)"
+    CURRENT_MODE="$("$PHP_BIN" -r 'echo PHP_ZTS ? "ZTS" : "NTS";' 2>/dev/null || true)"
+
+    [ -n "$CURRENT_VERSION" ] || die "não foi possível identificar a versão do PHP atual."
+    [ -n "$CURRENT_MODE" ] || die "não foi possível identificar se o PHP atual é ZTS ou NTS."
+else
+    command -v python3 >/dev/null 2>&1 || die "instale Python 3 para consultar as releases quando não há PHP no PATH."
+fi
+
+parse_release() {
+    if [ -n "$PHP_COMMAND" ]; then
+        "$PHP_BIN" -r '
+            $data = json_decode(stream_get_contents(STDIN), true);
+            if (!is_array($data) || !isset($data["assets"]) || !is_array($data["assets"])) {
+                exit(1);
+            }
+            $clean = static fn($value) => str_replace(["\t", "\r", "\n"], " ", (string) $value);
+            echo $clean($data["tag_name"] ?? ""), "\n";
+            foreach ($data["assets"] as $asset) {
+                $name = (string) ($asset["name"] ?? "");
+                $url = (string) ($asset["browser_download_url"] ?? "");
+                if ($name === "" || $url === "") {
+                    continue;
+                }
+                if (preg_match("/^(SHA(1|256|512)SUMS?|checksums?(\\.txt)?|.*\\.(sha1|sha256|sha512|sig|asc))$/i", $name)) {
+                    continue;
+                }
+                echo $clean($name), "\t", $clean($url), "\t", $clean($asset["digest"] ?? ""), "\n";
+            }
+        '
+    else
+        python3 -c '
+import json
+import re
+import sys
+
+data = json.load(sys.stdin)
+if not isinstance(data, dict) or not isinstance(data.get("assets"), list):
+    sys.exit(1)
+def clean(value):
+    return re.sub(r"[\t\r\n]", " ", str(value or ""))
+print(clean(data.get("tag_name")))
+for asset in data["assets"]:
+    name = asset.get("name") or ""
+    url = asset.get("browser_download_url") or ""
+    if not name or not url:
+        continue
+    if re.fullmatch(r"SHA(1|256|512)SUMS?|checksums?(\.txt)?|.*\.(sha1|sha256|sha512|sig|asc)", name, re.I):
+        continue
+    print("\t".join(clean(value) for value in (name, url, asset.get("digest"))))
+'
+    fi
+}
 
 RELEASE_JSON="$(curl -fsSL --retry 3 "$API_URL")" || die "não foi possível consultar a última release pública."
-
-RELEASE_TAG="$(printf '%s' "$RELEASE_JSON" | "$PHP_BIN" -r '
-    $data = json_decode(stream_get_contents(STDIN), true);
-    if (!is_array($data)) {
-        exit(1);
-    }
-    echo $data["tag_name"] ?? "";
-' 2>/dev/null || true)"
+RELEASE_DATA="$(printf '%s' "$RELEASE_JSON" | parse_release)" || die "a resposta da release pública é inválida."
 
 assets=()
 urls=()
 digests=()
 
-while IFS=$'\t' read -r name url digest; do
-    [ -n "$name" ] || continue
-    assets+=("$name")
-    urls+=("$url")
-    digests+=("$digest")
-done < <(
-    printf '%s' "$RELEASE_JSON" | "$PHP_BIN" -r '
-        $data = json_decode(stream_get_contents(STDIN), true);
-
-        if (!is_array($data) || !isset($data["assets"]) || !is_array($data["assets"])) {
-            exit(1);
-        }
-
-        foreach ($data["assets"] as $asset) {
-            $name = (string) ($asset["name"] ?? "");
-            $url = (string) ($asset["browser_download_url"] ?? "");
-            $digest = (string) ($asset["digest"] ?? "");
-
-            if ($name === "" || $url === "") {
-                continue;
-            }
-
-            if (preg_match("/^(SHA(1|256|512)SUMS?|checksums?(\\.txt)?|.*\\.(sha1|sha256|sha512|sig|asc))$/i", $name)) {
-                continue;
-            }
-
-            echo str_replace(["\\t", "\\r", "\\n"], " ", $name), "\t",
-                 str_replace(["\\t", "\\r", "\\n"], "", $url), "\t",
-                 str_replace(["\\t", "\\r", "\\n"], "", $digest), "\n";
-        }
-    '
-)
+{
+    IFS= read -r RELEASE_TAG
+    while IFS=$'\t' read -r name url digest; do
+        [ -n "$name" ] || continue
+        assets+=("$name")
+        urls+=("$url")
+        digests+=("$digest")
+    done
+} <<< "$RELEASE_DATA"
 
 [ "${#assets[@]}" -gt 0 ] || die "a última release pública não possui arquivos instaláveis."
 
@@ -83,11 +105,16 @@ exec 4>/dev/tty
 
 draw_menu() {
     printf '\033[2J\033[H' >&4
-    printf 'PCG729 - Atualizador do PHP\n\n' >&4
-    printf 'PHP atual\n' >&4
-    printf '  Binário: %s\n' "$PHP_BIN" >&4
-    printf '  Versão:  %s\n' "$CURRENT_VERSION" >&4
-    printf '  Build:    %s\n' "$CURRENT_MODE" >&4
+    printf 'PCG729 - Instalar ou atualizar o PHP\n\n' >&4
+    if [ -n "$PHP_COMMAND" ]; then
+        printf 'PHP atual\n' >&4
+        printf '  Binário: %s\n' "$PHP_BIN" >&4
+        printf '  Versão:  %s\n' "$CURRENT_VERSION" >&4
+        printf '  Build:    %s\n' "$CURRENT_MODE" >&4
+    else
+        printf 'PHP não encontrado no PATH.\n' >&4
+        printf '  Destino: %s\n' "$PHP_BIN" >&4
+    fi
 
     if [ -n "$RELEASE_TAG" ]; then
         printf '  Release:  %s\n' "$RELEASE_TAG" >&4
@@ -168,20 +195,20 @@ printf '\nBinário baixado:\n' >&4
 
 install_binary() {
     if [ -w "$PHP_BIN" ] || { [ ! -e "$PHP_BIN" ] && [ -w "$(dirname "$PHP_BIN")" ]; }; then
-        install -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
+        install -D -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
         return
     fi
 
     if command -v sudo >/dev/null 2>&1; then
-        sudo install -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
+        sudo install -D -m 0755 "$TMP_DIR/php-new" "$PHP_BIN"
         return
     fi
 
-    die "sem permissão para atualizar $PHP_BIN e sudo não está disponível."
+    die "sem permissão para instalar em $PHP_BIN e sudo não está disponível."
 }
 
-printf '\nAtualizando %s com %s...\n' "$PHP_BIN" "$ASSET" >&4
+printf '\nInstalando em %s o arquivo %s...\n' "$PHP_BIN" "$ASSET" >&4
 install_binary
 
-printf '\nPHP atualizado com sucesso:\n' >&4
+printf '\nPHP instalado com sucesso:\n' >&4
 "$PHP_BIN" -v >&4
