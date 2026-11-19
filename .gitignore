@@ -66,3 +66,6 @@ __pycache__/
 /*.pcmu
 /*.l16
 /*.gsm
+perf-out
+libspech
+.env

@@ -1,0 +1,57 @@
+{
+    "upstream": "swoole/swoole-src v6.3.0-rc1 (6.3.0RC1)",
+    "platforms": [
+        "Linux"
+    ],
+    "upstream_pr": "https://github.com/swoole/swoole-src/pull/6274",
+    "upstream_commit": "861a0dffbf5f97671b2d8772078e07d4db120cde",
+    "patch": "swoole_socket_fd_lifecycle_v630rc1.patch",
+    "patch_sha256": "73a378574bf80ab4632a43f7015d1f8d0877e93bddded81622673c7f7bc094b2",
+    "files": {
+        "ext-src/swoole_socket_coro.cc": {
+            "before": [
+                "73687f4de06c560633570a3bf0aa5da4b5d3ec46f61eab5365e068d8d7f780af"
+            ],
+            "after": [
+                "d82d7a08f17109bbc4e6cd60f7b4794ba6a40ce75ac69396f8908b327ac102bf"
+            ]
+        },
+        "include/swoole_coroutine_socket.h": {
+            "before": [
+                "999056ee5889dccc59323238376feedcf66427f7f27f2292980aa3a95bb4e7c3"
+            ],
+            "after": [
+                "f17d311c2b115b8c1f63d4f1d50a6caf92d7153a0972b664bf4636936744e634"
+            ]
+        },
+        "include/swoole_socket.h": {
+            "before": [
+                "b89ac2ed1790b77e8ed69d7bf1f1616b4002111c16ab6265db09713b8ea6f1ea"
+            ],
+            "after": [
+                "ec3577308d46aa498f1d290e7f5bea19ae25f6ef48866b688c1a582a21ac7af4"
+            ]
+        },
+        "src/coroutine/socket.cc": {
+            "before": [
+                "85b1d809c72451858caad161bf4904e7806d4aedf11b9171340f6f114718edac"
+            ],
+            "after": [
+                "4fe9cfa775a1efb96abbc443b8c5024ed56e6239ce08b51242c2e9f0999d0d79"
+            ]
+        },
+        "src/network/socket.cc": {
+            "before": [
+                "e6919bae549f08932e6922c118b830d1f9fe6e5318efb874a7909ccd2a3814bd"
+            ],
+            "after": [
+                "91aae4418a40646f38e5aa8e547f4880a4454f963595b8540b3dbcf3a06b2d8c"
+            ]
+        }
+    },
+    "unchanged": {
+        "src/coroutine/hook.cc": "16f01983bba935c1bd8507c09f02e9ebfa8bc78d55c455083a2a7ad21f7443e4"
+    },
+    "experimental_patch_sha256": "cf99f5e2cb651b790697a31d67980a3ef39779724535b4783dcee3abb2f63456",
+    "source_archive_sha256": "5d1d57adf16494f6cbb0211665d8fb7c7e4726c0b81d35e200812df326051e8e"
+}
