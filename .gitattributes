@@ -5,3 +5,6 @@
 /bin/php binary
 /bin/composer binary
 /composer binary
+
+# Preserve the original line endings recorded in the benchmark checksums.
+/validation/rtp-native/study/perf/individual.csv -text -eol

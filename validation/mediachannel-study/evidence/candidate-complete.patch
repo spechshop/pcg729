@@ -1,0 +1,59 @@
+--- baseline/plugins/Utils/sip/MediaChannel.php
++++ candidate/plugins/Utils/sip/MediaChannel.php
+@@ -717,7 +717,7 @@
+                             $packet = false;
+                         }
+                     } else {
+-                        $packet = $this->socket->recvfrom($peer, -1);
++                        $packet = $this->socket->recvfrom($peer, 0.2);
+                         $packetLength = $packet === false ? 0 : strlen($packet);
+                     }
+                     $currentTime = microtime(true);
+@@ -818,7 +818,7 @@
+                         ? new rtpc($packet)
+                         : rtpc::fromNativeBuffer($nativeBuffer, $packetLength);
+ 
+-                    if ($this->audioMetricsEnabled && ($packetLength < 12 || $rtpc->version !== 2)) {
++                    if ($packetLength < 12 || $rtpc->version !== 2) {
+                         continue;
+                     }
+ 
+@@ -984,7 +984,9 @@
+                         // Encoded relay is safe only when both negotiated
+                         // formats and packet durations match. Otherwise the
+                         // existing PCM queue must repacketize for the target.
+-                        if ($sourceCodec === $this->members[$targetId]['codec']
++                        if ((!in_array($sourceCodec, ['PCMA', 'PCMU'], true)
++                                || strlen($rtpc->payloadRaw) === $this->members[$targetId]['rtpChannel']->samplesPerPacket)
++                            && $sourceCodec === $this->members[$targetId]['codec']
+                             && $sourceFrequency === (int)$this->members[$targetId]['frequency']
+                             && $sourceChannels === (int)($this->members[$targetId]['channels'] ?? 1)
+                             && $this->rtpChans[$ssrc]->packetTimeMs === $this->members[$targetId]['rtpChannel']->packetTimeMs) {
+@@ -2409,15 +2411,6 @@
+                 if ($cached['processed'] && $isEnd) {
+                     // RFC: últimos 3 pacotes são idênticos com flag E set
+                     $closure(); // Fazer forward do pacote mesmo sendo duplicado
+-                    // Disparar callback de DTMF
+-                    $callback = $this->onDtmfCallable;
+-                    if (is_callable($callback)) {
+-                        if (($rtpc->sequence - $cached['sequence']) == 1) {
+-                            go($callback, $event, $peer, $event, $this);
+-                        }
+-
+-
+-                    }
+                     return;
+                 }
+ 
+@@ -2507,6 +2500,11 @@
+             $this->dtmfFiredGuard[$ssrc] = ['event' => $event, 'time' => $nowMs];
+ 
+ 
++            $callback = $this->onDtmfCallable;
++            if (is_callable($callback)) {
++                go($callback, $event, $peer, $event, $this);
++            }
++
+             // Limpar cache antigo (> 5 segundos)
+             $currentTime = microtime(true);
+             foreach ($this->dtmfPacketCache as $key => $cache) {

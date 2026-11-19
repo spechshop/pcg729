@@ -1,0 +1,11 @@
+--- before
++++ after
+@@ -818,7 +818,7 @@
+                         ? new rtpc($packet)
+                         : rtpc::fromNativeBuffer($nativeBuffer, $packetLength);
+ 
+-                    if ($this->audioMetricsEnabled && ($packetLength < 12 || $rtpc->version !== 2)) {
++                    if ($packetLength < 12 || $rtpc->version !== 2) {
+                         continue;
+                     }
+ 

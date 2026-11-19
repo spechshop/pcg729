@@ -1,0 +1,20 @@
+8.5.12 ZTS=1
+Function [ <internal:psampler> function psampler_rtp_parse ] {
+
+  - Parameters [4] {
+    Parameter #0 [ <required> object $source ]
+    Parameter #1 [ <required> int $packetLength ]
+    Parameter #2 [ <required> object $target ]
+    Parameter #3 [ <optional> bool $strict = true ]
+  }
+  - Return [ ?string ]
+}
+Method [ <internal:swoole> public method recvfromInto ] {
+
+  - Parameters [3] {
+    Parameter #0 [ <required> Swoole\Buffer $buffer ]
+    Parameter #1 [ <required> mixed &$peername ]
+    Parameter #2 [ <optional> float $timeout = 0 ]
+  }
+  - Return [ int|false ]
+}

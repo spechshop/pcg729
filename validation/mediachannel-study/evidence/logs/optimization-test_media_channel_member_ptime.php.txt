@@ -1,0 +1,7 @@
+
+Fatal error: Uncaught Swoole\Error: must call constructor first in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/optimization/plugins/Utils/sip/MediaChannel.php:2152
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/optimization/plugins/Utils/sip/MediaChannel.php(2152): Swoole\Coroutine\Socket->cancel(512)
+#1 /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/optimization/test_media_channel_member_ptime.php(485): libspech\Rtp\MediaChannel->close()
+#2 {main}
+  thrown in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/optimization/plugins/Utils/sip/MediaChannel.php on line 2152

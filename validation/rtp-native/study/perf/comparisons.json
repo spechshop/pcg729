@@ -1,0 +1,46 @@
+{
+  "A": {
+    "old": "baseline-native",
+    "new": "optimized-native",
+    "paired_rounds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "difference_us_per_rtp": [
+      4.449999999999989,
+      -4.400000000000006,
+      24.129999999999995,
+      13.032187048761529,
+      4.666666666666657
+    ],
+    "mean_difference": 8.375770743085633,
+    "median_difference": 4.666666666666657,
+    "median_paired_reduction_percent": 3.043914451183357,
+    "two_sided_sign_randomization_p": 0.125
+  },
+  "B": {
+    "old": "optimized-slice",
+    "new": "optimized-native",
+    "paired_rounds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "difference_us_per_rtp": [
+      -6.406666666666666,
+      -35.05333333333334,
+      19.78,
+      15.75,
+      7.553333333333342
+    ],
+    "mean_difference": 0.324666666666667,
+    "median_difference": 7.553333333333342,
+    "median_paired_reduction_percent": 3.4130618146764706,
+    "two_sided_sign_randomization_p": 0.9375
+  }
+}

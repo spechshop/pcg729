@@ -1,0 +1,62 @@
+[
+  {
+    "variant": "baseline",
+    "test": "test_rtpc_native.php",
+    "exit": 0
+  },
+  {
+    "variant": "baseline",
+    "test": "test_pcm_stream_converter.php",
+    "exit": 0
+  },
+  {
+    "variant": "baseline",
+    "test": "test_media_channel_member_ptime.php",
+    "exit": 255
+  },
+  {
+    "variant": "baseline",
+    "test": "test_audio_file_playback_resample.php",
+    "exit": 0
+  },
+  {
+    "variant": "candidate",
+    "test": "test_rtpc_native.php",
+    "exit": 0
+  },
+  {
+    "variant": "candidate",
+    "test": "test_pcm_stream_converter.php",
+    "exit": 0
+  },
+  {
+    "variant": "candidate",
+    "test": "test_media_channel_member_ptime.php",
+    "exit": 255
+  },
+  {
+    "variant": "candidate",
+    "test": "test_audio_file_playback_resample.php",
+    "exit": 0
+  },
+  {
+    "variant": "optimization",
+    "test": "test_rtpc_native.php",
+    "exit": 0
+  },
+  {
+    "variant": "optimization",
+    "test": "test_pcm_stream_converter.php",
+    "exit": 0
+  },
+  {
+    "variant": "optimization",
+    "test": "test_media_channel_member_ptime.php",
+    "exit": 255
+  },
+  {
+    "variant": "optimization",
+    "test": "test_audio_file_playback_resample.php",
+    "exit": 0
+  }
+]

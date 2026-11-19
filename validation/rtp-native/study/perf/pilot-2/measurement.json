@@ -1,0 +1,145 @@
+{
+  "start_receiver": {
+    "label": "start",
+    "monotonic_ns": 13682287118682,
+    "pid": 1621876,
+    "binary": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+    "binary_sha256": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+    "factory_file": "/home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/rtpc.php",
+    "factory_sha256": "6f40433e7234b86c2628ecf9ba8925f38cff54e170d432a9e8a4ff8b70e634a6",
+    "real_packet_factory_verified": true,
+    "config": {
+      "receiveOnlyMode": false,
+      "nativeRtpReceive": true,
+      "requireNativeRtpParser": true,
+      "settings": {
+        "sendSilenceProbeToMembers": true
+      },
+      "audioMetricsEnabled": false,
+      "codecMapper": {
+        "8": "PCMA/8000/1",
+        "101": "telephone-event/8000/1"
+      },
+      "members": 1,
+      "receiveTimeout": 0.2,
+      "options": {
+        "codecMapper": {
+          "8": "PCMA/8000/1",
+          "101": "telephone-event/8000/1"
+        },
+        "config": [],
+        "transcodingEnabled": false
+      }
+    },
+    "rtp": 278,
+    "audio": 256,
+    "dtmf_callbacks": 2,
+    "dtmf_events": 2,
+    "rusage": {
+      "ru_oublock": 8,
+      "ru_inblock": 0,
+      "ru_msgsnd": 0,
+      "ru_msgrcv": 0,
+      "ru_maxrss": 91180,
+      "ru_ixrss": 0,
+      "ru_idrss": 0,
+      "ru_minflt": 2682,
+      "ru_majflt": 0,
+      "ru_nsignals": 0,
+      "ru_nvcsw": 11254,
+      "ru_nivcsw": 6824,
+      "ru_nswap": 0,
+      "ru_utime.tv_usec": 102756,
+      "ru_utime.tv_sec": 0,
+      "ru_stime.tv_usec": 56048,
+      "ru_stime.tv_sec": 0
+    }
+  },
+  "end_receiver": {
+    "label": "end",
+    "monotonic_ns": 13684288970732,
+    "pid": 1621876,
+    "binary": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+    "binary_sha256": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+    "factory_file": "/home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/rtpc.php",
+    "factory_sha256": "6f40433e7234b86c2628ecf9ba8925f38cff54e170d432a9e8a4ff8b70e634a6",
+    "real_packet_factory_verified": true,
+    "config": {
+      "receiveOnlyMode": false,
+      "nativeRtpReceive": true,
+      "requireNativeRtpParser": true,
+      "settings": {
+        "sendSilenceProbeToMembers": true
+      },
+      "audioMetricsEnabled": false,
+      "codecMapper": {
+        "8": "PCMA/8000/1",
+        "101": "telephone-event/8000/1"
+      },
+      "members": 1,
+      "receiveTimeout": 0.2,
+      "options": {
+        "codecMapper": {
+          "8": "PCMA/8000/1",
+          "101": "telephone-event/8000/1"
+        },
+        "config": [],
+        "transcodingEnabled": false
+      }
+    },
+    "rtp": 378,
+    "audio": 345,
+    "dtmf_callbacks": 3,
+    "dtmf_events": 3,
+    "rusage": {
+      "ru_oublock": 8,
+      "ru_inblock": 0,
+      "ru_msgsnd": 0,
+      "ru_msgrcv": 0,
+      "ru_maxrss": 91180,
+      "ru_ixrss": 0,
+      "ru_idrss": 0,
+      "ru_minflt": 2706,
+      "ru_majflt": 0,
+      "ru_nsignals": 0,
+      "ru_nvcsw": 11364,
+      "ru_nivcsw": 6832,
+      "ru_nswap": 0,
+      "ru_utime.tv_usec": 116335,
+      "ru_utime.tv_sec": 0,
+      "ru_stime.tv_usec": 62322,
+      "ru_stime.tv_sec": 0
+    }
+  },
+  "start_sender": {
+    "audio": 256,
+    "dtmf": 22,
+    "events": 2,
+    "errors": 0,
+    "late_slots": 0,
+    "sink_pcma": 0,
+    "sink_pcmu": 0,
+    "sink_dtmf": 0,
+    "sink_other": 0,
+    "sink_pcmu_valid": 0,
+    "label": "start",
+    "monotonic_ns": 13682286488697
+  },
+  "end_sender": {
+    "audio": 345,
+    "dtmf": 33,
+    "events": 3,
+    "errors": 0,
+    "late_slots": 0,
+    "sink_pcma": 0,
+    "sink_pcmu": 0,
+    "sink_dtmf": 0,
+    "sink_other": 0,
+    "sink_pcmu_valid": 0,
+    "label": "end",
+    "monotonic_ns": 13684289748955
+  },
+  "enable_ack_ns": 13682288197232,
+  "disable_ack_ns": 13684288734165,
+  "active_seconds": 2.000536933
+}

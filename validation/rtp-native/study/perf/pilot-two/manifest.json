@@ -1,0 +1,108 @@
+{
+  "scenario": "optimized-native",
+  "binary": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+  "binary_sha256": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+  "mode": "native",
+  "profile": false,
+  "two_members": true,
+  "duration_requested": 2,
+  "hashes": {
+    "buildroot/bin/php": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+    "validation/rtp-native/study/receiver.php": "dfe7a4d8cd3c46f3dd5b91dc3dbf4d0454446e3a974fdcdabf72550cd8d487b4",
+    "validation/rtp-native/study/rtpc-slice.php": "4a78161e43e54eec684b804d9075570e6afcecbe6f1143a526776f405785ebba",
+    "validation/rtp-native/study/autoloader.php": "7b6f501c2463aa1958e8c89cb99d5cc2c669549b174092ad3d66cddf8c097678",
+    "validation/rtp-native/study/perf/control.php": "4671bbc23f6b26315be00244589aaf84508d5582996937950209cd57de292111",
+    "validation/rtp-native/study/perf/sender.py": "18d68c374d41abfddf41153909ae59206030a2be35bd2a0c32e9d82b697b2a02",
+    "validation/rtp-native/study/perf/run.py": "859b54ba4ae3d4b9a9a3a40f3f062925bc535634d7d6e6cf2f32baa367d64a20",
+    "libspech/plugins/Utils/sip/MediaChannel.php": "81cc7c3184658a8795e74c76baee108da8eefa511a9c1f35ae774b5fd434d46f",
+    "libspech/plugins/Utils/sip/rtpc.php": "6f40433e7234b86c2628ecf9ba8925f38cff54e170d432a9e8a4ff8b70e634a6",
+    "source/php-src/ext/psampler/binary_buffer.c": "8364c94865737f41da75d79ee504af9e4e98215ea4073a87446305a57e4bea7e",
+    "mc.php": "eefd7ed6949ca807d49155c199f360bef33779cb9d091993b260ccb5ddaf5aef",
+    "lsend.php": "f7e93cc6de6db1e8ea6b3c8131e2371eb96ab7fbc5558d968ccb2d6ec0d2ba51"
+  },
+  "status": "complete",
+  "kernel": "Linux lotus-Nitro-AN515-57 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "perf": "perf version 7.0.14\n",
+  "paranoid": "1",
+  "affinity": {
+    "receiver": 2,
+    "sender": 4
+  },
+  "started_unix": 1794618310.2373857,
+  "receiver_command": [
+    "taskset",
+    "-c",
+    "2",
+    "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/receiver.php"
+  ],
+  "sender_command": [
+    "taskset",
+    "-c",
+    "4",
+    "/usr/bin/python3",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/perf/sender.py"
+  ],
+  "pid": 1622600,
+  "proc_exe": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+  "config": {
+    "receiveOnlyMode": false,
+    "nativeRtpReceive": true,
+    "requireNativeRtpParser": true,
+    "settings": {
+      "sendSilenceProbeToMembers": true
+    },
+    "audioMetricsEnabled": false,
+    "codecMapper": {
+      "8": "PCMA/8000/1",
+      "101": "telephone-event/8000/1"
+    },
+    "members": 2,
+    "receiveTimeout": 0.2,
+    "options": {
+      "codecMapper": {
+        "8": "PCMA/8000/1",
+        "101": "telephone-event/8000/1"
+      },
+      "config": [],
+      "transcodingEnabled": false
+    }
+  },
+  "factory_file": "/home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/rtpc.php",
+  "factory_sha256": "6f40433e7234b86c2628ecf9ba8925f38cff54e170d432a9e8a4ff8b70e634a6",
+  "perf_command": [
+    "/usr/bin/perf",
+    "stat",
+    "-x",
+    ";",
+    "-o",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/perf/pilot-two/stat.csv",
+    "-e",
+    "task-clock,context-switches,cpu-migrations,cpu_core/cycles/,cpu_core/instructions/",
+    "-p",
+    "1622600",
+    "-D",
+    "-1",
+    "--control",
+    "fd:6,9"
+  ],
+  "perf_exit": -2,
+  "counts": {
+    "rtp": 100,
+    "audio": 89,
+    "dtmf_callbacks": 1,
+    "dtmf_events": 1,
+    "dtmf_packets": 11,
+    "sender": {
+      "audio": 89,
+      "dtmf": 11,
+      "events": 1,
+      "errors": 0,
+      "late_slots": 0,
+      "sink_pcmu": 89,
+      "sink_pcmu_valid": 89,
+      "sink_dtmf": 11
+    }
+  },
+  "ended_unix": 1794618318.2033315
+}

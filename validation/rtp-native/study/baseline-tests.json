@@ -1,0 +1,30 @@
+[
+  {
+    "command": [
+      "libspech/test_rtpc_native.php"
+    ],
+    "exit": 0,
+    "output": "773 parser cases; snapshots, references, cloning, serialization and build OK\n31 wrapped-buffer header/payload boundaries OK\n"
+  },
+  {
+    "command": [
+      "validation/rtp-native/functional.php"
+    ],
+    "exit": 0,
+    "output": "517 Swoole equivalence cases; strict bounds, extension, padding and reuse OK\n"
+  },
+  {
+    "command": [
+      "validation/rtp-native/media.php"
+    ],
+    "exit": 0,
+    "output": "MediaChannel: native UDP, peers, audio transcode, callbacks, DTMF and forwarding OK\n"
+  },
+  {
+    "command": [
+      "test_media_channel_member_ptime.php"
+    ],
+    "exit": 255,
+    "output": "\nFatal error: Uncaught Swoole\\Error: must call constructor first in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php:2152\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php(2152): Swoole\\Coroutine\\Socket->cancel(512)\n#1 /home/lotus/CLionProjects/pcg729/libspech/test_media_channel_member_ptime.php(485): libspech\\Rtp\\MediaChannel->close()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php on line 2152\n"
+  }
+]

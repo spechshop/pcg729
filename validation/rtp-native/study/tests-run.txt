@@ -1,0 +1,14 @@
+baseline libspech/test_rtpc_native.php 0
+baseline validation/rtp-native/functional.php 0
+baseline validation/rtp-native/media.php 0
+baseline validation/rtp-native/study/contracts.php 0
+baseline validation/rtp-native/study/zts.php 0
+baseline test_media_channel_member_ptime.php 255
+baseline ../validation/rtp-native/study/ptime-fixture.php 255
+interned libspech/test_rtpc_native.php 0
+interned validation/rtp-native/functional.php 0
+interned validation/rtp-native/media.php 0
+interned validation/rtp-native/study/contracts.php 0
+interned validation/rtp-native/study/zts.php 0
+interned test_media_channel_member_ptime.php 255
+interned ../validation/rtp-native/study/ptime-fixture.php 255

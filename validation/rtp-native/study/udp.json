@@ -1,0 +1,198 @@
+[
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3858.0000000000005,
+    "wall_ns": 3890.420666666667,
+    "n": 1500,
+    "repeat": 0
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2955.3333333333326,
+    "wall_ns": 2954.58,
+    "n": 1500,
+    "repeat": 0
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3781.9999999999995,
+    "wall_ns": 3783.6033333333335,
+    "n": 1500,
+    "repeat": 0
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 3055.9999999999986,
+    "wall_ns": 3054.940666666667,
+    "n": 1500,
+    "repeat": 0
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 3225.333333333332,
+    "wall_ns": 3224.8933333333334,
+    "n": 1500,
+    "repeat": 1
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3823.333333333334,
+    "wall_ns": 3829.057333333333,
+    "n": 1500,
+    "repeat": 1
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2989.3333333333335,
+    "wall_ns": 2988.6633333333334,
+    "n": 1500,
+    "repeat": 1
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3710.0000000000005,
+    "wall_ns": 3728.7386666666666,
+    "n": 1500,
+    "repeat": 1
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3627.3333333333335,
+    "wall_ns": 3627.4853333333335,
+    "n": 1500,
+    "repeat": 2
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2982.6666666666674,
+    "wall_ns": 2982.088,
+    "n": 1500,
+    "repeat": 2
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3562.666666666668,
+    "wall_ns": 3567.9553333333333,
+    "n": 1500,
+    "repeat": 2
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 3007.3333333333326,
+    "wall_ns": 3006.286,
+    "n": 1500,
+    "repeat": 2
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 2974.6666666666674,
+    "wall_ns": 3006.636,
+    "n": 1500,
+    "repeat": 3
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3518,
+    "wall_ns": 3516.5046666666667,
+    "n": 1500,
+    "repeat": 3
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2920.666666666666,
+    "wall_ns": 2920.1886666666664,
+    "n": 1500,
+    "repeat": 3
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3620.6666666666656,
+    "wall_ns": 3619.418,
+    "n": 1500,
+    "repeat": 3
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3599.333333333334,
+    "wall_ns": 3599.1006666666667,
+    "n": 1500,
+    "repeat": 4
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2968.000000000002,
+    "wall_ns": 2966.74,
+    "n": 1500,
+    "repeat": 4
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3632.0000000000014,
+    "wall_ns": 3636.364,
+    "n": 1500,
+    "repeat": 4
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 3000.0000000000005,
+    "wall_ns": 2999.7993333333334,
+    "n": 1500,
+    "repeat": 4
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 2977.9999999999995,
+    "wall_ns": 2977.296,
+    "n": 1500,
+    "repeat": 5
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3584.6666666666665,
+    "wall_ns": 3591.249333333333,
+    "n": 1500,
+    "repeat": 5
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2981.333333333332,
+    "wall_ns": 2985.268666666667,
+    "n": 1500,
+    "repeat": 5
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3776.6666666666665,
+    "wall_ns": 3775.72,
+    "n": 1500,
+    "repeat": 5
+  },
+  {
+    "mode": "string-parse",
+    "cpu_ns": 3642.6666666666656,
+    "wall_ns": 3642.412,
+    "n": 1500,
+    "repeat": 6
+  },
+  {
+    "mode": "string",
+    "cpu_ns": 2983.999999999998,
+    "wall_ns": 2983.478666666667,
+    "n": 1500,
+    "repeat": 6
+  },
+  {
+    "mode": "buffer-parse",
+    "cpu_ns": 3569.3333333333326,
+    "wall_ns": 3569.1086666666665,
+    "n": 1500,
+    "repeat": 6
+  },
+  {
+    "mode": "buffer",
+    "cpu_ns": 3003.3333333333335,
+    "wall_ns": 3002.52,
+    "n": 1500,
+    "repeat": 6
+  }
+]

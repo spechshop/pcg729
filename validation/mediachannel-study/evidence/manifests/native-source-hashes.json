@@ -1,0 +1,5 @@
+{
+  "source/php-src/ext/swoole/ext-src/swoole_socket_coro.cc": "73687f4de06c560633570a3bf0aa5da4b5d3ec46f61eab5365e068d8d7f780af",
+  "source/php-src/ext/swoole/src/coroutine/socket.cc": "85b1d809c72451858caad161bf4904e7806d4aedf11b9171340f6f114718edac",
+  "source/php-src/ext/psampler/binary_buffer.c": "8364c94865737f41da75d79ee504af9e4e98215ea4073a87446305a57e4bea7e"
+}

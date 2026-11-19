@@ -1,0 +1,2 @@
+{"before":{"4":"anon_inode:[eventpoll]"},"opened":{"4":"anon_inode:[eventpoll]","6":"socket:[2771889]","7":"socket:[2771890]"},"closed":{"4":"anon_inode:[eventpoll]","6":"socket:[2771889]","7":"socket:[2771890]"},"released":{"4":"anon_inode:[eventpoll]","6":"socket:[2771889]","7":"socket:[2771890]"},"state":{"socket_closed":true,"event_closed":true,"socket_error":9},"object_retained":false}
+{"after_reactor":[]}

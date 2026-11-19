@@ -1,0 +1,219 @@
+1792: static PHP_METHOD(swoole_socket_coro, recvfrom) {
+1793:     zval *peername;
+1794:     double timeout = 0;
+1795: 
+1796:     ZEND_PARSE_PARAMETERS_START(1, 2)
+1797:     Z_PARAM_ZVAL_EX(peername, 0, 1)
+1798:     Z_PARAM_OPTIONAL
+1799:     Z_PARAM_DOUBLE(timeout)
+1800:     ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
+1801: 
+1802:     swoole_get_socket_coro(sock, ZEND_THIS);
+1803: 
+1804:     zend_string *buf = zend_string_alloc(SW_BUFFER_SIZE_BIG, false);
+1805:     SocketImpl::TimeoutSetter ts(sock->socket, timeout, SW_TIMEOUT_READ);
+1806:     ssize_t bytes = sock->socket->recvfrom(ZSTR_VAL(buf), SW_BUFFER_SIZE_BIG);
+1807:     socket_coro_sync_properties(ZEND_THIS, sock);
+1808:     if (bytes < 0) {
+1809:         zend_string_free(buf);
+1810:         RETURN_FALSE;
+1811:     } else if (bytes == 0) {
+1812:         zend_string_free(buf);
+1813:         RETURN_EMPTY_STRING();
+1814:     } else {
+1815:         zval_dtor(peername);
+1816:         array_init(peername);
+1817:         add_assoc_string(peername, "address", (char *) sock->socket->get_addr());
+1818:         add_assoc_long(peername, "port", sock->socket->get_port());
+1819: 
+1820:         ZSTR_LEN(buf) = bytes;
+1821:         ZSTR_VAL(buf)[bytes] = 0;
+1822:         RETURN_STR(buf);
+1823:     }
+1824: }
+1825: 
+1826: static PHP_METHOD(swoole_socket_coro, recvfromInto) {
+1827:     zval *zbuffer, *peername;
+1828:     double timeout = 0;
+1829: 
+1830:     ZEND_PARSE_PARAMETERS_START(2, 3)
+1831:     Z_PARAM_OBJECT_OF_CLASS(zbuffer, swoole_buffer_ce)
+1832:     Z_PARAM_ZVAL(peername)
+1833:     Z_PARAM_OPTIONAL
+1834:     Z_PARAM_DOUBLE(timeout)
+1835:     ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
+1836: 
+1837:     swoole_get_socket_coro(sock, ZEND_THIS);
+1838:     auto *buffer = php_swoole_buffer_get(zbuffer);
+1839:     if (UNEXPECTED(buffer == nullptr)) {
+1840:         RETURN_THROWS();
+1841:     }
+1842:     if (UNEXPECTED(buffer->read_token != 0)) {
+1843:         zend_throw_error(nullptr, "Swoole\\Buffer has an active native read");
+1844:         RETURN_THROWS();
+1845:     }
+1846:     if (UNEXPECTED(buffer->receiving)) {
+1847:         zend_throw_error(nullptr, "Swoole\\Buffer has a pending receive");
+1848:         RETURN_THROWS();
+1849:     }
+1850:     if (UNEXPECTED(!sock->socket->get_socket()->is_dgram())) {
+1851:         sock->socket->set_err(EPROTONOSUPPORT);
+1852:         socket_coro_sync_properties(ZEND_THIS, sock);
+1853:         RETURN_FALSE;
+1854:     }
+1855: 
+1856:     // Own both objects independently of PHP variables/references throughout the
+1857:     // yield and peer assignment. The guard also releases the buffer on errors.
+1858:     struct ReceiveGuard {
+1859:         SwooleBufferObject *buffer;
+1860:         zend_object *socket_object;
+1861:         ReceiveGuard(SwooleBufferObject *buffer, zend_object *socket_object)
+1862:             : buffer(buffer), socket_object(socket_object) {
+1863:             GC_ADDREF(&buffer->std);
+1864:             GC_ADDREF(socket_object);
+1865:             buffer->receiving = true;
+1866:             buffer->length = 0;
+1867:         }
+1868:         void release() {
+1869:             buffer->receiving = false;
+1870:             // Buffer is final and has no PHP destructor or dynamic properties.
+1871:             // Release it before the socket, whose subclass destructor may bail out.
+1872:             OBJ_RELEASE(&buffer->std);
+1873:             OBJ_RELEASE(socket_object);
+1874:         }
+1875:         ~ReceiveGuard() {
+1876:             release();
+1877:         }
+1878:     } guard(buffer, Z_OBJ_P(ZEND_THIS));
+1879: 
+1880:     SocketImpl::TimeoutSetter ts(sock->socket, timeout, SW_TIMEOUT_READ);
+1881:     zend_array *volatile owned_peer = nullptr;
+1882:     RETVAL_FALSE;
+1883:     // Zend bailout skips C++ destructors. Keep guard/ts unchanged after setjmp
+1884:     // and restore both explicitly in the catch, before propagating the bailout.
+1885:     zend_try {
+1886:         // A private extra byte detects datagrams larger than the fixed capacity.
+1887:         // Keep Swoole's receive, reactor, cancellation and concurrency checks.
+1888:         ssize_t bytes = sock->socket->recvfrom(buffer->data, buffer->capacity + 1);
+1889:         if (bytes >= 0 && static_cast<size_t>(bytes) > buffer->capacity) {
+1890:             sock->socket->set_err(EMSGSIZE);
+1891:             bytes = -1;
+1892:         }
+1893:         socket_coro_sync_properties(ZEND_THIS, sock);
+1894:         if (bytes >= 0) {
+1895:             // Only metadata uses PHP strings, including for empty datagrams.
+1896:             // owned_peer is volatile because ownership changes after setjmp.
+1897:             owned_peer = zend_new_array(0);
+1898:             zval peer;
+1899:             ZVAL_ARR(&peer, owned_peer);
+1900:             add_assoc_string(&peer, "address", (char *) sock->socket->get_addr());
+1901:             add_assoc_long(&peer, "port", sock->socket->get_port());
+1902:             if (Z_ISREF_P(peername) && ZEND_REF_HAS_TYPE_SOURCES(Z_REF_P(peername))) {
+1903:                 // Typed assignment publishes the new value BEFORE invoking
+1904:                 // the old destructor. Retain ownership on validation failure.
+1905:                 if (zend_verify_ref_assignable_zval(Z_REF_P(peername), &peer, ZEND_ARG_USES_STRICT_TYPES())) {
+1906:                     owned_peer = nullptr;
+1907:                     zend_safe_assign_to_variable_noref(Z_REFVAL_P(peername), &peer);
+1908:                 }
+1909:             } else {
+1910:                 // Untyped ZEND_TRY_ASSIGN_VALUE destroys the old value BEFORE
+1911:                 // transfer. On bailout the metadata is still ours to destroy.
+1912:                 ZEND_TRY_ASSIGN_VALUE(peername, &peer);
+1913:                 owned_peer = nullptr;
+1914:             }
+1915:             if (!EG(exception)) {
+1916:                 buffer->length = static_cast<size_t>(bytes);
+1917:                 RETVAL_LONG(static_cast<zend_long>(bytes));
+1918:             }
+1919:         }
+1920:     } zend_catch {
+1921:         if (owned_peer != nullptr) {
+1922:             // Unpublished metadata contains only an address and a port, so its
+1923:             // destruction cannot invoke PHP. Published values belong to Zend.
+1924:             zend_array_destroy(owned_peer);
+1925:         }
+1926:         ts.~TimeoutSetter();
+1927:         guard.release();
+1928:         zend_bailout();
+1929:     } zend_end_try();
+1930:     if (owned_peer != nullptr) {
+1931:         zend_array_destroy(owned_peer);
+1932:     }
+1933:     if (UNEXPECTED(EG(exception))) {
+1934:         RETURN_THROWS();
+1935:     }
+1936: }
+1937: 
+1938: static PHP_METHOD(swoole_socket_coro, sendto) {
+1939:     char *data;
+1940:     size_t l_data;
+1941:     char *addr;
+1942:     size_t l_addr;
+1943:     zend_long port = 0;
+1944: 
+1945:     ZEND_PARSE_PARAMETERS_START(3, 3)
+1946:     Z_PARAM_STRING(addr, l_addr)
+1947:     Z_PARAM_LONG(port)
+1948:     Z_PARAM_STRING(data, l_data)
+1949:     ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
+1950: 
+1951:     swoole_get_socket_coro(sock, ZEND_THIS);
+1952: 
+1953:     ssize_t retval = sock->socket->sendto(std::string(addr, l_addr), port, data, l_data);
+1954:     socket_coro_sync_properties(ZEND_THIS, sock);
+1955:     if (retval < 0) {
+1956:         RETURN_FALSE;
+1957:     } else {
+1958:         RETURN_LONG(retval);
+1959:     }
+1960: }
+1961: 
+1962: static PHP_METHOD(swoole_socket_coro, shutdown) {
+1963:     zend_long how = SHUT_RDWR;
+1964: 
+1965:     ZEND_PARSE_PARAMETERS_START(0, 1)
+1966:     Z_PARAM_OPTIONAL
+1967:     Z_PARAM_LONG(how)
+1968:     ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
+1969: 
+1970:     swoole_get_socket_coro(sock, ZEND_THIS);
+1971: 
+1972:     if (!sock->socket->shutdown(how)) {
+1973:         socket_coro_sync_properties(ZEND_THIS, sock);
+1974:         RETURN_FALSE;
+1975:     }
+1976:     RETURN_TRUE;
+1977: }
+1978: 
+1979: static PHP_METHOD(swoole_socket_coro, close) {
+1980:     swoole_get_socket_coro(sock, ZEND_THIS);
+1981:     if (sock->reference) {
+1982:         php_swoole_error(E_WARNING, "cannot close the referenced resource");
+1983:         RETURN_FALSE;
+1984:     }
+1985:     if (sock->socket->protocol.private_data_1) {
+1986:         sw_callable_free(sock->socket->protocol.private_data_1);
+1987:         sock->socket->protocol.private_data_1 = nullptr;
+1988:     }
+1989:     if (!Z_ISUNDEF(sock->zstream)) {
+1990:         php_stream *stream = nullptr;
+1991:         php_stream_from_zval_no_verify(stream, &sock->zstream);
+1992:         if (stream != nullptr) {
+1993:             /* close & destroy stream, incl. removing it from the rsrc list;
+1994:              * resource stored in php_sock->zstream will become invalid */
+1995:             php_stream_free(stream,
+1996:                             PHP_STREAM_FREE_KEEP_RSRC | PHP_STREAM_FREE_CLOSE |
+1997:                                 (stream->is_persistent ? PHP_STREAM_FREE_CLOSE_PERSISTENT : 0));
+1998:         }
+1999:         ZVAL_UNDEF(&sock->zstream);
+2000:         sock->socket->move_fd();
+2001:     } else {
+2002:         sock->socket->close();
+2003:     }
+2004:     RETURN_TRUE;
+2005: }
+2006: 
+2007: static PHP_METHOD(swoole_socket_coro, getsockname) {
+2008:     swoole_get_socket_coro(sock, ZEND_THIS);
+2009: 
+2010:     if (!sock->socket->getsockname()) {

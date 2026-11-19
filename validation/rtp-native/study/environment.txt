@@ -1,0 +1,153 @@
+Linux lotus-Nitro-AN515-57 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           39 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  16
+On-line CPU(s) list:                     0-15
+Vendor ID:                               GenuineIntel
+Model name:                              13th Gen Intel(R) Core(TM) i5-13450HX
+CPU family:                              6
+Model:                                   183
+Thread(s) per core:                      2
+Core(s) per socket:                      10
+Socket(s):                               1
+Stepping:                                1
+CPU(s) scaling MHz:                      36%
+CPU max MHz:                             4600.0000
+CPU min MHz:                             800.0000
+BogoMIPS:                                5222.40
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize arch_lbr ibt flush_l1d arch_capabilities
+Virtualization:                          VT-x
+L1d cache:                               416 KiB (10 instances)
+L1i cache:                               448 KiB (10 instances)
+L2 cache:                                9.5 MiB (7 instances)
+L3 cache:                                20 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-15
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Mitigation; Clear Register File
+Vulnerability Retbleed:                  Not affected
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
+PHP 8.5.12 (cli) (built: Nov 13 2026 20:44:43) (ZTS)
+Copyright (c) The PHP Group
+Zend Engine v4.5.12, Copyright (c) Zend Technologies
+    with Zend OPcache v8.5.12, Copyright (c), by Zend Technologies
+
+psampler
+
+psampler support => enabled
+Version => 0.7.0
+Description => Reamostragem, manipulacao PCM e evidencias acusticas/ring PCM16
+Author => psampler
+PCM native API => v1; startup registry, PCM16LE borrowed access
+Binary native API => v1; synchronous borrowed spans, optional providers
+Swoole Buffer bridge => enabled (Swoole read ABI v1)
+
+Classe => Metodos / API
+Resampler => __construct(?int srcRate, ?int dstRate), reset(): void, sample(string pcm, ?int srcRate, ?int dstRate): string, process(string pcm): string, returnEmpty(): string|false
+LPCM => __construct(int channels, int bitDepth, bool isBigEndian=false), encodeMono(array): string, decodeMono(string): array, encodeStereo(array, array): string, decodeStereo(string): array
+ByteBuffer => __construct(int initialCapacity=4096), append(string): void, appendBuffer(object source, int offset=0, ?int length=null): void, supportsNativeBuffer(object source): bool, length(): int, has(int): bool, pop(int): string, peek(int): string, discard(int): void, clear(): void, capacity(): int
+PcmBuffer => __construct(int sampleRate, int channels), append(string pcm): void, size(): int, capacity(): int, sampleRate(): int, channels(): int, clear(): void, flush(): PcmBuffer, reset(int sampleRate, int channels): void, toString(): string, toMono(): PcmBuffer, toStereo(): PcmBuffer, resample(int sampleRate): PcmBuffer, canInvoke(string operation): bool, invoke(string operation, mixed ...args): mixed
+AcousticStreamAnalyzer => __construct(int sampleRate=8000, int frameDurationMs=20), on(string event, callable callback): AcousticStreamAnalyzer, push(string pcm): void, state(): array, reset(): void
+PCMAnalyzer => __construct(int sampleRate=8000, int frameDurationMs=20), analyze(string pcm): array
+
+Funcao global => Assinatura
+psampler_binary_slice => psampler_binary_slice(object source, int offset=0, ?int length=null): string
+interleavePcmStereo => interleavePcmStereo(string leftPcm, string rightPcm): string|false - intercala dois canais PCM 16-bit (L/R) em stream estereo
+monoToStereo => monoToStereo(string pcmData): string - duplica cada amostra PCM 16-bit mono nos canais L/R
+stereoToMono => stereoToMono(string pcmData): string - PCM16LE average, truncation toward zero
+
+Parametro de DSP => Valor
+Filtro => sinc janelado por Kaiser (polyphase)
+FILTER_LENGTH => 64
+KAISER_BETA => 8.6
+Fases polyphase => 256
+Cache FIR => LRU process-wide; 16 pares de taxas; ZTS-safe
+MAX_BUFFER_SIZE => 8192 amostras
+Pos-processamento => remocao de DC offset (passa-alta 1 polo) + soft clipping [-32768, 32767]
+
+swoole
+
+Swoole => enabled
+Author => Swoole Team <team@swoole.com>
+Version => 6.3.0RC1
+Built => Nov 13 2026 20:44:30
+host byte order => little endian
+coroutine => enabled with boost asm context
+epoll => enabled
+eventfd => enabled
+thread => enabled
+signalfd => enabled
+cpu_affinity => enabled
+spinlock => enabled
+rwlock => enabled
+sockets => enabled
+openssl => OpenSSL 4.0.2 25 Aug 2026
+dtls => enabled
+http2 => enabled
+json => enabled
+curl-native => enabled
+curl-version => 8.22.0
+c-ares => 1.34.8
+zlib => 1.3.2
+brotli => E16785408/D16785408
+mutex_timedlock => enabled
+pthread_barrier => enabled
+futex => enabled
+
+Directive => Local Value => Master Value
+swoole.enable_library => On => On
+swoole.enable_fiber_mock => Off => Off
+swoole.enable_preemptive_scheduler => Off => Off
+swoole.display_errors => On => On
+swoole.use_shortname => On => On
+swoole.socket_buffer_size => 8388608 => 8388608
+swoole.blocking_detection => Off => Off
+swoole.blocking_threshold => 100000 => 100000
+swoole.profile => Off => Off
+swoole.leak_detection => Off => Off
+Function [ <internal:psampler> function psampler_rtp_parse ] {
+
+  - Parameters [4] {
+    Parameter #0 [ <required> object $source ]
+    Parameter #1 [ <required> int $packetLength ]
+    Parameter #2 [ <required> object $target ]
+    Parameter #3 [ <optional> bool $strict = true ]
+  }
+  - Return [ ?string ]
+}
+Method [ <internal:swoole> public method recvfromInto ] {
+
+  - Parameters [3] {
+    Parameter #0 [ <required> Swoole\Buffer $buffer ]
+    Parameter #1 [ <required> mixed &$peername ]
+    Parameter #2 [ <optional> float $timeout = 0 ]
+  }
+  - Return [ int|false ]
+}
+buildroot/bin/php: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, with debug_info, not stripped
+18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99  buildroot/bin/php
+352186d2e57558321df65b5ae32a9c21778f17f9087913542a29933ebf2a7e79  validation/rtp-native/study/php-baseline
+8364c94865737f41da75d79ee504af9e4e98215ea4073a87446305a57e4bea7e  source/php-src/ext/psampler/binary_buffer.c
+8364c94865737f41da75d79ee504af9e4e98215ea4073a87446305a57e4bea7e  downloads/psampler/binary_buffer.c
+mc.php: OK
+lsend.php: OK
+00000000005fc696 t rtp_parse_view
+0000000001c67220 b rtp_property_names
+00000000005fd10d T zif_psampler_rtp_parse

@@ -1,0 +1,28 @@
+[
+  {
+    "variant": "baseline",
+    "exit": 0,
+    "stdout": "{\"rtcp_reorder_relay\":true,\"rebind\":true,\"public_removal\":true,\"closed\":true,\"metrics\":{\"total_packets\":4,\"lost_packets\":1,\"avg_energy\":0,\"voice_time\":0,\"silence_time\":0,\"rtcp_packets\":1,\"dtmf_events\":0,\"bytes_received\":688,\"jitter\":46.92421627044678,\"first_arrival\":1794622804.882481,\"last_arrival\":1794622804.8826,\"max_seq_gap\":1,\"codecs\":{\"PCMA\":4},\"jitter_ms\":5.865527033805847}}\n",
+    "stderr": ""
+  },
+  {
+    "variant": "baseline",
+    "test": "adapted member fixture",
+    "exit": 255,
+    "stdout": "\nFatal error: Declaration of MemberPtimeCaptureSocket::cancel(int $event): bool must be compatible with Swoole\\Coroutine\\Socket::cancel(int $event = SWOOLE_EVENT_READ): bool in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/baseline/test_member_adapted.php on line 24\nStack trace:\n#0 {main}\n",
+    "stderr": ""
+  },
+  {
+    "variant": "candidate",
+    "exit": 0,
+    "stdout": "{\"rtcp_reorder_relay\":true,\"rebind\":true,\"public_removal\":true,\"closed\":true,\"metrics\":{\"total_packets\":4,\"lost_packets\":1,\"avg_energy\":0,\"voice_time\":0,\"silence_time\":0,\"rtcp_packets\":1,\"dtmf_events\":0,\"bytes_received\":688,\"jitter\":46.888566970825195,\"first_arrival\":1794622804.979847,\"last_arrival\":1794622804.980077,\"max_seq_gap\":1,\"codecs\":{\"PCMA\":4},\"jitter_ms\":5.861070871353149}}\n",
+    "stderr": ""
+  },
+  {
+    "variant": "candidate",
+    "test": "adapted member fixture",
+    "exit": 255,
+    "stdout": "\nFatal error: Declaration of MemberPtimeCaptureSocket::cancel(int $event): bool must be compatible with Swoole\\Coroutine\\Socket::cancel(int $event = SWOOLE_EVENT_READ): bool in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/candidate/test_member_adapted.php on line 24\nStack trace:\n#0 {main}\n",
+    "stderr": ""
+  }
+]

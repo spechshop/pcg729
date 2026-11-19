@@ -1,0 +1,62 @@
+[
+  {
+    "file": "validation/mediachannel-study/lab/candidate/plugins/Utils/sip/MediaChannel.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/lab/candidate/plugins/Utils/sip/MediaChannel.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/acoustic-parity.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/acoustic-parity.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/bench.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/bench.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/check.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/check.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/codec-matrix.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/codec-matrix.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/fds.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/fds.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/flows.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/flows.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/index.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/index.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/ptime-frame.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/ptime-frame.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/ptime-wire.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/ptime-wire.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/scale.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/scale.php\n"
+  },
+  {
+    "file": "validation/mediachannel-study/tests/socket-control.php",
+    "exit": 0,
+    "output": "No syntax errors detected in validation/mediachannel-study/tests/socket-control.php\n"
+  }
+]

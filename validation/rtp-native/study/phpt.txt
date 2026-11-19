@@ -1,0 +1,43 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/buildroot/bin/php 
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.12
+ZEND_VERSION: 4.5.12
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :   
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  : 
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/20 [tests/native_swoole_buffer/bailout.phpt]SKIP Native reader releases borrow and references on Zend bailout (isolated process) [tests/native_swoole_buffer/bailout.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 2/20 [tests/native_swoole_buffer/coroutine_create.phpt]SKIP Borrow callback cannot enter a new Swoole coroutine from the main context [tests/native_swoole_buffer/coroutine_create.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 3/20 [tests/native_swoole_buffer/coroutine_suspend.phpt]SKIP Borrow callback cannot suspend Swoole coroutine; bailout releases native read [tests/native_swoole_buffer/coroutine_suspend.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 4/20 [tests/native_swoole_buffer/errors.phpt]SKIP Buffer native reader validates objects, initialization, ranges and error cleanup [tests/native_swoole_buffer/errors.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 5/20 [tests/native_swoole_buffer/guards.phpt]SKIP Native Buffer borrow rejects clear, constructor, recursive reads and receive before mutation [tests/native_swoole_buffer/guards.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 6/20 [tests/native_swoole_buffer/lifetime.phpt]SKIP Native Buffer pins survive removal of the last PHP owner and release after exceptions [tests/native_swoole_buffer/lifetime.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 7/20 [tests/native_swoole_buffer/pending_receive.phpt]SKIP Native reads reject pending UDP receive and allow timeout/cancellation cleanup [tests/native_swoole_buffer/pending_receive.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 8/20 [tests/native_swoole_buffer/psampler_contract.phpt]SKIP Optional psampler adapter uses the exact public v1 producer contract [tests/native_swoole_buffer/psampler_contract.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 9/20 [tests/native_swoole_buffer/read.phpt]SKIP Public Buffer C ABI: empty, binary UDP, exact capacity, slices and reuse [tests/native_swoole_buffer/read.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 10/20 [tests/native_swoole_buffer/recvfrom_into_bailout.phpt]SKIP recvfromInto releases guard, both Zend pins and unpublished peer on bailout [tests/native_swoole_buffer/recvfrom_into_bailout.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 11/20 [tests/native_swoole_buffer/recvfrom_into_exception.phpt]SKIP recvfromInto restores guard and Zend pins after an untyped peer exception [tests/native_swoole_buffer/recvfrom_into_exception.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 12/20 [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt]SKIP recvfromInto balances pins on UDP, timeout, cancellation, error, overflow and peer aliasing [tests/native_swoole_buffer/recvfrom_into_lifecycle.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 13/20 [tests/native_swoole_buffer/recvfrom_into_typed_bailout.phpt]SKIP recvfromInto releases pins without destroying the published typed peer twice [tests/native_swoole_buffer/recvfrom_into_typed_bailout.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 14/20 [tests/native_swoole_buffer/recvfrom_into_typed_exception.phpt]SKIP recvfromInto restores guard and Zend pins after typed peer exception [tests/native_swoole_buffer/recvfrom_into_typed_exception.phpt] reason: Required extension missing: swoole_buffer_test
+TEST 15/20 [source/php-src/ext/psampler/tests/binary_slice.phpt]PASS Binary slice copies only the requested logical range, including wrapped rings [source/php-src/ext/psampler/tests/binary_slice.phpt] 
+TEST 16/20 [source/php-src/ext/psampler/tests/binary_slice_oom.phpt]SKIP Binary slice allocation bailout releases the borrowed view [source/php-src/ext/psampler/tests/binary_slice_oom.phpt] reason: Required extension missing: psampler_binary_test
+TEST 17/20 [source/php-src/ext/psampler/tests/binary_slice_provider.phpt]SKIP Binary slice balances provider guards on invalid ranges and malformed views [source/php-src/ext/psampler/tests/binary_slice_provider.phpt] reason: Required extension missing: psampler_binary_test
+TEST 18/20 [source/php-src/ext/psampler/tests/binary_slice_signature.phpt]PASS Binary slice exposes the documented PHP signature in static and shared builds [source/php-src/ext/psampler/tests/binary_slice_signature.phpt] 
+TEST 19/20 [source/php-src/ext/psampler/tests/binary_slice_swoole.phpt]PASS Binary slice reads Swoole UDP storage and survives reuse, timeout and cancellation [source/php-src/ext/psampler/tests/binary_slice_swoole.phpt] 
+TEST 20/20 [source/php-src/ext/psampler/tests/rtp_parse.phpt]PASS Experimental native RTP hydration owns bytes and releases views before property hooks [source/php-src/ext/psampler/tests/rtp_parse.phpt] 
+=====================================================================
+Number of tests :    20                 4
+Tests skipped   :    16 ( 80.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     0 (  0.0%) (  0.0%)
+Tests passed    :     4 ( 20.0%) (100.0%)
+---------------------------------------------------------------------
+Time taken      : 0.119 seconds
+=====================================================================

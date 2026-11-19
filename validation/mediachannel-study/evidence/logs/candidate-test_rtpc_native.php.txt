@@ -1,0 +1,2 @@
+773 parser cases; snapshots, references, cloning, serialization and build OK
+31 wrapped-buffer header/payload boundaries OK

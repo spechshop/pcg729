@@ -1,0 +1,26 @@
+--- baseline/Monitor.php
++++ optimization/Monitor.php
+@@ -54,12 +54,17 @@
+             $offset = 0;
+             $length = strlen($pcm);
+             while ($offset < $length && !$this->closed) {
+-                $take = min(320 - strlen($this->pending), $length - $offset);
+-                $this->pending .= substr($pcm, $offset, $take);
+-                $offset += $take;
+-                if (strlen($this->pending) !== 320) continue;
+-                $frame = $this->pending;
+-                $this->pending = '';
++                if ($offset === 0 && $length === 320 && $this->pending === '') {
++                    $frame = $pcm;
++                    $offset = 320;
++                } else {
++                    $take = min(320 - strlen($this->pending), $length - $offset);
++                    $this->pending .= substr($pcm, $offset, $take);
++                    $offset += $take;
++                    if (strlen($this->pending) !== 320) continue;
++                    $frame = $this->pending;
++                    $this->pending = '';
++                }
+                 $this->audioMs += 20;
+                 $this->analyzer->push($frame);
+                 $state = $this->analyzer->state();

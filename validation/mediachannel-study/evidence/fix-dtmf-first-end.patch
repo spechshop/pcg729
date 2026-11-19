@@ -1,0 +1,14 @@
+--- before
++++ after
+@@ -2498,6 +2498,11 @@
+             $this->dtmfFiredGuard[$ssrc] = ['event' => $event, 'time' => $nowMs];
+ 
+ 
++            $callback = $this->onDtmfCallable;
++            if (is_callable($callback)) {
++                go($callback, $event, $peer, $event, $this);
++            }
++
+             // Limpar cache antigo (> 5 segundos)
+             $currentTime = microtime(true);
+             foreach ($this->dtmfPacketCache as $key => $cache) {

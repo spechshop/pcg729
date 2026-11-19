@@ -1,0 +1,302 @@
+{
+    "setSettings": [
+        58,
+        61
+    ],
+    "setNativeRtpReceive": [
+        64,
+        67
+    ],
+    "requireNativeRtpParser": [
+        70,
+        74
+    ],
+    "setPacketTime": [
+        82,
+        123
+    ],
+    "getPacketTime": [
+        125,
+        128
+    ],
+    "onReceive": [
+        130,
+        133
+    ],
+    "setEarlyMediaAcousticTap": [
+        136,
+        140
+    ],
+    "shareReceivedPcmForAcoustics": [
+        143,
+        146
+    ],
+    "setReceiveOnlyMode": [
+        149,
+        152
+    ],
+    "onDtmf": [
+        154,
+        157
+    ],
+    "onVadChange": [
+        159,
+        162
+    ],
+    "block": [
+        290,
+        296
+    ],
+    "unblock": [
+        298,
+        308
+    ],
+    "onDestruct": [
+        318,
+        321
+    ],
+    "__destruct": [
+        323,
+        326
+    ],
+    "__construct": [
+        330,
+        358
+    ],
+    "resolveCodecNameFromPt": [
+        360,
+        375
+    ],
+    "resolveFrequencyFromPt": [
+        377,
+        390
+    ],
+    "codecNameFromMapper": [
+        393,
+        400
+    ],
+    "frequencyFromMapper": [
+        403,
+        411
+    ],
+    "resolveRxCodecNameForMember": [
+        414,
+        423
+    ],
+    "resolveRxFrequencyForMember": [
+        426,
+        435
+    ],
+    "enableVAD": [
+        437,
+        441
+    ],
+    "setVadRegistrationThreshold": [
+        446,
+        449
+    ],
+    "setVadTimeout": [
+        454,
+        457
+    ],
+    "generateDeterministicSsrc": [
+        467,
+        495
+    ],
+    "onStart": [
+        500,
+        503
+    ],
+    "forwardDtmfToMembers": [
+        514,
+        565
+    ],
+    "relayDtmfPayloadForMember": [
+        567,
+        625
+    ],
+    "isRtcpPacket": [
+        627,
+        642
+    ],
+    "start": [
+        644,
+        1087
+    ],
+    "queueRelayedPcmForMember": [
+        1094,
+        1190
+    ],
+    "sendPcmFrameForMember": [
+        1194,
+        1214
+    ],
+    "encodePcmFrameForMember": [
+        1216,
+        1230
+    ],
+    "isMember": [
+        1239,
+        1242
+    ],
+    "addMember": [
+        1244,
+        1330
+    ],
+    "processVAD": [
+        1332,
+        1379
+    ],
+    "setAudioMetricsEnabled": [
+        1388,
+        1396
+    ],
+    "getAudioMetrics": [
+        1398,
+        1405
+    ],
+    "send2833": [
+        1409,
+        1544
+    ],
+    "checkVadTimeouts": [
+        1546,
+        1559
+    ],
+    "sendSilenceProbeToMembers": [
+        1561,
+        1591
+    ],
+    "setLegInjectionActive": [
+        1593,
+        1609
+    ],
+    "sendPcmToLeg": [
+        1619,
+        1623
+    ],
+    "pushPcmToLeg": [
+        1626,
+        1637
+    ],
+    "finishPcmToLeg": [
+        1640,
+        1658
+    ],
+    "cancelPcmToLeg": [
+        1660,
+        1666
+    ],
+    "readyMemberIdForLeg": [
+        1668,
+        1678
+    ],
+    "pcmFormatForMember": [
+        1681,
+        1698
+    ],
+    "convertPcmForMember": [
+        1700,
+        1735
+    ],
+    "logicalMemberKey": [
+        1737,
+        1741
+    ],
+    "queuePcmForMember": [
+        1746,
+        1775
+    ],
+    "startRelayPacerForMember": [
+        1779,
+        1845
+    ],
+    "relayBufferForMember": [
+        1847,
+        1862
+    ],
+    "clearRelayBufferForMember": [
+        1864,
+        1871
+    ],
+    "initializeRelayMetrics": [
+        1873,
+        1893
+    ],
+    "recordRelayInterval": [
+        1895,
+        1912
+    ],
+    "getRelayMetrics": [
+        1915,
+        1931
+    ],
+    "encodeGsmFrameForMember": [
+        1934,
+        1951
+    ],
+    "decodeGsmPayloadForMember": [
+        1953,
+        1966
+    ],
+    "encodeOpusFrameForMember": [
+        1968,
+        1975
+    ],
+    "encodeG729FrameForMember": [
+        1977,
+        1991
+    ],
+    "memberByLeg": [
+        1994,
+        2014
+    ],
+    "rebindMemberTransport": [
+        2016,
+        2059
+    ],
+    "makeSilencePayloadForMember": [
+        2061,
+        2119
+    ],
+    "makeSilencePcmForMember": [
+        2121,
+        2130
+    ],
+    "samplesForPacket": [
+        2132,
+        2135
+    ],
+    "validatePacketTimeForCodec": [
+        2137,
+        2142
+    ],
+    "close": [
+        2144,
+        2262
+    ],
+    "findTelephoneEventPt": [
+        2272,
+        2297
+    ],
+    "registerPtCodecs": [
+        2301,
+        2349
+    ],
+    "packetOnTimeout": [
+        2351,
+        2354
+    ],
+    "getFrequencyFromPtCodec": [
+        2358,
+        2361
+    ],
+    "processDtmf": [
+        2372,
+        2518
+    ],
+    "translateDigit": [
+        2520,
+        2537
+    ]
+}

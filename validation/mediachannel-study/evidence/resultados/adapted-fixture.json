@@ -1,0 +1,14 @@
+[
+  {
+    "variant": "baseline",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught RuntimeException: callback do fluxo RTP reutiliza o \u00fanico decode GSM\nEsperado: 320\nObtido:  0 in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/baseline/test_member_adapted.php:41\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/baseline/test_member_adapted.php(548): memberPtimeAssertSame(320, 0, 'callback do flu...')\n#1 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/baseline/test_member_adapted.php:495}()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/baseline/test_member_adapted.php on line 41\n[2026-11-13 22:20:26 %1633609.0]\tWARNING\tChannel::~Channel() (ERRNO 10003): channel is destroyed, 1 consumers will be discarded\n",
+    "stderr": ""
+  },
+  {
+    "variant": "candidate",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught RuntimeException: callback do fluxo RTP reutiliza o \u00fanico decode GSM\nEsperado: 320\nObtido:  0 in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/candidate/test_member_adapted.php:41\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/candidate/test_member_adapted.php(548): memberPtimeAssertSame(320, 0, 'callback do flu...')\n#1 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/candidate/test_member_adapted.php:495}()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/validation/mediachannel-study/lab/candidate/test_member_adapted.php on line 41\n[2026-11-13 22:20:27 %1633610.0]\tWARNING\tChannel::~Channel() (ERRNO 10003): channel is destroyed, 1 consumers will be discarded\n",
+    "stderr": ""
+  }
+]

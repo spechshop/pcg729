@@ -1,0 +1,5 @@
+Listener PCMA 8 kHz em 127.0.0.1:40000 | esperado 127.0.0.1:50000 | modo=recvfromInto + psampler_rtp_parse (obrigatorio)
+MediaChannel iniciado. Aguardando RTP...
+Primeiro RTP: 127.0.0.1:50000 | PT=8 | SSRC=456
+DTMF: evento=5
+RX: 3.0 PPS | 0.5 KiB/s | total=3 | lacunas_seq=0

@@ -1,0 +1,24 @@
+1327: ssize_t Socket::recvfrom(void *_buf, size_t _n) {
+1328:     if (sw_unlikely(!is_available(SW_EVENT_READ))) {
+1329:         return -1;
+1330:     }
+1331:     socket->info.len = sizeof(socket->info.addr);
+1332:     return recvfrom(_buf, _n, reinterpret_cast<sockaddr *>(&socket->info.addr), &socket->info.len);
+1333: }
+1334: 
+1335: ssize_t Socket::recvfrom(void *_buf, size_t _n, sockaddr *_addr, socklen_t *_socklen) {
+1336:     if (sw_unlikely(!is_available(SW_EVENT_READ))) {
+1337:         return -1;
+1338:     }
+1339:     ssize_t retval;
+1340:     TimerController timer(&read_timer, socket->read_timeout, this, timer_callback);
+1341:     do {
+1342:         retval = ::recvfrom(sock_fd, static_cast<char *>(_buf), _n, 0, _addr, _socklen);
+1343:         swoole_trace_log(SW_TRACE_SOCKET, "recvfrom %ld/%ld bytes, errno=%d", retval, _n, errno);
+1344:     } while (retval < 0 && ((errno == EINTR) || (socket->catch_read_error(errno) == SW_WAIT && timer.start() &&
+1345:                                                  wait_event(SW_EVENT_READ))));
+1346:     check_return_value(retval);
+1347:     return retval;
+1348: }
+1349: 
+1350: ssize_t Socket::recv_packet_with_length_protocol() {

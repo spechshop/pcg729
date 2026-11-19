@@ -1,0 +1,2538 @@
+0001 <?php
+0002 
+0003 namespace libspech\Rtp;
+0004 
+0005 use bcg729Channel;
+0006 use ByteBuffer;
+0007 use Closure;
+0008 use gsmChannel;
+0009 use libspech\Cache\cache;
+0010 use libspech\Cli\cli;
+0011 use libspech\Network\network;
+0012 use opusChannel;
+0013 use Swoole\Coroutine;
+0014 use Swoole\Coroutine\Socket;
+0015 use Throwable;
+0016 use function libspech\Sip\volumeAverage;
+0017 
+0018 
+0019 class MediaChannel
+0020 {
+0021     public const DEFAULT_PACKET_TIME_MS = 20;
+0022     private const GSM_PCM_BYTES_PER_FRAME = 320;
+0023     private const GSM_BYTES_PER_FRAME = 33;
+0024     private const GSM_FRAME_DURATION_MS = 20;
+0025     private const MAX_RELAY_BACKLOG_MS = 200;
+0026 
+0027     /** @var array<int,string> */
+0028     private const RTP_AVP_STATIC_CODECS = [
+0029         0 => 'PCMU/8000/1',
+0030         // Historical libspech raw PCM binding retained for compatibility.
+0031         1 => 'PCM/8000/1',
+0032         3 => 'GSM/8000/1',
+0033         8 => 'PCMA/8000/1',
+0034         10 => 'L16/44100/2',
+0035         11 => 'L16/44100/1',
+0036         18 => 'G729/8000/1',
+0037         // PT 101 is not static RTP/AVP, but remains a legacy libspech fallback.
+0038         101 => 'telephone-event/8000/1',
+0039     ];
+0040 
+0041     public bool $active = true;
+0042 
+0043     public int $connectTimeout = 30;
+0044 
+0045 
+0046     private int $packetTimeMs = self::DEFAULT_PACKET_TIME_MS;
+0047     private bool $receiveOnlyMode = false;
+0048     private ?EarlyMediaAcousticTap $earlyMediaAcousticTap = null;
+0049     private string|false|null $receivedPcmForAcoustics = null;
+0050     private bool $nativeRtpReceive = true;
+0051     private bool $requireNativeRtpParser = false;
+0052     public bool $debugEnabled = false;
+0053     private array $settings = [];
+0054     /** @var array<string,true> Explicitly replaced transports cannot autojoin. */
+0055     private array $retiredMemberEndpoints = [];
+0056     private $lastVoiceActivity = 0;
+0057 
+0058     public function setSettings(array $settings): void
+0059     {
+0060         $this->settings = $settings;
+0061     }
+0062 
+0063     /** Opt in before start(); unavailable native APIs fall back to recvfrom(). */
+0064     public function setNativeRtpReceive(bool $enabled): void
+0065     {
+0066         $this->nativeRtpReceive = $enabled;
+0067     }
+0068 
+0069     /** Experimental receiver: fail synchronously instead of silently falling back. */
+0070     public function requireNativeRtpParser(): void
+0071     {
+0072         $this->nativeRtpReceive = true;
+0073         $this->requireNativeRtpParser = true;
+0074     }
+0075 
+0076     /**
+0077      * Define o ptime default do MediaChannel.
+0078      *
+0079      * Membros que não informaram ptime continuam acompanhando este valor. Membros
+0080      * com ptime explícito preservam sua configuração individual.
+0081      */
+0082     public function setPacketTime(int $ptimeMs): void
+0083     {
+0084         if ($ptimeMs <= 0) {
+0085             throw new \InvalidArgumentException('Packet time deve ser maior que 0');
+0086         }
+0087 
+0088         foreach ($this->members as $member) {
+0089             if (($member['ptimeExplicit'] ?? false) === true) {
+0090                 continue;
+0091             }
+0092             $this->validatePacketTimeForCodec($ptimeMs, (string)($member['codec'] ?? ''));
+0093         }
+0094 
+0095         $this->packetTimeMs = $ptimeMs;
+0096 
+0097         foreach ($this->rtpChans as $ssrc => $channel) {
+0098             $memberId = $this->rtpChanMemberIds[$ssrc] ?? null;
+0099             if ($memberId !== null && ($this->members[$memberId]['ptimeExplicit'] ?? false) === true) {
+0100                 continue;
+0101             }
+0102             if ($channel instanceof rtpChannel) {
+0103                 $channel->setPacketTime($ptimeMs);
+0104             }
+0105         }
+0106 
+0107         foreach ($this->members as $id => $member) {
+0108             if (($member['ptimeExplicit'] ?? false) === true) {
+0109                 continue;
+0110             }
+0111             if (($member['rtpChannel'] ?? null) instanceof rtpChannel) {
+0112                 $this->members[$id]['rtpChannel']->setPacketTime($ptimeMs);
+0113                 $this->members[$id]['ptime'] = $ptimeMs;
+0114                 $this->members[$id]['samplesPerPacket'] = $this->members[$id]['rtpChannel']->samplesPerPacket;
+0115                 $this->members[$id]['relayFrameBytes'] = $this->members[$id]['samplesPerPacket'] * $this->members[$id]['channels'] * 2;
+0116                 // Um residual criado com o frame anterior não pode ser reinterpretado
+0117                 // com outro tamanho de packetização.
+0118                 $this->members[$id]['pcmAccumulator'] = '';
+0119                 $this->clearRelayBufferForMember($id);
+0120                 unset($this->relayNextSendAtNs[$id]);
+0121             }
+0122         }
+0123     }
+0124 
+0125     public function getPacketTime(): int
+0126     {
+0127         return $this->packetTimeMs;
+0128     }
+0129 
+0130     public function onReceive(callable $callback): void
+0131     {
+0132         $this->onReceiveCallable = $callback;
+0133     }
+0134 
+0135     /** Independent opt-in observer; existing callbacks and members are untouched. */
+0136     public function setEarlyMediaAcousticTap(?EarlyMediaAcousticTap $tap): void
+0137     {
+0138         $this->earlyMediaAcousticTap?->close('tap_replaced');
+0139         $this->earlyMediaAcousticTap = $tap;
+0140     }
+0141 
+0142     /** The receiveOnly trunk callback can lend its already decoded PCM synchronously. */
+0143     public function shareReceivedPcmForAcoustics(string $pcm): void
+0144     {
+0145         if ($this->earlyMediaAcousticTap) $this->receivedPcmForAcoustics = $pcm;
+0146     }
+0147 
+0148     /** Keep RTP/member bookkeeping and callbacks, without forwarding received media. */
+0149     public function setReceiveOnlyMode(bool $enabled): void
+0150     {
+0151         $this->receiveOnlyMode = $enabled;
+0152     }
+0153 
+0154     public function onDtmf(callable $callback): void
+0155     {
+0156         $this->onDtmfCallable = $callback;
+0157     }
+0158 
+0159     public function onVadChange(callable $callback): void
+0160     {
+0161         $this->onVadChangeCallable = $callback;
+0162     }
+0163 
+0164     public \SocketMutable $socket;
+0165 
+0166 
+0167     /**
+0168      * Array de membros com estrutura:
+0169      * [
+0170      *     'address' => string,
+0171      *     'port' => int,
+0172      *     'channels' => int,
+0173      *     'codec' => string,
+0174      *     'pt' => int, // alias legado de txPt
+0175      *     'txPt' => int,
+0176      *     'rxPt' => int,
+0177      *     'ptime' => int,
+0178      *     'samplesPerPacket' => int,
+0179      *     'pcmAccumulator' => string,
+0180      *     'relayPcmBuffer' => ByteBuffer,
+0181      *     'relayFrameBytes' => int,
+0182      *     'relayWake' => \Swoole\Coroutine\Channel,
+0183      *     'config' => array,
+0184      *     'opusEncoder' => ?opusChannel,
+0185      *     'opusDecoder' => ?opusChannel,
+0186      *     'gsmEncoder' => ?gsmChannel,
+0187      *     'gsmDecoder' => ?gsmChannel,
+0188      *     'frequency' => int,
+0189      *     'rtpChannel' => rtpChannel // owner de PT, sequence, timestamp e SSRC
+0190      * ]
+0191      *
+0192      * @var array<string, array<string,mixed>>
+0193      */
+0194     public array $members = [];
+0195     public int $defaultCodec = 8;
+0196     public bcg729Channel $channelEncode;
+0197     public bcg729Channel $channelDecode;
+0198     public array $ptCodecs = [
+0199         0 => 'PCMU',
+0200         1 => 'PCM',
+0201         3 => 'GSM',
+0202         8 => 'PCMA',
+0203         18 => 'G729', // G729
+0204         101 => 'telephone-event', // DTMF
+0205     ];
+0206     public array $ptCodecsFrequency = [
+0207         'PCMU' => 8000,
+0208         'PCM' => 8000,
+0209         'GSM' => 8000,
+0210         'PCMA' => 8000,
+0211         'L16' => 44100,
+0212         'G729' => 8000, // G729
+0213         'telephone-event' => 8000, // DTMF
+0214     ];
+0215     /** @var array<int,int> RTP payload type => clock rate negotiated */
+0216     public array $ptFrequencies = [];
+0217     public ?opusChannel $opusChannel = null;
+0218     public string $callId;
+0219     public array $codecMapper = [];
+0220     /** @var array<int,string> Explicit SDP mappings used for packets sent by libspech. */
+0221     public array $txCodecMapper = [];
+0222     /** @var array<int,string> Explicit SDP mappings used for packets received by libspech. */
+0223     public array $rxCodecMapper = [];
+0224     private ?\Swoole\Coroutine\Channel $blockChannel = null;
+0225     public $onReceiveCallable = null;
+0226     public $onDtmfCallable = null;
+0227     public $onVadChangeCallable = null;
+0228     public $onRecordingCallable = null;
+0229     public bool $vadEnabled = false;
+0230     public bool $isVoiceActive = false;
+0231     private float $vadThreshold = 2.0;
+0232     private int $vadHangoverFrames = 20;
+0233     private int $vadCurrentHangover = 0;
+0234     public bool $recordingEnabled = false;
+0235     private string $recordingPath = '';
+0236     private array $dtmfLastEvent = [];
+0237     private int $dtmfDebounceMs = 100;
+0238     private array $dtmfPacketCache = []; // Cache para detectar retransmissões RFC 4733
+0239     private array $dtmfFiredGuard = []; // Guard temporal por (ssrc) para evitar disparo múltiplo do mesmo dígito
+0240     public array $audioMetrics = [
+0241         'total_packets' => 0,
+0242         'lost_packets' => 0,
+0243         'avg_energy' => 0.0,
+0244         'voice_time' => 0.0,
+0245         'silence_time' => 0.0,
+0246         'rtcp_packets' => 0,
+0247         'dtmf_events' => 0,
+0248         'bytes_received' => 0,
+0249         'jitter' => 0.0,
+0250         'first_arrival' => 0.0,
+0251         'last_arrival' => 0.0,
+0252         'max_seq_gap' => 0,
+0253         'codecs' => [],
+0254     ];
+0255     private bool $audioMetricsEnabled = false;
+0256     // Estado por ssrc para cálculo barato de perda/jitter (RFC 3550), sem funções pesadas
+0257     private array $rtpStats = [];
+0258     private int $metricJitterFrequency = 0;
+0259 
+0260     private bool $adaptationEnabled = false;
+0261     private array $qualityReports = [];
+0262     private int $adaptationCheckInterval = 50;
+0263     private int $packetsProcessed = 0;
+0264     public array $registeredIds = [];
+0265     private array $lastVadActivity = [];
+0266     private int $vadTimeoutSeconds = 10;
+0267     private float $vadRegistrationThreshold = 2.0;
+0268     private float $lastSilenceProbeAt = 0.0;
+0269     public float $silenceProbeInterval = 0.5;
+0270 
+0271     /** @var array<string,bool> legs currently driven by an internal media source */
+0272     private array $injectedLegs = [];
+0273 
+0274     /** @var array<string,PcmStreamConverter> Logical source leg/member to target leg/member. */
+0275     private array $relayPcmStreams = [];
+0276 
+0277     /** @var array<string,PcmStreamConverter> One active injection stream per leg. */
+0278     private array $injectionPcmStreams = [];
+0279 
+0280     /** @var array<string,bool> members whose relayed PCM is being drained by a pacer */
+0281     private array $relayPacerRunning = [];
+0282 
+0283     /** @var array<string,int> next monotonic send deadline per destination member */
+0284     private array $relayNextSendAtNs = [];
+0285 
+0286     /** @var array<string,array<string,int|float|string>> */
+0287     private array $relayMetrics = [];
+0288 
+0289 
+0290     public function block($callback = null): void
+0291     {
+0292         if ($callback) {
+0293             $callback($this);
+0294         }
+0295         $this->blockChannel->pop();
+0296     }
+0297 
+0298     public function unblock(): void
+0299     {
+0300         $this->active = false;
+0301         foreach ($this->members as $member) {
+0302             $member['relayWake']->close();
+0303         }
+0304         if ($this->blockChannel->length() === 0) {
+0305             $this->blockChannel->push(true);
+0306         }
+0307         $this->blockChannel->close();
+0308     }
+0309 
+0310     public array $rtpChans = [];
+0311     /** @var array<int,string> source SSRC => member id */
+0312     private array $rtpChanMemberIds = [];
+0313     /** @var array<string,string> */
+0314     private array $legMemberIds = ['a' => '', 'b' => ''];
+0315     public Socket $eventSock;
+0316     public int $listenPort = 0;
+0317 
+0318     public function onDestruct(callable $callback): void
+0319     {
+0320         $this->onDestructCallable = $callback;
+0321     }
+0322 
+0323     public function __destruct()
+0324     {
+0325         ($this->onDestructCallable)(...)();
+0326     }
+0327 
+0328     private Closure $onDestructCallable;
+0329 
+0330     public function __construct(Socket|\SocketMutable &$socket, string $callId)
+0331     {
+0332         // A non-static closure created here is bound to $this and makes the
+0333         // MediaChannel retain itself. That delays destruction of closed RTP
+0334         // sockets until cyclic GC happens to run.
+0335         $this->onDestructCallable = static function (): void {
+0336         };
+0337 
+0338         $this->settings = [
+0339             'sendSilenceProbeToMembers' => true,
+0340         ];
+0341         $this->socket = $socket;
+0342         $this->callId = $callId;
+0343 
+0344 
+0345         $this->channelEncode = new bcg729Channel();
+0346         $this->channelDecode = new bcg729Channel();
+0347 
+0348         $this->blockChannel = new \Swoole\Coroutine\Channel(1);
+0349 
+0350 
+0351         $this->adaptationEnabled = false;
+0352         $this->qualityReports = [];
+0353         $this->adaptationCheckInterval = 50;
+0354         $this->packetsProcessed = 0;
+0355         $this->eventSock = new \SocketMutable(AF_INET, SOCK_DGRAM, SOL_UDP);
+0356         $this->rtpChans = [];
+0357         $this->listenPort = $this->socket->getsockname()['port'];
+0358     }
+0359 
+0360     public function resolveCodecNameFromPt(int $pt): ?string
+0361     {
+0362         $mapper = $this->rxCodecMapper !== [] ? $this->rxCodecMapper : $this->codecMapper;
+0363         $mapped = $this->codecNameFromMapper($mapper, $pt);
+0364         if ($mapped !== null) {
+0365             return $mapped;
+0366         }
+0367 
+0368         // `ptCodecs` remains a legacy registry. Directional SDP maps take
+0369         // precedence whenever present, including for static PT numbers.
+0370         if ($this->rxCodecMapper === [] && isset($this->ptCodecs[$pt])) {
+0371             return $this->ptCodecs[$pt];
+0372         }
+0373 
+0374         return $this->codecNameFromMapper(self::RTP_AVP_STATIC_CODECS, $pt);
+0375     }
+0376 
+0377     public function resolveFrequencyFromPt(int $pt): int
+0378     {
+0379         $mapper = $this->rxCodecMapper !== [] ? $this->rxCodecMapper : $this->codecMapper;
+0380         $mapped = $this->frequencyFromMapper($mapper, $pt);
+0381         if ($mapped !== null) {
+0382             return $mapped;
+0383         }
+0384 
+0385         if ($this->rxCodecMapper === [] && isset($this->ptFrequencies[$pt])) {
+0386             return $this->ptFrequencies[$pt];
+0387         }
+0388 
+0389         return $this->frequencyFromMapper(self::RTP_AVP_STATIC_CODECS, $pt) ?? 8000;
+0390     }
+0391 
+0392     /** @param array<int,string> $mapper */
+0393     private function codecNameFromMapper(array $mapper, int $pt): ?string
+0394     {
+0395         if (!array_key_exists($pt, $mapper)) {
+0396             return null;
+0397         }
+0398         $codec = trim((string)explode('/', (string)$mapper[$pt], 2)[0]);
+0399         return $codec === '' ? null : $codec;
+0400     }
+0401 
+0402     /** @param array<int,string> $mapper */
+0403     private function frequencyFromMapper(array $mapper, int $pt): ?int
+0404     {
+0405         if (!array_key_exists($pt, $mapper)) {
+0406             return null;
+0407         }
+0408         $parts = explode('/', (string)$mapper[$pt]);
+0409         $frequency = (int)($parts[1] ?? 0);
+0410         return $frequency > 0 ? $frequency : null;
+0411     }
+0412 
+0413     /** @param array<string,mixed>|null $member */
+0414     private function resolveRxCodecNameForMember(int $pt, ?array $member): ?string
+0415     {
+0416         if (is_array($member)) {
+0417             $mapped = $this->codecNameFromMapper((array)($member['rxCodecMapper'] ?? []), $pt);
+0418             if ($mapped !== null) {
+0419                 return $mapped;
+0420             }
+0421         }
+0422         return $this->resolveCodecNameFromPt($pt);
+0423     }
+0424 
+0425     /** @param array<string,mixed>|null $member */
+0426     private function resolveRxFrequencyForMember(int $pt, ?array $member): int
+0427     {
+0428         if (is_array($member)) {
+0429             $mapped = $this->frequencyFromMapper((array)($member['rxCodecMapper'] ?? []), $pt);
+0430             if ($mapped !== null) {
+0431                 return $mapped;
+0432             }
+0433         }
+0434         return $this->resolveFrequencyFromPt($pt);
+0435     }
+0436 
+0437     public function enableVAD(float $threshold = 2.0): void
+0438     {
+0439         $this->vadEnabled = true;
+0440         $this->vadThreshold = $threshold;
+0441     }
+0442 
+0443     /**
+0444      * Define o valor mínimo de energia para registrar um ID pelo VAD
+0445      */
+0446     public function setVadRegistrationThreshold(float $threshold): void
+0447     {
+0448         $this->vadRegistrationThreshold = $threshold;
+0449     }
+0450 
+0451     /**
+0452      * Define o timeout em segundos para IDs registrados pelo VAD
+0453      */
+0454     public function setVadTimeout(int $timeoutSeconds): void
+0455     {
+0456         $this->vadTimeoutSeconds = $timeoutSeconds;
+0457     }
+0458 
+0459     public array $openChannels = [];
+0460     public int $portList = 0;
+0461     public array $options = [];
+0462     public int $retrys = 0;
+0463     public mixed $ssrc = 0;
+0464 
+0465     private array $cacheKeys = [];
+0466 
+0467     public function generateDeterministicSsrc(string $ipPort): int
+0468     {
+0469         if (isset($this->cacheKeys[$ipPort])) {
+0470             return $this->cacheKeys[$ipPort];
+0471         }
+0472         if (!cache::get('local_ip')) {
+0473             cache::set('local_ip', network::getLocalIpv6());
+0474         }
+0475 
+0476 
+0477         // Hash SHA-1 da string IP:porta (gera 40 caracteres hex)
+0478         $hash = sha1($ipPort . cache::get('local_ip'));
+0479 
+0480         // Pegar os primeiros 8 caracteres hex (32 bits)
+0481         $hex = substr($hash, 0, 8);
+0482 
+0483         // Converter para inteiro (0 a 0xFFFFFFFF)
+0484         $ssrc = (int)hexdec($hex);
+0485 
+0486         // Garantir que está dentro do range de 32 bits
+0487         $result = $ssrc & 0xFFFFFFFF;
+0488         if (!cache::exists('ssrcs')) cache::set('ssrcs', []);
+0489         if (!in_array($result, cache::get('ssrcs'))) {
+0490             cache::join('ssrcs', $result);
+0491         }
+0492 
+0493         $this->cacheKeys[$ipPort] = $result;
+0494         return $result;
+0495     }
+0496 
+0497 
+0498     public mixed $onStartCallable = false;
+0499 
+0500     public function onStart(callable $callable): void
+0501     {
+0502         $this->onStartCallable = $callable;
+0503     }
+0504 
+0505     /**
+0506      * Faz forward de pacotes DTMF (telephone-event) para todos os membros
+0507      * Mantém o timestamp original do evento DTMF e ajusta o PT conforme necessário
+0508      *
+0509      * @param rtpc $rtpc Pacote RTP original com evento DTMF
+0510      * @param array $peer Informações do peer de origem ['address' => string, 'port' => int]
+0511      * @param string $idFrom Identificador do membro de origem (address:port)
+0512      * @param array $destinationChannels Array de canais RTP por destino (passado por referência)
+0513      */
+0514     private function forwardDtmfToMembers(rtpc $rtpc, array $peer, string $idFrom): void
+0515     {
+0516         $payload = $rtpc->payloadRaw;
+0517 
+0518         if (strlen($payload) >= 4) {
+0519             $event = ord($payload[0]);
+0520             $e_r_volume = ord($payload[1]);
+0521             $end = ($e_r_volume & 0x80) >> 7;
+0522             $volume = $e_r_volume & 0x3F;
+0523 
+0524             $duration = (ord($payload[2]) << 8) | ord($payload[3]);
+0525         } else {
+0526             cli::pcl("Invalid DTMF payload length: " . strlen($payload), 'red');
+0527             return;
+0528         }
+0529 
+0530 
+0531         foreach ($this->members as $targetId => $info) {
+0532             if ($targetId === $idFrom) {
+0533                 continue;
+0534             }
+0535             $isFirstPacket = ($rtpc->marker === 1);
+0536             //if ($isFirstPacket) cli::pcl("DTMF: {$event} {$volume} {$duration} {$end} {$targetId}", 'bold_green');
+0537 
+0538 
+0539             //
+0540 
+0541 
+0542             $frequencyMember = $this->ptCodecsFrequency[$info['codec']] ?? 8000;
+0543 
+0544             // Encontrar o PT correto do telephone-event para este destino
+0545             $telephoneEventPt = $this->findTelephoneEventPt($frequencyMember);
+0546 
+0547             // Configurar o PT do telephone-event no canal de destino
+0548             $this->members[$targetId]['rtpChannel']->setNewPtDTMF($telephoneEventPt);
+0549 
+0550 
+0551             // Construir e enviar pacote DTMF mantendo a timeline própria do canal de destino.
+0552             // Usar o timestamp do remetente quebra a continuidade RTP no destino, gerando
+0553             // "Jitter buffer empty / lost frames". Aqui o timestamp do evento é congelado na
+0554             // timeline de áudio atual do canal e avançado pela duração ao final do evento.
+0555             $this->relayDtmfPayloadForMember(
+0556                 $targetId,
+0557                 $rtpc,
+0558                 $event,
+0559                 $volume,
+0560                 $duration,
+0561                 $isFirstPacket,
+0562                 $end === 1
+0563             );
+0564         }
+0565     }
+0566 
+0567     private function relayDtmfPayloadForMember(
+0568         string $targetId,
+0569         rtpc   $sourcePacket,
+0570         int    $event,
+0571         int    $volume,
+0572         int    $duration,
+0573         bool   $isFirstPacket,
+0574         bool   $isEnd
+0575     ): void
+0576     {
+0577         $member = $this->members[$targetId] ?? null;
+0578         $channel = $member['rtpChannel'] ?? null;
+0579         if (!is_array($member) || !$channel instanceof rtpChannel) {
+0580             return;
+0581         }
+0582 
+0583         $eventKey = $sourcePacket->ssrc . ':' . $sourcePacket->timestamp . ':' . $event;
+0584         $state = $member['dtmfRelay'] ?? null;
+0585         if ($isFirstPacket || !is_array($state) || ($state['eventKey'] ?? '') !== $eventKey) {
+0586             $state = [
+0587                 'eventKey' => $eventKey,
+0588                 'lastProgressDuration' => 0,
+0589                 'emitted' => false,
+0590                 'endForwarded' => false,
+0591             ];
+0592         }
+0593 
+0594         // O campo duration recebido está no clock RFC4733. Para decidir quantos
+0595         // pacotes o destino precisa, usamos o ptime individual dele nesse mesmo clock.
+0596         $eventClockRate = max(1, $this->resolveFrequencyFromPt($sourcePacket->getCodec()));
+0597         $durationStep = max(1, (int)round(($eventClockRate * $channel->packetTimeMs) / 1000));
+0598         $nextDuration = (int)$state['lastProgressDuration'] + $durationStep;
+0599 
+0600         while ($nextDuration <= $duration) {
+0601             $payload = pack('CCn', $event, $volume & 0x3F, $nextDuration);
+0602             $packet = $channel->buildRelayedDtmfPacket($payload, !$state['emitted'], false, $nextDuration);
+0603             $this->socket->sendto((string)$member['address'], (int)$member['port'], $packet);
+0604             $state['emitted'] = true;
+0605             $state['lastProgressDuration'] = $nextDuration;
+0606             $nextDuration += $durationStep;
+0607         }
+0608 
+0609         if ($isEnd) {
+0610             // Retransmissões E recebidas continuam sendo encaminhadas, mas nunca
+0611             // avançam novamente a timeline do destino.
+0612             $payload = pack('CCn', $event, 0x80 | ($volume & 0x3F), $duration);
+0613             $packet = $channel->buildRelayedDtmfPacket($payload, !$state['emitted'], true, $duration);
+0614             $this->socket->sendto((string)$member['address'], (int)$member['port'], $packet);
+0615             $state['emitted'] = true;
+0616             if (!$state['endForwarded'] && $duration > $state['lastProgressDuration']) {
+0617                 $residualDuration = $duration - $state['lastProgressDuration'];
+0618                 $residualSamples = (int)round(($residualDuration * $channel->sampleRate) / $eventClockRate);
+0619                 $channel->advanceTimestampBySamples($residualSamples);
+0620             }
+0621             $state['endForwarded'] = true;
+0622         }
+0623 
+0624         $this->members[$targetId]['dtmfRelay'] = $state;
+0625     }
+0626 
+0627     private function isRtcpPacket(string $packet): bool
+0628     {
+0629         if (strlen($packet) < 4) {
+0630             return false;
+0631         }
+0632 
+0633         $version = (ord($packet[0]) >> 6) & 0x03;
+0634 
+0635         if ($version !== 2) {
+0636             return false;
+0637         }
+0638 
+0639         $type = ord($packet[1]);
+0640 
+0641         return $type >= 200 && $type <= 207;
+0642     }
+0643 
+0644     public function start(): void
+0645     {
+0646         if ($this->requireNativeRtpParser && (!$this->nativeRtpReceive
+0647             || !function_exists('psampler_rtp_parse')
+0648             || !function_exists('psampler_binary_slice')
+0649             || !class_exists(\Swoole\Buffer::class, false)
+0650             || !method_exists($this->socket, 'recvfromInto')
+0651             || !method_exists(ByteBuffer::class, 'supportsNativeBuffer')
+0652             || !ByteBuffer::supportsNativeBuffer(new \Swoole\Buffer(16)))) {
+0653             throw new \RuntimeException('Native RTP requires psampler_rtp_parse, recvfromInto and the Swoole Buffer bridge');
+0654         }
+0655         Coroutine::create(function () {
+0656             try {
+0657                 $maxFrequency = 8000;
+0658                 $this->active = true;
+0659 
+0660                 $nativeBuffer = null;
+0661                 if ($this->nativeRtpReceive
+0662                     && function_exists('psampler_binary_slice')
+0663                     && class_exists(\Swoole\Buffer::class, false)
+0664                     && method_exists($this->socket, 'recvfromInto')
+0665                     && method_exists(ByteBuffer::class, 'supportsNativeBuffer')) {
+0666                     $candidate = new \Swoole\Buffer(65536);
+0667                     if (ByteBuffer::supportsNativeBuffer($candidate)) {
+0668                         $nativeBuffer = $candidate;
+0669                     }
+0670                     unset($candidate);
+0671                 }
+0672 
+0673                 foreach ($this->ptCodecsFrequency as $codec => $frequency) {
+0674                     if ($frequency > $maxFrequency) {
+0675                         $maxFrequency = $frequency;
+0676                     }
+0677                 }
+0678 
+0679 
+0680                 if (is_callable($this->onStartCallable)) go($this->onStartCallable, $this->callId);
+0681 
+0682 
+0683                 $lastPacketTime = microtime(true);
+0684                 $lastDebug = microtime(true);
+0685 
+0686                 while (true) {
+0687                     if (!$this->active) {
+0688                         // close() is normally called by the RTP control coroutine
+0689                         // while recvfrom() belongs to this coroutine. Swoole may
+0690                         // reject a cross-coroutine close, so the owner performs the
+0691                         // definitive close after cancellation or receive timeout.
+0692                         try {
+0693                             if (method_exists($this->socket, 'destroy')) {
+0694                                 $this->socket->destroy();
+0695                             } elseif (!$this->socket->isClosed()) {
+0696                                 $this->socket->close();
+0697                             }
+0698                         } catch (\Throwable) {
+0699                         }
+0700                         try {
+0701                             if (method_exists($this->eventSock, 'destroy')) {
+0702                                 $this->eventSock->destroy();
+0703                             } elseif (!$this->eventSock->isClosed()) {
+0704                                 $this->eventSock->close();
+0705                             }
+0706                         } catch (\Throwable) {
+0707                         }
+0708                         return;
+0709                     }
+0710                     $peer = ['address' => '0.0.0.0', 'port' => 0];
+0711                     if ($nativeBuffer !== null) {
+0712                         $bytes = $this->socket->recvfromInto($nativeBuffer, $peer, 0.2);
+0713                         $packetLength = $bytes === false ? 0 : $bytes;
+0714                         $packet = $packetLength > 0;
+0715                         // recvfrom's falsey string "0" also follows the idle path.
+0716                         if ($packetLength === 1 && \psampler_binary_slice($nativeBuffer, 0, 1) === '0') {
+0717                             $packet = false;
+0718                         }
+0719                     } else {
+0720                         $packet = $this->socket->recvfrom($peer, -1);
+0721                         $packetLength = $packet === false ? 0 : strlen($packet);
+0722                     }
+0723                     $currentTime = microtime(true);
+0724 
+0725 
+0726                     if (!$packet) {
+0727                         $now = $currentTime;
+0728                         $elapsed = round($now - $lastPacketTime, 3);
+0729 
+0730 
+0731                         $errCode = (int)($this->socket->errCode ?? 0);
+0732                         if ($nativeBuffer !== null && ($bytes === 0
+0733                             || ($bytes === false && defined('SOCKET_EMSGSIZE') && $errCode === SOCKET_EMSGSIZE))) {
+0734                             // Empty/oversized datagrams are not fatal and do not
+0735                             // refresh inactivity. Run the existing idle policy.
+0736                             $errCode = 0;
+0737                         }
+0738 
+0739                         if ($errCode !== 0 && !in_array($errCode, [110, 11, 35], true)) {
+0740                             $this->unblock();
+0741                             $this->socket->close();
+0742                             $this->eventSock->close();
+0743 
+0744                             if ($this->active)
+0745                                 if (is_callable($this->packetOnTimeoutCallable)) {
+0746                                     call_user_func($this->packetOnTimeoutCallable, $this->callId);
+0747                                 }
+0748                             return;
+0749                         }
+0750 
+0751                         // Enquanto ainda não passou o timeout final, tenta acordar os members.
+0752                         $elapsedInSeconds = round($now - $lastPacketTime, 3);
+0753 
+0754                         if ($elapsedInSeconds <= $this->connectTimeout) {
+0755 
+0756 
+0757                             // disabled
+0758 
+0759 //                        if ($this->socket->getsockname()['port'] == $this->listenPort) {
+0760 //                            $try = $this->socket->getsockname()['port']-1;
+0761 //                            if (network::isPortAvailable($try, 'udp')) {
+0762 //                                cli::pcl("PORTA: $try disponivel", 'bold_green');
+0763 //                            } else {
+0764 //                                cli::pcl("PORTA: $try indisponivel", 'bold_red');
+0765 //                            }
+0766 //                            $this->socket->close();
+0767 //                            $this->socket = new \SocketMutable(AF_INET, SOCK_DGRAM, 0);
+0768 //                            if (!$this->socket->bind('0.0.0.0', (int)$try)) {
+0769 //                                cli::pcl("SOCKET ERROR: {$this->socket->errCode} {$this->socket->errMsg} PORTA: $try", 'bold_red');
+0770 //                            } else {
+0771 //                                cli::pcl("SOCKET BIND: {$this->socket->errCode} {$this->socket->errMsg} PORTA: " . $this->socket->getsockname()['port'], 'bold_green');
+0772 //                            }
+0773 //                        }
+0774 
+0775                             if (!$this->receiveOnlyMode && $this->settings['sendSilenceProbeToMembers']) $this->sendSilenceProbeToMembers($now);
+0776                             continue;
+0777                         }
+0778                         if ($elapsed >= $this->connectTimeout) {
+0779                             // Agora sim: timeout real da chamada.
+0780                             cli::pcl(
+0781                                 "TIMEOUT: no packets received for {$elapsed} seconds, exceed: {$this->connectTimeout}",
+0782                                 'bold_red'
+0783                             );
+0784                         }
+0785 
+0786 
+0787                         $this->unblock();
+0788                         $this->socket->close();
+0789                         $this->eventSock->close();
+0790 
+0791                         if (is_callable($this->packetOnTimeoutCallable)) {
+0792                             call_user_func($this->packetOnTimeoutCallable, $this->callId);
+0793                         }
+0794 
+0795                         return;
+0796                     } else {
+0797                         if ($peer['port'] === 5060) continue;
+0798                         $lastPacketTime = microtime(true);
+0799                     }
+0800 
+0801 
+0802                     $idFrom = "{$peer['address']}:{$peer['port']}";
+0803                     if ($this->retiredMemberEndpoints !== [] && isset($this->retiredMemberEndpoints[$idFrom])) {
+0804                         continue;
+0805                     }
+0806                     if ($this->isRtcpPacket($nativeBuffer === null
+0807                         ? $packet
+0808                         : \psampler_binary_slice($nativeBuffer, 0, min(4, $packetLength)))) {
+0809                         if ($this->audioMetricsEnabled) {
+0810                             $this->audioMetrics['rtcp_packets']++;
+0811                         }
+0812                         continue;
+0813                     }
+0814                     $this->packetsProcessed++;
+0815 
+0816 
+0817                     $rtpc = $nativeBuffer === null
+0818                         ? new rtpc($packet)
+0819                         : rtpc::fromNativeBuffer($nativeBuffer, $packetLength);
+0820 
+0821                     if ($this->audioMetricsEnabled && ($packetLength < 12 || $rtpc->version !== 2)) {
+0822                         continue;
+0823                     }
+0824 
+0825 
+0826                     $pt = $rtpc->getCodec();
+0827 
+0828 
+0829                     $ssrcOrigin = $this->generateDeterministicSsrc($idFrom);
+0830                     $ssrc = $ssrcOrigin;
+0831 
+0832 
+0833                     $sourceMember = $this->members[$idFrom] ?? null;
+0834                     $codec = $this->resolveRxCodecNameForMember($pt, $sourceMember);
+0835                     $sourceCodec = strtoupper((string)$codec);
+0836                     if ($codec === null) {
+0837                         // PT sem rtpmap explícito e sem binding RTP/AVP conhecido.
+0838                         continue;
+0839                     }
+0840 
+0841 
+0842                     if ($this->audioMetricsEnabled) {
+0843                         // Contagem, bytes e chegada cobrem somente RTP válido e mapeado; RTCP fica separado.
+0844                         $this->audioMetrics['total_packets']++;
+0845                         $this->audioMetrics['bytes_received'] += $packetLength;
+0846                         if ($this->audioMetrics['first_arrival'] === 0.0) {
+0847                             $this->audioMetrics['first_arrival'] = $currentTime;
+0848                         }
+0849                         $this->audioMetrics['last_arrival'] = $currentTime;
+0850 
+0851                         // Contagem por codec, perda estimada e jitter (RFC 3550).
+0852                         $this->audioMetrics['codecs'][$codec] = ($this->audioMetrics['codecs'][$codec] ?? 0) + 1;
+0853 
+0854                         $freqStat = $this->resolveRxFrequencyForMember($pt, $sourceMember);
+0855                         $arrivalTs = $currentTime * $freqStat;
+0856                         $statsSsrc = $rtpc->ssrc;
+0857                         if (isset($this->rtpStats[$statsSsrc])) {
+0858                             $prev = $this->rtpStats[$statsSsrc];
+0859 
+0860                             // Conta lacunas somente ao avançar; atrasados/duplicados não movem a sequência.
+0861                             $seqDelta = ($rtpc->sequence - $prev['seq']) & 0xFFFF;
+0862                             if ($seqDelta > 0 && $seqDelta < 0x8000) {
+0863                                 $seqGap = $seqDelta - 1;
+0864                                 if ($seqGap > 0 && $seqGap < 1000) {
+0865                                     // Estimativa cumulativa: sem histórico, pacote tardio não corrige lacuna anterior.
+0866                                     $this->audioMetrics['lost_packets'] += $seqGap;
+0867                                     if ($seqGap > $this->audioMetrics['max_seq_gap']) {
+0868                                         $this->audioMetrics['max_seq_gap'] = $seqGap;
+0869                                     }
+0870                                 }
+0871                                 $this->rtpStats[$statsSsrc]['seq'] = $rtpc->sequence;
+0872                             }
+0873 
+0874                             // Mudança de clock inicia uma série de jitter independente.
+0875                             if ($prev['frequency'] !== $freqStat) {
+0876                                 $this->rtpStats[$statsSsrc]['frequency'] = $freqStat;
+0877                                 $this->rtpStats[$statsSsrc]['transit'] = $arrivalTs - $rtpc->timestamp;
+0878                                 $this->rtpStats[$statsSsrc]['jitter'] = 0.0;
+0879                             } else {
+0880                                 // Jitter interarrival (RFC 3550): J += (|D| - J) / 16
+0881                                 $transit = $arrivalTs - $rtpc->timestamp;
+0882                                 $d = $transit - $prev['transit'];
+0883                                 if ($d < 0) $d = -$d;
+0884                                 $this->rtpStats[$statsSsrc]['jitter'] += ($d - $prev['jitter']) / 16;
+0885                                 $this->rtpStats[$statsSsrc]['transit'] = $transit;
+0886                             }
+0887                             $this->audioMetrics['jitter'] = $this->rtpStats[$statsSsrc]['jitter'];
+0888                         } else {
+0889                             $this->rtpStats[$statsSsrc] = [
+0890                                 'seq' => $rtpc->sequence,
+0891                                 'transit' => $arrivalTs - $rtpc->timestamp,
+0892                                 'jitter' => 0.0,
+0893                                 'frequency' => $freqStat,
+0894                             ];
+0895                             $this->audioMetrics['jitter'] = 0.0;
+0896                         }
+0897                         $this->metricJitterFrequency = $freqStat;
+0898                     }
+0899 
+0900 
+0901                     if (!array_key_exists($ssrc, $this->rtpChans)) {
+0902                         $sourceMember = $this->members[$idFrom] ?? null;
+0903                         $sourcePtime = ($sourceMember['rtpChannel'] ?? null) instanceof rtpChannel
+0904                             ? $sourceMember['rtpChannel']->packetTimeMs
+0905                             : (int)($sourceMember['ptime'] ?? $this->packetTimeMs);
+0906                         $this->rtpChans[$ssrc] = new rtpChannel($rtpc->getCodec(), $this->resolveRxFrequencyForMember($pt, $sourceMember), $sourcePtime, $ssrc);
+0907                         $this->rtpChanMemberIds[$ssrc] = $idFrom;
+0908                         $this->rtpChans[$ssrc]->sequenceNumber = $rtpc->sequence;
+0909                         $this->rtpChans[$ssrc]->timestamp = $rtpc->timestamp;
+0910                     }
+0911 
+0912                     if (!$this->isMember($idFrom)) {
+0913                         $this->addMember([
+0914                             'address' => $peer['address'],
+0915                             'port' => $peer['port'],
+0916                             'codec' => $codec,
+0917                             'pt' => $pt,
+0918                             'txPt' => $pt,
+0919                             'rxPt' => $pt,
+0920                             'ssrc' => $ssrcOrigin,
+0921                             'ssrcReceived' => $rtpc->ssrc,
+0922                             'timestamp' => $rtpc->timestamp,
+0923                             'config' => $this->options['config'] ?? [],
+0924                             'opus' => $this->members[$idFrom]['opus'] ?? null,
+0925                             'frequency' => $this->resolveRxFrequencyForMember($pt, $sourceMember),
+0926                         ]);
+0927                     }
+0928 
+0929 
+0930                     $pt = $rtpc->getCodec();
+0931 
+0932 
+0933                     if ($sourceCodec === 'TELEPHONE-EVENT') {
+0934                         if ($this->audioMetricsEnabled) {
+0935                             $this->audioMetrics['dtmf_events']++;
+0936                         }
+0937                         if (!$this->receiveOnlyMode) {
+0938                             $this->forwardDtmfToMembers($rtpc, $peer, $idFrom);
+0939                         }
+0940                         $this->processDtmf($rtpc, $peer, function () {});
+0941                         continue;
+0942                     }
+0943 
+0944 
+0945                     if ($this->onReceiveCallable) {
+0946                         // This callback only updates in-memory session state and may
+0947                         // enqueue a coalesced maintenance mark. Spawning one
+0948                         // coroutine for every RTP packet adds scheduler pressure and
+0949                         // keeps MediaChannel/RtpSession references alive during
+0950                         // teardown. Run it inline with the receive coroutine.
+0951                         ($this->onReceiveCallable)($rtpc, $peer, $this, $this->rtpChans[$ssrc]);
+0952                     }
+0953 
+0954                     // Member registration above creates the GSM/Opus decoders;
+0955                     // the trunk callback owns decoding, recording, VAD and PCM.
+0956                     // Nothing below this boundary is required by that callback.
+0957                     if ($this->receiveOnlyMode) {
+0958                         if ($this->earlyMediaAcousticTap) {
+0959                             $member = $this->members[$idFrom] ?? [];
+0960                             $this->earlyMediaAcousticTap->receive($rtpc, $member, $sourceCodec,
+0961                                 $this->resolveRxFrequencyForMember($pt, $member),
+0962                                 (int)($member['channels'] ?? 1), $this->receivedPcmForAcoustics);
+0963                             $this->receivedPcmForAcoustics = null;
+0964                         }
+0965                         continue;
+0966                     }
+0967 
+0968 
+0969 
+0970                     $sourceMember = $this->members[$idFrom] ?? [];
+0971                     $sourceFrequency = $this->resolveRxFrequencyForMember($pt, $sourceMember);
+0972                     if ($sourceFrequency <= 0) $sourceFrequency = 8000;
+0973 
+0974                     $sourceChannels = (int)($sourceMember['channels'] ?? $this->ptCodecsChannels[$pt] ?? 1);
+0975                     if ($sourceChannels <= 0) $sourceChannels = 1;
+0976 
+0977 
+0978                     $pcmData = false;
+0979 
+0980                     foreach (array_keys($this->members) as $targetId) {
+0981                         if ($targetId === $idFrom) continue;
+0982                         if ($this->dtmfInUse) continue;
+0983 
+0984                         // Encoded relay is safe only when both negotiated
+0985                         // formats and packet durations match. Otherwise the
+0986                         // existing PCM queue must repacketize for the target.
+0987                         if ($sourceCodec === $this->members[$targetId]['codec']
+0988                             && $sourceFrequency === (int)$this->members[$targetId]['frequency']
+0989                             && $sourceChannels === (int)($this->members[$targetId]['channels'] ?? 1)
+0990                             && $this->rtpChans[$ssrc]->packetTimeMs === $this->members[$targetId]['rtpChannel']->packetTimeMs) {
+0991                             $packet = $this->members[$targetId]['rtpChannel']->buildAudioPacket($rtpc->payloadRaw);
+0992                             if ($this->socket->sendto((string)$this->members[$targetId]['address'], (int)$this->members[$targetId]['port'], $packet)) {
+0993                                 $this->relayMetrics[$targetId]['packets_sent']++;
+0994                                 if ($this->audioMetricsEnabled) $this->recordRelayInterval($targetId, hrtime(true), $this->members[$targetId]['rtpChannel']->packetTimeMs);
+0995                             }
+0996                             continue;
+0997                         }
+0998 
+0999 
+1000                         $targetIdChannels = (int)($this->members[$targetId]['channels'] ?? $this->ptCodecsChannels[$pt] ?? 1);
+1001                         if ($targetIdChannels <= 0) $targetIdChannels = 1;
+1002                         $targetIdFrequency = (int)($this->members[$targetId]['frequency'] ?? $this->ptCodecsFrequency[$pt] ?? 8000);
+1003 
+1004 
+1005                         if (!$pcmData) {
+1006                             try {
+1007                                 $pcmData = match ($sourceCodec) {
+1008                                     'G729' => $this->rtpChans[$ssrc]->bcg729Channel->decode($rtpc->payloadRaw),
+1009                                     'PCMU' => decodePcmuToPcm($rtpc->payloadRaw),
+1010                                     'PCMA' => decodePcmaToPcm($rtpc->payloadRaw),
+1011                                     'OPUS' => ($this->members[$idFrom]['opusDecoder'] ?? $this->members[$idFrom]['opusDecoder'])->decode($rtpc->payloadRaw),
+1012                                     'L16' => decodeL16ToPcm($rtpc->payloadRaw),
+1013                                     'GSM' => $this->decodeGsmPayloadForMember($idFrom, $rtpc->payloadRaw),
+1014                                     default => false
+1015                                 };
+1016                             } catch (Throwable $e) {
+1017                                 continue;
+1018                             }
+1019                         }
+1020                         if (!$pcmData) continue;
+1021                         try {
+1022                             $pcmForTarget = $pcmData;
+1023                             if ($sourceChannels !== $targetIdChannels) {
+1024                                 if ($sourceChannels > $targetIdChannels) {
+1025                                     $pcmForTarget=stereoToMono($pcmForTarget);
+1026                                 } else {
+1027                                     $pcmForTarget=monoToStereo($pcmForTarget);
+1028                                 }
+1029                             }
+1030                             if ($sourceFrequency !== $targetIdFrequency) {
+1031                                 $pcmForTarget=resampler($pcmForTarget, $sourceFrequency, $targetIdFrequency);
+1032                             }
+1033 
+1034                             $this->queueRelayedPcmForMember($targetId, $pcmForTarget);
+1035                         } catch (Throwable $e) {
+1036                             if ($this->debugEnabled) {
+1037                                 $targetCodec = strtoupper((string)($this->members[$targetId]['codec'] ?? ''));
+1038                                 cli::pcl("{$this->callId} MediaChannel transcode {$sourceCodec}->{$targetCodec}: {$e->getMessage()}", 'red');
+1039                             }
+1040                         }
+1041                     }
+1042                     if ($this->earlyMediaAcousticTap) {
+1043                         $this->earlyMediaAcousticTap->receive($rtpc, $sourceMember, $sourceCodec,
+1044                             $sourceFrequency, $sourceChannels, $pcmData ?: $this->receivedPcmForAcoustics);
+1045                         $this->receivedPcmForAcoustics = null;
+1046                     }
+1047                     if ($sourceCodec === 'GSM') {
+1048                         unset($this->members[$idFrom]['gsmDecodedPcm']);
+1049                     }
+1050                     if ($this->debugEnabled) {
+1051                         if (empty($lastDebug)) $lastDebug = microtime(true);
+1052                         if (microtime(true) - $lastDebug >= 0.160) {
+1053 
+1054 
+1055                             $timeMS = round((microtime(true) - $lastPacketTime) * 1000, 2);
+1056                             cli::pcl("$this->callId MediaChannel: " . $timeMS . "ms com " . count($this->members) . " membros",
+1057                                 !empty($packet) ? 'bold_green' : 'bold_red'
+1058                             );
+1059                             $lastDebug = microtime(true);
+1060 
+1061                         }
+1062                     }
+1063                 }
+1064             } finally {
+1065                 $this->active = false;
+1066                 foreach ($this->members as $member) {
+1067                     $member['relayWake']->close();
+1068                 }
+1069                 try {
+1070                     if (method_exists($this->socket, 'destroy')) {
+1071                         $this->socket->destroy();
+1072                     } elseif (!$this->socket->isClosed()) {
+1073                         $this->socket->close();
+1074                     }
+1075                 } catch (\Throwable) {
+1076                 }
+1077                 try {
+1078                     if (method_exists($this->eventSock, 'destroy')) {
+1079                         $this->eventSock->destroy();
+1080                     } elseif (!$this->eventSock->isClosed()) {
+1081                         $this->eventSock->close();
+1082                     }
+1083                 } catch (\Throwable) {
+1084                 }
+1085             }
+1086         });
+1087     }
+1088     /**
+1089      * Repacketized bridge audio must leave at the destination ptime. A source RTP
+1090      * carrying 40/60 ms can produce two or three 20 ms destination frames; sending
+1091      * those frames in the receive callback creates a burst followed by an equally
+1092      * long gap and repeatedly starves endpoint jitter buffers.
+1093      */
+1094     private function queueRelayedPcmForMember(string $id, string $pcm): void
+1095     {
+1096         if (!isset($this->members[$id])) {
+1097             return;
+1098         }
+1099         $member = &$this->members[$id];
+1100         $channel = $member['rtpChannel'] ?? null;
+1101         if (!$channel instanceof rtpChannel) {
+1102             throw new \RuntimeException('relay_rtp_channel_not_found');
+1103         }
+1104 
+1105         $format = $this->pcmFormatForMember($id);
+1106         $frameBytes = $channel->samplesPerPacket * $format['channels'] * 2;
+1107         if ($frameBytes <= 0) {
+1108             throw new \RuntimeException('relay_frame_size_invalid');
+1109         }
+1110         $member['relayFrameBytes'] = $frameBytes;
+1111 
+1112         /** @var ByteBuffer $buffer */
+1113         $buffer = $member['relayPcmBuffer'];
+1114         /** @var \Swoole\Coroutine\Channel $wake */
+1115         $wake = $member['relayWake'];
+1116         if ($pcm !== '') {
+1117             $buffer->append($pcm);
+1118         }
+1119 
+1120         $maxFrames = max(2, (int)ceil(self::MAX_RELAY_BACKLOG_MS / $channel->packetTimeMs));
+1121         while ($buffer->length() > ($frameBytes * $maxFrames)) {
+1122             $buffer->discard($frameBytes);
+1123             $this->relayMetrics[$id]['dropped_frames']++;
+1124         }
+1125         $this->relayMetrics[$id]['max_queue_frames'] = max($this->relayMetrics[$id]['max_queue_frames'], intdiv($buffer->length(), $frameBytes));
+1126         if (isset($this->relayPacerRunning[$id])) {
+1127             // Um único sinal pendente basta para retomar o consumo do buffer.
+1128             if (!$wake->isFull()) {
+1129                 $wake->push(true, 0.0);
+1130             }
+1131             return;
+1132         }
+1133 
+1134         if (!$this->active || !isset($this->members[$id]) || isset($this->relayPacerRunning[$id])) {
+1135             return;
+1136         }
+1137 
+1138         $this->relayPacerRunning[$id] = true;
+1139         Coroutine::create(function () use ($id, $channel, $buffer, $wake): void {
+1140             $nextSendAtNs = hrtime(true);
+1141             try {
+1142                 while ($this->active && ($this->members[$id]['relayWake'] ?? null) === $wake) {
+1143                     $frameBytes = $this->members[$id]['relayFrameBytes'];
+1144                     // Sem um frame completo, aguarda PCM sem encerrar o pacer.
+1145                     while (!$buffer->has($frameBytes)) {
+1146                         if ($wake->pop() === false
+1147                             || !$this->active
+1148                             || ($this->members[$id]['relayWake'] ?? null) !== $wake) {
+1149                             return;
+1150                         }
+1151                         $frameBytes = $this->members[$id]['relayFrameBytes'];
+1152                     }
+1153 
+1154                     $intervalNs = $channel->packetTimeMs * 1_000_000;
+1155                     $nowNs = hrtime(true);
+1156                     if ($nextSendAtNs < ($nowNs - $intervalNs)) {
+1157                         $nextSendAtNs = $nowNs;
+1158                     }
+1159                     $remainingNs = $nextSendAtNs - $nowNs;
+1160                     if ($remainingNs > 0) {
+1161                         Coroutine::sleep(max(0.001, $remainingNs / 1_000_000_000));
+1162                     }
+1163 
+1164                     if (!$this->active || ($this->members[$id]['relayWake'] ?? null) !== $wake) {
+1165                         return;
+1166                     }
+1167                     if ($frameBytes !== $this->members[$id]['relayFrameBytes'] || !$buffer->has($frameBytes)) {
+1168                         continue;
+1169                     }
+1170                     $frame = $buffer->pop($frameBytes);
+1171                     $sentAtNs = hrtime(true);
+1172                     $lateNs = max(0, $sentAtNs - $nextSendAtNs);
+1173                     if ($lateNs >= 2_000_000) $this->relayMetrics[$id]['late_packets']++;
+1174                     $this->relayMetrics[$id]['max_late_ms'] = max($this->relayMetrics[$id]['max_late_ms'], $lateNs / 1_000_000);
+1175                     $this->recordRelayInterval($id, $sentAtNs, $channel->packetTimeMs);
+1176                     $this->sendPcmFrameForMember($id, $channel, $frame);
+1177                     $this->relayMetrics[$id]['packets_sent']++;
+1178                     $nextSendAtNs += $intervalNs;
+1179                 }
+1180             } catch (Throwable $e) {
+1181                 if ($this->debugEnabled) {
+1182                     cli::pcl("{$this->callId} MediaChannel relay pacer {$id}: {$e->getMessage()}", 'red');
+1183                 }
+1184             } finally {
+1185                 if (!isset($this->members[$id]) || $this->members[$id]['relayWake'] === $wake) {
+1186                     unset($this->relayPacerRunning[$id]);
+1187                 }
+1188             }
+1189         });
+1190     }
+1191     /**
+1192      * @return array{codec:string,payload_type:int,frequency:int,sequence:int,timestamp:int,ssrc:int}
+1193      */
+1194     private function sendPcmFrameForMember(string $id, rtpChannel $channel, string $frame): array
+1195     {
+1196         $payload = $this->encodePcmFrameForMember($id, $frame);
+1197         if ($payload === '') {
+1198             throw new \RuntimeException('playback_encode_failed');
+1199         }
+1200 
+1201         $sequence = (int)$channel->sequenceNumber;
+1202         $timestamp = (int)$channel->timestamp;
+1203         $packet = $channel->buildAudioPacket($payload);
+1204         $this->socket->sendto((string)$this->members[$id]['address'], (int)$this->members[$id]['port'], $packet);
+1205 
+1206         return [
+1207             'codec' => strtoupper((string)($this->members[$id]['codec'] ?? '')),
+1208             'payload_type' => (int)$channel->payloadType,
+1209             'frequency' => (int)$channel->sampleRate,
+1210             'sequence' => $sequence,
+1211             'timestamp' => $timestamp,
+1212             'ssrc' => (int)$channel->ssrc,
+1213         ];
+1214     }
+1215 
+1216     private function encodePcmFrameForMember(string $id, string $pcmFrame): string
+1217     {
+1218         $codec = strtoupper((string)($this->members[$id]['codec'] ?? ''));
+1219 
+1220         return match ($codec) {
+1221             'PCMA' => encodePcmToPcma($pcmFrame),
+1222             'PCMU' => encodePcmToPcmu($pcmFrame),
+1223             'L16' => encodePcmToL16($pcmFrame),
+1224             'PCM' => $pcmFrame,
+1225             'OPUS' => $this->encodeOpusFrameForMember($id, $pcmFrame),
+1226             'G729' => $this->encodeG729FrameForMember($id, $pcmFrame),
+1227             'GSM' => $this->encodeGsmFrameForMember($id, $pcmFrame),
+1228             default => throw new \RuntimeException('playback_codec_not_supported'),
+1229         };
+1230     }
+1231 
+1232 
+1233 
+1234 
+1235 
+1236 
+1237 
+1238 
+1239     public function isMember(string $id): bool
+1240     {
+1241         return isset($this->members[$id]);
+1242     }
+1243 
+1244     public function addMember(array $peer): void
+1245     {
+1246         $txPt = (int)($peer['txPt'] ?? $peer['pt']);
+1247         $rxPt = (int)($peer['rxPt'] ?? $peer['pt']);
+1248         // `pt` has always represented the payload emitted by this member's
+1249         // rtpChannel. Keep that contract while exposing both directions.
+1250         $peer['pt'] = $txPt;
+1251         $peer['txPt'] = $txPt;
+1252         $peer['rxPt'] = $rxPt;
+1253         $peer['config'] = is_array($peer['config'] ?? null) ? $peer['config'] : [];
+1254         if (isset($peer['channels'])) {
+1255             $nc = max(1, (int)$peer['channels']);
+1256         } else {
+1257             $stereo = $peer['config']['stereo'] ?? $this->options['stereo'] ?? false;
+1258             $nc = $stereo ? 2 : 1;
+1259         }
+1260         $codec = strtoupper((string)($peer['codec'] ?? ''));
+1261         if (in_array($codec, ['PCMA', 'PCMU', 'G729', 'GSM'], true)) {
+1262             $peer['frequency'] = 8000;
+1263             $nc = 1;
+1264         }
+1265 
+1266         $ptimeExplicit = array_key_exists('ptime', $peer) && $peer['ptime'] !== null;
+1267         $ptimeMs = $ptimeExplicit ? (int)$peer['ptime'] : $this->packetTimeMs;
+1268         if ($ptimeMs <= 0) {
+1269             throw new \InvalidArgumentException('Packet time do membro deve ser maior que 0');
+1270         }
+1271         $this->validatePacketTimeForCodec($ptimeMs, $codec);
+1272 
+1273         $mapping = $codec . '/' . (int)$peer['frequency'] . '/' . $nc;
+1274         $peer['txCodecMapper'] = is_array($peer['txCodecMapper'] ?? null)
+1275             ? $peer['txCodecMapper']
+1276             : ($this->txCodecMapper !== [] ? $this->txCodecMapper : [$txPt => $mapping]);
+1277         $peer['rxCodecMapper'] = is_array($peer['rxCodecMapper'] ?? null)
+1278             ? $peer['rxCodecMapper']
+1279             : ($this->rxCodecMapper !== [] ? $this->rxCodecMapper : [$rxPt => $mapping]);
+1280 
+1281         if ($codec === 'OPUS') {
+1282             // Encoder e decoder Opus separados evitam compartilhar estado entre as duas
+1283             // direções do mesmo membro. `opus` permanece como alias legado do decoder.
+1284             $peer['opusEncoder'] = new opusChannel(48000, $nc);
+1285             $peer['opusDecoder'] = new opusChannel(48000, $nc);
+1286             $peer['opus'] = $peer['opusDecoder'];
+1287         }
+1288         if ($codec === 'GSM') {
+1289             $peer['gsmEncoder'] = new gsmChannel();
+1290             $peer['gsmDecoder'] = new gsmChannel();
+1291         }
+1292         $id = "{$peer['address']}:{$peer['port']}";
+1293         if ($codec === 'OPUS') {
+1294             /** @var opusChannel $opus */
+1295             foreach ([$peer['opusEncoder'], $peer['opusDecoder']] as $opus) {
+1296                //$opus->setComplexity(8);
+1297                //$opus->setSignalVoice(false);
+1298                $opus->setDTX(true);
+1299                //$opus->setVBR(true);
+1300                //$opus->setBitrate(24000);
+1301             }
+1302         }
+1303 
+1304 
+1305         $peer['rtpChannel'] = new rtpChannel($txPt, (int)$peer['frequency'], $ptimeMs, $this->generateDeterministicSsrc($id));
+1306         $peer['rtpChannel']->setSsrc($this->generateDeterministicSsrc($id));
+1307         $peer['ptime'] = $ptimeMs;
+1308         $peer['ptimeExplicit'] = $ptimeExplicit;
+1309         $peer['samplesPerPacket'] = $peer['rtpChannel']->samplesPerPacket;
+1310         $peer['pcmAccumulator'] = '';
+1311         $peer['relayPcmBuffer'] = new ByteBuffer(4096);
+1312         $peer['relayFrameBytes'] = $peer['rtpChannel']->samplesPerPacket * $nc * 2;
+1313         $peer['relayWake'] = new \Swoole\Coroutine\Channel(1);
+1314         $peer['channels'] = $nc;
+1315         if ($codec === 'G729') {
+1316             $peer['bcg729Channel'] = new bcg729Channel();
+1317         }
+1318         $this->ptCodecsChannels[$txPt] = $nc;
+1319         $this->ptFrequencies[$txPt] = (int)$peer['frequency'];
+1320         if (isset($this->members[$id])) {
+1321             $wake = $this->members[$id]['relayWake'];
+1322             unset($this->members[$id], $this->relayPacerRunning[$id]);
+1323             $wake->close();
+1324         }
+1325         $this->members[$id] = $peer;
+1326         $this->initializeRelayMetrics($id, $peer['rtpChannel']);
+1327         if (in_array((string)($peer['leg'] ?? ''), ['a', 'b'], true)) {
+1328             $this->legMemberIds[(string)$peer['leg']] = $id;
+1329         }
+1330     }
+1331 
+1332     private function processVAD(string $pcmData, ...$extra): void
+1333     {
+1334         if (!$this->vadEnabled) {
+1335             return;
+1336         }
+1337         $energy = volumeAverage($pcmData);
+1338         $idFrom = $extra[0] ?? $this->callId;
+1339         $frequency = (int)($extra[1] ?? $this->members[$idFrom]['frequency'] ?? 0);
+1340         $channels = (int)($extra[2] ?? $this->members[$idFrom]['channels'] ?? 0);
+1341         $frameDuration = $this->packetTimeMs / 1000;
+1342         if ($frequency > 0 && $channels > 0 && (strlen($pcmData) % (2 * $channels)) === 0) {
+1343             $frameDuration = (strlen($pcmData) / (2 * $channels)) / $frequency;
+1344         }
+1345         if ($this->audioMetricsEnabled) {
+1346             $this->audioMetrics['avg_energy'] = $this->audioMetrics['avg_energy'] * 0.9 + $energy * 0.1;
+1347         }
+1348         $wasActive = $this->isVoiceActive;
+1349         if ($energy > $this->vadRegistrationThreshold) {
+1350             if (!isset($this->registeredIds[$idFrom])) {
+1351                 $this->registeredIds[$idFrom] = true;
+1352             }
+1353             $this->lastVadActivity[$idFrom] = microtime(true);
+1354         }
+1355         if ($energy > $this->vadThreshold) {
+1356             $this->isVoiceActive = true;
+1357             // Mantém os 400 ms legados (20 frames de 20 ms) mesmo quando a
+1358             // origem usa outro ptime ou entrega PCM com duração diferente.
+1359             $legacyHangoverSeconds = ($this->vadHangoverFrames * self::DEFAULT_PACKET_TIME_MS) / 1000;
+1360             $this->vadCurrentHangover = max(1, (int)ceil($legacyHangoverSeconds / $frameDuration));
+1361         } else if ($this->vadCurrentHangover > 0) {
+1362             $this->vadCurrentHangover--;
+1363             $this->isVoiceActive = true;
+1364         } else {
+1365             $this->isVoiceActive = false;
+1366         }
+1367         if ($wasActive !== $this->isVoiceActive) {
+1368             if (is_callable($this->onVadChangeCallable)) {
+1369                 go($this->onVadChangeCallable, $this->isVoiceActive, $energy, $extra[0]);
+1370             }
+1371         }
+1372         if ($this->audioMetricsEnabled) {
+1373             if ($this->isVoiceActive) {
+1374                 $this->audioMetrics['voice_time'] += $frameDuration;
+1375             } else {
+1376                 $this->audioMetrics['silence_time'] += $frameDuration;
+1377             }
+1378         }
+1379     }
+1380 
+1381     /**
+1382      * Habilita ou desabilita a coleta de métricas de áudio.
+1383      *
+1384      * Ao desabilitar, os valores já coletados são preservados e o estado
+1385      * temporário de perda/jitter é liberado. Ao reabilitar, perda e jitter
+1386      * voltam a ser calculados a partir do próximo pacote RTP.
+1387      */
+1388     public function setAudioMetricsEnabled(bool $enabled): void
+1389     {
+1390         if ($this->audioMetricsEnabled === $enabled) {
+1391             return;
+1392         }
+1393 
+1394         $this->audioMetricsEnabled = $enabled;
+1395         $this->rtpStats = [];
+1396     }
+1397 
+1398     public function getAudioMetrics(): array
+1399     {
+1400         $metrics = $this->audioMetrics;
+1401         if ($this->metricJitterFrequency > 0) {
+1402             $metrics['jitter_ms'] = $metrics['jitter'] * (1000.0 / $this->metricJitterFrequency);
+1403         }
+1404         return $metrics;
+1405     }
+1406 
+1407     public bool $dtmfInUse = false;
+1408 
+1409     public function send2833(string $digit): void
+1410     {
+1411         if ($this->socket->isClosed()) {
+1412             return;
+1413         }
+1414 
+1415         if (empty($this->members)) {
+1416             return;
+1417         }
+1418 
+1419         $event = match (strtoupper($digit)) {
+1420             '0' => 0,
+1421             '1' => 1,
+1422             '2' => 2,
+1423             '3' => 3,
+1424             '4' => 4,
+1425             '5' => 5,
+1426             '6' => 6,
+1427             '7' => 7,
+1428             '8' => 8,
+1429             '9' => 9,
+1430             '*' => 10,
+1431             '#' => 11,
+1432             'A' => 12,
+1433             'B' => 13,
+1434             'C' => 14,
+1435             'D' => 15,
+1436             default => null,
+1437         };
+1438 
+1439         if ($event === null) {
+1440             cli::pcl("[DTMF] Dígito inválido: {$digit}", "bold_red");
+1441             return;
+1442         }
+1443 
+1444         // Snapshot das chaves dos membros para iterar de forma estável.
+1445         $memberKeys = array_keys($this->members);
+1446 
+1447         // Envio SÍNCRONO (sem coroutine separada): garante que múltiplos dígitos
+1448         // enviados em sequência cheguem na ORDEM correta. Os Coroutine::sleep()
+1449         // abaixo apenas cedem o controle para o agendador (o loop de mídia roda
+1450         // em outra coroutine), portanto não bloqueiam o áudio. Enquanto o tom é
+1451         // transmitido, a flag dtmfInUse suspende o relay de áudio para não
+1452         // sobrepor pacotes na mesma SSRC (causa de chiado e perda de pacotes).
+1453         try {
+1454             $this->dtmfInUse = true;
+1455 
+1456             // RFC 4733: volume=10 e duração total de 160ms (1280 samples@8kHz).
+1457             // O intervalo e o avanço por pacote seguem o ptime de cada destino.
+1458             // 160ms é mais compatível com a maioria dos endpoints SIP/PJSIP e evita
+1459             // que o evento se arraste por tempo demais em relação a outros clientes.
+1460             $volume = 10;
+1461             $endRetransmits = 3;
+1462             $durationMs = 160;
+1463 
+1464             foreach ($memberKeys as $key) {
+1465                 $member = $this->members[$key] ?? null;
+1466                 if ($member === null) {
+1467                     continue;
+1468                 }
+1469 
+1470                 $ip = $member['address'] ?? null;
+1471                 $port = $member['port'] ?? null;
+1472                 if (empty($ip) || empty($port)) {
+1473                     continue;
+1474                 }
+1475 
+1476                 $rtpChannel = $member['rtpChannel'] ?? null;
+1477                 if (!$rtpChannel instanceof rtpChannel) {
+1478                     continue;
+1479                 }
+1480 
+1481                 $ptimeMs = $rtpChannel->packetTimeMs;
+1482                 $memberFrequency = max(1, (int)($member['frequency'] ?? $rtpChannel->sampleRate));
+1483                 $ptTelephoneEvent = $this->findTelephoneEventPt($memberFrequency);
+1484                 $eventClockRate = (int)($this->ptFrequencies[$ptTelephoneEvent] ?? 8000);
+1485                 $finalDurationSamples = max(1, (int)round(($eventClockRate * $durationMs) / 1000));
+1486                 $stepSamples = max(1, (int)round(($eventClockRate * $ptimeMs) / 1000));
+1487                 $steps = max(1, (int)ceil($finalDurationSamples / $stepSamples));
+1488                 $rtpChannel->setNewPtDTMF($ptTelephoneEvent);
+1489 
+1490                 // Timestamp do evento fixo em todos os pacotes do mesmo dígito (RFC 4733)
+1491                 $eventTs = (int)$rtpChannel->timestamp;
+1492 
+1493                 // Pacotes de progresso do evento
+1494                 for ($i = 1; $i <= $steps; $i++) {
+1495                     if ($this->socket->isClosed()) {
+1496                         return;
+1497                     }
+1498 
+1499                     $duration = $i * $stepSamples;
+1500                     if ($duration > $finalDurationSamples) {
+1501                         $duration = $finalDurationSamples;
+1502                     }
+1503 
+1504                     $isFirst = ($i === 1);
+1505                     $isLast = ($duration >= $finalDurationSamples);
+1506 
+1507                     // Byte 2 do payload: bit 7 = E (não setar aqui); bits 0..5 = volume
+1508                     $payload = pack('CCn', $event, $volume & 0x3F, $duration);
+1509 
+1510                     $packet = $rtpChannel->buildDtmfForwardPacket($payload, $eventTs, $isFirst);
+1511                     $this->socket->sendto($ip, $port, $packet);
+1512 
+1513                     // Dorme entre os pacotes, exceto depois do último "progresso"
+1514                     if (!$isLast) {
+1515                         Coroutine::sleep($ptimeMs / 1000);
+1516                     }
+1517                 }
+1518 
+1519                 // Retransmite o último pacote com E-bit 3 vezes
+1520                 $payloadEnd = pack('CCn', $event, 0x80 | ($volume & 0x3F), $finalDurationSamples);
+1521 
+1522                 for ($r = 0; $r < $endRetransmits; $r++) {
+1523                     if ($this->socket->isClosed()) {
+1524                         return;
+1525                     }
+1526 
+1527                     $packet = $rtpChannel->buildDtmfForwardPacket($payloadEnd, $eventTs, false);
+1528                     $this->socket->sendto($ip, $port, $packet);
+1529 
+1530                     if ($r < $endRetransmits - 1) {
+1531                         Coroutine::sleep($ptimeMs / 1000);
+1532                     }
+1533                 }
+1534 
+1535                 // Mantém a timeline de áudio contínua após o evento DTMF
+1536                 $audioDurationSamples = (int)round(($rtpChannel->sampleRate * $durationMs) / 1000);
+1537                 $rtpChannel->advanceTimestampBySamples($audioDurationSamples);
+1538             }
+1539         } catch (\Throwable $e) {
+1540             // silencioso: não interrompe o fluxo de áudio da chamada
+1541         } finally {
+1542             $this->dtmfInUse = false;
+1543         }
+1544     }
+1545 
+1546     private function checkVadTimeouts(): bool
+1547     {
+1548         $currentTime = microtime(true);
+1549         foreach ($this->registeredIds as $idFrom => $registered) {
+1550             if (!$registered) {
+1551                 continue;
+1552             }
+1553             $lastActivity = $this->lastVadActivity[$idFrom] ?? 0;
+1554             if ($currentTime - $lastActivity > $this->vadTimeoutSeconds) {
+1555                 return true;
+1556             }
+1557         }
+1558         return false;
+1559     }
+1560 
+1561     private function sendSilenceProbeToMembers(float $currentTime): void
+1562     {
+1563         if (empty($this->members)) {
+1564             return;
+1565         }
+1566 
+1567         if (($currentTime - $this->lastSilenceProbeAt) < $this->silenceProbeInterval) {
+1568             return;
+1569         }
+1570 
+1571         $this->lastSilenceProbeAt = $currentTime;
+1572 
+1573         foreach ($this->members as $idMember => $member) {
+1574             $memberLeg = strtolower((string)($member['leg'] ?? ''));
+1575             if ($memberLeg !== '' && isset($this->injectedLegs[$memberLeg])) {
+1576                 continue;
+1577             }
+1578             if (empty($member['address']) || empty($member['port'])) {
+1579                 continue;
+1580             }
+1581 
+1582             if (!isset($member['rtpChannel'])) {
+1583                 continue;
+1584             }
+1585 
+1586             try {
+1587                 $this->queuePcmForMember($idMember, $this->makeSilencePcmForMember($idMember));
+1588             } catch (\Throwable $e) {
+1589             }
+1590         }
+1591     }
+1592 
+1593     public function setLegInjectionActive(string $leg, bool $active): void
+1594     {
+1595         $leg = strtolower(trim($leg));
+1596         if (!in_array($leg, ['a', 'b'], true)) {
+1597             return;
+1598         }
+1599         if ($active) {
+1600             $this->injectedLegs[$leg] = true;
+1601             foreach ($this->members as $member) {
+1602                 if (strtolower((string)($member['leg'] ?? '')) === $leg && isset($member['rtpChannel'])) {
+1603                     $member['rtpChannel']->setMarkerBit(true);
+1604                 }
+1605             }
+1606         } else {
+1607             unset($this->injectedLegs[$leg]);
+1608         }
+1609     }
+1610 
+1611     /**
+1612      * Injects arbitrary signed 16-bit little-endian PCM into a negotiated leg.
+1613      * The caller does not need to slice frames: incomplete PCM is accumulated and
+1614      * oversized PCM emits every complete RTP allowed by the member's ptime.
+1615      * Encoding and RTP state stay owned by the member's existing rtpChannel.
+1616      *
+1617      * @return array{codec:string,payload_type:int,frequency:int,sequence:int,timestamp:int,ssrc:int}|null
+1618      */
+1619     public function sendPcmToLeg(string $leg, string $pcm, int $sourceFrequency, int $sourceChannels = 1): ?array
+1620     {
+1621         $sent = $this->pushPcmToLeg($leg, $pcm, $sourceFrequency, $sourceChannels);
+1622         return $sent === null || $sent === [] ? null : $sent[array_key_last($sent)];
+1623     }
+1624 
+1625     /** @return list<array<string,int|string>>|null Null means the leg is unavailable; [] means accepted and buffered. */
+1626     public function pushPcmToLeg(string $leg, string $pcm, int $sourceFrequency, int $sourceChannels = 1): ?array
+1627     {
+1628         $leg = strtolower(trim($leg));
+1629         if (!$this->active || !in_array($leg, ['a', 'b'], true) || $sourceFrequency <= 0
+1630             || !in_array($sourceChannels, [1, 2], true)) {
+1631             return null;
+1632         }
+1633         $id = $this->readyMemberIdForLeg($leg);
+1634         if ($id === null) return null;
+1635         $converted = $this->convertPcmForMember($id, $pcm, $sourceFrequency, $sourceChannels, $leg, true);
+1636         return $this->queuePcmForMember($id, $converted);
+1637     }
+1638 
+1639     /** Finish a normal injection. A final partial ptime is padded with silence. */
+1640     public function finishPcmToLeg(string $leg): ?array
+1641     {
+1642         $leg = strtolower(trim($leg));
+1643         $converter = $this->injectionPcmStreams[$leg] ?? null;
+1644         unset($this->injectionPcmStreams[$leg]);
+1645         $id = $this->readyMemberIdForLeg($leg);
+1646         if ($id === null) return null;
+1647         $tail = $converter?->finish() ?? '';
+1648         $sent = $this->queuePcmForMember($id, $tail);
+1649         $channel = $this->members[$id]['rtpChannel'];
+1650         $format = $this->pcmFormatForMember($id);
+1651         $frameBytes = $channel->samplesPerPacket * $format['channels'] * 2;
+1652         $residual = (string)($this->members[$id]['pcmAccumulator'] ?? '');
+1653         if ($residual !== '') {
+1654             $sent = array_merge($sent, $this->queuePcmForMember($id,
+1655                 str_repeat("\0", $frameBytes - strlen($residual))));
+1656         }
+1657         return $sent;
+1658     }
+1659 
+1660     public function cancelPcmToLeg(string $leg): void
+1661     {
+1662         $leg = strtolower(trim($leg));
+1663         unset($this->injectionPcmStreams[$leg]);
+1664         $id = $this->readyMemberIdForLeg($leg);
+1665         if ($id !== null) $this->members[$id]['pcmAccumulator'] = '';
+1666     }
+1667 
+1668     private function readyMemberIdForLeg(string $leg): ?string
+1669     {
+1670         if (!in_array($leg, ['a', 'b'], true)) return null;
+1671         $id = $this->legMemberIds[$leg] ?? '';
+1672         if ($id !== '' && ($this->members[$id]['rtpChannel'] ?? null) instanceof rtpChannel) return $id;
+1673         foreach ($this->members as $id => $member) {
+1674             if (strtolower((string)($member['leg'] ?? '')) === $leg
+1675                 && ($member['rtpChannel'] ?? null) instanceof rtpChannel) return $id;
+1676         }
+1677         return null;
+1678     }
+1679 
+1680     /** @return array{frequency:int,channels:int} */
+1681     private function pcmFormatForMember(string $id): array
+1682     {
+1683         $member = $this->members[$id] ?? null;
+1684         if (!is_array($member)) {
+1685             throw new \RuntimeException('playback_member_not_found');
+1686         }
+1687 
+1688         $codec = strtoupper((string)($member['codec'] ?? ''));
+1689         $frequency = max(1, (int)($member['frequency'] ?? 8000));
+1690         $channels = max(1, (int)($member['channels'] ?? 1));
+1691 
+1692         if (in_array($codec, ['PCMA', 'PCMU', 'G729', 'GSM'], true)) {
+1693             $frequency = 8000;
+1694             $channels = 1;
+1695         }
+1696 
+1697         return ['frequency' => $frequency, 'channels' => $channels];
+1698     }
+1699 
+1700     private function convertPcmForMember(string $id, string $pcm, int $sourceFrequency, int $sourceChannels,
+1701                                          string $sourceKey, bool $injection): string
+1702     {
+1703         if ($sourceFrequency <= 0 || $sourceChannels <= 0) {
+1704             throw new \RuntimeException('playback_pcm_invalid');
+1705         }
+1706         if ((strlen($pcm) % (2 * $sourceChannels)) !== 0) {
+1707             throw new \RuntimeException('playback_pcm_alignment_invalid');
+1708         }
+1709 
+1710         $format = $this->pcmFormatForMember($id);
+1711         if ($sourceFrequency === $format['frequency'] && $sourceChannels === $format['channels']) {
+1712             if ($injection) unset($this->injectionPcmStreams[$sourceKey]);
+1713             elseif ($this->relayPcmStreams !== []) {
+1714                 unset($this->relayPcmStreams[$sourceKey . '>' . $this->logicalMemberKey($id)]);
+1715             }
+1716             return $pcm;
+1717         }
+1718 
+1719 
+1720 
+1721 
+1722 
+1723 
+1724         $targetKey = $this->logicalMemberKey($id);
+1725         $key = $injection ? $sourceKey : $sourceKey . '>' . $targetKey;
+1726         $streams = &$this->{$injection ? 'injectionPcmStreams' : 'relayPcmStreams'};
+1727         $stream = $streams[$key] ?? null;
+1728         if (!$stream instanceof PcmStreamConverter
+1729             || $stream->sourceRate !== $sourceFrequency || $stream->sourceChannels !== $sourceChannels
+1730             || $stream->targetRate !== $format['frequency'] || $stream->targetChannels !== $format['channels']) {
+1731             $stream = new PcmStreamConverter($sourceFrequency, $sourceChannels, $format['frequency'], $format['channels']);
+1732             $streams[$key] = $stream;
+1733         }
+1734         return $stream->push($pcm);
+1735     }
+1736 
+1737     private function logicalMemberKey(string $id): string
+1738     {
+1739         $leg = strtolower((string)($this->members[$id]['leg'] ?? ''));
+1740         return in_array($leg, ['a', 'b'], true) ? $leg : $id;
+1741     }
+1742 
+1743     /**
+1744      * @return list<array{codec:string,payload_type:int,frequency:int,sequence:int,timestamp:int,ssrc:int}>
+1745      */
+1746     private function queuePcmForMember(string $id, string $pcm): array
+1747     {
+1748         if (!isset($this->members[$id]) || !is_array($this->members[$id])) {
+1749             throw new \RuntimeException('playback_rtp_channel_not_found');
+1750         }
+1751         $channel = $this->members[$id]['rtpChannel'] ?? null;
+1752         if (!$channel instanceof rtpChannel) {
+1753             throw new \RuntimeException('playback_rtp_channel_not_found');
+1754         }
+1755 
+1756         $format = $this->pcmFormatForMember($id);
+1757         $frameBytes = $channel->samplesPerPacket * $format['channels'] * 2;
+1758         if ($frameBytes <= 0) {
+1759             throw new \RuntimeException('playback_frame_size_invalid');
+1760         }
+1761 
+1762         $this->members[$id]['ptime'] = $channel->packetTimeMs;
+1763         $this->members[$id]['samplesPerPacket'] = $channel->samplesPerPacket;
+1764         $this->members[$id]['pcmAccumulator'] = (string)($this->members[$id]['pcmAccumulator'] ?? '') . $pcm;
+1765 
+1766         $sent = [];
+1767         while (strlen($this->members[$id]['pcmAccumulator']) >= $frameBytes) {
+1768             $frame = substr($this->members[$id]['pcmAccumulator'], 0, $frameBytes);
+1769             $this->members[$id]['pcmAccumulator'] = substr($this->members[$id]['pcmAccumulator'], $frameBytes);
+1770 
+1771             $sent[] = $this->sendPcmFrameForMember($id, $channel, $frame);
+1772         }
+1773 
+1774         return $sent;
+1775     }
+1776 
+1777 
+1778 
+1779     private function startRelayPacerForMember(string $id): void
+1780     {
+1781         if (!$this->active || !isset($this->members[$id]) || isset($this->relayPacerRunning[$id])) {
+1782             return;
+1783         }
+1784 
+1785         $this->relayPacerRunning[$id] = true;
+1786         Coroutine::create(function () use ($id): void {
+1787             try {
+1788                 while ($this->active && isset($this->members[$id])) {
+1789                     $channel = $this->members[$id]['rtpChannel'] ?? null;
+1790                     if (!$channel instanceof rtpChannel) {
+1791                         return;
+1792                     }
+1793                     $format = $this->pcmFormatForMember($id);
+1794                     $frameBytes = $channel->samplesPerPacket * $format['channels'] * 2;
+1795                     $buffer = $this->relayBufferForMember($id);
+1796                     if ($frameBytes <= 0 || !$buffer->has($frameBytes)) {
+1797                         return;
+1798                     }
+1799 
+1800                     $intervalNs = $channel->packetTimeMs * 1_000_000;
+1801                     $nowNs = hrtime(true);
+1802                     $nextSendAtNs = $this->relayNextSendAtNs[$id] ?? $nowNs;
+1803                     if ($nextSendAtNs < ($nowNs - $intervalNs)) {
+1804                         // Atraso maior que um ptime nunca é compensado com rajada.
+1805                         $nextSendAtNs = $nowNs;
+1806                     }
+1807                     $remainingNs = $nextSendAtNs - $nowNs;
+1808                     if ($remainingNs > 0) {
+1809                         Coroutine::sleep(max(0.001, $remainingNs / 1_000_000_000));
+1810                     }
+1811 
+1812                     if (!$this->active || !isset($this->members[$id]) || !$buffer->has($frameBytes)) {
+1813                         return;
+1814                     }
+1815                     $actualSendAtNs = hrtime(true);
+1816                     $lateNs = max(0, $actualSendAtNs - $nextSendAtNs);
+1817                     if ($lateNs >= 2_000_000) {
+1818                         $this->relayMetrics[$id]['late_packets']++;
+1819                     }
+1820                     $this->relayMetrics[$id]['max_late_ms'] = max(
+1821                         (float)$this->relayMetrics[$id]['max_late_ms'],
+1822                         $lateNs / 1_000_000,
+1823                     );
+1824 
+1825                     $frame = $buffer->pop($frameBytes);
+1826                     $this->recordRelayInterval($id, $actualSendAtNs, $channel->packetTimeMs);
+1827                     $this->sendPcmFrameForMember($id, $channel, $frame);
+1828                     $this->relayMetrics[$id]['packets_sent']++;
+1829                     $completedAtNs = hrtime(true);
+1830                     // Compensa apenas o jitter pequeno do scheduler. Um atraso
+1831                     // relevante, inclusive dentro do envio, reinicia a cadência.
+1832                     $this->relayNextSendAtNs[$id] = $lateNs <= intdiv($intervalNs, 2)
+1833                     && ($completedAtNs - $actualSendAtNs) <= intdiv($intervalNs, 2)
+1834                         ? $nextSendAtNs + $intervalNs
+1835                         : $completedAtNs + $intervalNs;
+1836                 }
+1837             } catch (Throwable $e) {
+1838                 if ($this->debugEnabled) {
+1839                     cli::pcl("{$this->callId} MediaChannel relay pacer {$id}: {$e->getMessage()}", 'red');
+1840                 }
+1841             } finally {
+1842                 unset($this->relayPacerRunning[$id]);
+1843             }
+1844         });
+1845     }
+1846 
+1847     private function relayBufferForMember(string $id): ByteBuffer
+1848     {
+1849         $buffer = $this->members[$id]['relayPcmBuffer'] ?? null;
+1850         if ($buffer instanceof ByteBuffer) {
+1851             return $buffer;
+1852         }
+1853 
+1854         $buffer = new ByteBuffer(4096);
+1855         $legacy = (string)($this->members[$id]['relayPcmAccumulator'] ?? '');
+1856         if ($legacy !== '') {
+1857             $buffer->append($legacy);
+1858         }
+1859         $this->members[$id]['relayPcmBuffer'] = $buffer;
+1860         unset($this->members[$id]['relayPcmAccumulator']);
+1861         return $buffer;
+1862     }
+1863 
+1864     private function clearRelayBufferForMember(string $id): void
+1865     {
+1866         $buffer = $this->members[$id]['relayPcmBuffer'] ?? null;
+1867         if ($buffer instanceof ByteBuffer) {
+1868             $buffer->clear();
+1869         }
+1870         unset($this->members[$id]['relayPcmAccumulator']);
+1871     }
+1872 
+1873     private function initializeRelayMetrics(string $id, rtpChannel $channel): void
+1874     {
+1875         $this->relayMetrics[$id] ??= [
+1876             'leg' => strtolower((string)($this->members[$id]['leg'] ?? '')),
+1877             'codec' => strtoupper((string)($this->members[$id]['codec'] ?? '')),
+1878             'ptime_ms' => $channel->packetTimeMs,
+1879             'packets_sent' => 0,
+1880             'dropped_frames' => 0,
+1881             'late_packets' => 0,
+1882             'max_late_ms' => 0.0,
+1883             'max_queue_frames' => 0,
+1884             'interval_samples' => 0,
+1885             'interval_error_ms_sum' => 0.0,
+1886             'min_interval_ms' => 0.0,
+1887             'max_interval_ms' => 0.0,
+1888             'last_send_at_ns' => 0,
+1889         ];
+1890         $this->relayMetrics[$id]['ptime_ms'] = $channel->packetTimeMs;
+1891         $this->relayMetrics[$id]['leg'] = strtolower((string)($this->members[$id]['leg'] ?? ''));
+1892         $this->relayMetrics[$id]['codec'] = strtoupper((string)($this->members[$id]['codec'] ?? ''));
+1893     }
+1894 
+1895     private function recordRelayInterval(string $id, int $sentAtNs, int $ptimeMs): void
+1896     {
+1897         $lastSentAtNs = (int)($this->relayMetrics[$id]['last_send_at_ns'] ?? 0);
+1898         if ($lastSentAtNs > 0) {
+1899             $intervalMs = ($sentAtNs - $lastSentAtNs) / 1_000_000;
+1900             $this->relayMetrics[$id]['interval_samples']++;
+1901             $this->relayMetrics[$id]['interval_error_ms_sum'] += abs($intervalMs - $ptimeMs);
+1902             $minimum = (float)$this->relayMetrics[$id]['min_interval_ms'];
+1903             $this->relayMetrics[$id]['min_interval_ms'] = $minimum === 0.0
+1904                 ? $intervalMs
+1905                 : min($minimum, $intervalMs);
+1906             $this->relayMetrics[$id]['max_interval_ms'] = max(
+1907                 (float)$this->relayMetrics[$id]['max_interval_ms'],
+1908                 $intervalMs,
+1909             );
+1910         }
+1911         $this->relayMetrics[$id]['last_send_at_ns'] = $sentAtNs;
+1912     }
+1913 
+1914     /** @return array<string,array<string,int|float|string>> */
+1915     public function getRelayMetrics(): array
+1916     {
+1917         $result = [];
+1918         foreach ($this->relayMetrics as $id => $metrics) {
+1919             $samples = (int)$metrics['interval_samples'];
+1920             $metrics['avg_interval_error_ms'] = $samples > 0
+1921                 ? round((float)$metrics['interval_error_ms_sum'] / $samples, 3)
+1922                 : 0.0;
+1923             $metrics['max_late_ms'] = round((float)$metrics['max_late_ms'], 3);
+1924             $metrics['min_interval_ms'] = round((float)$metrics['min_interval_ms'], 3);
+1925             $metrics['max_interval_ms'] = round((float)$metrics['max_interval_ms'], 3);
+1926             unset($metrics['interval_error_ms_sum'], $metrics['last_send_at_ns']);
+1927             $leg = (string)($metrics['leg'] ?: $id);
+1928             $result[$leg] = $metrics;
+1929         }
+1930         return $result;
+1931     }
+1932 
+1933 
+1934     private function encodeGsmFrameForMember(string $id, string $pcmFrame): string
+1935     {
+1936         $encoder = $this->members[$id]['gsmEncoder'] ?? null;
+1937         $pcmBytes = strlen($pcmFrame);
+1938         if (!$encoder instanceof gsmChannel) {
+1939             throw new \RuntimeException('playback_gsm_encoder_not_found');
+1940         }
+1941         if ($pcmBytes === 0 || ($pcmBytes % self::GSM_PCM_BYTES_PER_FRAME) !== 0) {
+1942             throw new \RuntimeException('playback_gsm_frame_invalid');
+1943         }
+1944 
+1945         $payload = $encoder->encode($pcmFrame);
+1946         $expectedBytes = intdiv($pcmBytes, self::GSM_PCM_BYTES_PER_FRAME) * self::GSM_BYTES_PER_FRAME;
+1947         if ($payload === false || strlen($payload) !== $expectedBytes) {
+1948             throw new \RuntimeException('playback_gsm_encode_failed');
+1949         }
+1950         return $payload;
+1951     }
+1952 
+1953     private function decodeGsmPayloadForMember(string $id, string $payload): string|false
+1954     {
+1955         $decoder = $this->members[$id]['gsmDecoder'] ?? null;
+1956         if (!$decoder instanceof gsmChannel || $payload === '' || (strlen($payload) % self::GSM_BYTES_PER_FRAME) !== 0) {
+1957             return false;
+1958         }
+1959 
+1960         $pcm = $decoder->decode($payload);
+1961         $expectedBytes = intdiv(strlen($payload), self::GSM_BYTES_PER_FRAME) * self::GSM_PCM_BYTES_PER_FRAME;
+1962         if ($pcm === false || strlen($pcm) !== $expectedBytes) {
+1963             return false;
+1964         }
+1965         return $pcm;
+1966     }
+1967 
+1968     private function encodeOpusFrameForMember(string $id, string $pcmFrame): string
+1969     {
+1970         $encoder = $this->members[$id]['opusEncoder'] ?? $this->members[$id]['opus'] ?? null;
+1971         if (!$encoder instanceof opusChannel) {
+1972             throw new \RuntimeException('playback_opus_encoder_not_found');
+1973         }
+1974         return $encoder->encode($pcmFrame);
+1975     }
+1976 
+1977     private function encodeG729FrameForMember(string $id, string $pcmFrame): string
+1978     {
+1979         if (!isset($this->members[$id]['bcg729Channel']) || !$this->members[$id]['bcg729Channel'] instanceof bcg729Channel) {
+1980             $this->members[$id]['bcg729Channel'] = new bcg729Channel();
+1981         }
+1982         if ((strlen($pcmFrame) % 160) !== 0) {
+1983             throw new \RuntimeException('playback_g729_frame_invalid');
+1984         }
+1985 
+1986         $payload = '';
+1987         for ($offset = 0; $offset < strlen($pcmFrame); $offset += 160) {
+1988             $payload .= $this->members[$id]['bcg729Channel']->encode(substr($pcmFrame, $offset, 160));
+1989         }
+1990         return $payload;
+1991     }
+1992 
+1993     /** @return array<string,mixed>|null */
+1994     public function memberByLeg(string $leg): ?array
+1995     {
+1996         $leg = strtolower(trim($leg));
+1997         if (!in_array($leg, ['a', 'b'], true)) {
+1998             return null;
+1999         }
+2000 
+2001         $canonicalId = $this->legMemberIds[$leg] ?? '';
+2002         if ($canonicalId !== '' && isset($this->members[$canonicalId])) {
+2003             return $this->members[$canonicalId];
+2004         }
+2005 
+2006         foreach ($this->members as $id => $member) {
+2007             if (strtolower((string)($member['leg'] ?? '')) === $leg) {
+2008                 $this->legMemberIds[$leg] = $id;
+2009                 return $member;
+2010             }
+2011         }
+2012 
+2013         return null;
+2014     }
+2015 
+2016     public function rebindMemberTransport(string $leg, string $address, int $port): bool
+2017     {
+2018         $leg = strtolower(trim($leg));
+2019         $address = trim($address);
+2020         if (!in_array($leg, ['a', 'b'], true) || $address === '' || $port <= 0) {
+2021             return false;
+2022         }
+2023 
+2024         $current = $this->memberByLeg($leg);
+2025         if (!is_array($current)) {
+2026             return false;
+2027         }
+2028 
+2029         $currentId = $this->legMemberIds[$leg] ?? '';
+2030         $newId = $address . ':' . $port;
+2031         if ($currentId === $newId && (string)($current['address'] ?? '') === $address && (int)($current['port'] ?? 0) === $port) {
+2032             return false;
+2033         }
+2034 
+2035         $current['address'] = $address;
+2036         $current['port'] = $port;
+2037         $current['leg'] = $leg;
+2038 
+2039         if ($currentId !== '' && isset($this->members[$currentId])) {
+2040             $this->retiredMemberEndpoints[$currentId] = true;
+2041             unset($this->members[$currentId]);
+2042             $current['relayWake']->close();
+2043         }
+2044         $current['relayWake'] = new \Swoole\Coroutine\Channel(1);
+2045         $this->members[$newId] = $current;
+2046         unset($this->retiredMemberEndpoints[$newId]);
+2047         if ($currentId !== '' && isset($this->relayMetrics[$currentId])) {
+2048             $this->relayMetrics[$newId] = $this->relayMetrics[$currentId];
+2049             unset($this->relayMetrics[$currentId]);
+2050         }
+2051         $this->legMemberIds[$leg] = $newId;
+2052         foreach ($this->rtpChanMemberIds as $ssrc => $memberId) {
+2053             if ($memberId === $currentId) {
+2054                 $this->rtpChanMemberIds[$ssrc] = $newId;
+2055             }
+2056         }
+2057 
+2058         return true;
+2059     }
+2060 
+2061     private function makeSilencePayloadForMember(array $member): ?string
+2062     {
+2063         $codec = strtoupper($member['codec'] ?? 'PCMA');
+2064         $frequency = (int)($member['frequency'] ?? 8000);
+2065         $samplesPerPacket = ($member['rtpChannel'] ?? null) instanceof rtpChannel
+2066             ? $member['rtpChannel']->samplesPerPacket
+2067             : $this->samplesForPacket($frequency, (int)($member['ptime'] ?? $this->packetTimeMs));
+2068 
+2069         switch ($codec) {
+2070             case 'PCMA':
+2071                 return str_repeat("\xD5", $samplesPerPacket);
+2072 
+2073             case 'PCMU':
+2074                 return str_repeat("\xFF", $samplesPerPacket);
+2075 
+2076             case 'L16':
+2077             case 'PCM':
+2078                 $channels = $member['channels'] ?? 1;
+2079                 $samples = $samplesPerPacket * $channels;
+2080                 return str_repeat("\x00\x00", $samples);
+2081 
+2082             case 'OPUS':
+2083                 $opus = $member['opusEncoder'] ?? $member['opus'] ?? null;
+2084                 if (!$opus instanceof opusChannel) {
+2085                     return null;
+2086                 }
+2087                 $channels = max(1, (int)($member['channels'] ?? 1));
+2088                 $pcm = str_repeat("\x00\x00", $samplesPerPacket * $channels);
+2089                 return $opus->encode($pcm);
+2090 
+2091             case 'G729':
+2092                 if (!isset($member['bcg729Channel'])) {
+2093                     return null;
+2094                 }
+2095                 // G.729 trabalha com frames indivisíveis de 10ms (80 samples @ 8kHz).
+2096                 if ($samplesPerPacket % 80 !== 0) {
+2097                     return null;
+2098                 }
+2099                 $pcm10ms = str_repeat("\x00\x00", 80);
+2100                 $payload = '';
+2101                 for ($frame = 0; $frame < intdiv($samplesPerPacket, 80); $frame++) {
+2102                     $payload .= $member['bcg729Channel']->encode($pcm10ms);
+2103                 }
+2104                 return $payload;
+2105 
+2106             case 'GSM':
+2107                 $encoder = $member['gsmEncoder'] ?? null;
+2108                 if (!$encoder instanceof gsmChannel || $samplesPerPacket % 160 !== 0) {
+2109                     return null;
+2110                 }
+2111                 $pcm = str_repeat("\x00\x00", $samplesPerPacket);
+2112                 $payload = $encoder->encode($pcm);
+2113                 $expectedBytes = intdiv($samplesPerPacket, 160) * self::GSM_BYTES_PER_FRAME;
+2114                 return $payload !== false && strlen($payload) === $expectedBytes ? $payload : null;
+2115 
+2116             default:
+2117                 return null;
+2118         }
+2119     }
+2120 
+2121     private function makeSilencePcmForMember(string $id): string
+2122     {
+2123         $member = $this->members[$id] ?? null;
+2124         $channel = $member['rtpChannel'] ?? null;
+2125         if (!is_array($member) || !$channel instanceof rtpChannel) {
+2126             throw new \RuntimeException('silence_member_not_found');
+2127         }
+2128         $format = $this->pcmFormatForMember($id);
+2129         return str_repeat("\x00\x00", $channel->samplesPerPacket * $format['channels']);
+2130     }
+2131 
+2132     private function samplesForPacket(int $frequency, ?int $ptimeMs = null): int
+2133     {
+2134         return max(1, (int)round(($frequency * ($ptimeMs ?? $this->packetTimeMs)) / 1000));
+2135     }
+2136 
+2137     private function validatePacketTimeForCodec(int $ptimeMs, string $codec): void
+2138     {
+2139         if (strtoupper(trim($codec)) === 'GSM' && ($ptimeMs % self::GSM_FRAME_DURATION_MS) !== 0) {
+2140             throw new \InvalidArgumentException('Packet time de GSM deve ser múltiplo de 20 ms');
+2141         }
+2142     }
+2143 
+2144     public function close(): void
+2145     {
+2146         $this->earlyMediaAcousticTap?->close('channel_closed');
+2147         $this->earlyMediaAcousticTap = null;
+2148         $this->receivedPcmForAcoustics = null;
+2149         $this->active = false;
+2150         // Wake the coroutine that owns recvfrom so it can close its socket.
+2151         // This keeps the longer idle timeout without delaying port release.
+2152         $this->socket->cancel(SWOOLE_EVENT_READ);
+2153         foreach ($this->members as $member) {
+2154             $member['relayWake']->close();
+2155         }
+2156         // Teardown discards DSP history and residual PCM; it must never emit a FIR tail.
+2157         $this->relayPcmStreams = [];
+2158         $this->injectionPcmStreams = [];
+2159         // Do not close the RTP socket from the control coroutine. The receive
+2160         // coroutine owns recvfrom() and performs destroy() when its 200 ms
+2161         // timeout observes active=false.
+2162 
+2163         // RtpSession installs closures that capture itself. Clear them
+2164         // explicitly so MediaChannel -> callback -> RtpSession -> socket does
+2165         // not retain closed kernel FDs until an eventual cyclic-GC pass.
+2166         $this->onReceiveCallable = null;
+2167         $this->onDtmfCallable = null;
+2168         $this->onVadChangeCallable = null;
+2169         $this->onRecordingCallable = null;
+2170         $this->onStartCallable = false;
+2171         $this->packetOnTimeoutCallable = false;
+2172 
+2173         try {
+2174             if (!$this->eventSock->isClosed()) {
+2175                 $this->eventSock->close();
+2176             }
+2177         } catch (\Throwable $e) {
+2178         }
+2179 
+2180         // Limpa o blockChannel
+2181         if ($this->blockChannel) {
+2182             try {
+2183                 // Consumir dados pendentes
+2184                 while (!$this->blockChannel->isEmpty()) {
+2185                     $this->blockChannel->pop(0.001);
+2186                 }
+2187                 // Fechar o channel
+2188                 $this->blockChannel->close();
+2189             } catch (\Throwable $e) {
+2190             }
+2191         }
+2192 
+2193         // Limpa os canais opus
+2194         foreach ($this->openChannels as $channel) {
+2195             try {
+2196                 if (is_a($channel, opusChannel::class)) {
+2197                     if (method_exists($channel, 'destroy')) {
+2198                         $channel->destroy();
+2199                     }
+2200                 }
+2201             } catch (\Throwable $e) {
+2202             }
+2203         }
+2204 
+2205         // Limpa os rtpChans
+2206         foreach ($this->rtpChans as $channel) {
+2207             try {
+2208                 if (is_a($channel, rtpChannel::class)) {
+2209                     if (property_exists($channel, 'bcg729Channel')) {
+2210                         $channel->bcg729Channel->close();
+2211                     }
+2212                 }
+2213             } catch (\Throwable $e) {
+2214             }
+2215         }
+2216 
+2217         // Política de fechamento: PCM residual é descartado. Completar com silêncio
+2218         // enviaria áudio novo durante teardown e poderia atrasar/ultrapassar o BYE.
+2219         foreach ($this->members as $id => $member) {
+2220             try {
+2221                 $destroyedOpus = [];
+2222                 foreach (['opusEncoder', 'opusDecoder', 'opus'] as $opusKey) {
+2223                     $opus = $member[$opusKey] ?? null;
+2224                     if (!$opus instanceof opusChannel) {
+2225                         continue;
+2226                     }
+2227                     $objectId = spl_object_id($opus);
+2228                     if (!isset($destroyedOpus[$objectId]) && method_exists($opus, 'destroy')) {
+2229                         $opus->destroy();
+2230                         $destroyedOpus[$objectId] = true;
+2231                     }
+2232                 }
+2233                 if (($member['bcg729Channel'] ?? null) instanceof bcg729Channel) {
+2234                     $member['bcg729Channel']->close();
+2235                 }
+2236                 foreach (['gsmEncoder', 'gsmDecoder'] as $gsmKey) {
+2237                     $gsm = $member[$gsmKey] ?? null;
+2238                     if ($gsm instanceof gsmChannel) {
+2239                         $gsm->close();
+2240                     }
+2241                 }
+2242                 $this->members[$id]['pcmAccumulator'] = '';
+2243                 $this->clearRelayBufferForMember($id);
+2244                 if (isset($member['rtpChannel'])) {
+2245                     unset($member['rtpChannel']);
+2246                 }
+2247             } catch (\Throwable $e) {
+2248             }
+2249         }
+2250 
+2251         // Limpa arrays
+2252         $this->members = [];
+2253         $this->injectedLegs = [];
+2254         $this->relayPacerRunning = [];
+2255         $this->relayNextSendAtNs = [];
+2256         $this->relayMetrics = [];
+2257         $this->rtpChans = [];
+2258         $this->rtpChanMemberIds = [];
+2259         $this->openChannels = [];
+2260 
+2261 //        cli::pcl("MediaChannel fechado Call-ID: {$this->callId}", 'green');
+2262     }
+2263 
+2264 
+2265     /**
+2266      * Encontra o PT correto do telephone-event para uma frequência específica
+2267      * Busca primeiro na configuração registrada, depois usa fallback
+2268      *
+2269      * @param int $frequency Frequência do codec de áudio (8000, 16000, 48000, etc)
+2270      * @return int PT do telephone-event (geralmente 101)
+2271      */
+2272     private function findTelephoneEventPt(int $frequency): int
+2273     {
+2274         // Buscar nos codecs registrados com a frequência exata
+2275         $targetKey = 'telephone-event_' . $frequency;
+2276         if (isset($this->ptCodecsFrequency[$targetKey])) {
+2277             // Encontrar o PT correspondente
+2278             foreach ($this->ptCodecs as $pt => $codecName) {
+2279                 if (
+2280                     strtolower($codecName) === 'telephone-event'
+2281                     && (int)($this->ptFrequencies[$pt] ?? 0) === $frequency
+2282                 ) {
+2283                     return $pt;
+2284                 }
+2285             }
+2286         }
+2287 
+2288         // Fallback: buscar telephone-event sem verificar frequência
+2289         foreach ($this->ptCodecs as $pt => $codecName) {
+2290             if (strtolower($codecName) === 'telephone-event') {
+2291                 return $pt;
+2292             }
+2293         }
+2294 
+2295         // Fallback final: PT 101 (padrão RFC 4733)
+2296         return 101;
+2297     }
+2298 
+2299     public array $ptCodecsChannels = [];
+2300 
+2301     public function registerPtCodecs(array $ptCodecs): void
+2302     {
+2303         $preRender = [
+2304             0 => 'PCMU/8000',
+2305             1 => 'PCM/8000',
+2306             3 => 'GSM/8000',
+2307             8 => 'PCMA/8000',
+2308             10 => 'L16/44100/2',
+2309             11 => 'L16/44100/1',
+2310             18 => 'G729/8000',
+2311             101 => 'telephone-event/8000',
+2312         ];
+2313 
+2314         // Registrar codecs padrão primeiro
+2315         foreach ($preRender as $pt => $codec) {
+2316             $parts = explode('/', $codec);
+2317             $codecName = $parts[0] ?? $pt;
+2318             $frequency = (int)($parts[1] ?? 8000);
+2319 
+2320             $this->ptCodecs[$pt] = $codecName;
+2321             $this->ptFrequencies[$pt] = $frequency;
+2322 
+2323             // Para telephone-event, usar chave composta para suportar múltiplas frequências
+2324             if (strtolower($codecName) === 'telephone-event') {
+2325                 $this->ptCodecsFrequency[$codecName . '_' . $frequency] = $frequency;
+2326             } else {
+2327                 $this->ptCodecsFrequency[$codecName] = $frequency;
+2328             }
+2329         }
+2330 
+2331         // Sobrescrever com codecs fornecidos pelo SDP
+2332         foreach ($ptCodecs as $pt => $codec) {
+2333             $parts = explode('/', $codec);
+2334             $codecName = $parts[0] ?? $pt;
+2335             $frequency = (int)($parts[1] ?? 8000);
+2336             $channels = (int)($parts[2] ?? 1);
+2337             $this->ptCodecsChannels[$pt] = $channels;
+2338 
+2339             $this->ptCodecs[$pt] = $codecName;
+2340             $this->ptFrequencies[$pt] = $frequency;
+2341 
+2342             // Para telephone-event, usar chave composta para suportar múltiplas frequências
+2343             if (strtolower($codecName) === 'telephone-event') {
+2344                 $this->ptCodecsFrequency[$codecName . '_' . $frequency] = $frequency;
+2345             } else {
+2346                 $this->ptCodecsFrequency[$codecName] = $frequency;
+2347             }
+2348         }
+2349     }
+2350 
+2351     public function packetOnTimeout(callable $param): void
+2352     {
+2353         $this->packetOnTimeoutCallable = $param;
+2354     }
+2355 
+2356     public mixed $packetOnTimeoutCallable = false;
+2357 
+2358     public function getFrequencyFromPtCodec(int $pt)
+2359     {
+2360         return $this->resolveFrequencyFromPt($pt);
+2361     }
+2362 
+2363 
+2364     /**
+2365      * Processa eventos telephone-event (RFC 4733/2833)
+2366      * Implementa tratamento correto de DTMF com:
+2367      * - Detecção de retransmissões (RFC requer 3 pacotes finais)
+2368      * - Validação de flag E (End)
+2369      * - Debouncing baseado em timestamp + sequence
+2370      * - Forward correto para outros membros
+2371      */
+2372     private function processDtmf(rtpc $rtpc, mixed $peer, Closure $closure): void
+2373     {
+2374         Coroutine::create(function () use ($rtpc, $peer, $closure) {
+2375             $ssrc = $rtpc->ssrc;
+2376             $payload = $rtpc->payloadRaw;
+2377             $sequence = $rtpc->sequence;
+2378             $timestamp = $rtpc->timestamp;
+2379 
+2380             // RFC 4733: payload mínimo = 4 bytes
+2381             if (strlen($payload) < 4) {
+2382                 return;
+2383             }
+2384 
+2385             // RFC 4733 Section 2.3: Event Payload Format
+2386             // 0                   1                   2                   3
+2387             // 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+2388             // +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+2389             // |     event     |E|R| volume    |          duration             |
+2390             // +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+2391             $data = unpack('Cevent/Cflags/nduration', $payload);
+2392             $event = $data['event'];
+2393             $flags = $data['flags'];
+2394             $isEnd = ($flags & 0x80) !== 0; // Flag E (End of Event)
+2395             $volume = $flags & 0x3F; // 6 bits de volume
+2396             $duration = $data['duration'];
+2397 
+2398 
+2399             // Criar chave única para este evento específico
+2400             $cacheKey = "{$ssrc}:{$timestamp}:{$event}";
+2401 
+2402             // RFC 4733 Section 2.5.1.4: Detectar retransmissões
+2403             // O timestamp permanece o mesmo durante todo o evento
+2404             // Sequence number incrementa a cada pacote
+2405             if (isset($this->dtmfPacketCache[$cacheKey])) {
+2406                 $cached = $this->dtmfPacketCache[$cacheKey];
+2407 
+2408                 // Se já processamos um pacote END para este evento, ignorar retransmissões
+2409                 if ($cached['processed'] && $isEnd) {
+2410                     // RFC: últimos 3 pacotes são idênticos com flag E set
+2411                     $closure(); // Fazer forward do pacote mesmo sendo duplicado
+2412                     // Disparar callback de DTMF
+2413                     $callback = $this->onDtmfCallable;
+2414                     if (is_callable($callback)) {
+2415                         if (($rtpc->sequence - $cached['sequence']) == 1) {
+2416                             go($callback, $event, $peer, $event, $this);
+2417                         }
+2418 
+2419 
+2420                     }
+2421                     return;
+2422                 }
+2423 
+2424                 // Atualizar informações do evento em andamento
+2425                 $this->dtmfPacketCache[$cacheKey]['sequence'] = $sequence;
+2426                 $this->dtmfPacketCache[$cacheKey]['duration'] = $duration;
+2427                 $this->dtmfPacketCache[$cacheKey]['lastSeen'] = microtime(true);
+2428             } else {
+2429                 // Novo evento DTMF iniciado
+2430                 $this->dtmfPacketCache[$cacheKey] = [
+2431                     'event' => $event,
+2432                     'timestamp' => $timestamp,
+2433                     'sequence' => $sequence,
+2434                     'duration' => $duration,
+2435                     'volume' => $volume,
+2436                     'firstSeen' => microtime(true),
+2437                     'lastSeen' => microtime(true),
+2438                     'processed' => false,
+2439                 ];
+2440             }
+2441 
+2442 
+2443             // Forward para outros membros (sempre, para manter sincronização)
+2444             $closure();
+2445 
+2446             // Processar apenas quando flag E (End) está setada
+2447             if (!$isEnd) {
+2448 
+2449                 return;
+2450             }
+2451 
+2452             // Verificar se já processamos este evento
+2453             if ($this->dtmfPacketCache[$cacheKey]['processed']) {
+2454 
+2455                 return;
+2456             }
+2457 
+2458             // Validação de debounce entre eventos diferentes
+2459             // RFC 4733: eventos diferentes devem ter timestamps diferentes
+2460             if (isset($this->dtmfLastEvent[$ssrc])) {
+2461                 $last = $this->dtmfLastEvent[$ssrc];
+2462 
+2463                 // Se for o mesmo evento com timestamp muito próximo, ignorar
+2464                 if ($last['event'] === $event && $timestamp === $last['timestamp']) {
+2465                     return;
+2466                 }
+2467 
+2468                 // Debounce adicional: mínimo 50ms entre eventos (400 samples @ 8kHz)
+2469                 $timeDiffSamples = abs($timestamp - $last['timestamp']);
+2470                 $timeDiffMs = ($timeDiffSamples / 8); // 8000Hz = 8 samples/ms
+2471 
+2472                 if ($timeDiffMs < 50 && $last['event'] === $event) {
+2473                     return;
+2474                 }
+2475             }
+2476 
+2477             // Marcar como processado
+2478             $this->dtmfPacketCache[$cacheKey]['processed'] = true;
+2479 
+2480             // Atualizar último evento processado
+2481             $this->dtmfLastEvent[$ssrc] = [
+2482                 'event' => $event,
+2483                 'timestamp' => $timestamp,
+2484                 'sequence' => $sequence,
+2485                 'duration' => $duration,
+2486                 'time' => microtime(true),
+2487             ];
+2488 
+2489             // Traduzir evento para dígito
+2490             $digit = $this->translateDigit($event);
+2491 
+2492 
+2493             // Guard temporal contra disparo múltiplo do mesmo dígito.
+2494             // O RFC 4733 retransmite o pacote final (flag E) 3x; se essas retransmissões
+2495             // chegarem com timestamp/SSRC variando, o cacheKey muda e o dedup acima não
+2496             // as captura, causando o callback disparar 3x para uma única tecla pressionada.
+2497             // Aqui garantimos um único disparo por (ssrc, event) dentro da janela de debounce.
+2498             $nowMs = microtime(true) * 1000;
+2499             $lastFired = $this->dtmfFiredGuard[$ssrc] ?? null;
+2500             if (
+2501                 $lastFired !== null &&
+2502                 $lastFired['event'] === $event &&
+2503                 ($nowMs - $lastFired['time']) < $this->dtmfDebounceMs
+2504             ) {
+2505                 return;
+2506             }
+2507             $this->dtmfFiredGuard[$ssrc] = ['event' => $event, 'time' => $nowMs];
+2508 
+2509 
+2510             // Limpar cache antigo (> 5 segundos)
+2511             $currentTime = microtime(true);
+2512             foreach ($this->dtmfPacketCache as $key => $cache) {
+2513                 if ($currentTime - $cache['lastSeen'] > 5.0) {
+2514                     unset($this->dtmfPacketCache[$key]);
+2515                 }
+2516             }
+2517         });
+2518     }
+2519 
+2520     private function translateDigit(mixed $event): string
+2521     {
+2522         $mapa = [
+2523             0 => '0',
+2524             1 => '1',
+2525             2 => '2',
+2526             3 => '3',
+2527             4 => '4',
+2528             5 => '5',
+2529             6 => '6',
+2530             7 => '7',
+2531             8 => '8',
+2532             9 => '9',
+2533             10 => '*',
+2534             11 => '#',
+2535         ];
+2536         return $mapa[$event] ?? '';
+2537     }
+2538 }

@@ -1,0 +1,11 @@
+--- before
++++ after
+@@ -717,7 +717,7 @@
+                             $packet = false;
+                         }
+                     } else {
+-                        $packet = $this->socket->recvfrom($peer, -1);
++                        $packet = $this->socket->recvfrom($peer, 0.2);
+                         $packetLength = $packet === false ? 0 : strlen($packet);
+                     }
+                     $currentTime = microtime(true);

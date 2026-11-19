@@ -1,0 +1,18 @@
+--- before
++++ after
+@@ -2409,15 +2409,6 @@
+                 if ($cached['processed'] && $isEnd) {
+                     // RFC: últimos 3 pacotes são idênticos com flag E set
+                     $closure(); // Fazer forward do pacote mesmo sendo duplicado
+-                    // Disparar callback de DTMF
+-                    $callback = $this->onDtmfCallable;
+-                    if (is_callable($callback)) {
+-                        if (($rtpc->sequence - $cached['sequence']) == 1) {
+-                            go($callback, $event, $peer, $event, $this);
+-                        }
+-
+-
+-                    }
+                     return;
+                 }
+ 

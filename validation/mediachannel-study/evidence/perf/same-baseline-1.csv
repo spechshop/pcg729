@@ -1,0 +1,8 @@
+# started on Fri Nov 13 22:19:49 2026
+
+53.26;msec;task-clock;53260005;100.00;;
+92;;context-switches;53260005;100.00;;
+97456004;;cpu_atom/cycles/;862597;1.00;;
+115578097;;cpu_core/cycles/;52397408;98.00;;
+85594900;;cpu_atom/instructions/;862597;1.00;;
+184898511;;cpu_core/instructions/;52397408;98.00;;

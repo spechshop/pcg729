@@ -1,0 +1,2 @@
+Verified factory=slice file=/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/rtpc-slice.php lazy=0
+Factory check OK

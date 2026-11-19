@@ -1,0 +1,18 @@
+# started on Fri Nov 13 22:18:57 2026
+
+
+ Performance counter stats for 'buildroot/bin/php validation/mediachannel-study/tests/bench.php validation/mediachannel-study/lab/baseline acoustic 20':
+
+             38.65 msec task-clock                                                            
+               119      context-switches                                                      
+          40424121      cpu_atom/cycles/                                                        (17.23%)
+         127688202      cpu_core/cycles/                                                        (89.93%)
+          29223230      cpu_atom/instructions/                                                  (17.23%)
+         196665090      cpu_core/instructions/                                                  (89.93%)
+
+       0.552094862 seconds time elapsed
+
+       0.026301000 seconds user
+       0.015342000 seconds sys
+
+

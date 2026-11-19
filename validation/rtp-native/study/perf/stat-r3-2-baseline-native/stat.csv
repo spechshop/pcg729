@@ -1,0 +1,7 @@
+# started on Fri Nov 13 21:13:12 2026
+
+667.26;msec;task-clock;667262486;100.00;;
+3080;;context-switches;667262486;100.00;;
+0;;cpu-migrations;667262486;100.00;;
+685990886;;cpu_core/cycles/;667262486;100.00;;
+210220366;;cpu_core/instructions/;667262486;100.00;;

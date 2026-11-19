@@ -1,0 +1,6 @@
+
+Fatal error: Cannot redeclare class libspech\Rtp\rtpc (previously declared in /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/rtpc-slice.php:7) in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/rtpc.php on line 7
+Stack trace:
+#0 /home/lotus/CLionProjects/pcg729/libspech/plugins/autoloader.php(39): include()
+#1 /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/media-compare.php(5): require('/home/lotus/CLi...')
+#2 {main}

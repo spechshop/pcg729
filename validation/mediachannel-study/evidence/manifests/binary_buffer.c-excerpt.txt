@@ -1,0 +1,102 @@
+307: {
+308:     binary_slice_context slice = {0};
+309:     slice.offset = offset;
+310:     slice.length = length;
+311:     slice.result = result;
+312:     return binary_slice_view(v, &slice);
+313: }
+314: 
+315: static zend_result rtp_parse_view(const psampler_binary_view *v, void *opaque)
+316: {
+317:     rtp_parse_context *c = opaque;
+318:     size_t n = c->length, offset, payload_length;
+319:     unsigned int first, second, padding_length;
+320:     if (n > v->spans[0].length + v->spans[1].length) {
+321:         zend_argument_value_error(2, "exceeds the native source length");
+322:         return FAILURE;
+323:     }
+324:     if (n < 12) goto malformed;
+325:     first = rtp_byte(v, 0);
+326:     second = rtp_byte(v, 1);
+327:     c->fields[0] = first >> 6;
+328:     c->fields[1] = (first >> 5) & 1;
+329:     c->fields[2] = (first >> 4) & 1;
+330:     c->fields[3] = first & 15;
+331:     c->fields[4] = second >> 7;
+332:     c->fields[5] = second & 127;
+333:     c->fields[6] = rtp_uint(v, 2, 2);
+334:     c->fields[7] = rtp_uint(v, 4, 4);
+335:     c->fields[8] = rtp_uint(v, 8, 4);
+336:     if (c->strict && c->fields[0] != 2) goto malformed;
+337:     offset = 12 + 4 * c->fields[3];
+338:     if (offset > n) goto malformed;
+339:     if (c->fields[2]) {
+340:         size_t extension_length;
+341:         if (n - offset < 4) goto malformed;
+342:         extension_length = 4 * (size_t) rtp_uint(v, offset + 2, 2);
+343:         offset += 4;
+344:         if (extension_length > n - offset) goto malformed;
+345:         offset += extension_length;
+346:     }
+347:     payload_length = n - offset;
+348:     if (c->strict && c->fields[1]) {
+349:         if (!payload_length) goto malformed;
+350:         padding_length = rtp_byte(v, n - 1);
+351:         if (!padding_length || padding_length > payload_length) goto malformed;
+352:         payload_length -= padding_length;
+353:     }
+354:     if (rtp_copy(v, 0, offset, &c->header) != SUCCESS) return FAILURE;
+355:     return rtp_copy(v, offset, payload_length, &c->payload);
+356: malformed:
+357:     if (c->strict) {
+358:         zend_value_error("Malformed RTP packet (version, header, extension or padding)");
+359:         return FAILURE;
+360:     }
+361:     /* Compatibility with rtpc: short packets keep defaults, other malformed
+362:      * packets retain the parsed fixed fields and the entire raw packet. */
+363:     if (n >= 12) return rtp_copy(v, 0, n, &c->raw);
+364:     return SUCCESS;
+365: }
+366: 
+367: PHP_FUNCTION(psampler_rtp_parse)
+368: {
+369:     zval *source, *target;
+370:     zend_long length;
+371:     zend_bool strict = 1;
+372:     rtp_parse_context context = {0};
+373:     ZEND_PARSE_PARAMETERS_START(3, 4)
+374:         Z_PARAM_OBJECT(source)
+375:         Z_PARAM_LONG(length)
+376:         Z_PARAM_OBJECT(target)
+377:         Z_PARAM_OPTIONAL
+378:         Z_PARAM_BOOL(strict)
+379:     ZEND_PARSE_PARAMETERS_END();
+380:     if (length < 0) {
+381:         zend_argument_value_error(2, "must be greater than or equal to 0");
+382:         RETURN_THROWS();
+383:     }
+384:     context.length = (size_t) length;
+385:     context.strict = strict;
+386:     ZVAL_NULL(&context.header);
+387:     ZVAL_EMPTY_STRING(&context.payload);
+388:     ZVAL_EMPTY_STRING(&context.raw);
+389:     if (psampler_binary_with_view(source, rtp_parse_view, &context) == SUCCESS) {
+390:         if (length >= 12) {
+391:             for (size_t i = 0; i < 9 && !EG(exception); i++) {
+392:                 zval value;
+393:                 ZVAL_LONG(&value, context.fields[i]);
+394:                 zend_update_property_ex(Z_OBJCE_P(target), Z_OBJ_P(target), rtp_property_names[i], &value);
+395:             }
+396:         }
+397:         if (!EG(exception)) zend_update_property_ex(Z_OBJCE_P(target), Z_OBJ_P(target), rtp_property_names[9], &context.payload);
+398:         if (!EG(exception) && Z_TYPE(context.header) == IS_NULL)
+399:             zend_update_property_ex(Z_OBJCE_P(target), Z_OBJ_P(target), rtp_property_names[10], &context.raw);
+400:     }
+401:     zval_ptr_dtor(&context.payload);
+402:     zval_ptr_dtor(&context.raw);
+403:     if (EG(exception)) {
+404:         zval_ptr_dtor(&context.header);
+405:         RETURN_THROWS();
+406:     }
+407:     RETURN_COPY_VALUE(&context.header);
+408: }

@@ -1,0 +1,12 @@
+ M .gitignore
+ M comandos.txt
+?? contexto-pcg729-20261113-195543.txt
+?? entregar/
+?? lsend.php
+?? lsim.php
+?? mc-native.php
+?? mc.php
+?? perf
+?? relatorio-rtp-nativo.md
+?? validation/mediachannel-study/
+?? validation/rtp-native/

@@ -1,0 +1,209 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Uso: bash perf [script.php] [segundos] [identificador]
+# O modo native/recvfrom e lido do mc.php ao lado deste script.
+# Exemplos:
+#   bash perf
+#   bash perf mc.php
+#   bash perf mc.php 15
+#   bash perf mc.php 15 teste
+
+target=${1:-}
+sec=${2:-}
+label=${3:-}
+
+if (( $# > 3 )); then
+    echo "Uso: bash $0 [script.php] [segundos] [identificador]" >&2
+    exit 2
+fi
+
+for cmd in perf php ps awk grep tr date head sleep dirname; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Dependencia ausente: $cmd" >&2
+        exit 1
+    fi
+done
+
+config_file="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/mc.php"
+# Tokeniza sem executar o receptor; ignora comentarios e espacos.
+native_rtp_receive=$(php -n -r '
+    $source = @file_get_contents($argv[1]);
+    if ($source === false) {
+        fwrite(STDERR, "Nao foi possivel ler " . $argv[1] . PHP_EOL);
+        exit(1);
+    }
+    $tokens = [];
+    foreach (token_get_all($source) as $token) {
+        if (is_array($token)) {
+            if (in_array($token[0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true)) {
+                continue;
+            }
+            $tokens[] = $token[1];
+        } else {
+            $tokens[] = $token;
+        }
+    }
+    $values = [];
+    foreach ($tokens as $i => $token) {
+        if ($token !== "$" . "mediaChannel" || ($tokens[$i + 1] ?? null) !== "->"
+            || strcasecmp($tokens[$i + 2] ?? "", "setNativeRtpReceive") !== 0) {
+            continue;
+        }
+        $value = strtolower($tokens[$i + 4] ?? "");
+        if (($tokens[$i + 3] ?? null) !== "(" || ($tokens[$i + 5] ?? null) !== ")"
+            || !in_array($value, ["true", "false"], true)) {
+            fwrite(STDERR, "setNativeRtpReceive deve usar true ou false literal em mc.php." . PHP_EOL);
+            exit(1);
+        }
+        $values[] = $value;
+    }
+    if (count($values) !== 1) {
+        fwrite(STDERR, "Esperada uma chamada ativa a mediaChannel->setNativeRtpReceive em mc.php." . PHP_EOL);
+        exit(1);
+    }
+    echo $values[0];
+' "$config_file")
+mode=recvfrom
+if [[ "$native_rtp_receive" == true ]]; then
+    mode=native
+fi
+
+mkdir -p perf-out
+
+choose_pid() {
+    local selected
+    if (( $# == 1 )); then
+        printf '%s\n' "$1"
+        return 0
+    fi
+    if ! command -v fzf >/dev/null 2>&1; then
+        echo "Mais de um processo encontrado; instale fzf para selecionar." >&2
+        return 1
+    fi
+    selected=$(
+        for p in "$@"; do
+            ps -p "$p" -o pid=,pcpu=,comm=,args= 2>/dev/null || true
+        done | fzf \
+            --height=100% --border --reverse \
+            --prompt="Selecionar processo > " \
+            --header="PID  CPU  COMANDO  ARGS | Enter seleciona / ESC cancela"
+    ) || return 1
+    [[ -n "$selected" ]] || return 1
+    awk '{print $1}' <<< "$selected"
+}
+
+if [[ -n "$target" ]]; then
+    # Busca por um argumento de script exato na linha de comando de processos PHP.
+    # Evita falsos positivos de grep/awk ou do proprio profiler.
+    matches=()
+    for cmdline in /proc/[0-9]*/cmdline; do
+        [[ -r "$cmdline" ]] || continue
+        argv=()
+        mapfile -d '' -t argv < "$cmdline" 2>/dev/null || continue
+        (( ${#argv[@]} >= 2 )) || continue
+
+        executable=${argv[0]##*/}
+        [[ "$executable" == *php* ]] || continue
+
+        for arg in "${argv[@]:1}"; do
+            if [[ "$arg" == "$target" || "${arg##*/}" == "${target##*/}" ]]; then
+                p=${cmdline#/proc/}
+                p=${p%/cmdline}
+                matches+=("$p")
+                break
+            fi
+        done
+    done
+
+    if (( ${#matches[@]} == 0 )); then
+        echo "Nenhum processo PHP executando '$target' foi encontrado." >&2
+        exit 1
+    fi
+    pid=$(choose_pid "${matches[@]}") || exit 0
+else
+    if ! command -v fzf >/dev/null 2>&1; then
+        echo 'Dependencia ausente: fzf' >&2
+        exit 1
+    fi
+    selected=$(
+        ps aux | fzf \
+            --header-lines=1 --height=100% --border --reverse \
+            --prompt="Selecionar processo > " \
+            --header="Setas: navegar | Enter: selecionar | ESC: cancelar"
+    ) || exit 0
+    [[ -n "$selected" ]] || exit 0
+    pid=$(awk '{print $2}' <<< "$selected")
+fi
+
+if ! ps -p "$pid" >/dev/null 2>&1; then
+    echo "O processo PID $pid ja foi encerrado." >&2
+    exit 1
+fi
+
+cpu=$(ps -p "$pid" -o %cpu= | awk '{print $1}')
+name=$(ps -p "$pid" -o comm= | tr -cs '[:alnum:]_.-' '_')
+name=${name%_}
+
+if [[ -z "$sec" ]]; then
+    read -r -p 'Tempo de coleta em segundos [30]: ' sec < /dev/tty
+    sec=${sec:-30}
+fi
+if ! [[ "$sec" =~ ^[0-9]+$ ]] || [[ "$sec" =~ ^0+$ ]]; then
+    echo 'Duracao invalida.' >&2
+    exit 1
+fi
+sec=$((10#$sec))
+
+label=$(printf '%s' "$label" | tr -cs '[:alnum:]_.-' '_')
+label=${label%_}
+
+stamp=$(date +%Y%m%d-%H%M%S)
+prefix="perf-out/${mode}${label:+-${label}}-${name}-${pid}-${stamp}"
+data="${prefix}.data"
+flat="${prefix}-flat.txt"
+children="${prefix}-children.txt"
+stats="${prefix}-stat.txt"
+
+printf '\n========================================\n'
+printf ' Processo: %s\n PID: %s\n CPU (ps): %s%%\n Duracao: %ss\n Modo: %s\n' "$name" "$pid" "$cpu" "$sec" "$mode"
+printf ' setNativeRtpReceive: %s\n' "$native_rtp_receive"
+printf '========================================\n\n'
+
+events='task-clock,context-switches,cpu-migrations,page-faults'
+if perf stat -e cycles,instructions -- true >/dev/null 2>&1; then
+    events="${events},cycles,instructions"
+fi
+
+echo '[1/4] Iniciando contadores de CPU...'
+printf '# mode: %s\n# native_rtp_receive: %s\n# config_source: %s (lido no inicio da coleta)\n' \
+    "$mode" "$native_rtp_receive" "$config_file" > "$stats"
+perf stat --append --no-big-num -p "$pid" -e "$events" -o "$stats" -- sleep "$sec" &
+stat_pid=$!
+trap 'kill "${stat_pid}" 2>/dev/null || true' EXIT
+
+echo '[2/4] Coletando amostras e call stacks...'
+if ! perf record -e cpu-clock -F 999 --call-graph fp -p "$pid" -o "$data" -- sleep "$sec"; then
+    echo 'Falha no perf record.' >&2
+    exit 1
+fi
+
+if ! wait "$stat_pid"; then
+    echo 'Falha no perf stat.' >&2
+    exit 1
+fi
+trap - EXIT
+
+echo '[3/4] Gerando relatorio flat...'
+perf report -i "$data" --stdio --no-children --sort=symbol > "$flat"
+
+echo '[4/4] Gerando relatorio com custos acumulados...'
+perf report -i "$data" --stdio --children --sort=symbol > "$children"
+
+printf '\n========== RESUMO DE CPU ==========\n'
+grep -E 'task-clock|cycles|instructions|context-switches|cpu-migrations|page-faults|seconds time elapsed' "$stats" || cat "$stats"
+printf '\n========== RESUMO DO PROFILING ==========\n'
+grep -E 'Total Lost Samples|Samples:|Event count' "$flat" | head -10 || true
+printf '\n========== ARQUIVOS GERADOS ==========\n'
+ls -lh "$data" "$flat" "$children" "$stats"
+echo 'Coleta concluida.'

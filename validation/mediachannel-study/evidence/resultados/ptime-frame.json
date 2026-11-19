@@ -1,0 +1,14 @@
+[
+  {
+    "variant": "baseline",
+    "exit": 1,
+    "stdout": "{\"codec\":\"PCMA\",\"lengths\":[320],\"ok\":false}\n{\"codec\":\"PCMU\",\"lengths\":[320],\"ok\":false}\n",
+    "stderr": ""
+  },
+  {
+    "variant": "candidate",
+    "exit": 0,
+    "stdout": "{\"codec\":\"PCMA\",\"lengths\":[160,160],\"ok\":true}\n{\"codec\":\"PCMU\",\"lengths\":[160,160],\"ok\":true}\n",
+    "stderr": ""
+  }
+]

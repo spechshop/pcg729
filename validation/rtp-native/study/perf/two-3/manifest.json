@@ -1,0 +1,120 @@
+{
+  "load_start": [
+    1.09521484375,
+    1.3271484375,
+    1.1484375
+  ],
+  "frequency_start": "800000",
+  "scenario": "optimized-slice",
+  "binary": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+  "binary_sha256": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+  "mode": "slice",
+  "profile": false,
+  "two_members": true,
+  "duration_requested": 60,
+  "hashes": {
+    "buildroot/bin/php": "18f0763f823d9e1b83ac3c78e9164dc0636772ceff173057550697a0314c6f99",
+    "validation/rtp-native/study/receiver.php": "dfe7a4d8cd3c46f3dd5b91dc3dbf4d0454446e3a974fdcdabf72550cd8d487b4",
+    "validation/rtp-native/study/rtpc-slice.php": "4a78161e43e54eec684b804d9075570e6afcecbe6f1143a526776f405785ebba",
+    "validation/rtp-native/study/autoloader.php": "7b6f501c2463aa1958e8c89cb99d5cc2c669549b174092ad3d66cddf8c097678",
+    "validation/rtp-native/study/perf/control.php": "4671bbc23f6b26315be00244589aaf84508d5582996937950209cd57de292111",
+    "validation/rtp-native/study/perf/sender.py": "18d68c374d41abfddf41153909ae59206030a2be35bd2a0c32e9d82b697b2a02",
+    "validation/rtp-native/study/perf/run.py": "d06c2e514e9669ec6a1f19db9155142d3d8ef47bc9ed8b499ee456ff88b16d39",
+    "libspech/plugins/Utils/sip/MediaChannel.php": "81cc7c3184658a8795e74c76baee108da8eefa511a9c1f35ae774b5fd434d46f",
+    "libspech/plugins/Utils/sip/rtpc.php": "6f40433e7234b86c2628ecf9ba8925f38cff54e170d432a9e8a4ff8b70e634a6",
+    "source/php-src/ext/psampler/binary_buffer.c": "8364c94865737f41da75d79ee504af9e4e98215ea4073a87446305a57e4bea7e",
+    "mc.php": "eefd7ed6949ca807d49155c199f360bef33779cb9d091993b260ccb5ddaf5aef",
+    "lsend.php": "f7e93cc6de6db1e8ea6b3c8131e2371eb96ab7fbc5558d968ccb2d6ec0d2ba51"
+  },
+  "status": "complete",
+  "kernel": "Linux lotus-Nitro-AN515-57 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "perf": "perf version 7.0.14\n",
+  "paranoid": "1",
+  "affinity": {
+    "receiver": 2,
+    "sender": 4
+  },
+  "started_unix": 1794620047.5564213,
+  "receiver_command": [
+    "taskset",
+    "-c",
+    "2",
+    "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/receiver.php"
+  ],
+  "sender_command": [
+    "taskset",
+    "-c",
+    "4",
+    "/usr/bin/python3",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/perf/sender.py"
+  ],
+  "pid": 1629125,
+  "proc_exe": "/home/lotus/CLionProjects/pcg729/buildroot/bin/php",
+  "config": {
+    "receiveOnlyMode": false,
+    "nativeRtpReceive": true,
+    "requireNativeRtpParser": true,
+    "settings": {
+      "sendSilenceProbeToMembers": true
+    },
+    "audioMetricsEnabled": false,
+    "codecMapper": {
+      "8": "PCMA/8000/1",
+      "101": "telephone-event/8000/1"
+    },
+    "members": 2,
+    "receiveTimeout": 0.2,
+    "options": {
+      "codecMapper": {
+        "8": "PCMA/8000/1",
+        "101": "telephone-event/8000/1"
+      },
+      "config": [],
+      "transcodingEnabled": false
+    }
+  },
+  "factory_file": "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/rtpc-slice.php",
+  "factory_sha256": "4a78161e43e54eec684b804d9075570e6afcecbe6f1143a526776f405785ebba",
+  "perf_command": [
+    "/usr/bin/perf",
+    "stat",
+    "-x",
+    ";",
+    "-o",
+    "/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/perf/two-3/stat.csv",
+    "-e",
+    "task-clock,context-switches,cpu-migrations,cpu_core/cycles/,cpu_core/instructions/",
+    "-p",
+    "1629125",
+    "-D",
+    "-1",
+    "--control",
+    "fd:6,9"
+  ],
+  "perf_exit": -2,
+  "counts": {
+    "rtp": 3001,
+    "audio": 2781,
+    "dtmf_callbacks": 20,
+    "dtmf_events": 20,
+    "dtmf_packets": 220,
+    "sender": {
+      "audio": 2781,
+      "dtmf": 220,
+      "events": 20,
+      "errors": 0,
+      "late_slots": 0,
+      "sink_pcmu": 2780,
+      "sink_pcmu_valid": 2780,
+      "sink_dtmf": 220
+    }
+  },
+  "ended_unix": 1794620113.5373852,
+  "load_end": [
+    1.07958984375,
+    1.28759765625,
+    1.1484375
+  ],
+  "frequency_end": "1332471"
+}

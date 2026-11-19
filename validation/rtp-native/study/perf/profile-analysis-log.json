@@ -1,0 +1,524 @@
+{
+  "profile-1": {
+    "samples": 6456,
+    "kernel_leaf": 1672,
+    "unknown_leaf": 32,
+    "groups": {
+      "native_parser_inclusive": {
+        "samples": 230,
+        "percent": 3.5625774473358116
+      },
+      "buffer_bridge_inclusive": {
+        "samples": 160,
+        "percent": 2.4783147459727384
+      },
+      "udp_receive_inclusive": {
+        "samples": 1918,
+        "percent": 29.708798017348204
+      },
+      "reactor_epoll_scheduler_inclusive": {
+        "samples": 1888,
+        "percent": 29.244114002478316
+      },
+      "zend_property_inclusive": {
+        "samples": 282,
+        "percent": 4.368029739776952
+      },
+      "allocation_copy_inclusive": {
+        "samples": 301,
+        "percent": 4.662329615861214
+      },
+      "object_lifecycle_inclusive": {
+        "samples": 67,
+        "percent": 1.0377942998760843
+      },
+      "perf_observer_inclusive": {
+        "samples": 62,
+        "percent": 0.9603469640644362
+      },
+      "unpack_inclusive": {
+        "samples": 13,
+        "percent": 0.201363073110285
+      },
+      "codec_inclusive": {
+        "samples": 0,
+        "percent": 0.0
+      }
+    },
+    "top_leaf": [
+      {
+        "symbol": "execute_ex (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 275,
+        "percent": 4.259603469640644
+      },
+      {
+        "symbol": "zend_hash_find_bucket (inlined)",
+        "samples": 81,
+        "percent": 1.254646840148699
+      },
+      {
+        "symbol": "zim_swoole_socket_coro_recvfromInto (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 78,
+        "percent": 1.20817843866171
+      },
+      {
+        "symbol": "aa_dfa_match_len ([kernel.kallsyms])",
+        "samples": 78,
+        "percent": 1.20817843866171
+      },
+      {
+        "symbol": "memcpy (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 68,
+        "percent": 1.0532837670384139
+      },
+      {
+        "symbol": "zend_string_equal_content (inlined)",
+        "samples": 61,
+        "percent": 0.9448574969021065
+      },
+      {
+        "symbol": "strlen (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 49,
+        "percent": 0.7589838909541512
+      },
+      {
+        "symbol": "ZEND_FETCH_OBJ_R_SPEC_UNUSED_CONST_INLINE_HANDLER (inlined)",
+        "samples": 47,
+        "percent": 0.7280049566294919
+      },
+      {
+        "symbol": "printf_core (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 43,
+        "percent": 0.6660470879801735
+      },
+      {
+        "symbol": "i_zval_ptr_dtor (inlined)",
+        "samples": 38,
+        "percent": 0.5885997521685254
+      },
+      {
+        "symbol": "swoole::ReactorEpoll::wait() (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 38,
+        "percent": 0.5885997521685254
+      },
+      {
+        "symbol": "get_meta (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 38,
+        "percent": 0.5885997521685254
+      },
+      {
+        "symbol": "ZEND_TYPE_CHECK_SPEC_CV_HANDLER (inlined)",
+        "samples": 37,
+        "percent": 0.5731102850061958
+      },
+      {
+        "symbol": "kmem_cache_alloc_noprof ([kernel.kallsyms])",
+        "samples": 37,
+        "percent": 0.5731102850061958
+      },
+      {
+        "symbol": "fdget ([kernel.kallsyms])",
+        "samples": 36,
+        "percent": 0.5576208178438662
+      },
+      {
+        "symbol": "zend_mm_get_next_free_slot (inlined)",
+        "samples": 34,
+        "percent": 0.5266418835192069
+      },
+      {
+        "symbol": "[unknown] ([vdso])",
+        "samples": 32,
+        "percent": 0.49566294919454773
+      },
+      {
+        "symbol": "ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_USED_HANDLER (inlined)",
+        "samples": 32,
+        "percent": 0.49566294919454773
+      },
+      {
+        "symbol": "__pthread_getspecific (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 32,
+        "percent": 0.49566294919454773
+      },
+      {
+        "symbol": "_efree (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 31,
+        "percent": 0.4801734820322181
+      },
+      {
+        "symbol": "update_curr ([kernel.kallsyms])",
+        "samples": 31,
+        "percent": 0.4801734820322181
+      },
+      {
+        "symbol": "buffer_read_acquire(_zend_object*, swoole_buffer_read_view_v1*) (/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/php-baseline)",
+        "samples": 30,
+        "percent": 0.4646840148698885
+      },
+      {
+        "symbol": "zend_vm_calc_used_stack (inlined)",
+        "samples": 30,
+        "percent": 0.4646840148698885
+      },
+      {
+        "symbol": "ZEND_INIT_METHOD_CALL_SPEC_UNUSED_CONST_HANDLER (inlined)",
+        "samples": 30,
+        "percent": 0.4646840148698885
+      },
+      {
+        "symbol": "ZEND_INIT_NS_FCALL_BY_NAME_SPEC_CONST_HANDLER (inlined)",
+        "samples": 30,
+        "percent": 0.4646840148698885
+      }
+    ]
+  },
+  "profile-2": {
+    "samples": 6387,
+    "kernel_leaf": 1631,
+    "unknown_leaf": 33,
+    "groups": {
+      "native_parser_inclusive": {
+        "samples": 146,
+        "percent": 2.2858932206043527
+      },
+      "buffer_bridge_inclusive": {
+        "samples": 166,
+        "percent": 2.599029278221387
+      },
+      "udp_receive_inclusive": {
+        "samples": 1957,
+        "percent": 30.640363237826836
+      },
+      "reactor_epoll_scheduler_inclusive": {
+        "samples": 1876,
+        "percent": 29.372162204477846
+      },
+      "zend_property_inclusive": {
+        "samples": 178,
+        "percent": 2.786910912791608
+      },
+      "allocation_copy_inclusive": {
+        "samples": 309,
+        "percent": 4.837952090183185
+      },
+      "object_lifecycle_inclusive": {
+        "samples": 64,
+        "percent": 1.0020353843745107
+      },
+      "perf_observer_inclusive": {
+        "samples": 46,
+        "percent": 0.7202129325191796
+      },
+      "unpack_inclusive": {
+        "samples": 8,
+        "percent": 0.12525442304681383
+      },
+      "codec_inclusive": {
+        "samples": 0,
+        "percent": 0.0
+      }
+    },
+    "top_leaf": [
+      {
+        "symbol": "execute_ex (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 277,
+        "percent": 4.336934397995929
+      },
+      {
+        "symbol": "zim_swoole_socket_coro_recvfromInto (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 78,
+        "percent": 1.2212306247064348
+      },
+      {
+        "symbol": "memcpy (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 72,
+        "percent": 1.1272898074213247
+      },
+      {
+        "symbol": "aa_dfa_match_len ([kernel.kallsyms])",
+        "samples": 63,
+        "percent": 0.986378581493659
+      },
+      {
+        "symbol": "printf_core (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 59,
+        "percent": 0.9237513699702521
+      },
+      {
+        "symbol": "get_meta (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 55,
+        "percent": 0.8611241584468452
+      },
+      {
+        "symbol": "zend_hash_find_bucket (inlined)",
+        "samples": 51,
+        "percent": 0.7984969469234382
+      },
+      {
+        "symbol": "ZEND_FETCH_OBJ_R_SPEC_UNUSED_CONST_INLINE_HANDLER (inlined)",
+        "samples": 49,
+        "percent": 0.7671833411617348
+      },
+      {
+        "symbol": "ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_USED_HANDLER (inlined)",
+        "samples": 47,
+        "percent": 0.7358697354000313
+      },
+      {
+        "symbol": "zend_vm_calc_used_stack (inlined)",
+        "samples": 45,
+        "percent": 0.7045561296383278
+      },
+      {
+        "symbol": "swoole::ReactorEpoll::wait() (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 40,
+        "percent": 0.6262721152340692
+      },
+      {
+        "symbol": "zend_mm_get_next_free_slot (inlined)",
+        "samples": 39,
+        "percent": 0.6106153123532174
+      },
+      {
+        "symbol": "i_zval_ptr_dtor (inlined)",
+        "samples": 38,
+        "percent": 0.5949585094723657
+      },
+      {
+        "symbol": "aa_inet_msg_perm ([kernel.kallsyms])",
+        "samples": 36,
+        "percent": 0.5636449037106623
+      },
+      {
+        "symbol": "[unknown] ([vdso])",
+        "samples": 33,
+        "percent": 0.5166744950681071
+      },
+      {
+        "symbol": "ep_poll ([kernel.kallsyms])",
+        "samples": 33,
+        "percent": 0.5166744950681071
+      },
+      {
+        "symbol": "fdget ([kernel.kallsyms])",
+        "samples": 33,
+        "percent": 0.5166744950681071
+      },
+      {
+        "symbol": "kmem_cache_alloc_noprof ([kernel.kallsyms])",
+        "samples": 32,
+        "percent": 0.5010176921872553
+      },
+      {
+        "symbol": "__pthread_getspecific (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 31,
+        "percent": 0.48536088930640364
+      },
+      {
+        "symbol": "_get_zval_ptr_var (inlined)",
+        "samples": 30,
+        "percent": 0.4697040864255519
+      },
+      {
+        "symbol": "psi_group_change ([kernel.kallsyms])",
+        "samples": 29,
+        "percent": 0.4540472835447002
+      },
+      {
+        "symbol": "buffer_read_acquire(_zend_object*, swoole_buffer_read_view_v1*) (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 29,
+        "percent": 0.4540472835447002
+      },
+      {
+        "symbol": "ep_deliver_event ([kernel.kallsyms])",
+        "samples": 28,
+        "percent": 0.43839048066384845
+      },
+      {
+        "symbol": "ZEND_SEND_VAL_EX_SPEC_CONST_UNUSED_QUICK_HANDLER (inlined)",
+        "samples": 28,
+        "percent": 0.43839048066384845
+      },
+      {
+        "symbol": "zend_hash_find (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 27,
+        "percent": 0.4227336777829967
+      }
+    ]
+  },
+  "profile-3": {
+    "samples": 6476,
+    "kernel_leaf": 1661,
+    "unknown_leaf": 23,
+    "groups": {
+      "native_parser_inclusive": {
+        "samples": 0,
+        "percent": 0.0
+      },
+      "buffer_bridge_inclusive": {
+        "samples": 128,
+        "percent": 1.9765287214329834
+      },
+      "udp_receive_inclusive": {
+        "samples": 1961,
+        "percent": 30.28103767757875
+      },
+      "reactor_epoll_scheduler_inclusive": {
+        "samples": 1777,
+        "percent": 27.439777640518837
+      },
+      "zend_property_inclusive": {
+        "samples": 126,
+        "percent": 1.945645460160593
+      },
+      "allocation_copy_inclusive": {
+        "samples": 348,
+        "percent": 5.373687461395924
+      },
+      "object_lifecycle_inclusive": {
+        "samples": 73,
+        "percent": 1.1272390364422482
+      },
+      "perf_observer_inclusive": {
+        "samples": 54,
+        "percent": 0.8338480543545398
+      },
+      "unpack_inclusive": {
+        "samples": 126,
+        "percent": 1.945645460160593
+      },
+      "codec_inclusive": {
+        "samples": 0,
+        "percent": 0.0
+      }
+    },
+    "top_leaf": [
+      {
+        "symbol": "execute_ex (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 321,
+        "percent": 4.9567634342186535
+      },
+      {
+        "symbol": "memcpy (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 83,
+        "percent": 1.2816553428042001
+      },
+      {
+        "symbol": "zend_hash_find_bucket (inlined)",
+        "samples": 70,
+        "percent": 1.0809141445336627
+      },
+      {
+        "symbol": "zim_swoole_socket_coro_recvfromInto (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 69,
+        "percent": 1.0654725138974677
+      },
+      {
+        "symbol": "zif_unpack (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 61,
+        "percent": 0.9419394688079061
+      },
+      {
+        "symbol": "printf_core (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 60,
+        "percent": 0.9264978381717109
+      },
+      {
+        "symbol": "aa_dfa_match_len ([kernel.kallsyms])",
+        "samples": 58,
+        "percent": 0.8956145768993206
+      },
+      {
+        "symbol": "zend_mm_get_next_free_slot (inlined)",
+        "samples": 48,
+        "percent": 0.7411982705373688
+      },
+      {
+        "symbol": "zend_vm_calc_used_stack (inlined)",
+        "samples": 48,
+        "percent": 0.7411982705373688
+      },
+      {
+        "symbol": "ZEND_FETCH_OBJ_R_SPEC_UNUSED_CONST_INLINE_HANDLER (inlined)",
+        "samples": 45,
+        "percent": 0.6948733786287832
+      },
+      {
+        "symbol": "fdget ([kernel.kallsyms])",
+        "samples": 45,
+        "percent": 0.6948733786287832
+      },
+      {
+        "symbol": "get_meta (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 40,
+        "percent": 0.6176652254478073
+      },
+      {
+        "symbol": "epoll_pwait (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 35,
+        "percent": 0.5404570722668314
+      },
+      {
+        "symbol": "tsrm_get_ls_cache (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 33,
+        "percent": 0.509573810994441
+      },
+      {
+        "symbol": "ZEND_TYPE_CHECK_SPEC_CV_HANDLER (inlined)",
+        "samples": 33,
+        "percent": 0.509573810994441
+      },
+      {
+        "symbol": "swoole::ReactorEpoll::wait() (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 32,
+        "percent": 0.49413218035824585
+      },
+      {
+        "symbol": "buffer_read_acquire(_zend_object*, swoole_buffer_read_view_v1*) (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 30,
+        "percent": 0.46324891908585547
+      },
+      {
+        "symbol": "ZEND_INIT_NS_FCALL_BY_NAME_SPEC_CONST_HANDLER (inlined)",
+        "samples": 30,
+        "percent": 0.46324891908585547
+      },
+      {
+        "symbol": "aa_inet_msg_perm ([kernel.kallsyms])",
+        "samples": 29,
+        "percent": 0.4478072884496603
+      },
+      {
+        "symbol": "x64_sys_call ([kernel.kallsyms])",
+        "samples": 29,
+        "percent": 0.4478072884496603
+      },
+      {
+        "symbol": "ZEND_INIT_METHOD_CALL_SPEC_UNUSED_CONST_HANDLER (inlined)",
+        "samples": 29,
+        "percent": 0.4478072884496603
+      },
+      {
+        "symbol": "__pthread_getspecific (/home/lotus/CLionProjects/pcg729/buildroot/bin/php)",
+        "samples": 28,
+        "percent": 0.4323656578134651
+      },
+      {
+        "symbol": "psi_group_change ([kernel.kallsyms])",
+        "samples": 28,
+        "percent": 0.4323656578134651
+      },
+      {
+        "symbol": "i_zval_ptr_dtor (inlined)",
+        "samples": 28,
+        "percent": 0.4323656578134651
+      },
+      {
+        "symbol": "zval_get_type (inlined)",
+        "samples": 27,
+        "percent": 0.4169240271772699
+      }
+    ]
+  }
+}

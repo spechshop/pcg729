@@ -1,0 +1,7 @@
+0.84;msec;task-clock;838333;100.00;;
+1;;context-switches;838333;100.00;;
+0;;cpu-migrations;838333;100.00;;
+1832453;;cpu_atom/cycles/;838333;100.00;;
+<not counted>;;cpu_core/cycles/;0;0.00;;
+1574139;;cpu_atom/instructions/;838333;100.00;;
+<not counted>;;cpu_core/instructions/;0;0.00;;

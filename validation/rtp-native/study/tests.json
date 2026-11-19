@@ -1,0 +1,114 @@
+[
+  {
+    "binary": "baseline",
+    "script": "libspech/test_rtpc_native.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "773 parser cases; snapshots, references, cloning, serialization and build OK\n31 wrapped-buffer header/payload boundaries OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "validation/rtp-native/functional.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "517 Swoole equivalence cases; strict bounds, extension, padding and reuse OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "validation/rtp-native/media.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "MediaChannel: native UDP, peers, audio transcode, callbacks, DTMF and forwarding OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "validation/rtp-native/study/contracts.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "References, hooks, types, reentry, 3000 deterministic malformed packets OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "validation/rtp-native/study/zts.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "References, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nJoined four threads; inspect worker PASS lines\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "test_media_channel_member_ptime.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729/libspech",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught Swoole\\Error: must call constructor first in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php:2152\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php(2152): Swoole\\Coroutine\\Socket->cancel(512)\n#1 /home/lotus/CLionProjects/pcg729/libspech/test_media_channel_member_ptime.php(485): libspech\\Rtp\\MediaChannel->close()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php on line 2152\n",
+    "stderr": ""
+  },
+  {
+    "binary": "baseline",
+    "script": "../validation/rtp-native/study/ptime-fixture.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729/libspech",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught RuntimeException: callback do fluxo RTP reutiliza o \u00fanico decode GSM\nEsperado: 320\nObtido:  0 in /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php:40\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php(547): memberPtimeAssertSame(320, 0, 'callback do flu...')\n#1 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php:494}()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php on line 40\n[2026-11-13 20:47:14 %1613198.0]\tWARNING\tChannel::~Channel() (ERRNO 10003): channel is destroyed, 1 consumers will be discarded\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "libspech/test_rtpc_native.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "773 parser cases; snapshots, references, cloning, serialization and build OK\n31 wrapped-buffer header/payload boundaries OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "validation/rtp-native/functional.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "517 Swoole equivalence cases; strict bounds, extension, padding and reuse OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "validation/rtp-native/media.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "MediaChannel: native UDP, peers, audio transcode, callbacks, DTMF and forwarding OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "validation/rtp-native/study/contracts.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "References, hooks, types, reentry, 3000 deterministic malformed packets OK\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "validation/rtp-native/study/zts.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729",
+    "exit": 0,
+    "stdout": "References, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nReferences, hooks, types, reentry, 3000 deterministic malformed packets OK\nWorker PASS\nJoined four threads; inspect worker PASS lines\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "test_media_channel_member_ptime.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729/libspech",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught Swoole\\Error: must call constructor first in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php:2152\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php(2152): Swoole\\Coroutine\\Socket->cancel(512)\n#1 /home/lotus/CLionProjects/pcg729/libspech/test_media_channel_member_ptime.php(485): libspech\\Rtp\\MediaChannel->close()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/libspech/plugins/Utils/sip/MediaChannel.php on line 2152\n",
+    "stderr": ""
+  },
+  {
+    "binary": "interned",
+    "script": "../validation/rtp-native/study/ptime-fixture.php",
+    "cwd": "/home/lotus/CLionProjects/pcg729/libspech",
+    "exit": 255,
+    "stdout": "\nFatal error: Uncaught RuntimeException: callback do fluxo RTP reutiliza o \u00fanico decode GSM\nEsperado: 320\nObtido:  0 in /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php:40\nStack trace:\n#0 /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php(547): memberPtimeAssertSame(320, 0, 'callback do flu...')\n#1 [internal function]: {closure:/home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php:494}()\n#2 {main}\n  thrown in /home/lotus/CLionProjects/pcg729/validation/rtp-native/study/ptime-fixture.php on line 40\n[2026-11-13 20:47:17 %1613223.0]\tWARNING\tChannel::~Channel() (ERRNO 10003): channel is destroyed, 1 consumers will be discarded\n",
+    "stderr": ""
+  }
+]

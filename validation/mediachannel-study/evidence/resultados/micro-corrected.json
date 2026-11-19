@@ -1,0 +1,326 @@
+[
+  {
+    "scenario": "micro",
+    "pid": 1633651,
+    "frames": 200000,
+    "cpu": 0.21352900000000002,
+    "wall": 0.213552889,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 186029592,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 0
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633652,
+    "frames": 200000,
+    "cpu": 0.192984,
+    "wall": 0.192991769,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 166750791,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 0
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633653,
+    "frames": 200000,
+    "cpu": 0.191335,
+    "wall": 0.191342682,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 165394779,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 1
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633654,
+    "frames": 200000,
+    "cpu": 0.21306999999999998,
+    "wall": 0.213135228,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 184850251,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 1
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633655,
+    "frames": 200000,
+    "cpu": 0.208332,
+    "wall": 0.20840927,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 181988798,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 2
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633656,
+    "frames": 200000,
+    "cpu": 0.19963,
+    "wall": 0.199654031,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 172629271,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 2
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633657,
+    "frames": 200000,
+    "cpu": 0.194833,
+    "wall": 0.194848329,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 167156233,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 3
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633658,
+    "frames": 200000,
+    "cpu": 0.21074,
+    "wall": 0.210761654,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 182836439,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 3
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633659,
+    "frames": 200000,
+    "cpu": 0.20785199999999998,
+    "wall": 0.207868909,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 182004088,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 4
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633660,
+    "frames": 200000,
+    "cpu": 0.193901,
+    "wall": 0.193909242,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 168132196,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 4
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633661,
+    "frames": 200000,
+    "cpu": 0.191802,
+    "wall": 0.19180903,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 166076072,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 5
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633662,
+    "frames": 200000,
+    "cpu": 0.211841,
+    "wall": 0.211865813,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 183810989,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 5
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633663,
+    "frames": 200000,
+    "cpu": 0.210687,
+    "wall": 0.210699309,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 182739431,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 6
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633664,
+    "frames": 200000,
+    "cpu": 0.196997,
+    "wall": 0.197012116,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 169154062,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 6
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633665,
+    "frames": 200000,
+    "cpu": 0.190578,
+    "wall": 0.190587027,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 164732402,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 7
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633666,
+    "frames": 200000,
+    "cpu": 0.215449,
+    "wall": 0.215470495,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 188267623,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 7
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633667,
+    "frames": 200000,
+    "cpu": 0.206289,
+    "wall": 0.206312954,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 180276904,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "b03a767aecf520ca7189d3f985f00d4e182837fa7ac3c6f63871faf935cd2081",
+    "variant": "baseline",
+    "repeat": 8
+  },
+  {
+    "scenario": "micro",
+    "pid": 1633668,
+    "frames": 200000,
+    "cpu": 0.198187,
+    "wall": 0.19843966,
+    "metrics": {
+      "audio_ms": 4000000,
+      "qualified_voice_ms": 0,
+      "processing_ns": 170314964,
+      "pending_bytes": 0,
+      "continuity_epoch": 0,
+      "closed": false
+    },
+    "hash": "40a4a190c4bbfa6355f8cd7bfc9c96bae2660d458bfbf5dec8b3672f042e9e15",
+    "variant": "optimization",
+    "repeat": 8
+  }
+]

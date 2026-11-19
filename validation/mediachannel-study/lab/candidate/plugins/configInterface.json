@@ -1,0 +1,13 @@
+{
+  "autoload": [
+    "Utils/audio",
+    "Utils/cache",
+    "Utils/cli",
+    "Utils/sip",
+    "Utils/libspech",
+    "Utils/network",
+    "Packet/controller",
+    "Utils/Coroutine"
+  ],
+  "reloadCaseFileModify": []
+}

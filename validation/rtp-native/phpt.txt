@@ -1,0 +1,27 @@
+
+=====================================================================
+PHP         : /home/lotus/CLionProjects/pcg729/buildroot/bin/php 
+PHP_SAPI    : cli
+PHP_VERSION : 8.5.12
+ZEND_VERSION: 4.5.12
+PHP_OS      : Linux - Linux lotus-Nitro-AN515-57 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2 x86_64
+INI actual  : /home/lotus/CLionProjects/pcg729
+More .INIs  :   
+CWD         : /home/lotus/CLionProjects/pcg729
+Extra dirs  : 
+VALGRIND    : Not used
+=====================================================================
+Running selected tests.
+TEST 1/4 [source/php-src/ext/psampler/tests/binary_slice.phpt]PASS Binary slice copies only the requested logical range, including wrapped rings [source/php-src/ext/psampler/tests/binary_slice.phpt] 
+TEST 2/4 [source/php-src/ext/psampler/tests/binary_slice_signature.phpt]PASS Binary slice exposes the documented PHP signature in static and shared builds [source/php-src/ext/psampler/tests/binary_slice_signature.phpt] 
+TEST 3/4 [source/php-src/ext/psampler/tests/binary_slice_swoole.phpt]PASS Binary slice reads Swoole UDP storage and survives reuse, timeout and cancellation [source/php-src/ext/psampler/tests/binary_slice_swoole.phpt] 
+TEST 4/4 [source/php-src/ext/psampler/tests/rtp_parse.phpt]PASS Experimental native RTP hydration owns bytes and releases views before property hooks [source/php-src/ext/psampler/tests/rtp_parse.phpt] 
+=====================================================================
+Number of tests :     4                 4
+Tests skipped   :     0 (  0.0%) --------
+Tests warned    :     0 (  0.0%) (  0.0%)
+Tests failed    :     0 (  0.0%) (  0.0%)
+Tests passed    :     4 (100.0%) (100.0%)
+---------------------------------------------------------------------
+Time taken      : 0.136 seconds
+=====================================================================

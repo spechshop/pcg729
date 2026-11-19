@@ -1,0 +1,1 @@
+[{"cls":"Swoole\\Coroutine\\Socket","b":6,"a":7,"ret":true,"closed":true,"after":6},{"cls":"SocketMutable","b":6,"a":7,"ret":true,"closed":true,"after":6},{"after_reactor":5}]

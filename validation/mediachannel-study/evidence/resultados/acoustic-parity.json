@@ -1,0 +1,247 @@
+{
+  "baseline": {
+    "aligned": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    },
+    "fragmented": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    },
+    "multi": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    }
+  },
+  "optimization": {
+    "aligned": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    },
+    "fragmented": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    },
+    "multi": {
+      "metrics": {
+        "audio_ms": 2000,
+        "qualified_voice_ms": 0,
+        "pending_bytes": 0,
+        "continuity_epoch": 0,
+        "closed": false
+      },
+      "events": [
+        {
+          "event": "monitor.started",
+          "audio_ms": 0,
+          "continuity_epoch": 0
+        },
+        {
+          "event": "signal.changed",
+          "audio_ms": 60,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "signal.changed",
+            "at_ms": 60,
+            "detected_at_ms": 60,
+            "signal": "narrowband_tone",
+            "reason": "classification_changed"
+          }
+        },
+        {
+          "event": "ring.started",
+          "audio_ms": 760,
+          "continuity_epoch": 0,
+          "native": {
+            "type": "ring.started",
+            "at_ms": 760,
+            "detected_at_ms": 760,
+            "signal": "narrowband_tone",
+            "reason": "qualified_tone"
+          }
+        }
+      ]
+    }
+  },
+  "equal": true
+}
