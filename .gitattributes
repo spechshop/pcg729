@@ -8,3 +8,9 @@
 
 # Preserve the original line endings recorded in the benchmark checksums.
 /validation/rtp-native/study/perf/individual.csv -text -eol
+
+# Store large RTP benchmark artifacts in Git LFS.
+validation/rtp-native/study/php-baseline filter=lfs diff=lfs merge=lfs -text
+validation/rtp-native/study/perf/profile-1/perf.data filter=lfs diff=lfs merge=lfs -text
+validation/rtp-native/study/perf/profile-2/perf.data filter=lfs diff=lfs merge=lfs -text
+validation/rtp-native/study/perf/profile-3/perf.data filter=lfs diff=lfs merge=lfs -text
