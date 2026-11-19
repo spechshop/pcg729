@@ -4,14 +4,16 @@
 set -eu
 # see what system used
 __OS__=$(uname -s)
-# see what arch used
-__ARCH__=$(uname -m)
-# format arch name
-case $__ARCH__ in
-arm64 | aarch64) __ARCH__=aarch64 ;;
-x86_64|x64) __ARCH__=x86_64 ;;
-*) ;;
-esac
+
+normalize_arch() {
+  case "$1" in
+    arm64|aarch64) echo aarch64 ;;
+    x86_64|x64|amd64) echo x86_64 ;;
+    *) echo "$1" ;;
+  esac
+}
+
+__ARCH__=$(normalize_arch "$(uname -m)")
 
 # format uname
 case $__OS__ in
@@ -55,11 +57,39 @@ if ! command -v curl > /dev/null && command -v apk > /dev/null; then
   apk add --no-cache curl
 fi
 
-test -d "${__PROJECT__}"/downloads || mkdir "${__PROJECT__}"/downloads
-# download static php binary
-test -f "${__PROJECT__}"/downloads/runtime.tar.gz || { echo "Downloading $__PHP_RUNTIME_URL__ ..." && curl -#fSL -o "${__PROJECT__}"/downloads/runtime.tar.gz "$__PHP_RUNTIME_URL__" ; }
-test -f "${__DIR__}"/php || { tar -xf "${__PROJECT__}"/downloads/runtime.tar.gz -C "${__DIR__}"/ ; }
-chmod +x "${__DIR__}"/php
+runtime_matches() {
+  runtime_platform=$("$1" -n -r 'echo php_uname("s"), ":", php_uname("m");' 2>/dev/null) || return 1
+  [ "${runtime_platform%%:*}" = "$__OS__" ] &&
+    [ "$(normalize_arch "${runtime_platform#*:}")" = "$__ARCH__" ]
+}
+
+# Install the runtime for this host even if a different architecture shipped with the checkout.
+if ! runtime_matches "${__DIR__}/php"; then
+  download_dir="${__PROJECT__}/downloads"
+  runtime_archive="${download_dir}/runtime-${__OS_FIXED__}-${__ARCH__}.tar.gz"
+  mkdir -p "$download_dir"
+  runtime_tmp=$(mktemp -d "${__DIR__}/.runtime.XXXXXX")
+  trap 'rm -rf "$runtime_tmp"' EXIT
+
+  archive_to_extract=$runtime_archive
+  if [ ! -f "$runtime_archive" ]; then
+    echo "Downloading $__PHP_RUNTIME_URL__ ..."
+    archive_to_extract="$runtime_tmp/runtime.tar.gz"
+    curl -#fSL -o "$archive_to_extract" "$__PHP_RUNTIME_URL__"
+  fi
+
+  tar -xf "$archive_to_extract" -C "$runtime_tmp" php
+  chmod +x "$runtime_tmp/php"
+  if ! runtime_matches "$runtime_tmp/php"; then
+    echo "PHP runtime does not match ${__OS__}/${__ARCH__}" >&2
+    exit 1
+  fi
+
+  if [ "$archive_to_extract" != "$runtime_archive" ]; then
+    mv -f "$archive_to_extract" "$runtime_archive"
+  fi
+  mv -f "$runtime_tmp/php" "${__DIR__}/php"
+fi
 # download composer
 test -f "${__DIR__}"/composer || { echo "Downloading Composer from $__COMPOSER_URL__" && curl -#fSL -o "${__DIR__}"/composer "$__COMPOSER_URL__" ; }
 chmod +x "${__DIR__}"/composer

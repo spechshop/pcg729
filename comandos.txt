@@ -75,7 +75,7 @@ rm -rf source/php-src/ext/bcg729 && rm -rf source/php-src/ext/psampler && rm -rf
 
 
 
-bin/spc build --build-cli "pgsql" --enable-zts --debug --with-clean
+bin/spc build --build-cli "swow" --enable-zts --debug --with-clean
 
 
 // my build

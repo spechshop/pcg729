@@ -143,11 +143,11 @@ function patch_point_interrupt(int $retcode, string $msg = ''): InterruptExcepti
 // f_ means standard function wrapper
 
 /**
- * Execute the shell command, and the output will be directly printed in the terminal. If there is an error, an exception will be thrown
+ * Execute a shell command and print its output directly. When checked, throw on a nonzero exit status.
  *
  * @throws RuntimeException
  */
-function f_passthru(string $cmd): ?bool
+function f_passthru(string $cmd, bool $check = false): ?bool
 {
     $danger = false;
     foreach (DANGER_CMD as $danger_cmd) {
@@ -162,8 +162,8 @@ function f_passthru(string $cmd): ?bool
         logger()->debug('[PASSTHRU] ' . $cmd);
     }
     $ret = passthru($cmd, $code);
-    if ($code !== 0) {
-        //throw new RuntimeException('Command '.$cmd.' run failed with code[' . $code . ']: ' . $cmd, $code);
+    if ($check && $code !== 0) {
+        throw new RuntimeException("Command failed with exit code {$code}: {$cmd}", $code);
     }
     return $ret;
 }

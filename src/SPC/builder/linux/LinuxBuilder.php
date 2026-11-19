@@ -123,7 +123,7 @@ class LinuxBuilder extends UnixBuilderBase
         $this->emitPatchPoint('before-php-buildconf');
         SourcePatcher::patchBeforeBuildconf($this);
 
-        shell()->cd(SOURCE_PATH . '/php-src')->exec(getenv('SPC_CMD_PREFIX_PHP_BUILDCONF'));
+        shell()->cd(SOURCE_PATH . '/php-src')->exec(getenv('SPC_CMD_PREFIX_PHP_BUILDCONF'), check: true);
 
         $this->emitPatchPoint('before-php-configure');
         SourcePatcher::patchBeforeConfigure($this);
@@ -184,7 +184,8 @@ class LinuxBuilder extends UnixBuilderBase
                 $zts .
                 $maxExecutionTimers .
                 $this->makeExtensionArgs() .
-                ' ' . $envs_build_php . ' '
+                ' ' . $envs_build_php . ' ',
+                check: true,
             );
 
         $this->emitPatchPoint('before-php-make');
@@ -232,15 +233,15 @@ class LinuxBuilder extends UnixBuilderBase
 
 
         shell()->cd(SOURCE_PATH . '/php-src')
-            ->exec('sed -i "s|//lib|/lib|g" Makefile')
-            ->exec("\$SPC_CMD_PREFIX_PHP_MAKE {$vars} cli");
+            ->exec('sed -i "s|//lib|/lib|g" Makefile', check: true)
+            ->exec("\$SPC_CMD_PREFIX_PHP_MAKE {$vars} cli", check: true);
 
         if ($this->getOption('with-upx-pack')) {
             shell()->cd(SOURCE_PATH . '/php-src/sapi/cli')
-                ->exec('strip --strip-all php')
-                ->exec(getenv('UPX_EXEC') . ' --best php');
+                ->exec('strip --strip-all php', check: true)
+                ->exec(getenv('UPX_EXEC') . ' --best php', check: true);
         } elseif (!$this->getOption('no-strip', false)) {
-            shell()->cd(SOURCE_PATH . '/php-src/sapi/cli')->exec('strip --strip-all php');
+            shell()->cd(SOURCE_PATH . '/php-src/sapi/cli')->exec('strip --strip-all php', check: true);
         }
 
         $this->deployBinary(BUILD_TARGET_CLI);

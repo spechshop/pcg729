@@ -37,7 +37,7 @@ class UnixShell
     /**
      * @throws RuntimeException
      */
-    public function exec(string $cmd): UnixShell
+    public function exec(string $cmd, bool $check = false): UnixShell
     {
         /* @phpstan-ignore-next-line */
         logger()->info(ConsoleColor::yellow('[EXEC] ') . ConsoleColor::green($cmd));
@@ -48,7 +48,7 @@ class UnixShell
         if (!$this->debug) {
             $cmd .= ' 1>/dev/null 2>&1';
         }
-        f_passthru($cmd);
+        f_passthru($cmd, $check);
         return $this;
     }
 

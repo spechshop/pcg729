@@ -224,7 +224,7 @@ abstract class UnixBuilderBase extends BuilderBase
         };
         logger()->info('Deploying ' . $this->getBuildTypeName($type) . ' file');
         FileSystem::createDir(BUILD_ROOT_PATH . '/bin');
-        shell()->exec('cp ' . escapeshellarg($src) . ' ' . escapeshellarg(BUILD_ROOT_PATH . '/bin/'));
+        shell()->exec('cp ' . escapeshellarg($src) . ' ' . escapeshellarg(BUILD_ROOT_PATH . '/bin/'), check: true);
         return true;
     }
 

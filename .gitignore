@@ -5,6 +5,7 @@
 /dist/
 /pkgroot/
 /frankenphp-dist/
+/.spc-docker/
 /BLADE/
 /cmake-build-*/
 /CMakeUserPresets.json

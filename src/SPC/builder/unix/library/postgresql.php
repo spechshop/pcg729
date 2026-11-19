@@ -147,7 +147,7 @@ trait postgresql
 
             FileSystem::writeFile($this->source_dir . '/build/libpq_encoding_compat.c', $compat_c);
 
-            $cc = getenv('CC') ?: 'x86_64-linux-musl-gcc';
+            $cc = getenv('CC') ?: 'cc';
             $ar = getenv('AR') ?: 'ar';
             $ranlib = getenv('RANLIB') ?: 'ranlib';
 

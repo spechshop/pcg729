@@ -42,6 +42,7 @@ Para compilar um PHP com a extensão `bcg729` e suporte a ZTS:
 ```bash
 git clone https://github.com/spechshop/pcg729
 cd pcg729
+bin/setup-runtime
 bin/php bin/composer install
 bin/php bin/spc download -A --shallow-clone --debug
 bin/php bin/spc doctor --auto-fix
@@ -50,6 +51,16 @@ buildroot/bin/php -v
 ```
 
 O `-A` baixa todas as fontes. As fontes do GitHub usam URLs públicas de versões fixas em `config/source.json`, sem depender da API de releases e tags.
+
+O `bin/setup-runtime` instala o PHP para o sistema e a arquitetura atuais em `bin/php`. Ao executar `bin/spc` diretamente, o PHP vem do `PATH`.
+
+Para verificar o ambiente Linux ARM64 com Docker:
+
+```bash
+SPC_USE_ARCH=arm64 bin/spc-alpine-docker doctor
+```
+
+Em um host x86-64, habilite a emulação ARM64 no Docker antes de rodar o comando. Em um host ARM64, o script seleciona a arquitetura automaticamente. Os arquivos de build ARM64 ficam em `.spc-docker/aarch64/`. [Documentação do Docker sobre emulação com QEMU](https://docs.docker.com/build/building/multi-platform/#qemu)
 
 ## Contribuição
 Contribuições são bem-vindas! Siga as etapas abaixo para contribuir:

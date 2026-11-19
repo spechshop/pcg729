@@ -6,6 +6,7 @@ namespace SPC\builder\extension;
 
 use SPC\builder\Extension;
 use SPC\exception\RuntimeException;
+use SPC\store\FileSystem;
 use SPC\util\CustomExt;
 
 #[CustomExt('swow')]
@@ -23,6 +24,9 @@ class swow extends Extension
         $arg = '--enable-swow';
         $arg .= $this->builder->getLib('openssl') ? ' --enable-swow-ssl' : ' --disable-swow-ssl';
         $arg .= $this->builder->getLib('curl') ? ' --enable-swow-curl' : ' --disable-swow-curl';
+        if ($this->builder->getExt('pdo') === null) {
+            $arg .= ' --disable-swow-pdo-pgsql';
+        }
         return $arg;
     }
 
@@ -40,5 +44,19 @@ class swow extends Extension
             return true;
         }
         return false;
+    }
+
+    public function patchBeforeMake(): bool
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            return false;
+        }
+
+        // Swow needs its bundled libuv headers before the ones in the shared build include directory.
+        return FileSystem::replaceFileRegex(
+            SOURCE_PATH . '/php-src/Makefile',
+            '/^(\t[^\n]* -Iext\/swow\/\S* -I\S+ )\$\(COMMON_FLAGS\)/m',
+            '$1$(SWOW_UV_INCLUDES) $(COMMON_FLAGS)',
+        ) !== false;
     }
 }
